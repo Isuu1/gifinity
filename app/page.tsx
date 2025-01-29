@@ -7,7 +7,7 @@ export default async function Home() {
   console.log("Gifs", data);
 
   return (
-    <div className={styles.page}>
+    <div className="page">
       <GifsFeed trendingGifs={data} />
     </div>
   );

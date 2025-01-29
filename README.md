@@ -25,3 +25,4 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 1. Create basic layout components ✅
 2. Create a function to fetch and display data from API ✅
 3. Create a feed component ✅
+4. Add overlay to each gif (wishlist icon, copy button)

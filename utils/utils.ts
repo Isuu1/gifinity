@@ -1,3 +1,6 @@
+import { toastStyle } from "@/styles/toast";
+import toast from "react-hot-toast";
+
 export async function getTrendingGifs() {
   try {
     const data = await fetch(
@@ -12,4 +15,5 @@ export async function getTrendingGifs() {
 
 export function copyToClipboard(text: string) {
   navigator.clipboard.writeText(text);
+  toast.success("Copied to clipboard", toastStyle);
 }

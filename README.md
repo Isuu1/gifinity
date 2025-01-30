@@ -27,5 +27,5 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 3. Create a feed component ✅
 4. Add overlay to each gif (wishlist icon, copy button) ✅
 5. Add function to copy gif url when user click copy icon ✅
-6. Add function to save gifs in local storage
+6. Add function to save gifs in local storage ✅
 7. Add notifications when user perform action and animation to overlay

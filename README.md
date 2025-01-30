@@ -31,3 +31,4 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 5. Add function to copy gif url when user click copy icon ✅
 6. Add function to save gifs in local storage ✅
 7. Add notifications when user perform action and animation to overlay ✅
+8. Create stylized headlines

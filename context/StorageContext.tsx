@@ -2,6 +2,9 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
+import toast from "react-hot-toast";
+
+import { toastStyle } from "@/styles/toast";
 
 interface StorageContextType {
   userGifs: string[];
@@ -30,10 +33,12 @@ export const StorageProvider = ({
 
   const addItem = (item: string) => {
     if (userGifs.some((gif) => gif === item)) {
-      alert("Gif already saved");
+      setUserGifs(userGifs.filter((gif) => gif !== item));
+      toast.success("Gif removed from wishlist", toastStyle);
       return;
     }
     setUserGifs([...userGifs, item]);
+    toast.success("Gif added to wishlist", toastStyle);
   };
 
   return (

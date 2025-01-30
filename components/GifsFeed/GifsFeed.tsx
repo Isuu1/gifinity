@@ -37,7 +37,9 @@ const GifsFeed = ({ trendingGifs }: IProps) => {
             onMouseEnter={() => setShowOverlay(gif.id)}
             onMouseLeave={() => setShowOverlay(null)}
           >
-            {showOverlay === gif.id && <GifOverlay />}
+            {showOverlay === gif.id && (
+              <GifOverlay gifUrl={gif.images.original.url} />
+            )}
             <Image
               className={styles.image}
               src={gif.images.original.url}

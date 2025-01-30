@@ -9,3 +9,7 @@ export async function getTrendingGifs() {
     console.error("Error fetching gifs", error);
   }
 }
+
+export function copyToClipboard(text: string) {
+  navigator.clipboard.writeText(text);
+}

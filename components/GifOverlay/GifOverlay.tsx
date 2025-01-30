@@ -7,12 +7,17 @@ import styles from "./GifOverlay.module.scss";
 import { FaCopy } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { copyToClipboard } from "@/utils/utils";
+import { useStorage } from "@/context/StorageContext";
 
 interface IProps {
   gifUrl: string;
 }
 
 const GifOverlay: React.FC<IProps> = ({ gifUrl }) => {
+  const { userGifs, addItem } = useStorage();
+
+  const isGifOnWishlist = userGifs.find((gif) => gif === gifUrl);
+
   return (
     <div className={styles.overlay}>
       <div className={styles.overlay_element}>
@@ -20,7 +25,10 @@ const GifOverlay: React.FC<IProps> = ({ gifUrl }) => {
           className={styles.icon}
           onClick={() => copyToClipboard(gifUrl)}
         />
-        <FaHeart className={styles.icon} />
+        <FaHeart
+          className={`${styles.icon} ${isGifOnWishlist ? styles.filled : ""}`}
+          onClick={() => addItem(gifUrl)}
+        />
       </div>
       {/* {gif.user?.display_name && (
                   <div className={styles.overlay_element}>

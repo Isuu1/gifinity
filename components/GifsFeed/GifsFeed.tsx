@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import styles from "./GifsFeed.module.scss";
 import GifOverlay from "../GifOverlay/GifOverlay";
+import { AnimatePresence } from "framer-motion";
 
 interface IProps {
   trendingGifs: {
@@ -37,9 +38,11 @@ const GifsFeed = ({ trendingGifs }: IProps) => {
             onMouseEnter={() => setShowOverlay(gif.id)}
             onMouseLeave={() => setShowOverlay(null)}
           >
-            {showOverlay === gif.id && (
-              <GifOverlay gifUrl={gif.images.original.url} />
-            )}
+            <AnimatePresence initial={false}>
+              {showOverlay === gif.id && (
+                <GifOverlay key={gif.id} gifUrl={gif.images.original.url} />
+              )}
+            </AnimatePresence>
             <Image
               className={styles.image}
               src={gif.images.original.url}

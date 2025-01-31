@@ -6,6 +6,9 @@ import styles from "./GifsFeed.module.scss";
 import GifOverlay from "../GifOverlay/GifOverlay";
 import { AnimatePresence } from "framer-motion";
 
+//Icons
+import { FaArrowUpShortWide } from "react-icons/fa6";
+
 interface IProps {
   trendingGifs: {
     data: {
@@ -29,7 +32,16 @@ const GifsFeed = ({ trendingGifs }: IProps) => {
 
   return (
     <div>
-      <h2 className={styles.title}>Trending gifs</h2>
+      <div className="headline-container">
+        {/* <FaArrowUpShortWide className="headline-container__icon" /> */}
+        <Image
+          src="/images/trending3.svg"
+          alt="trending"
+          width={40}
+          height={40}
+        />
+        <h2 className="headline-container__text">Trending now</h2>
+      </div>
       <div className={styles.feedContainer}>
         {trendingGifs.data.map((gif) => (
           <div

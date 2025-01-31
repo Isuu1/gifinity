@@ -32,4 +32,14 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 6. Add function to save gifs in local storage ✅
 7. Add notifications when user perform action and animation to overlay ✅
 8. Create stylized headlines ✅
-9. Create buttons for gifs/stickers menu
+9. Create buttons for gifs/stickers menu ✅
+10. Add functionality to switch between gifs/stickers
+
+- [ ] Add sitckers API
+- [ ] Add onlick events to buttons
+
+11. Header
+
+- [ ] Header layout and styles
+- [ ] Add categories menu
+- [ ] Add search component

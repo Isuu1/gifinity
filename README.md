@@ -43,3 +43,5 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 - [ ] Header layout and styles
 - [ ] Add categories menu
 - [ ] Add search component
+
+12. Add trending tags

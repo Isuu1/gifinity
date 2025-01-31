@@ -33,10 +33,10 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 7. Add notifications when user perform action and animation to overlay ✅
 8. Create stylized headlines ✅
 9. Create buttons for gifs/stickers menu ✅
-10. Add functionality to switch between gifs/stickers
+10. Add functionality to switch between gifs/stickers ✅
 
-- [ ] Add sitckers API
-- [ ] Add onlick events to buttons
+- [x] Add sitckers API
+- [x] Add onlick events to buttons
 
 11. Header
 

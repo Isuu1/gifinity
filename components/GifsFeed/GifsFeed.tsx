@@ -25,10 +25,36 @@ interface IProps {
       };
     }[];
   };
+  trendingStickers: {
+    data: {
+      id: string;
+      title: string;
+      images: {
+        original: {
+          url: string;
+        };
+      };
+      user: {
+        display_name: string;
+        avatar_url: string;
+      };
+    }[];
+  };
 }
 
-const GifsFeed = ({ trendingGifs }: IProps) => {
+const GifsFeed = ({ trendingGifs, trendingStickers }: IProps) => {
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
+  const [displayedContent, setDisplayedContent] = useState(trendingGifs);
+  const [activeButton, setActiveButton] = useState("gifs");
+
+  const changeContent = (content: string) => {
+    setActiveButton(content);
+    if (content === "gifs") {
+      setDisplayedContent(trendingGifs);
+    } else {
+      setDisplayedContent(trendingStickers);
+    }
+  };
 
   return (
     <div>
@@ -42,11 +68,21 @@ const GifsFeed = ({ trendingGifs }: IProps) => {
         <h2 className="headline-container__text">Trending now</h2>
       </div>
       <div className={styles.submenuContainer}>
-        <Button active={true}>Gifs</Button>
-        <Button>Stickers</Button>
+        <Button
+          active={activeButton === "gifs" && true}
+          onClick={() => changeContent("gifs")}
+        >
+          Gifs
+        </Button>
+        <Button
+          active={activeButton === "stickers" && true}
+          onClick={() => changeContent("stickers")}
+        >
+          Stickers
+        </Button>
       </div>
       <div className={styles.feedContainer}>
-        {trendingGifs.data.map((gif) => (
+        {displayedContent.data.map((gif) => (
           <div
             key={gif.id}
             className={styles.gif}

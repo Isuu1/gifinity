@@ -10,9 +10,12 @@ interface IProps {
   active: boolean;
 }
 
-const Button: React.FC<IProps> = ({ children, active, icon }) => {
+const Button: React.FC<IProps> = ({ children, active, icon, onClick }) => {
   return (
-    <button className={`${styles.button} ${active && styles.active}`}>
+    <button
+      className={`${styles.button} ${active && styles.active}`}
+      onClick={onClick}
+    >
       {icon && <span className={styles.icon}>{icon}</span>}
       <span className={styles.text}>{children}</span>
     </button>

@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .button {
   font-family: "Neucha", serif;
   font-weight: 700;
@@ -13,20 +15,13 @@
   align-items: center;
   gap: 0.3rem;
   &.active {
-    background: #ff204e;
-    // border: 3px solid #ff206e;
+    background: $secondaryColorLight;
     &:hover {
-      //   background: linear-gradient(
-      //     90deg,
-      //     rgba(98, 0, 254, 1) 0%,
-      //     rgba(144, 13, 179, 1) 51%,
-      //     rgba(255, 64, 131, 1) 100%
-      //   );
-      background: #a0153e;
+      background: $secondaryColorDark;
     }
   }
   &:hover {
-    background: #8d133e;
+    background: $secondaryColorDark;
     color: #fff !important;
   }
   .icon {

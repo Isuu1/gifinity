@@ -37,6 +37,19 @@ export async function getTrendingSearches() {
   }
 }
 
+export async function fetchSearchData(searchQuery: string) {
+  try {
+    const data = await fetch(
+      `https://api.giphy.com/v1/gifs/search?q=${searchQuery}&api_key=${process.env.API_KEY}`
+    );
+    const response = await data.json();
+    console.log(response);
+    return response;
+  } catch (error) {
+    console.error("Error fetching gifs", error);
+  }
+}
+
 export function copyToClipboard(text: string) {
   navigator.clipboard.writeText(text);
   toast.success("Copied to clipboard", toastStyle);

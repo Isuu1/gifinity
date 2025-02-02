@@ -1,46 +1,34 @@
 import { toastStyle } from "@/styles/toast";
 import toast from "react-hot-toast";
 
-export async function getTrendingGifs() {
+async function fetchData(endpoint: string) {
   try {
     const data = await fetch(
-      `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.API_KEY}`
+      `https://api.giphy.com/v1/${endpoint}?api_key=${process.env.API_KEY}`
     );
     const response = await data.json();
     return response;
   } catch (error) {
-    console.error("Error fetching gifs", error);
+    console.error(`Error fetching ${endpoint}`, error);
   }
+}
+
+export async function getTrendingGifs() {
+  return fetchData("gifs/trending");
 }
 
 export async function getTrendingStickers() {
-  try {
-    const data = await fetch(
-      `https://api.giphy.com/v1/stickers/trending?api_key=${process.env.API_KEY}`
-    );
-    const response = await data.json();
-    return response;
-  } catch (error) {
-    console.error("Error fetching gifs", error);
-  }
+  return fetchData("stickers/trending");
 }
 
 export async function getTrendingSearches() {
-  try {
-    const data = await fetch(
-      `https://api.giphy.com/v1/trending/searches?api_key=${process.env.API_KEY}`
-    );
-    const response = await data.json();
-    return response;
-  } catch (error) {
-    console.error("Error fetching gifs", error);
-  }
+  return fetchData("trending/searches");
 }
 
-export async function fetchSearchData(searchQuery: string) {
+async function fetchSearchData(searchQuery: string, type: string) {
   try {
     const data = await fetch(
-      `https://api.giphy.com/v1/gifs/search?q=${searchQuery}&api_key=${process.env.API_KEY}`
+      `https://api.giphy.com/v1/${type}/search?q=${searchQuery}&api_key=${process.env.API_KEY}`
     );
     const response = await data.json();
     console.log(response);
@@ -48,6 +36,14 @@ export async function fetchSearchData(searchQuery: string) {
   } catch (error) {
     console.error("Error fetching gifs", error);
   }
+}
+
+export async function getSearchedGifs(searchQuery: string) {
+  return fetchSearchData(searchQuery, "gifs");
+}
+
+export async function getSearchedStickers(searchQuery: string) {
+  return fetchSearchData(searchQuery, "stickers");
 }
 
 export function copyToClipboard(text: string) {

@@ -1,4 +1,5 @@
-import { fetchSearchData } from "@/utils/utils";
+import DataFeed from "@/components/DataFeed/DataFeed";
+import { getSearchedGifs, getSearchedStickers } from "@/utils/utils";
 
 export default async function Page({
   searchParams,
@@ -7,15 +8,17 @@ export default async function Page({
 }) {
   const searchQuery = searchParams.q || "";
 
-  const results = await fetchSearchData(searchQuery);
-  console.log(results);
+  const gifs = await getSearchedGifs(searchQuery);
+  const stickers = await getSearchedStickers(searchQuery);
 
   return (
-    <div>
-      <h1>Search for: {searchQuery}</h1>
-      {results.data.map((result) => (
-        <img key={result.id} src={result.images.original.url} />
-      ))}
+    <div className="page">
+      <div className="headline-container">
+        <h2 className="headline-container__text">
+          Search results for: {searchQuery}
+        </h2>
+      </div>
+      <DataFeed data={{ gifs: gifs, stickers: stickers }} />
     </div>
   );
 }

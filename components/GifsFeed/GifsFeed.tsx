@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 //Components
 import Button from "../UI/Button";
 import GifOverlay from "../GifOverlay/GifOverlay";
+import SliderMenu from "../SliderMenu/SliderMenu";
 
 interface IProps {
   trendingGifs: {
@@ -40,9 +41,16 @@ interface IProps {
       };
     }[];
   };
+  trendingSearches: {
+    data: string[];
+  };
 }
 
-const GifsFeed = ({ trendingGifs, trendingStickers }: IProps) => {
+const GifsFeed = ({
+  trendingGifs,
+  trendingStickers,
+  trendingSearches,
+}: IProps) => {
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
   const [displayedContent, setDisplayedContent] = useState(trendingGifs);
   const [activeButton, setActiveButton] = useState("gifs");
@@ -67,6 +75,7 @@ const GifsFeed = ({ trendingGifs, trendingStickers }: IProps) => {
         />
         <h2 className="headline-container__text">Trending now</h2>
       </div>
+      <SliderMenu items={trendingSearches} />
       <div className={styles.submenuContainer}>
         <Button
           active={activeButton === "gifs" && true}

@@ -5,9 +5,9 @@ import styles from "./Button.module.scss";
 
 interface IProps {
   children: string;
-  onClick: () => void;
-  icon: React.ReactNode;
-  active: boolean;
+  onClick?: () => void;
+  icon?: React.ReactNode;
+  active?: boolean;
 }
 
 const Button: React.FC<IProps> = ({ children, active, icon, onClick }) => {

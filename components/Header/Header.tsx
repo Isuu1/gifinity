@@ -1,10 +1,12 @@
 import React from "react";
+import Search from "../Search/Search";
 
 const Header = () => {
   return (
-    <div>
-      <h1>Header</h1>
-    </div>
+    <header>
+      <h1>Gifinity</h1>
+      <Search />
+    </header>
   );
 };
 

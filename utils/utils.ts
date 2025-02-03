@@ -25,6 +25,10 @@ export async function getTrendingSearches() {
   return fetchData("trending/searches");
 }
 
+export async function getCategories() {
+  return fetchData("gifs/categories");
+}
+
 async function fetchSearchData(searchQuery: string, type: string) {
   try {
     const data = await fetch(

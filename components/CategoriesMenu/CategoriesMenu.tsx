@@ -13,6 +13,10 @@ import Button from "../UI/Button";
 
 //Animation
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  categoriesMenuAnimation,
+  categoryMenuItemsAnimation,
+} from "@/styles/animations";
 
 interface IProps {
   categories: string[];
@@ -24,16 +28,6 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
   const handleCategories = () => {
     console.log("show", showCategories);
     setShowCategories(!showCategories);
-  };
-
-  const categoriesMenuAnimation = {
-    hidden: { opacity: 0, height: 0 },
-    visible: {
-      opacity: 1,
-      height: "auto",
-      transition: { duration: 0.2, delayChildren: 0.4, staggerChildren: 0.1 },
-    },
-    exit: { opacity: 0, height: 0 },
   };
 
   return (
@@ -60,9 +54,9 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
               <motion.li
                 key={index}
                 className={styles.navItem}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
+                variants={categoryMenuItemsAnimation}
+                initial="hidden"
+                animate="visible"
               >
                 <Button className={styles.button}>{category.name}</Button>
               </motion.li>

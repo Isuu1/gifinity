@@ -9,7 +9,7 @@ export const categoriesMenuAnimation = {
   visible: {
     opacity: 1,
     height: "auto",
-    transition: { duration: 0.2, delayChildren: 0.4, staggerChildren: 0.1 },
+    transition: { duration: 0.2, delayChildren: 0.1, staggerChildren: 0.02 },
   },
   exit: { opacity: 0, height: 0 },
 };

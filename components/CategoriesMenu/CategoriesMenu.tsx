@@ -38,10 +38,14 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
     >
       <button className={`${styles.button} ${showCategories && styles.active}`}>
         Categories
-        <PiArrowBendRightDownBold className={styles.icon} />
+        <PiArrowBendRightDownBold
+          className={`${styles.icon} ${
+            showCategories && styles.rotateAnimation
+          }`}
+        />
       </button>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {showCategories && (
           <motion.ul
             className={styles.categoriesWrapper}
@@ -55,8 +59,6 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
                 key={index}
                 className={styles.navItem}
                 variants={categoryMenuItemsAnimation}
-                initial="hidden"
-                animate="visible"
               >
                 <Button className={styles.button}>{category.name}</Button>
               </motion.li>

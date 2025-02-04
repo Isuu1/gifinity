@@ -1,5 +1,9 @@
 @import "../../styles/variables.scss";
 
+.rotateAnimation {
+  transform: rotate(180deg);
+}
+
 .categoriesContainer {
   .button {
     font-family: "Neucha", serif;
@@ -30,9 +34,6 @@
       background: $secondaryColorDark;
       color: #fff !important;
     }
-    &:hover .icon {
-      transform: rotate(180deg);
-    }
   }
   z-index: 4;
   position: relative;
@@ -44,7 +45,7 @@
     gap: 0.3rem;
     list-style: none;
     position: absolute;
-    top: 37px;
+    top: 33px;
     left: 0;
     background: #36343a;
     .navItem {

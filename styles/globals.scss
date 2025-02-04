@@ -46,12 +46,24 @@ a {
 
 @media (min-width: 768px) {
   .page {
-    padding: 2rem;
+    padding: 1rem 2rem;
   }
 }
 
 @media (min-width: 1024px) {
   .page {
-    padding: 3rem;
+    padding: 1rem 3rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page {
+    padding: 1rem 8rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .page {
+    padding: 1rem 11rem;
   }
 }

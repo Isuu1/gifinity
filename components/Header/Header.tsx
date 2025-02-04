@@ -18,7 +18,7 @@ const Header: React.FC = async () => {
   const categories = await getCategories();
 
   return (
-    <header className={`${styles.header} page`}>
+    <header className={styles.header}>
       <div className={styles.headerTop}>
         <h1>Gifinity</h1>
         <div className={styles.nav}>

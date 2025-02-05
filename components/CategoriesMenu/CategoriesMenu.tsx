@@ -18,8 +18,12 @@ import {
   categoryMenuItemsAnimation,
 } from "@/styles/animations";
 
+interface Category {
+  name: string;
+}
+
 interface IProps {
-  categories: string[];
+  categories: Category[];
 }
 
 const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
@@ -29,6 +33,8 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
     console.log("show", showCategories);
     setShowCategories(!showCategories);
   };
+
+  console.log("categories", categories);
 
   return (
     <div
@@ -54,7 +60,7 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
             animate={showCategories ? "visible" : "hidden"}
             exit="exit"
           >
-            {categories.data.map((category: any, index: number) => (
+            {categories.map((category, index: number) => (
               <motion.li
                 key={index}
                 className={styles.navItem}

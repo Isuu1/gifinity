@@ -22,7 +22,7 @@ const Header: React.FC = async () => {
       <div className={styles.headerTop}>
         <h1>Gifinity</h1>
         <div className={styles.nav}>
-          <CategoriesMenu categories={categories} />
+          <CategoriesMenu categories={categories.data} />
           <Button icon={<TbArrowsRandom />} iconPosition="right">
             Random
           </Button>

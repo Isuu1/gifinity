@@ -4,9 +4,9 @@ import { getSearchedGifs, getSearchedStickers } from "@/utils/utils";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const searchQuery = searchParams.q || "";
+  const searchQuery = (searchParams.q as string) || "";
 
   const gifs = await getSearchedGifs(searchQuery);
   const stickers = await getSearchedStickers(searchQuery);

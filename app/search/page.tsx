@@ -1,14 +1,16 @@
 import DataFeed from "@/components/DataFeed/DataFeed";
 import { getSearchedGifs, getSearchedStickers } from "@/utils/utils";
 
-interface SearchPageProps {
-  searchParams: {
-    q?: string;
-  };
-}
-
-export default async function Page({ searchParams }: SearchPageProps) {
-  const searchQuery = (searchParams.q as string) || "";
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchQueryParam =
+    (await searchParams.then((params) => params.q)) || "";
+  const searchQuery = Array.isArray(searchQueryParam)
+    ? searchQueryParam[0]
+    : searchQueryParam;
 
   console.log("searchParams", searchParams);
 

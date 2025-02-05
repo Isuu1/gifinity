@@ -29,6 +29,13 @@ const Header: React.FC = async () => {
           <Button>User profile</Button>
         </div>
       </div>
+      <div className={styles.headerBottom}>
+        <h2>Find the Perfect GIF for Every Moment!</h2>
+        <p>
+          Explore a world of fun with trending GIFs and stickers. Search, share,
+          and express yourself!
+        </p>
+      </div>
       <Search />
     </header>
   );

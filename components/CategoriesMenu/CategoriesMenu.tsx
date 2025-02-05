@@ -34,8 +34,6 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
     setShowCategories(!showCategories);
   };
 
-  console.log("categories", categories);
-
   return (
     <div
       className={styles.categoriesContainer}

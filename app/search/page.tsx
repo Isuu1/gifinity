@@ -10,6 +10,8 @@ interface SearchPageProps {
 export default async function Page({ searchParams }: SearchPageProps) {
   const searchQuery = (searchParams.q as string) || "";
 
+  console.log("searchParams", searchParams);
+
   const gifs = await getSearchedGifs(searchQuery);
   const stickers = await getSearchedStickers(searchQuery);
 

@@ -25,8 +25,6 @@ export const StorageProvider = ({
     }
   });
 
-  console.log(userGifs);
-
   useEffect(() => {
     localStorage.setItem("userGifs", JSON.stringify(userGifs));
   }, [userGifs]);

@@ -1,11 +1,14 @@
 import DataFeed from "@/components/DataFeed/DataFeed";
 import { getSearchedGifs, getSearchedStickers } from "@/utils/utils";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+interface SearchPageProps {
+  params: {};
+  searchParams: {
+    q?: string;
+  };
+}
+
+export default async function Page({ searchParams }: SearchPageProps) {
   const searchQuery = (searchParams.q as string) || "";
 
   const gifs = await getSearchedGifs(searchQuery);

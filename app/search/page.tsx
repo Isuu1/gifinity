@@ -2,7 +2,7 @@ import DataFeed from "@/components/DataFeed/DataFeed";
 import { getSearchedGifs, getSearchedStickers } from "@/utils/utils";
 
 interface SearchPageProps {
-  params: {};
+  params: object;
   searchParams: {
     q?: string;
   };

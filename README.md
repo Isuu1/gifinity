@@ -40,9 +40,13 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 11. Header
 
-- [ ] Header layout and styles
+- [x] Header layout and styles ✅
 - [x] Add categories menu ✅
 - [x] Add search component ✅
 - [x] Add search page ✅
 
 12. Add trending tags ✅
+
+### Milestone 2
+
+Moved to Github Project Board.

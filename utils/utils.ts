@@ -32,10 +32,10 @@ export async function getCategories() {
 async function fetchSearchData(searchQuery: string, type: string) {
   try {
     const data = await fetch(
-      `https://api.giphy.com/v1/${type}/search?q=${searchQuery}&api_key=${process.env.API_KEY}`
+      `https://api.giphy.com/v1/${type}/search?q=${searchQuery}&api_key=${process.env.API_KEY}`,
+      { cache: "no-store" }
     );
     const response = await data.json();
-    console.log(response);
     return response;
   } catch (error) {
     console.error("Error fetching gifs", error);

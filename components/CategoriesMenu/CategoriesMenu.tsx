@@ -17,6 +17,8 @@ import {
   categoriesMenuAnimation,
   categoryMenuItemsAnimation,
 } from "@/styles/animations";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Category {
   name: string;
@@ -29,9 +31,26 @@ interface IProps {
 const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
   const [showCategories, setShowCategories] = useState<boolean>(false);
 
+  const router = useRouter();
+
   const handleCategories = () => {
     console.log("show", showCategories);
     setShowCategories(!showCategories);
+  };
+
+  const handleCategoryChange = (categoryName: string) => {
+    //router push path with category name
+    router.push(`/category?q=${categoryName}`);
+    if (categoryName.includes("&")) {
+      const newCategoryName = replaceAnd(categoryName);
+      return newCategoryName;
+    }
+    return categoryName;
+  };
+
+  //In category name replace & with -
+  const replaceAnd = (categoryName: string) => {
+    return categoryName.replace("&", "-");
   };
 
   return (
@@ -64,7 +83,12 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
                 className={styles.navItem}
                 variants={categoryMenuItemsAnimation}
               >
-                <Button className={styles.button}>{category.name}</Button>
+                <Button
+                  className={styles.button}
+                  onClick={() => handleCategoryChange(category.name)}
+                >
+                  {category.name}
+                </Button>
               </motion.li>
             ))}
           </motion.ul>

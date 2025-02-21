@@ -17,7 +17,6 @@ import {
   categoriesMenuAnimation,
   categoryMenuItemsAnimation,
 } from "@/styles/animations";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface Category {
@@ -34,23 +33,29 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
   const router = useRouter();
 
   const handleCategories = () => {
-    console.log("show", showCategories);
     setShowCategories(!showCategories);
-  };
-
-  const handleCategoryChange = (categoryName: string) => {
-    //router push path with category name
-    router.push(`/category?q=${categoryName}`);
-    if (categoryName.includes("&")) {
-      const newCategoryName = replaceAnd(categoryName);
-      return newCategoryName;
-    }
-    return categoryName;
   };
 
   //In category name replace & with -
   const replaceAnd = (categoryName: string) => {
-    return categoryName.replace("&", "-");
+    const slicedCategoryName = categoryName.substring(
+      0,
+      categoryName.indexOf("&")
+    );
+    return slicedCategoryName;
+  };
+
+  const handleCategoryChange = (categoryName: string) => {
+    if (categoryName.includes("&")) {
+      const newCategoryName = replaceAnd(categoryName);
+      //router push path with category name
+      router.push(`/category?q=${newCategoryName}`);
+      return newCategoryName;
+    } else {
+      //router push path with category name
+      router.push(`/category?q=${categoryName}`);
+      return categoryName;
+    }
   };
 
   return (

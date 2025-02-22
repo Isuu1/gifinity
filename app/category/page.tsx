@@ -1,6 +1,7 @@
 "use client";
 
 import DataFeed from "@/components/DataFeed/DataFeed";
+import Loading from "@/components/Loading/Loading";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -48,7 +49,7 @@ export default function Page() {
   console.log("isLoading", isLoading);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

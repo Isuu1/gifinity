@@ -29,6 +29,14 @@ export async function getCategories() {
   return fetchData("gifs/categories");
 }
 
+export async function getRandomGifs() {
+  return fetchData("gifs/random");
+}
+
+export async function getRandomStickers() {
+  return fetchData("stickers/random");
+}
+
 async function fetchSearchData(searchQuery: string, type: string) {
   try {
     const data = await fetch(

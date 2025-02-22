@@ -13,6 +13,7 @@ import Search from "../Search/Search";
 
 //Icons
 import { TbArrowsRandom } from "react-icons/tb";
+import Link from "next/link";
 
 const Header: React.FC = async () => {
   const categories = await getCategories();
@@ -20,7 +21,9 @@ const Header: React.FC = async () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
-        <h1>Gifinity</h1>
+        <Link href="/">
+          <h1>Gifinity</h1>
+        </Link>
         <div className={styles.nav}>
           <CategoriesMenu categories={categories.data} />
           <Button icon={<TbArrowsRandom />} iconPosition="right">

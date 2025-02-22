@@ -26,9 +26,11 @@ const Header: React.FC = async () => {
         </Link>
         <div className={styles.nav}>
           <CategoriesMenu categories={categories.data} />
-          <Button icon={<TbArrowsRandom />} iconPosition="right">
-            Random
-          </Button>
+          <Link href="/random">
+            <Button icon={<TbArrowsRandom />} iconPosition="right">
+              Random
+            </Button>
+          </Link>
           <Button>User profile</Button>
         </div>
       </div>

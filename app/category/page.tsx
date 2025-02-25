@@ -7,9 +7,13 @@ import { useEffect, useState } from "react";
 import DataFeed from "@/components/DataFeed/DataFeed";
 import Loading from "@/components/Loading/Loading";
 
+//Interfaces
+import { Gifs } from "@/interfaces/gifs";
+import { Stickers } from "@/interfaces/stickers";
+
 export default function Page() {
-  const [gifs, setGifs] = useState(null);
-  const [stickers, setStickers] = useState(null);
+  const [gifs, setGifs] = useState<Gifs | null>(null);
+  const [stickers, setStickers] = useState<Stickers | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 

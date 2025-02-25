@@ -1,11 +1,13 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-
 //Components
 import DataFeed from "@/components/DataFeed/DataFeed";
 import Loading from "@/components/Loading/Loading";
+import SliderMenu from "@/components/SliderMenu/SliderMenu";
+
+//Utils
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const [gifs, setGifs] = useState(null);
@@ -14,12 +16,12 @@ export default function Page() {
   const [error, setError] = useState<string | null>(null);
 
   const searchParams = useSearchParams();
-  const category = searchParams.get("q") || "";
+  const searchQuery = searchParams.get("q") || "";
 
-  async function fetchCategory(categoryName: string, type: string) {
+  async function fetchSearchData(searchQuery: string, type: string) {
     try {
       const data = await fetch(
-        `https://api.giphy.com/v1/${type}/search?q=${categoryName}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `https://api.giphy.com/v1/${type}/search?q=${searchQuery}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       const response = await data.json();
       return response;
@@ -32,8 +34,8 @@ export default function Page() {
     async function fetchData() {
       setIsLoading(true);
       try {
-        const gifs = await fetchCategory(category, "gifs");
-        const stickers = await fetchCategory(category, "stickers");
+        const gifs = await fetchSearchData(searchQuery, "gifs");
+        const stickers = await fetchSearchData(searchQuery, "stickers");
         setGifs(gifs);
         setStickers(stickers);
       } catch (error) {
@@ -43,7 +45,7 @@ export default function Page() {
       }
     }
     fetchData();
-  }, [category]);
+  }, [searchQuery]);
 
   if (isLoading) {
     return <Loading />;
@@ -53,9 +55,10 @@ export default function Page() {
     <div className="page">
       <div className="headline-container">
         <h2 className="headline-container__text">
-          Gifs from category: {category}
+          Trending for: {searchQuery}
         </h2>
       </div>
+      <SliderMenu />
       {error !== null && <p>{error}</p>}
       {gifs !== null && stickers !== null && (
         <DataFeed data={{ gifs: gifs, stickers: stickers }} />

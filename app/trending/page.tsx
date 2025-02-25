@@ -2,6 +2,7 @@
 
 //Components
 import DataFeed from "@/components/DataFeed/DataFeed";
+import Loading from "@/components/Loading/Loading";
 import SliderMenu from "@/components/SliderMenu/SliderMenu";
 
 //Utils
@@ -49,6 +50,10 @@ export default function Page() {
     }
     fetchData();
   }, [searchQuery]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="page">

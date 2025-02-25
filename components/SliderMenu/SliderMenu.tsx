@@ -22,7 +22,7 @@ const SliderMenu: React.FC<IProps> = ({ items }) => {
   const router = useRouter();
 
   const handleTagClick = (tag: string) => {
-    router.push(`/search?q=${tag}`);
+    router.push(`/trending?q=${tag}`);
   };
 
   return (

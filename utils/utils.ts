@@ -21,10 +21,6 @@ export async function getTrendingStickers() {
   return fetchData("stickers/trending");
 }
 
-export async function getTrendingSearches() {
-  return fetchData("trending/searches");
-}
-
 export async function getCategories() {
   return fetchData("gifs/categories");
 }

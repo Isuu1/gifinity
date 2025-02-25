@@ -1,16 +1,11 @@
 import DataFeed from "@/components/DataFeed/DataFeed";
-import {
-  getTrendingGifs,
-  getTrendingSearches,
-  getTrendingStickers,
-} from "@/utils/utils";
+import { getTrendingGifs, getTrendingStickers } from "@/utils/utils";
 import Image from "next/image";
 import SliderMenu from "@/components/SliderMenu/SliderMenu";
 
 export default async function Home() {
   const trendingGifs = await getTrendingGifs();
   const trendingStickers = await getTrendingStickers();
-  const trendingSearches = await getTrendingSearches();
 
   return (
     <div className="page">
@@ -23,7 +18,7 @@ export default async function Home() {
         />
         <h2 className="headline-container__text">Trending now</h2>
       </div>
-      <SliderMenu items={trendingSearches} />
+      <SliderMenu />
       <DataFeed
         data={{
           gifs: trendingGifs,

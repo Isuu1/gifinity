@@ -27,7 +27,6 @@ export default function Page() {
 
   const [gifs, setGifs] = useState(null);
   const [stickers, setStickers] = useState(null);
-  //   const [trendingSearches, setTrendingSearches] = useState<string[]>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -51,19 +50,6 @@ export default function Page() {
     fetchData();
   }, [searchQuery]);
 
-  //   useEffect(() => {
-  //     async function fetchTrendingSearches() {
-  //       try {
-  //         const trendingSearches = await getTrendingSearches();
-  //         console.log("Trending searches", trendingSearches);
-  //         setTrendingSearches(trendingSearches);
-  //       } catch (error) {
-  //         console.error("Error fetching trending searches", error);
-  //       }
-  //     }
-  //     fetchTrendingSearches();
-  //   }, []);
-
   return (
     <div className="page">
       <div className="headline-container">
@@ -71,7 +57,7 @@ export default function Page() {
           Trending for: {searchQuery}
         </h2>
       </div>
-      {/* <SliderMenu items={trendingSearches} /> */}
+      <SliderMenu />
       {gifs !== null && stickers !== null && (
         <DataFeed data={{ gifs: gifs, stickers: stickers }} />
       )}

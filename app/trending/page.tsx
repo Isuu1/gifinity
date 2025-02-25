@@ -6,11 +6,18 @@ import Loading from "@/components/Loading/Loading";
 import SliderMenu from "@/components/SliderMenu/SliderMenu";
 
 //Utils
-
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
+  const [gifs, setGifs] = useState(null);
+  const [stickers, setStickers] = useState(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("q") || "";
+
   async function fetchSearchData(searchQuery: string, type: string) {
     try {
       const data = await fetch(
@@ -19,20 +26,9 @@ export default function Page() {
       const response = await data.json();
       return response;
     } catch (error) {
-      console.error("Error fetching gifs", error);
+      setError(`Error fetching gifs: ${error}`);
     }
   }
-
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get("q") || "";
-
-  const [gifs, setGifs] = useState(null);
-  const [stickers, setStickers] = useState(null);
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  console.log("Gifs", gifs);
-  console.log("Stickers", stickers);
 
   useEffect(() => {
     async function fetchData() {
@@ -63,6 +59,7 @@ export default function Page() {
         </h2>
       </div>
       <SliderMenu />
+      {error !== null && <p>{error}</p>}
       {gifs !== null && stickers !== null && (
         <DataFeed data={{ gifs: gifs, stickers: stickers }} />
       )}

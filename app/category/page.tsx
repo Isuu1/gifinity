@@ -1,40 +1,39 @@
 "use client";
 
-import DataFeed from "@/components/DataFeed/DataFeed";
-import Loading from "@/components/Loading/Loading";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
+//Components
+import DataFeed from "@/components/DataFeed/DataFeed";
+import Loading from "@/components/Loading/Loading";
+
 export default function Page() {
-  async function fetchSearchData(searchQuery: string, type: string) {
+  const [gifs, setGifs] = useState(null);
+  const [stickers, setStickers] = useState(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const searchParams = useSearchParams();
+  const category = searchParams.get("q") || "";
+
+  async function fetchCategory(categoryName: string, type: string) {
     try {
       const data = await fetch(
-        `https://api.giphy.com/v1/${type}/search?q=${searchQuery}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+        `https://api.giphy.com/v1/${type}/search?q=${categoryName}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
       );
       const response = await data.json();
       return response;
     } catch (error) {
-      console.error("Error fetching gifs", error);
+      setError(`Error fetching gifs: ${error}`);
     }
   }
-
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get("q") || "";
-
-  const [gifs, setGifs] = useState(null);
-  const [stickers, setStickers] = useState(null);
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  console.log("Gifs", gifs);
-  console.log("Stickers", stickers);
 
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
       try {
-        const gifs = await fetchSearchData(searchQuery, "gifs");
-        const stickers = await fetchSearchData(searchQuery, "stickers");
+        const gifs = await fetchCategory(category, "gifs");
+        const stickers = await fetchCategory(category, "stickers");
         setGifs(gifs);
         setStickers(stickers);
       } catch (error) {
@@ -44,9 +43,7 @@ export default function Page() {
       }
     }
     fetchData();
-  }, [searchQuery]);
-
-  console.log("isLoading", isLoading);
+  }, [category]);
 
   if (isLoading) {
     return <Loading />;
@@ -56,9 +53,10 @@ export default function Page() {
     <div className="page">
       <div className="headline-container">
         <h2 className="headline-container__text">
-          Gifs from category: {searchQuery}
+          Gifs from category: {category}
         </h2>
       </div>
+      {error !== null && <p>{error}</p>}
       {gifs !== null && stickers !== null && (
         <DataFeed data={{ gifs: gifs, stickers: stickers }} />
       )}

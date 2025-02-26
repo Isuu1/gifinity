@@ -9,14 +9,21 @@ export default function Page({
         style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 20 }}
       >
         <div>
-          <Image
-            src="/images/avatar.svg"
-            width={100}
-            height={100}
-            alt="avatar"
-            priority
-          />
-          <h1>User menu</h1>
+          <div>
+            <Image
+              src="/images/avatar.svg"
+              width={100}
+              height={100}
+              alt="avatar"
+              priority
+            />
+          </div>
+          <ul>
+            <li style={{ background: "#ff204e" }}>Profile</li>
+            <li>Favourites</li>
+            <li>Log in</li>
+            <li>Sign up</li>
+          </ul>
         </div>
         {children}
       </div>

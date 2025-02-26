@@ -25,7 +25,9 @@ const Header: React.FC = async () => {
         </Link>
         <div className={styles.nav}>
           <CategoriesMenu categories={categories.data} />
-          <Button>User profile</Button>
+          <Link href="/user/profile">
+            <Button>User profile</Button>
+          </Link>
         </div>
       </div>
       <div className={styles.headerBottom}>

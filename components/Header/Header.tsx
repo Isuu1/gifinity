@@ -12,7 +12,6 @@ import Button from "../UI/Button";
 import Search from "../Search/Search";
 
 //Icons
-import { TbArrowsRandom } from "react-icons/tb";
 import Link from "next/link";
 
 const Header: React.FC = async () => {
@@ -26,9 +25,6 @@ const Header: React.FC = async () => {
         </Link>
         <div className={styles.nav}>
           <CategoriesMenu categories={categories.data} />
-          <Button icon={<TbArrowsRandom />} iconPosition="right">
-            Random
-          </Button>
           <Button>User profile</Button>
         </div>
       </div>

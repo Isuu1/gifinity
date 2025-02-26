@@ -12,12 +12,17 @@ import Button from "../UI/Button";
 //Icons
 import { FaFireFlameSimple } from "react-icons/fa6";
 
+//Utils
+import { fetchTrendingSearches } from "@/utils/client";
+
 interface TrendingTags {
   data: string[];
 }
 
 const SliderMenu: React.FC = () => {
   const [items, setItems] = useState<TrendingTags | null>(null);
+
+  const [error, setError] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -27,16 +32,13 @@ const SliderMenu: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const data = await fetch(
-          `https://api.giphy.com/v1/trending/searches?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-        );
-        const response = await data.json();
-        setItems(response);
-        return response;
-      } catch (error) {
-        console.error("Error fetching gifs", error);
-      }
+      setError(null);
+
+      const trendingSearches = await fetchTrendingSearches();
+
+      if (trendingSearches.error) setError(trendingSearches.error);
+
+      if (trendingSearches.data) setItems(trendingSearches.data);
     };
     fetchData();
   }, []);
@@ -44,6 +46,7 @@ const SliderMenu: React.FC = () => {
   return (
     <div className={styles.sliderMenuContainer}>
       <div className={styles.sliderMenuInnerWrapper}>
+        {error !== null && <p>{error}</p>}
         {/* Render two sets of items for a seamless effect */}
         {items !== null &&
           [...items.data, ...items.data].map((item, index) => (

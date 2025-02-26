@@ -12,6 +12,9 @@ import SliderMenu from "@/components/SliderMenu/SliderMenu";
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
 
+//Utils
+import { fetchTrendingByTag } from "@/utils/client";
+
 export default function Page() {
   const [gifs, setGifs] = useState<Gifs | null>(null);
   const [stickers, setStickers] = useState<Stickers | null>(null);
@@ -21,31 +24,20 @@ export default function Page() {
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("q") || "";
 
-  async function fetchSearchData(searchQuery: string, type: string) {
-    try {
-      const data = await fetch(
-        `https://api.giphy.com/v1/${type}/search?q=${searchQuery}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-      );
-      const response = await data.json();
-      return response;
-    } catch (error) {
-      setError(`Error fetching gifs: ${error}`);
-    }
-  }
-
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
-      try {
-        const gifs = await fetchSearchData(searchQuery, "gifs");
-        const stickers = await fetchSearchData(searchQuery, "stickers");
-        setGifs(gifs);
-        setStickers(stickers);
-      } catch (error) {
-        console.error("Error fetching gifs", error);
-      } finally {
-        setIsLoading(false);
-      }
+      setError(null);
+
+      const gifs = await fetchTrendingByTag(searchQuery, "gifs");
+      const stickers = await fetchTrendingByTag(searchQuery, "stickers");
+
+      if (gifs.error || stickers.error) setError(gifs.error || stickers.error);
+
+      if (gifs.data) setGifs(gifs.data);
+      if (stickers.data) setStickers(stickers.data);
+
+      setIsLoading(false);
     }
     fetchData();
   }, [searchQuery]);

@@ -2,7 +2,7 @@
 import DataFeed from "@/components/DataFeed/DataFeed";
 
 //Utils
-import { getSearchedGifs, getSearchedStickers } from "@/utils/utils";
+import { getSearchedGifs, getSearchedStickers } from "@/utils/api";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";

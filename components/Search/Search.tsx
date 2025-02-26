@@ -5,6 +5,8 @@ import React, { useState } from "react";
 
 //Styles
 import styles from "./Search.module.scss";
+
+//Components
 import Button from "../UI/Button";
 
 //Icons
@@ -12,7 +14,8 @@ import { FaSearch } from "react-icons/fa";
 
 const Search: React.FC = () => {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState("");
+
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleSearch = () => {
     router.push(`/search?q=${searchQuery}`);

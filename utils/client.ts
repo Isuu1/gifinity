@@ -48,6 +48,6 @@ export async function fetchTrendingSearches() {
 
     return { data, error: null };
   } catch (error) {
-    return { data: null, error: `Error fetching gifs: ${error}` };
+    return { data: null, error: `Error fetching trending searches: ${error}` };
   }
 }

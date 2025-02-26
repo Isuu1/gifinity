@@ -3,6 +3,9 @@
   margin: 1rem auto;
   overflow: hidden;
   width: 100%;
+  .error {
+    text-align: center;
+  }
   .sliderMenuInnerWrapper {
     display: flex;
     gap: 0.3rem;

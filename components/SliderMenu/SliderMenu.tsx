@@ -45,8 +45,8 @@ const SliderMenu: React.FC = () => {
 
   return (
     <div className={styles.sliderMenuContainer}>
+      {error !== null && <h3 className={styles.error}>{error}</h3>}
       <div className={styles.sliderMenuInnerWrapper}>
-        {error !== null && <p>{error}</p>}
         {/* Render two sets of items for a seamless effect */}
         {items !== null &&
           [...items.data, ...items.data].map((item, index) => (

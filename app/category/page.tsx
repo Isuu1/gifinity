@@ -11,6 +11,9 @@ import Loading from "@/components/Loading/Loading";
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
 
+//Utils
+import { fetchCategoryData } from "@/utils/client";
+
 export default function Page() {
   const [gifs, setGifs] = useState<Gifs | null>(null);
   const [stickers, setStickers] = useState<Stickers | null>(null);
@@ -20,31 +23,22 @@ export default function Page() {
   const searchParams = useSearchParams();
   const category = searchParams.get("q") || "";
 
-  async function fetchCategory(categoryName: string, type: string) {
-    try {
-      const data = await fetch(
-        `https://api.giphy.com/v1/${type}/search?q=${categoryName}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-      );
-      const response = await data.json();
-      return response;
-    } catch (error) {
-      setError(`Error fetching gifs: ${error}`);
-    }
-  }
-
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
-      try {
-        const gifs = await fetchCategory(category, "gifs");
-        const stickers = await fetchCategory(category, "stickers");
-        setGifs(gifs);
-        setStickers(stickers);
-      } catch (error) {
-        console.error("Error fetching gifs", error);
-      } finally {
-        setIsLoading(false);
+      setError(null);
+
+      const gifs = await fetchCategoryData(category, "gifs");
+      const stickers = await fetchCategoryData(category, "stickers");
+
+      if (gifs.error || stickers.error) {
+        setError(gifs.error || stickers.error);
       }
+
+      if (gifs.data) setGifs(gifs.data);
+      if (stickers.data) setStickers(stickers.data);
+
+      setIsLoading(false);
     }
     fetchData();
   }, [category]);

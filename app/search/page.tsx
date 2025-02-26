@@ -1,5 +1,12 @@
+//Components
 import DataFeed from "@/components/DataFeed/DataFeed";
+
+//Utils
 import { getSearchedGifs, getSearchedStickers } from "@/utils/utils";
+
+//Interfaces
+import { Gifs } from "@/interfaces/gifs";
+import { Stickers } from "@/interfaces/stickers";
 
 export default async function Page({
   searchParams,
@@ -12,10 +19,8 @@ export default async function Page({
     ? searchQueryParam[0]
     : searchQueryParam;
 
-  console.log("searchParams", searchParams);
-
-  const gifs = await getSearchedGifs(searchQuery);
-  const stickers = await getSearchedStickers(searchQuery);
+  const gifs: Gifs = await getSearchedGifs(searchQuery);
+  const stickers: Stickers = await getSearchedStickers(searchQuery);
 
   return (
     <div className="page">

@@ -14,12 +14,13 @@ import Button from "../UI/Button";
 import GifOverlay from "../GifOverlay/GifOverlay";
 
 //Interfaces
-import { IGifSticker } from "@/interfaces/dataTypes";
+import { Gifs } from "@/interfaces/gifs";
+import { Stickers } from "@/interfaces/stickers";
 
 interface IProps {
   data: {
-    gifs?: IGifSticker;
-    stickers?: IGifSticker;
+    gifs?: Gifs;
+    stickers?: Stickers;
   };
 }
 
@@ -27,10 +28,12 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
   const { gifs, stickers } = data;
 
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
+
   const [displayedContent, setDisplayedContent] = useState<
-    IGifSticker | undefined
+    Gifs | Stickers | undefined
   >(gifs);
-  const [activeButton, setActiveButton] = useState("gifs");
+
+  const [activeButton, setActiveButton] = useState<string>("gifs");
 
   const changeContent = (content: string) => {
     setActiveButton(content);

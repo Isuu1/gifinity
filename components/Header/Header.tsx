@@ -1,7 +1,7 @@
 import React from "react";
 
 //Utils
-import { getCategories } from "@/utils/utils";
+import { getCategories } from "@/utils/api";
 
 //Styles
 import styles from "./Header.module.scss";

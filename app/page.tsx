@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 //Utils
-import { getTrendingGifs, getTrendingStickers } from "@/utils/utils";
+import { getTrendingGifs, getTrendingStickers } from "@/utils/api";
 
 //Components
 import SliderMenu from "@/components/SliderMenu/SliderMenu";

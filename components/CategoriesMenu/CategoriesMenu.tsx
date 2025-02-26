@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 //Icons
 import { PiArrowBendRightDownBold } from "react-icons/pi";
@@ -17,7 +18,6 @@ import {
   categoriesMenuAnimation,
   categoryMenuItemsAnimation,
 } from "@/styles/animations";
-import { useRouter } from "next/navigation";
 
 interface Category {
   name: string;

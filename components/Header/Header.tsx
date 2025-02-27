@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 //Utils
 import { getCategories } from "@/utils/api";
@@ -12,7 +13,7 @@ import Button from "../UI/Button";
 import Search from "../Search/Search";
 
 //Icons
-import Link from "next/link";
+import { FaHeart } from "react-icons/fa";
 
 const Header: React.FC = async () => {
   const categories = await getCategories();
@@ -25,9 +26,14 @@ const Header: React.FC = async () => {
         </Link>
         <div className={styles.nav}>
           <CategoriesMenu categories={categories.data} />
-          <Link href="/user/profile">
+          {/* <Link href="/user/profile">
             <Button>User profile</Button>
-          </Link>
+          </Link> */}
+          <Button>Log in</Button>
+          <Button active>Sign up</Button>
+          <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
+            Favourites
+          </Button>
         </div>
       </div>
       <div className={styles.headerBottom}>

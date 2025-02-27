@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
-import styles from "./GifOverlay.module.scss";
+
+//Styles
+import styles from "./MediaOverlay.module.scss";
 
 //Icons
 import { FaCopy } from "react-icons/fa";
@@ -15,14 +17,23 @@ import { useStorage } from "@/context/StorageContext";
 import { motion } from "framer-motion";
 import { overlayAnimation } from "@/styles/animations";
 
+//Interfaces
+import { Gif } from "@/interfaces/gifs";
+import { Sticker } from "@/interfaces/stickers";
+
 interface IProps {
-  gifUrl: string;
+  media: Gif | Sticker;
 }
 
-const GifOverlay: React.FC<IProps> = ({ gifUrl }) => {
-  const { userGifs, addItem } = useStorage();
+const MediaOverlay: React.FC<IProps> = ({ media }) => {
+  const { localFavouriteGifs, localFavouriteStickers, addItem } = useStorage();
 
-  const isGifOnWishlist = userGifs.find((gif) => gif === gifUrl);
+  const isGifOnWishlist = localFavouriteGifs.data.find(
+    (item) => item.id === media.id
+  );
+  const isStickerOnWishlist = localFavouriteStickers.data.find(
+    (item) => item.id === media.id
+  );
 
   return (
     <motion.div
@@ -35,11 +46,13 @@ const GifOverlay: React.FC<IProps> = ({ gifUrl }) => {
       <div className={styles.overlay_element}>
         <FaCopy
           className={styles.icon}
-          onClick={() => copyToClipboard(gifUrl)}
+          onClick={() => copyToClipboard(media.images.original.url)}
         />
         <FaHeart
-          className={`${styles.icon} ${isGifOnWishlist ? styles.filled : ""}`}
-          onClick={() => addItem(gifUrl)}
+          className={`${styles.icon} ${
+            isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
+          }`}
+          onClick={() => addItem(media)}
         />
       </div>
       {/* {gif.user?.display_name && (
@@ -60,4 +73,4 @@ const GifOverlay: React.FC<IProps> = ({ gifUrl }) => {
   );
 };
 
-export default GifOverlay;
+export default MediaOverlay;

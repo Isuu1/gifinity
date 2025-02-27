@@ -11,7 +11,7 @@ import { AnimatePresence } from "framer-motion";
 
 //Components
 import Button from "../UI/Button";
-import GifOverlay from "../GifOverlay/GifOverlay";
+import MediaOverlay from "../MediaOverlay/MediaOverlay";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
@@ -62,22 +62,22 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
       </div>
       <div className={styles.feedContainer}>
         {displayedContent &&
-          displayedContent.data.map((gif) => (
+          displayedContent.data.map((media) => (
             <div
-              key={gif.id}
+              key={media.id}
               className={styles.gif}
-              onMouseEnter={() => setShowOverlay(gif.id)}
+              onMouseEnter={() => setShowOverlay(media.id)}
               onMouseLeave={() => setShowOverlay(null)}
             >
               <AnimatePresence initial={false}>
-                {showOverlay === gif.id && (
-                  <GifOverlay key={gif.id} gifUrl={gif.images.original.url} />
+                {showOverlay === media.id && (
+                  <MediaOverlay key={media.id} media={media} />
                 )}
               </AnimatePresence>
               <Image
                 className={styles.image}
-                src={gif.images.original.url}
-                alt={gif.title}
+                src={media.images.original.url}
+                alt={media.title}
                 fill
                 unoptimized
               />

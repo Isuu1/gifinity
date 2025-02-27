@@ -1,7 +1,35 @@
+"use client";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+
+//Interfaces
+import { Gifs } from "@/interfaces/gifs";
+import { Stickers } from "@/interfaces/stickers";
+import DataFeed from "@/components/DataFeed/DataFeed";
+
 export default function Page() {
+  const [gifs, setGifs] = useState<Gifs | null>(null);
+  const [stickers, setStickers] = useState<Stickers | null>(null);
+
+  useEffect(() => {
+    const gifs = JSON.parse(localStorage.getItem("userGifs") || "null");
+    const stickers = JSON.parse(localStorage.getItem("userStickers") || "null");
+
+    if (gifs !== null) {
+      setGifs(gifs);
+    }
+
+    if (stickers !== null) {
+      setStickers(stickers);
+    }
+  }, []);
+
   return (
     <div className="page">
-      <h2>Favourites</h2>
+      <div className="headline-container">
+        <Image src="/images/heart.svg" alt="trending" width={40} height={40} />
+        <h2 className="headline-container__text">Favourites</h2>
+      </div>
       <div
         style={{
           background: "#a0153e",
@@ -17,6 +45,13 @@ export default function Page() {
           you to access then on any device.
         </h4>
       </div>
+      {gifs !== null || stickers !== null ? (
+        <DataFeed gifs={gifs} stickers={stickers} />
+      ) : (
+        <h2 style={{ textAlign: "center" }}>
+          You don`t have any favourites yet!
+        </h2>
+      )}
     </div>
   );
 }

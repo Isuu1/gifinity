@@ -31,9 +31,11 @@ const Header: React.FC = async () => {
           </Link> */}
           <Button>Log in</Button>
           <Button active>Sign up</Button>
-          <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
-            Favourites
-          </Button>
+          <Link href="/favourites">
+            <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
+              Favourites
+            </Button>
+          </Link>
         </div>
       </div>
       <div className={styles.headerBottom}>

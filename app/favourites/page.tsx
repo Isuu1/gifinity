@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
 
-//Interfaces
+//Components
 import DataFeed from "@/components/DataFeed/DataFeed";
+
+//Context
 import { useStorage } from "@/context/StorageContext";
 
 export default function Page() {

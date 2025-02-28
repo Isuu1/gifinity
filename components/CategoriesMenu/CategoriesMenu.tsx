@@ -18,15 +18,17 @@ import {
   categoriesMenuAnimation,
   categoryMenuItemsAnimation,
 } from "@/styles/animations";
+
+//Interfaces
 import { Categories } from "@/interfaces/categories";
+
+//Utils
 import { fetchCategories } from "@/utils/client";
 
 const CategoriesMenu: React.FC = () => {
   const [showCategories, setShowCategories] = useState<boolean>(false);
 
   const [categories, setCategories] = useState<Categories>({ data: [] });
-
-  console.log(categories);
 
   useEffect(() => {
     async function fetchData() {

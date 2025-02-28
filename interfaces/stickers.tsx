@@ -3,6 +3,7 @@ export interface Stickers {
 }
 
 export interface Sticker {
+  type: string;
   id: string;
   title: string;
   images: {

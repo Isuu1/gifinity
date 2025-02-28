@@ -59,22 +59,43 @@ export const StorageProvider = ({
   }, [localFavouriteStickers]);
 
   const addItem = (item: Gif | Sticker) => {
-    setLocalFavouriteGifs((prev) => {
-      const isItemInFavourites = prev.data.some((gif) => gif.id === item.id);
-      const updatedFavourites = isItemInFavourites
-        ? prev.data.filter((gif) => gif.id !== item.id)
-        : [...prev.data, item];
+    if (item.type === "gif") {
+      setLocalFavouriteGifs((prev) => {
+        const isItemInFavourites = prev.data.some((gif) => gif.id === item.id);
+        const updatedFavourites = isItemInFavourites
+          ? prev.data.filter((gif) => gif.id !== item.id)
+          : [...prev.data, item];
 
-      return {
-        data: updatedFavourites,
-      };
-    });
-    toast.success(
-      localFavouriteGifs.data.some((gif) => gif.id === item.id)
-        ? "Gif removed from wishlist"
-        : "Gif added to wishlist",
-      toastStyle
-    );
+        return {
+          data: updatedFavourites,
+        };
+      });
+      toast.success(
+        localFavouriteGifs.data.some((gif) => gif.id === item.id)
+          ? "Gif removed from wishlist"
+          : "Gif added to wishlist",
+        toastStyle
+      );
+    } else if (item.type === "sticker") {
+      setLocalFavouriteStickers((prev) => {
+        const isItemInFavourites = prev.data.some(
+          (sticker) => sticker.id === item.id
+        );
+        const updatedFavourites = isItemInFavourites
+          ? prev.data.filter((sticker) => sticker.id !== item.id)
+          : [...prev.data, item];
+
+        return {
+          data: updatedFavourites,
+        };
+      });
+      toast.success(
+        localFavouriteStickers.data.some((sticker) => sticker.id === item.id)
+          ? "Sticker removed from wishlist"
+          : "Sticker added to wishlist",
+        toastStyle
+      );
+    }
   };
 
   return (

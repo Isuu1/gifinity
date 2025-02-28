@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 //Icons
@@ -18,17 +18,23 @@ import {
   categoriesMenuAnimation,
   categoryMenuItemsAnimation,
 } from "@/styles/animations";
+import { Categories } from "@/interfaces/categories";
+import { fetchCategories } from "@/utils/client";
 
-interface Category {
-  name: string;
-}
-
-interface IProps {
-  categories: Category[];
-}
-
-const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
+const CategoriesMenu: React.FC = () => {
   const [showCategories, setShowCategories] = useState<boolean>(false);
+
+  const [categories, setCategories] = useState<Categories>({ data: [] });
+
+  console.log(categories);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetchCategories();
+      setCategories(response.data);
+    }
+    fetchData();
+  }, []);
 
   const router = useRouter();
 
@@ -82,7 +88,7 @@ const CategoriesMenu: React.FC<IProps> = ({ categories }) => {
             animate={showCategories ? "visible" : "hidden"}
             exit="exit"
           >
-            {categories.map((category, index: number) => (
+            {categories.data.map((category, index: number) => (
               <motion.li
                 key={index}
                 className={styles.navItem}

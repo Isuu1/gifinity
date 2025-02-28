@@ -2,13 +2,19 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
-import toast from "react-hot-toast";
 
+//Toast notifications
+import toast from "react-hot-toast";
 import { toastStyle } from "@/styles/toast";
 
+//Interfaces
+import { Gif, Gifs } from "@/interfaces/gifs";
+import { Sticker, Stickers } from "@/interfaces/stickers";
+
 interface StorageContextType {
-  userGifs: string[];
-  addItem: (item: string) => void;
+  localFavouriteGifs: Gifs;
+  localFavouriteStickers: Stickers;
+  addItem: (item: Gif | Sticker) => void;
 }
 
 export const StorageContext = createContext<StorageContextType | null>(null);
@@ -18,29 +24,84 @@ export const StorageProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [userGifs, setUserGifs] = useState<string[]>(() => {
-    if (typeof window !== "undefined") {
-      const localData = localStorage.getItem("userGifs");
-      return localData ? JSON.parse(localData) : [];
-    }
+  const [localFavouriteGifs, setLocalFavouriteGifs] = useState<Gifs>({
+    data: [],
   });
+  const [localFavouriteStickers, setLocalFavouriteStickers] =
+    useState<Stickers>({ data: [] });
+
+  //When the component mounts, check if there are any gifs or stickers in local storage and set them to state
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const localGifs = localStorage.getItem("userGifs");
+      const localStickers = localStorage.getItem("userStickers");
+      setLocalFavouriteGifs(localGifs ? JSON.parse(localGifs) : { data: [] });
+      setLocalFavouriteStickers(
+        localStickers ? JSON.parse(localStickers) : { data: [] }
+      );
+    }
+  }, []);
+
+  //When the localFavouriteGifs or localFavouriteStickers state changes, update the local storage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("userGifs", JSON.stringify(localFavouriteGifs));
+    }
+  }, [localFavouriteGifs]);
 
   useEffect(() => {
-    localStorage.setItem("userGifs", JSON.stringify(userGifs));
-  }, [userGifs]);
-
-  const addItem = (item: string) => {
-    if (userGifs.some((gif) => gif === item)) {
-      setUserGifs(userGifs.filter((gif) => gif !== item));
-      toast.success("Gif removed from wishlist", toastStyle);
-      return;
+    if (typeof window !== "undefined") {
+      localStorage.setItem(
+        "userStickers",
+        JSON.stringify(localFavouriteStickers)
+      );
     }
-    setUserGifs([...userGifs, item]);
-    toast.success("Gif added to wishlist", toastStyle);
+  }, [localFavouriteStickers]);
+
+  const addItem = (item: Gif | Sticker) => {
+    if (item.type === "gif") {
+      setLocalFavouriteGifs((prev) => {
+        const isItemInFavourites = prev.data.some((gif) => gif.id === item.id);
+        const updatedFavourites = isItemInFavourites
+          ? prev.data.filter((gif) => gif.id !== item.id)
+          : [...prev.data, item];
+
+        return {
+          data: updatedFavourites,
+        };
+      });
+      toast.success(
+        localFavouriteGifs.data.some((gif) => gif.id === item.id)
+          ? "Gif removed from wishlist"
+          : "Gif added to wishlist",
+        toastStyle
+      );
+    } else if (item.type === "sticker") {
+      setLocalFavouriteStickers((prev) => {
+        const isItemInFavourites = prev.data.some(
+          (sticker) => sticker.id === item.id
+        );
+        const updatedFavourites = isItemInFavourites
+          ? prev.data.filter((sticker) => sticker.id !== item.id)
+          : [...prev.data, item];
+
+        return {
+          data: updatedFavourites,
+        };
+      });
+      toast.success(
+        localFavouriteStickers.data.some((sticker) => sticker.id === item.id)
+          ? "Sticker removed from wishlist"
+          : "Sticker added to wishlist",
+        toastStyle
+      );
+    }
   };
 
   return (
-    <StorageContext.Provider value={{ userGifs, addItem }}>
+    <StorageContext.Provider
+      value={{ localFavouriteGifs, localFavouriteStickers, addItem }}
+    >
       {children}
     </StorageContext.Provider>
   );

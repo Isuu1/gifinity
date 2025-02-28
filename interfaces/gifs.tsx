@@ -3,6 +3,7 @@ export interface Gifs {
 }
 
 export interface Gif {
+  type: string;
   id: string;
   title: string;
   images: {

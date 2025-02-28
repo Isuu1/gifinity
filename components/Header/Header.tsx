@@ -1,8 +1,7 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
-
-//Utils
-import { getCategories } from "@/utils/api";
 
 //Styles
 import styles from "./Header.module.scss";
@@ -15,9 +14,7 @@ import Search from "../Search/Search";
 //Icons
 import { FaHeart } from "react-icons/fa";
 
-const Header: React.FC = async () => {
-  const categories = await getCategories();
-
+const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
@@ -25,15 +22,17 @@ const Header: React.FC = async () => {
           <h1>Gifinity</h1>
         </Link>
         <div className={styles.nav}>
-          <CategoriesMenu categories={categories.data} />
+          <CategoriesMenu />
           {/* <Link href="/user/profile">
             <Button>User profile</Button>
           </Link> */}
           <Button>Log in</Button>
           <Button active>Sign up</Button>
-          <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
-            Favourites
-          </Button>
+          <Link href="/favourites">
+            <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
+              Favourites
+            </Button>
+          </Link>
         </div>
       </div>
       <div className={styles.headerBottom}>

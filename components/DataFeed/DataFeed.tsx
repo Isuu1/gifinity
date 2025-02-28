@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 //Styles
 import styles from "./DataFeed.module.scss";
@@ -11,7 +11,7 @@ import { AnimatePresence } from "framer-motion";
 
 //Components
 import Button from "../UI/Button";
-import GifOverlay from "../GifOverlay/GifOverlay";
+import MediaOverlay from "../MediaOverlay/MediaOverlay";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
@@ -35,49 +35,45 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
 
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
-  const changeContent = (content: string) => {
-    setActiveButton(content);
-    if (content === "gifs") {
-      setDisplayedContent(gifs);
-    } else {
-      setDisplayedContent(stickers);
-    }
-  };
+  useEffect(() => {
+    // Ensure it updates when props change
+    setDisplayedContent(activeButton === "gifs" ? gifs : stickers);
+  }, [gifs, stickers, activeButton]);
 
   return (
     <div>
       <div className={styles.submenuContainer}>
         <Button
           active={activeButton === "gifs" && true}
-          onClick={() => changeContent("gifs")}
+          onClick={() => setActiveButton("gifs")}
         >
           Gifs
         </Button>
         <Button
           active={activeButton === "stickers" && true}
-          onClick={() => changeContent("stickers")}
+          onClick={() => setActiveButton("stickers")}
         >
           Stickers
         </Button>
       </div>
       <div className={styles.feedContainer}>
         {displayedContent &&
-          displayedContent.data.map((gif) => (
+          displayedContent.data.map((media) => (
             <div
-              key={gif.id}
+              key={media.id}
               className={styles.gif}
-              onMouseEnter={() => setShowOverlay(gif.id)}
+              onMouseEnter={() => setShowOverlay(media.id)}
               onMouseLeave={() => setShowOverlay(null)}
             >
               <AnimatePresence initial={false}>
-                {showOverlay === gif.id && (
-                  <GifOverlay key={gif.id} gifUrl={gif.images.original.url} />
+                {showOverlay === media.id && (
+                  <MediaOverlay key={media.id} media={media} />
                 )}
               </AnimatePresence>
               <Image
                 className={styles.image}
-                src={gif.images.original.url}
-                alt={gif.title}
+                src={media.images.original.url}
+                alt={media.title}
                 fill
                 unoptimized
               />

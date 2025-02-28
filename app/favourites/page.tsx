@@ -1,31 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
 //Interfaces
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
 import DataFeed from "@/components/DataFeed/DataFeed";
+import { useStorage } from "@/context/StorageContext";
 
 export default function Page() {
-  const [gifs, setGifs] = useState<Gifs>({ data: [] });
-  const [stickers, setStickers] = useState<Stickers>({ data: [] });
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedGifs = localStorage.getItem("userGifs");
-      const storedStickers = localStorage.getItem("userStickers");
-
-      if (storedGifs) {
-        setGifs(JSON.parse(storedGifs));
-      }
-      if (storedStickers) {
-        setStickers(JSON.parse(storedStickers));
-      }
-    }
-  }, []);
-
-  console.log("gifs", gifs);
+  const { localFavouriteGifs, localFavouriteStickers } = useStorage();
 
   return (
     <div className="page">
@@ -48,8 +29,11 @@ export default function Page() {
           you to access then on any device.
         </h4>
       </div>
-      {gifs.data.length > 0 || gifs.data.length > 0 ? (
-        <DataFeed data={{ gifs: gifs, stickers: stickers }} />
+      {localFavouriteGifs.data.length > 0 ||
+      localFavouriteStickers.data.length > 0 ? (
+        <DataFeed
+          data={{ gifs: localFavouriteGifs, stickers: localFavouriteStickers }}
+        />
       ) : (
         <h2 style={{ textAlign: "center" }}>
           You don`t have any favourites yet!

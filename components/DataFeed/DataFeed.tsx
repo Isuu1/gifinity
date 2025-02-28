@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 //Styles
 import styles from "./DataFeed.module.scss";
@@ -35,27 +35,23 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
 
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
-  const changeContent = (content: string) => {
-    setActiveButton(content);
-    if (content === "gifs") {
-      setDisplayedContent(gifs);
-    } else {
-      setDisplayedContent(stickers);
-    }
-  };
+  useEffect(() => {
+    // Ensure it updates when props change
+    setDisplayedContent(activeButton === "gifs" ? gifs : stickers);
+  }, [gifs, stickers, activeButton]);
 
   return (
     <div>
       <div className={styles.submenuContainer}>
         <Button
           active={activeButton === "gifs" && true}
-          onClick={() => changeContent("gifs")}
+          onClick={() => setActiveButton("gifs")}
         >
           Gifs
         </Button>
         <Button
           active={activeButton === "stickers" && true}
-          onClick={() => changeContent("stickers")}
+          onClick={() => setActiveButton("stickers")}
         >
           Stickers
         </Button>

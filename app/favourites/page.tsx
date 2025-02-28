@@ -28,7 +28,7 @@ export default function Page() {
         <h4>
           Your favorites are currently stored in your browser`s local storage.
           Creating an account will allow you to save them permanently allowing
-          you to access then on any device.
+          you to access them on any device.
         </h4>
       </div>
       {localFavouriteGifs.data.length > 0 ||

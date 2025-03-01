@@ -18,6 +18,9 @@ import { AnimatePresence } from "motion/react";
 //Icons
 import { IoTrashBin } from "react-icons/io5";
 
+//Context
+import { useStorage } from "@/context/StorageContext";
+
 interface IProps {
   data: {
     gifs?: Gifs;
@@ -35,6 +38,8 @@ const FavouritesFeed: React.FC<IProps> = ({ data }) => {
   const [displayedContent, setDisplayedContent] = useState<
     Gifs | Stickers | undefined
   >(gifs);
+
+  const { removeFavouritesFromLocalStorage } = useStorage();
 
   const isFavouritesEmpty = !displayedContent?.data.length;
 
@@ -68,7 +73,11 @@ const FavouritesFeed: React.FC<IProps> = ({ data }) => {
           </Button>
         </div>
         <div className={styles.clearButton}>
-          <Button icon={<IoTrashBin />} iconPosition="right">
+          <Button
+            icon={<IoTrashBin />}
+            iconPosition="right"
+            onClick={() => removeFavouritesFromLocalStorage()}
+          >
             Clear favourites
           </Button>
         </div>

@@ -21,7 +21,7 @@ export default function Page() {
   const [error, setError] = useState<string | null>(null);
 
   const searchParams = useSearchParams();
-  const category = searchParams.get("q") || "";
+  const category = decodeURIComponent(searchParams.get("q") || "");
 
   useEffect(() => {
     async function fetchData() {

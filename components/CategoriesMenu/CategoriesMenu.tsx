@@ -45,7 +45,9 @@ const CategoriesMenu: React.FC = () => {
   };
 
   const handleCategoryChange = (categoryName: string) => {
-    router.push(`/category?q=${categoryName}`);
+    //Encode category name to handle special character '&'
+    const encodedCategoryName = encodeURIComponent(categoryName);
+    router.push(`/category?q=${encodedCategoryName}`);
   };
 
   return (

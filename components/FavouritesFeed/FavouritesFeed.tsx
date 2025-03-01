@@ -20,6 +20,7 @@ import { IoTrashBin } from "react-icons/io5";
 
 //Context
 import { useStorage } from "@/context/StorageContext";
+import NotificationMessage from "../NotificationMessage/NotificationMessage";
 
 interface IProps {
   data: {
@@ -50,13 +51,12 @@ const FavouritesFeed: React.FC<IProps> = ({ data }) => {
 
   return (
     <div>
-      <div className={styles.notification}>
-        <h4>
-          Your favorites are currently stored in your browser`s local storage.
-          Creating an account will allow you to save them permanently allowing
-          you to access them on any device.
-        </h4>
-      </div>
+      <NotificationMessage>
+        Your favorites are currently stored in your browser`s local storage.
+        Creating an account will allow you to save them permanently allowing you
+        to access them on any device.
+      </NotificationMessage>
+
       <div className="flex-row">
         <div className={styles.submenuContainer}>
           <Button

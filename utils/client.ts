@@ -16,9 +16,10 @@ export async function fetchCategories() {
 }
 
 export async function fetchCategoryData(categoryName: string, type: string) {
+  const encodedSearchQuery = encodeURIComponent(categoryName);
   try {
     const response = await fetch(
-      `https://api.giphy.com/v1/${type}/search?q=${categoryName}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+      `https://api.giphy.com/v1/${type}/search?q=${encodedSearchQuery}&api_key=${process.env.NEXT_PUBLIC_API_KEY}`
     );
 
     if (!response.ok) {

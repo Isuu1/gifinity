@@ -45,25 +45,26 @@ const CategoriesMenu: React.FC = () => {
   };
 
   //In category name replace & with -
-  const replaceAnd = (categoryName: string) => {
-    const slicedCategoryName = categoryName.substring(
-      0,
-      categoryName.indexOf("&")
-    );
-    return slicedCategoryName;
-  };
+  // const replaceAnd = (categoryName: string) => {
+  //   const slicedCategoryName = categoryName.substring(
+  //     0,
+  //     categoryName.indexOf("&")
+  //   );
+  //   return slicedCategoryName;
+  // };
 
   const handleCategoryChange = (categoryName: string) => {
-    if (categoryName.includes("&")) {
-      const newCategoryName = replaceAnd(categoryName);
-      //router push path with category name
-      router.push(`/category?q=${newCategoryName}`);
-      return newCategoryName;
-    } else {
-      //router push path with category name
-      router.push(`/category?q=${categoryName}`);
-      return categoryName;
-    }
+    // if (categoryName.includes("&")) {
+    //   const newCategoryName = replaceAnd(categoryName);
+    //   //router push path with category name
+    //   router.push(`/category?q=${newCategoryName}`);
+    //   return newCategoryName;
+    // } else {
+    //   //router push path with category name
+    //   router.push(`/category?q=${categoryName}`);
+    //   return categoryName;
+    // }
+    router.push(`/category?q=${categoryName}`);
   };
 
   return (

@@ -51,7 +51,7 @@ export default function Page() {
     <div className="page">
       <div className="headline-container">
         <h2 className="headline-container__text">
-          Gifs from category: {category}
+          Results for category: {category}
         </h2>
       </div>
       {error !== null && <p>{error}</p>}

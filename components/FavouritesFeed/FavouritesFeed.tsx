@@ -15,6 +15,9 @@ import styles from "./FavouritesFeed.module.scss";
 //Animations
 import { AnimatePresence } from "motion/react";
 
+//Icons
+import { IoTrashBin } from "react-icons/io5";
+
 interface IProps {
   data: {
     gifs?: Gifs;
@@ -49,19 +52,26 @@ const FavouritesFeed: React.FC<IProps> = ({ data }) => {
           you to access them on any device.
         </h4>
       </div>
-      <div className={styles.submenuContainer}>
-        <Button
-          active={activeButton === "gifs" && true}
-          onClick={() => setActiveButton("gifs")}
-        >
-          Gifs
-        </Button>
-        <Button
-          active={activeButton === "stickers" && true}
-          onClick={() => setActiveButton("stickers")}
-        >
-          Stickers
-        </Button>
+      <div className="flex-row">
+        <div className={styles.submenuContainer}>
+          <Button
+            active={activeButton === "gifs" && true}
+            onClick={() => setActiveButton("gifs")}
+          >
+            Gifs
+          </Button>
+          <Button
+            active={activeButton === "stickers" && true}
+            onClick={() => setActiveButton("stickers")}
+          >
+            Stickers
+          </Button>
+        </div>
+        <div className={styles.clearButton}>
+          <Button icon={<IoTrashBin />} iconPosition="right">
+            Clear favourites
+          </Button>
+        </div>
       </div>
       <div className={styles.feedContainer}>
         {displayedContent &&

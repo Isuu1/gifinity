@@ -26,7 +26,8 @@ interface IProps {
 }
 
 const MediaOverlay: React.FC<IProps> = ({ media }) => {
-  const { localFavouriteGifs, localFavouriteStickers, addItem } = useStorage();
+  const { localFavouriteGifs, localFavouriteStickers, addItemToLocalStorage } =
+    useStorage();
 
   const isGifOnWishlist = localFavouriteGifs.data.find(
     (item) => item.id === media.id
@@ -52,7 +53,7 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
           className={`${styles.icon} ${
             isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
           }`}
-          onClick={() => addItem(media)}
+          onClick={() => addItemToLocalStorage(media)}
         />
       </div>
       {/* {gif.user?.display_name && (

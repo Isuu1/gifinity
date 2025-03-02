@@ -14,7 +14,8 @@ import { Sticker, Stickers } from "@/interfaces/stickers";
 interface StorageContextType {
   localFavouriteGifs: Gifs;
   localFavouriteStickers: Stickers;
-  addItem: (item: Gif | Sticker) => void;
+  addItemToLocalStorage: (item: Gif | Sticker) => void;
+  removeFavouritesFromLocalStorage: () => void;
 }
 
 export const StorageContext = createContext<StorageContextType | null>(null);
@@ -58,7 +59,7 @@ export const StorageProvider = ({
     }
   }, [localFavouriteStickers]);
 
-  const addItem = (item: Gif | Sticker) => {
+  const addItemToLocalStorage = (item: Gif | Sticker) => {
     if (item.type === "gif") {
       setLocalFavouriteGifs((prev) => {
         const isItemInFavourites = prev.data.some((gif) => gif.id === item.id);
@@ -98,9 +99,21 @@ export const StorageProvider = ({
     }
   };
 
+  const removeFavouritesFromLocalStorage = () => {
+    localStorage.removeItem("userGifs");
+    localStorage.removeItem("userStickers");
+    setLocalFavouriteGifs({ data: [] });
+    setLocalFavouriteStickers({ data: [] });
+  };
+
   return (
     <StorageContext.Provider
-      value={{ localFavouriteGifs, localFavouriteStickers, addItem }}
+      value={{
+        localFavouriteGifs,
+        localFavouriteStickers,
+        addItemToLocalStorage,
+        removeFavouritesFromLocalStorage,
+      }}
     >
       {children}
     </StorageContext.Provider>

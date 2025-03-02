@@ -6,6 +6,18 @@ import { motion } from "framer-motion";
 //Styles
 import styles from "./Modal.module.scss";
 
+export const modalBackdropAnimation = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+
 export const modalAnimation = {
   hidden: {
     opacity: 0,
@@ -27,7 +39,13 @@ interface IProps {
 
 const Modal: React.FC<IProps> = ({ children }) => {
   return (
-    <div className={styles.modalContainer}>
+    <motion.div
+      className={styles.modalContainer}
+      variants={modalBackdropAnimation}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
       <motion.div
         className={styles.modal}
         variants={modalAnimation}
@@ -37,7 +55,7 @@ const Modal: React.FC<IProps> = ({ children }) => {
       >
         {children}
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

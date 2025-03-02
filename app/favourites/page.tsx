@@ -17,7 +17,7 @@ import { useStorage } from "@/context/StorageContext";
 import { IoTrashBin } from "react-icons/io5";
 
 //Animations
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence } from "framer-motion";
 
 export default function Page() {
   const {
@@ -42,7 +42,7 @@ export default function Page() {
         <h2 className="headline-container__text">Favourites</h2>
       </div>
 
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} mode="wait">
         {showModal && (
           <Modal key="modal">
             <ConfirmDelete

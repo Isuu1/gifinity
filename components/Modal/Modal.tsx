@@ -2,36 +2,10 @@ import React from "react";
 
 //Animations
 import { motion } from "framer-motion";
+import { modalAnimation, modalBackdropAnimation } from "@/styles/animations";
 
 //Styles
 import styles from "./Modal.module.scss";
-
-export const modalBackdropAnimation = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-  },
-  exit: {
-    opacity: 0,
-  },
-};
-
-export const modalAnimation = {
-  hidden: {
-    opacity: 0,
-    scale: 0,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-  },
-  exit: {
-    opacity: 0,
-    scale: 0,
-  },
-};
 
 interface IProps {
   children: React.ReactNode;

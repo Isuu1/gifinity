@@ -8,6 +8,7 @@ import NotificationMessage from "@/components/NotificationMessage/NotificationMe
 import MediaTypeMenu from "@/components/MediaTypeMenu/MediaTypeMenu";
 import Button from "@/components/UI/Button";
 import Modal from "@/components/Modal/Modal";
+import ConfirmDelete from "@/components/ConfirmDelete/ConfirmDelete";
 
 //Context
 import { useStorage } from "@/context/StorageContext";
@@ -44,15 +45,10 @@ export default function Page() {
       <AnimatePresence initial={false}>
         {showModal && (
           <Modal key="modal">
-            <h3>
-              Are you sure you want to delete favourites gifs and stickers?
-            </h3>
-            <div className="flex-row">
-              <Button active onClick={() => handleRemoveItems()}>
-                Confirm
-              </Button>
-              <Button onClick={() => setShowModal(false)}>Cancel</Button>
-            </div>
+            <ConfirmDelete
+              onConfirm={handleRemoveItems}
+              onCancel={() => setShowModal(false)}
+            />
           </Modal>
         )}
       </AnimatePresence>

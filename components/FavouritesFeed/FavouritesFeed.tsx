@@ -22,6 +22,7 @@ import { IoTrashBin } from "react-icons/io5";
 
 //Context
 import { useStorage } from "@/context/StorageContext";
+import MediaTypeMenu from "../MediaTypeMenu/MediaTypeMenu";
 
 interface IProps {
   data: {
@@ -81,20 +82,10 @@ const FavouritesFeed: React.FC<IProps> = ({ data }) => {
       </NotificationMessage>
 
       <div className="flex-row">
-        <div className={styles.submenuContainer}>
-          <Button
-            active={activeButton === "gifs" && true}
-            onClick={() => setActiveButton("gifs")}
-          >
-            Gifs
-          </Button>
-          <Button
-            active={activeButton === "stickers" && true}
-            onClick={() => setActiveButton("stickers")}
-          >
-            Stickers
-          </Button>
-        </div>
+        <MediaTypeMenu
+          activeButton={activeButton}
+          setActiveButton={setActiveButton}
+        />
         <div className={styles.clearButton}>
           <Button
             icon={<IoTrashBin />}

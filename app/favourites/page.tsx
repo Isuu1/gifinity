@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 
 //Components
@@ -9,6 +8,7 @@ import MediaTypeMenu from "@/components/MediaTypeMenu/MediaTypeMenu";
 import Button from "@/components/UI/Button";
 import Modal from "@/components/Modal/Modal";
 import ConfirmDelete from "@/components/ConfirmDelete/ConfirmDelete";
+import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Context
 import { useStorage } from "@/context/StorageContext";
@@ -37,10 +37,7 @@ export default function Page() {
 
   return (
     <div className="page">
-      <div className="headline-container">
-        <Image src="/images/heart.svg" alt="trending" width={40} height={40} />
-        <h2 className="headline-container__text">Favourites</h2>
-      </div>
+      <PageHeadline title="Favourites" imageUrl="/images/heart.svg" />
 
       <AnimatePresence initial={false} mode="wait">
         {showModal && (

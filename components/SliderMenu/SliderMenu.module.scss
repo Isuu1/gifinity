@@ -20,6 +20,9 @@
       background: #36343a;
       flex: 1 1;
       white-space: nowrap;
+      .placeholder {
+        opacity: 0;
+      }
     }
   }
   &:after {

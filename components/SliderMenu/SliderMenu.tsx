@@ -48,17 +48,25 @@ const SliderMenu: React.FC = () => {
       {error !== null && <h3 className={styles.error}>{error}</h3>}
       <div className={styles.sliderMenuInnerWrapper}>
         {/* Render two sets of items for a seamless effect */}
-        {items !== null &&
-          [...items.data, ...items.data].map((item, index) => (
-            <div key={index} className={styles.sliderMenuItem}>
-              <Button
-                icon={<FaFireFlameSimple />}
-                onClick={() => handleTagClick(item)}
-              >
-                {item}
-              </Button>
-            </div>
-          ))}
+        {items
+          ? [...items.data, ...items.data].map((item, index) => (
+              <div key={index} className={styles.sliderMenuItem}>
+                <Button
+                  icon={<FaFireFlameSimple />}
+                  onClick={() => handleTagClick(item)}
+                >
+                  {item}
+                </Button>
+              </div>
+            ))
+          : //Render placeholders while loading
+            Array.from({ length: 30 }).map((item, index) => (
+              <div key={index} className={styles.sliderMenuItem}>
+                <div className={styles.placeholder}>
+                  <Button>Loading...</Button>
+                </div>
+              </div>
+            ))}
       </div>
     </div>
   );

@@ -1,21 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎭 Gifinity
 
-## Getting Started
+A **Next.js (App Router) web app** that lets users explore GIFs & stickers using the **Giphy API**. Users can **save favorites locally** without logging in and **optionally create an account** to store them in a database. Logged-in users can **transfer** their locally saved favorites to their online account.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **🎨 GIF & Sticker Search** – Fetches results from the Giphy API.
+- **💾 Favorites Without Login** – Uses **local storage** to save favorites.
+- **🔑 User Authentication** – Sign up/log in to store favorites in a **database**.
+- **🔄 Sync Local Favorites** – Transfer saved GIFs from **local storage** to an **online account** after logging in.
+- **⚡ Smooth UI/UX** – Built with **Framer Motion** for animations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js (App Router)**
+- **TypeScript**
+- **Giphy API**
+- **Supabase (for authentication & database storage)**
+- **Framer Motion (animations)**
+- **Local Storage (for guest users)**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📜 License
+
+This project is **proprietary**. Unauthorized use, copying, or distribution is prohibited.
+For licensing inquiries, contact: **https://jakubbabelek.com/**

@@ -7,7 +7,7 @@ import NotificationMessage from "@/components/NotificationMessage/NotificationMe
 import MediaTypeMenu from "@/components/MediaTypeMenu/MediaTypeMenu";
 import Button from "@/components/UI/Button";
 import Modal from "@/components/Modal/Modal";
-import ConfirmDelete from "@/components/ConfirmDelete/ConfirmDelete";
+import ConfirmAction from "@/components/ConfirmAction/ConfirmAction";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Context
@@ -42,7 +42,7 @@ export default function Page() {
       <AnimatePresence initial={false} mode="wait">
         {showModal && (
           <Modal key="modal">
-            <ConfirmDelete
+            <ConfirmAction
               onConfirm={handleRemoveItems}
               onCancel={() => setShowModal(false)}
             />

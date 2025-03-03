@@ -4,14 +4,14 @@ import React from "react";
 import Button from "../UI/Button";
 
 //Styles
-import styles from "./ConfirmDelete.module.scss";
+import styles from "./ConfirmAction.module.scss";
 
 interface IProps {
   onConfirm: () => void;
   onCancel: (value: boolean) => void;
 }
 
-const ConfirmDelete: React.FC<IProps> = ({ onConfirm, onCancel }) => {
+const ConfirmAction: React.FC<IProps> = ({ onConfirm, onCancel }) => {
   return (
     <div className={styles.confirmDelete}>
       <h3>Are you sure you want to delete favourites gifs and stickers?</h3>
@@ -25,4 +25,4 @@ const ConfirmDelete: React.FC<IProps> = ({ onConfirm, onCancel }) => {
   );
 };
 
-export default ConfirmDelete;
+export default ConfirmAction;

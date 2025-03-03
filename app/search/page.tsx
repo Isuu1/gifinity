@@ -1,5 +1,6 @@
 //Components
 import DataFeed from "@/components/DataFeed/DataFeed";
+import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Utils
 import { getSearchedGifs, getSearchedStickers } from "@/utils/api";
@@ -24,11 +25,11 @@ export default async function Page({
 
   return (
     <div className="page">
-      <div className="headline-container">
-        <h2 className="headline-container__text">
-          Search results for: {searchQuery}
-        </h2>
-      </div>
+      <PageHeadline
+        title={`Search results for: ${searchQuery}`}
+        imageUrl="/images/search.svg"
+      />
+
       <DataFeed data={{ gifs: gifs, stickers: stickers }} />
     </div>
   );

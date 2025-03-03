@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import DataFeed from "@/components/DataFeed/DataFeed";
 import Loading from "@/components/Loading/Loading";
 import SliderMenu from "@/components/SliderMenu/SliderMenu";
+import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
@@ -48,12 +49,13 @@ export default function Page() {
 
   return (
     <div className="page">
-      <div className="headline-container">
-        <h2 className="headline-container__text">
-          Trending for: {searchQuery}
-        </h2>
-      </div>
+      <PageHeadline
+        title={`Trending for: ${searchQuery}`}
+        imageUrl="/images/trending4.svg"
+      />
+
       <SliderMenu />
+
       {error !== null && <p>{error}</p>}
       {gifs !== null && stickers !== null && (
         <DataFeed data={{ gifs: gifs, stickers: stickers }} />

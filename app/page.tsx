@@ -1,11 +1,10 @@
-import Image from "next/image";
-
 //Utils
 import { getTrendingGifs, getTrendingStickers } from "@/utils/api";
 
 //Components
 import SliderMenu from "@/components/SliderMenu/SliderMenu";
 import DataFeed from "@/components/DataFeed/DataFeed";
+import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
@@ -17,15 +16,8 @@ export default async function Home() {
 
   return (
     <div className="page">
-      <div className="headline-container">
-        <Image
-          src="/images/trending4.svg"
-          alt="trending"
-          width={40}
-          height={40}
-        />
-        <h2 className="headline-container__text">Trending now</h2>
-      </div>
+      <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
+
       <SliderMenu />
       <DataFeed
         data={{

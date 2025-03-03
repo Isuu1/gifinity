@@ -13,6 +13,7 @@ import { Stickers } from "@/interfaces/stickers";
 
 //Utils
 import { fetchCategoryData } from "@/utils/client";
+import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 export default function Page() {
   const [gifs, setGifs] = useState<Gifs | null>(null);
@@ -49,11 +50,10 @@ export default function Page() {
 
   return (
     <div className="page">
-      <div className="headline-container">
-        <h2 className="headline-container__text">
-          Results for category: {category}
-        </h2>
-      </div>
+      <PageHeadline
+        title={`Results for category: ${category}`}
+        imageUrl="/images/category.svg"
+      />
       {error !== null && <p>{error}</p>}
       {gifs !== null && stickers !== null && (
         <DataFeed data={{ gifs: gifs, stickers: stickers }} />

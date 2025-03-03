@@ -22,4 +22,5 @@ A **Next.js (App Router) web app** that lets users explore GIFs & stickers using
 ## 📜 License
 
 This project is **proprietary**. Unauthorized use, copying, or distribution is prohibited.
+See the [LICENSE](LICENSE) file for details.
 For licensing inquiries, contact: **https://jakubbabelek.com/**

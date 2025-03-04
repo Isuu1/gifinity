@@ -26,7 +26,7 @@ const Header: React.FC = () => {
           {/* <Link href="/user/profile">
             <Button>User profile</Button>
           </Link> */}
-          <Link href="/login">
+          <Link href="/login" scroll={false}>
             <Button>Log in</Button>
           </Link>
           <Button active>Sign up</Button>

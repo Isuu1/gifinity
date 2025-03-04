@@ -26,7 +26,9 @@ const Header: React.FC = () => {
           {/* <Link href="/user/profile">
             <Button>User profile</Button>
           </Link> */}
-          <Button>Log in</Button>
+          <Link href="/login">
+            <Button>Log in</Button>
+          </Link>
           <Button active>Sign up</Button>
           <Link href="/favourites">
             <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">

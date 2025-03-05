@@ -1,5 +1,6 @@
 "use client";
 
+import LoginForm from "@/components/Authentication/LoginForm/LoginForm";
 import Modal from "@/components/Modal/Modal";
 import Button from "@/components/UI/Button";
 import { AnimatePresence } from "framer-motion";
@@ -21,6 +22,7 @@ export default function InterceptedLogin() {
         {showModal && (
           <Modal key="modal">
             <Button onClick={() => closeModal()}>X</Button>
+            <LoginForm />
           </Modal>
         )}
       </AnimatePresence>

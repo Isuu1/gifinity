@@ -3,7 +3,6 @@
 import Modal from "@/components/Modal/Modal";
 import Button from "@/components/UI/Button";
 import { AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -17,6 +16,7 @@ export default function InterceptedLogin() {
   };
   return (
     <div>
+      {/* Using onExitComplete here is necessary to keep modal exit animation working */}
       <AnimatePresence mode="wait" onExitComplete={() => router.back()}>
         {showModal && (
           <Modal key="modal">

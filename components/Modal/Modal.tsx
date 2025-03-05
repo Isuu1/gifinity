@@ -9,10 +9,10 @@ import styles from "./Modal.module.scss";
 
 interface IProps {
   children: React.ReactNode;
-  background: "light" | "dark";
+  theme: "light" | "dark";
 }
 
-const Modal: React.FC<IProps> = ({ children, background }) => {
+const Modal: React.FC<IProps> = ({ children, theme }) => {
   return (
     <motion.div
       className={styles.modalContainer}
@@ -22,9 +22,7 @@ const Modal: React.FC<IProps> = ({ children, background }) => {
       exit="exit"
     >
       <motion.div
-        className={`${styles.modal} ${
-          background === "light" ? styles.light : styles.dark
-        }`}
+        className={`${styles.modal} ${styles[theme]}`}
         variants={modalAnimation}
         initial="hidden"
         animate="visible"

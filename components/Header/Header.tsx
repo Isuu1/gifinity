@@ -29,7 +29,9 @@ const Header: React.FC = () => {
           <Link href="/login" scroll={false}>
             <Button>Log in</Button>
           </Link>
-          <Button active>Sign up</Button>
+          <Link href="/signup" scroll={false}>
+            <Button active>Sign up</Button>
+          </Link>
           <Link href="/favourites">
             <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
               Favourites

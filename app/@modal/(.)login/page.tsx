@@ -21,7 +21,9 @@ export default function InterceptedLogin() {
       <AnimatePresence mode="wait" onExitComplete={() => router.back()}>
         {showModal && (
           <Modal key="modal" theme="light">
-            <Button onClick={() => closeModal()}>X</Button>
+            <div className="margin-left-auto">
+              <Button onClick={() => closeModal()}>X</Button>
+            </div>
             <LoginForm />
           </Modal>
         )}

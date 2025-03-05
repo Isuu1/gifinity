@@ -6,6 +6,7 @@ import { useState } from "react";
 //Components
 import Modal from "@/components/Modal/Modal";
 import Button from "@/components/UI/Button";
+import SignupForm from "@/components/Authentication/SignupForm/SignupForm";
 
 //Animations
 import { AnimatePresence } from "framer-motion";
@@ -27,7 +28,7 @@ export default function InterceptedSignup() {
             <div className="margin-left-auto">
               <Button onClick={() => closeModal()}>X</Button>
             </div>
-            {/* <LoginForm /> */}
+            <SignupForm />
           </Modal>
         )}
       </AnimatePresence>

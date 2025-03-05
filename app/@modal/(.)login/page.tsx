@@ -1,11 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+//Components
 import LoginForm from "@/components/Authentication/LoginForm/LoginForm";
 import Modal from "@/components/Modal/Modal";
 import Button from "@/components/UI/Button";
+
+//Animations
 import { AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function InterceptedLogin() {
   const [showModal, setShowModal] = useState<boolean>(true);

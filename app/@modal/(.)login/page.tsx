@@ -20,7 +20,7 @@ export default function InterceptedLogin() {
       {/* Using onExitComplete here is necessary to keep modal exit animation working */}
       <AnimatePresence mode="wait" onExitComplete={() => router.back()}>
         {showModal && (
-          <Modal key="modal">
+          <Modal key="modal" background="light">
             <Button onClick={() => closeModal()}>X</Button>
             <LoginForm />
           </Modal>

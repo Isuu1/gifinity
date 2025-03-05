@@ -7,7 +7,8 @@ interface IProps {
   id: string;
   label: string;
   type: string;
-  labelHidden: boolean;
+  placeholder?: string;
+  labelHidden?: boolean;
   required?: boolean;
   theme: "light" | "dark" | "white";
 }
@@ -19,11 +20,13 @@ const Input: React.FC<IProps> = ({
   type,
   theme,
   required,
+  placeholder,
 }) => {
   return (
     <div>
       <label htmlFor={label}>{!labelHidden && label}</label>
       <input
+        placeholder={placeholder}
         className={`${styles.input} ${styles[theme]}`}
         required={required}
         id={id}

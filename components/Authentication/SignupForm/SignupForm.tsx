@@ -92,7 +92,9 @@ const SignupForm: React.FC = () => {
                   </p>
                 ));
               })}
-            <Button active>Sign up</Button>
+            <Button active disabled={isPending}>
+              {isPending ? "Creating account..." : "Sign up"}
+            </Button>
           </Form>
           <h4>——— or ———</h4>
           <Button

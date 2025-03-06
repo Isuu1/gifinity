@@ -14,6 +14,10 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  &:disabled {
+    cursor: not-allowed;
+    background: $secondaryColorLight;
+  }
   &.active {
     background: $secondaryColorLight;
     &:hover {

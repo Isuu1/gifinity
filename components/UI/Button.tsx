@@ -10,6 +10,7 @@ interface IProps {
   active?: boolean;
   iconPosition?: "left" | "right";
   className?: string;
+  disabled?: boolean;
 }
 
 const Button: React.FC<IProps> = ({
@@ -19,6 +20,7 @@ const Button: React.FC<IProps> = ({
   onClick,
   iconPosition,
   className,
+  disabled,
 }) => {
   return (
     <button
@@ -27,6 +29,7 @@ const Button: React.FC<IProps> = ({
       style={{
         flexDirection: iconPosition === "right" ? "row-reverse" : "row",
       }}
+      disabled={disabled}
     >
       {icon && <span className={styles.icon}>{icon}</span>}
       <span className={styles.text}>{children}</span>

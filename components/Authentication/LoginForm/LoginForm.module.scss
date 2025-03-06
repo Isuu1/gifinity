@@ -1,0 +1,19 @@
+.loginFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  .loginWithGoogleButton {
+    background: #1a49ca;
+    &:hover {
+      background: #072b8d;
+    }
+  }
+  .loginWithFacebookButton {
+    background: #011857;
+    &:hover {
+      background: #2e4fa8;
+    }
+  }
+}

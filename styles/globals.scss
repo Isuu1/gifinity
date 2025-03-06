@@ -38,24 +38,6 @@ a {
   margin-left: auto;
 }
 
-.headline-container {
-  position: relative;
-  display: flex;
-  gap: 0.3rem;
-  align-items: center;
-  margin-bottom: 1rem;
-  &__icon {
-    font-size: 2rem;
-    color: $secondaryColorLight;
-  }
-  &__text {
-    font-weight: 700;
-    font-style: normal;
-    font-size: 2rem;
-    color: #fff;
-  }
-}
-
 @media (min-width: 768px) {
   .page {
     padding: 1rem 2rem;

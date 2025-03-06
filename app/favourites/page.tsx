@@ -41,7 +41,7 @@ export default function Page() {
 
       <AnimatePresence initial={false} mode="wait">
         {showModal && (
-          <Modal key="modal">
+          <Modal key="modal" theme="light">
             <ConfirmAction
               onConfirm={handleRemoveItems}
               onCancel={() => setShowModal(false)}

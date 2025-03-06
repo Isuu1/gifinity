@@ -10,11 +10,19 @@ import styles from "./Header.module.scss";
 import CategoriesMenu from "../CategoriesMenu/CategoriesMenu";
 import Button from "../UI/Button";
 import Search from "../Search/Search";
+import SignoutButton from "../Authentication/SignoutButton/SignoutButton";
 
 //Icons
 import { FaHeart } from "react-icons/fa";
 
-const Header: React.FC = () => {
+//Supabase
+import { User } from "@supabase/supabase-js";
+
+interface IProps {
+  user: User | null;
+}
+
+const Header: React.FC<IProps> = ({ user }) => {
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
@@ -23,16 +31,28 @@ const Header: React.FC = () => {
         </Link>
         <div className={styles.nav}>
           <CategoriesMenu />
-          {/* <Link href="/user/profile">
-            <Button>User profile</Button>
-          </Link> */}
-          <Button>Log in</Button>
-          <Button active>Sign up</Button>
-          <Link href="/favourites">
-            <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
-              Favourites
-            </Button>
-          </Link>
+          {user ? (
+            <>
+              <Link href="/user/profile">
+                <Button>User profile</Button>
+              </Link>
+              <SignoutButton />
+            </>
+          ) : (
+            <>
+              <Link href="/login" scroll={false}>
+                <Button>Log in</Button>
+              </Link>
+              <Link href="/signup" scroll={false}>
+                <Button active>Sign up</Button>
+              </Link>
+              <Link href="/favourites">
+                <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
+                  Favourites
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <div className={styles.headerBottom}>

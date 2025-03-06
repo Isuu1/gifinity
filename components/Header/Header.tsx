@@ -13,8 +13,14 @@ import Search from "../Search/Search";
 
 //Icons
 import { FaHeart } from "react-icons/fa";
+import { User } from "@supabase/supabase-js";
 
-const Header: React.FC = () => {
+interface IProps {
+  user: User | null;
+}
+
+const Header: React.FC<IProps> = ({ user }) => {
+  console.log(user);
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>

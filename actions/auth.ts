@@ -35,6 +35,7 @@ type SignupError =
 export async function signup(prevState: SignupError, formData: FormData) {
   const supabase = await createClient();
 
+  //Form data from frontend form
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
@@ -50,12 +51,14 @@ export async function signup(prevState: SignupError, formData: FormData) {
 
   const validateSignupData = signupSchema.safeParse(data);
 
+  //Return data along with error message to to able to set email as default value (prevent clearing the input)
   if (!validateSignupData.success) {
-    return { error: validateSignupData.error.format() };
+    return { data, error: validateSignupData.error.format() };
   }
 
+  //Return data along with error message to to able to set email as default value (prevent clearing the input)
   if (data.password !== data.confirmPassword) {
-    return { error: "Passwords do not match" };
+    return { data, error: "Passwords do not match" };
   }
 
   const { error } = await supabase.auth.signUp(data);

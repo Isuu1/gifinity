@@ -11,6 +11,7 @@ interface IProps {
   placeholder?: string;
   labelHidden?: boolean;
   required?: boolean;
+  defaultValue?: string;
   icon?: React.ReactNode;
   theme: "light" | "dark" | "white";
 }
@@ -27,6 +28,7 @@ const Input: React.FC<IProps> = ({
   type,
   theme,
   required,
+  defaultValue,
   placeholder,
   icon,
 }) => {
@@ -43,6 +45,7 @@ const Input: React.FC<IProps> = ({
         id={id}
         name={id}
         type={type}
+        defaultValue={defaultValue}
       />
     </div>
   );

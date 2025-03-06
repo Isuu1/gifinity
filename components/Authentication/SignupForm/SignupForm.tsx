@@ -43,6 +43,7 @@ const SignupForm: React.FC = () => {
           labelHidden
           placeholder="Email"
           icon={<MdEmail />}
+          defaultValue={state.data?.email}
         />
         <Input
           type="password"

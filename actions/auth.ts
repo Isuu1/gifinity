@@ -25,6 +25,10 @@ export async function login(formData: FormData) {
   redirect("/");
 }
 
+//
+// Signup process
+//
+
 export async function signup(prevState: SignupError, formData: FormData) {
   const supabase = await createClient();
 
@@ -47,14 +51,29 @@ export async function signup(prevState: SignupError, formData: FormData) {
     return { data, error: "Passwords do not match" };
   }
 
+  //Check if user is already registered
+  const { error: duplicateUserError } = await supabase.auth.signInWithPassword({
+    email: data.email,
+    password: data.password,
+  });
+
+  if (!duplicateUserError) {
+    return { error: "This email is already registered. Please log in." };
+  }
+
   const { error } = await supabase.auth.signUp(data);
 
   if (error) {
     return { error: error.message };
   }
 
-  revalidatePath("/", "layout");
-  redirect("/");
+  //revalidatePath("/", "layout");
 
-  return { error: null };
+  //Upon successful registration, return success message
+  return {
+    data,
+    error: null,
+    success:
+      "Registration successful! Please check your email to confirm your account.",
+  };
 }

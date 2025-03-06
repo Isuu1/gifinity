@@ -15,7 +15,7 @@ import { ImFacebook2 } from "react-icons/im";
 import styles from "./SignupForm.module.scss";
 
 //Utils
-import { login } from "@/app/login/actions";
+import { signup } from "@/actions/auth";
 
 const LoginForm: React.FC = () => {
   return (
@@ -24,7 +24,7 @@ const LoginForm: React.FC = () => {
       <h4>
         Create account to access your favorites, sync across devices, and more!
       </h4>
-      <Form action={login}>
+      <Form action={signup}>
         <Input
           type="email"
           id="email"

@@ -15,7 +15,7 @@ import { ImFacebook2 } from "react-icons/im";
 import styles from "./LoginForm.module.scss";
 
 //Utils
-import { login } from "@/app/login/actions";
+import { login } from "@/actions/auth";
 
 const LoginForm: React.FC = () => {
   return (

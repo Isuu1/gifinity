@@ -1,4 +1,5 @@
 import React from "react";
+import { useActionState } from "react";
 
 //Components
 import Button from "@/components/UI/Button";
@@ -18,13 +19,21 @@ import styles from "./SignupForm.module.scss";
 import { signup } from "@/actions/auth";
 
 const SignupForm: React.FC = () => {
+  const initialState = { error: null };
+
+  const [state, formAction, isPending] = useActionState(signup, initialState);
+
+  console.log("Form state: ", state);
+
+  console.log("Is pending: ", isPending);
+
   return (
     <div className={styles.signupFormContainer}>
       <h2>Signup to Gifinity</h2>
       <h4>
         Create account to access your favorites, sync across devices, and more!
       </h4>
-      <Form action={signup}>
+      <Form action={formAction}>
         <Input
           type="email"
           id="email"
@@ -55,6 +64,21 @@ const SignupForm: React.FC = () => {
           placeholder="Confirm password"
           icon={<RiLockPasswordFill />}
         />
+        {typeof state.error === "string" && (
+          <p className={styles.errorMessage}>{state.error}</p>
+        )}
+
+        {state.error &&
+          typeof state.error === "object" &&
+          Object.entries(state.error).map(([key, value]) => {
+            const errorsArray = Array.isArray(value) ? value : value._errors;
+
+            return errorsArray.map((error, index) => (
+              <p key={`${key}-${index}`} className={styles.errorMessage}>
+                {error}
+              </p>
+            ));
+          })}
         <Button active>Sign up</Button>
       </Form>
       <h4>——— or ———</h4>

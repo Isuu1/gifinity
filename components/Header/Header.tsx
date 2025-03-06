@@ -13,7 +13,12 @@ import Search from "../Search/Search";
 
 //Icons
 import { FaHeart } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
+
+//Supabase
 import { User } from "@supabase/supabase-js";
+import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 
 interface IProps {
   user: User | null;
@@ -21,6 +26,23 @@ interface IProps {
 
 const Header: React.FC<IProps> = ({ user }) => {
   console.log(user);
+
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+
+    async function signOut() {
+      const { error } = await supabase.auth.signOut();
+      router.refresh();
+      if (error) {
+        console.error("Error logging out:", error.message);
+        return;
+      }
+    }
+    signOut();
+  };
+
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
@@ -29,20 +51,34 @@ const Header: React.FC<IProps> = ({ user }) => {
         </Link>
         <div className={styles.nav}>
           <CategoriesMenu />
-          {/* <Link href="/user/profile">
-            <Button>User profile</Button>
-          </Link> */}
-          <Link href="/login" scroll={false}>
-            <Button>Log in</Button>
-          </Link>
-          <Link href="/signup" scroll={false}>
-            <Button active>Sign up</Button>
-          </Link>
-          <Link href="/favourites">
-            <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
-              Favourites
-            </Button>
-          </Link>
+          {user ? (
+            <>
+              <Link href="/user/profile">
+                <Button>User profile</Button>
+              </Link>
+              <Button
+                onClick={handleSignOut}
+                icon={<FaSignOutAlt />}
+                iconPosition="right"
+              >
+                Sign out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link href="/login" scroll={false}>
+                <Button>Log in</Button>
+              </Link>
+              <Link href="/signup" scroll={false}>
+                <Button active>Sign up</Button>
+              </Link>
+              <Link href="/favourites">
+                <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
+                  Favourites
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
       <div className={styles.headerBottom}>

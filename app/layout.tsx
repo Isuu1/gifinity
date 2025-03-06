@@ -26,11 +26,7 @@ export default async function RootLayout({
 }>) {
   const supabase = await createClient();
 
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error) {
-    console.error(error);
-  }
+  const { data } = await supabase.auth.getUser();
 
   return (
     <html lang="en">

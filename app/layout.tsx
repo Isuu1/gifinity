@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
 import { Neucha } from "next/font/google";
+import { Toaster } from "react-hot-toast";
+
+//Styles
 import "@/styles/globals.scss";
+
+//Components
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+
+//Context
 import { StorageProvider } from "@/context/StorageContext";
-import { Toaster } from "react-hot-toast";
+
+//Supabase
 import { createClient } from "@/utils/supabase/server";
 
 const neucha = Neucha({

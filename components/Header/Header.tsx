@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 //Styles
 import styles from "./Header.module.scss";
@@ -18,20 +19,16 @@ import { FaSignOutAlt } from "react-icons/fa";
 //Supabase
 import { User } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
 
 interface IProps {
   user: User | null;
 }
 
 const Header: React.FC<IProps> = ({ user }) => {
-  console.log(user);
-
   const router = useRouter();
 
   const handleSignOut = async () => {
     const supabase = createClient();
-
     async function signOut() {
       const { error } = await supabase.auth.signOut();
       router.refresh();

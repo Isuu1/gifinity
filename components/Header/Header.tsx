@@ -2,7 +2,6 @@
 
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 //Styles
 import styles from "./Header.module.scss";
@@ -11,35 +10,19 @@ import styles from "./Header.module.scss";
 import CategoriesMenu from "../CategoriesMenu/CategoriesMenu";
 import Button from "../UI/Button";
 import Search from "../Search/Search";
+import SignoutButton from "../Authentication/SignoutButton/SignoutButton";
 
 //Icons
 import { FaHeart } from "react-icons/fa";
-import { FaSignOutAlt } from "react-icons/fa";
 
 //Supabase
 import { User } from "@supabase/supabase-js";
-import { createClient } from "@/utils/supabase/client";
 
 interface IProps {
   user: User | null;
 }
 
 const Header: React.FC<IProps> = ({ user }) => {
-  const router = useRouter();
-
-  const handleSignOut = async () => {
-    const supabase = createClient();
-    async function signOut() {
-      const { error } = await supabase.auth.signOut();
-      router.refresh();
-      if (error) {
-        console.error("Error logging out:", error.message);
-        return;
-      }
-    }
-    signOut();
-  };
-
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
@@ -53,13 +36,7 @@ const Header: React.FC<IProps> = ({ user }) => {
               <Link href="/user/profile">
                 <Button>User profile</Button>
               </Link>
-              <Button
-                onClick={handleSignOut}
-                icon={<FaSignOutAlt />}
-                iconPosition="right"
-              >
-                Sign out
-              </Button>
+              <SignoutButton />
             </>
           ) : (
             <>

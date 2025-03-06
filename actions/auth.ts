@@ -1,11 +1,9 @@
 "use server";
 
-import { z, ZodFormattedError } from "zod";
-
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
 import { createClient } from "@/utils/supabase/server";
+import { SignupError, signupSchema } from "@/utils/authValidation";
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -27,11 +25,6 @@ export async function login(formData: FormData) {
   redirect("/");
 }
 
-type SignupError =
-  | { error: null } // No errors
-  | { error: string } // General string error (e.g., "Passwords do not match")
-  | { error: ZodFormattedError<{ email: string; password: string }, string> }; // Zod validation errors
-
 export async function signup(prevState: SignupError, formData: FormData) {
   const supabase = await createClient();
 
@@ -41,13 +34,6 @@ export async function signup(prevState: SignupError, formData: FormData) {
     password: formData.get("password") as string,
     confirmPassword: formData.get("confirmPassword") as string,
   };
-
-  const signupSchema = z.object({
-    email: z.string().email(),
-    password: z
-      .string()
-      .min(8, { message: "Password must be at least 8 characters long" }),
-  });
 
   const validateSignupData = signupSchema.safeParse(data);
 

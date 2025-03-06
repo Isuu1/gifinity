@@ -17,7 +17,7 @@ import styles from "./SignupForm.module.scss";
 //Utils
 import { signup } from "@/actions/auth";
 
-const LoginForm: React.FC = () => {
+const SignupForm: React.FC = () => {
   return (
     <div className={styles.signupFormContainer}>
       <h2>Signup to Gifinity</h2>
@@ -76,4 +76,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

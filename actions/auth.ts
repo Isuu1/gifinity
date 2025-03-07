@@ -52,6 +52,15 @@ export async function signup(prevState: SignupError, formData: FormData) {
   }
 
   //Check if user is already registered
+  const checkUserInDb = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("email", data.email) //eq() is a filter method to check for email
+    .single(); //single() returns only one record
+
+  if (checkUserInDb) {
+    return { data, error: "User already exists" };
+  }
 
   // Include all initial user data in metadata to insert them in the database
   const { error } = await supabase.auth.signUp({
@@ -72,8 +81,6 @@ export async function signup(prevState: SignupError, formData: FormData) {
   if (error) {
     return { error: error.message };
   }
-
-  //revalidatePath("/", "layout");
 
   //Upon successful registration, return success message
   return {

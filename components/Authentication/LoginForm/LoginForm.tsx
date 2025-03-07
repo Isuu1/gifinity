@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useActionState } from "react";
 
 //Components
 import Button from "@/components/UI/Button";
@@ -18,11 +18,19 @@ import styles from "./LoginForm.module.scss";
 import { login } from "@/actions/auth";
 
 const LoginForm: React.FC = () => {
+  const initialState = {
+    error: null,
+    success: "",
+    data: { email: "", password: "" },
+  };
+
+  const [state, formAction, isPending] = useActionState(login, initialState);
+
   return (
     <div className={styles.loginFormContainer}>
       <h2>Log in to Gifinity</h2>
       <h4>Access your favorites, sync across devices, and more!</h4>
-      <Form action={login}>
+      <Form action={formAction}>
         <Input
           type="email"
           id="email"
@@ -43,7 +51,21 @@ const LoginForm: React.FC = () => {
           placeholder="Password"
           icon={<RiLockPasswordFill />}
         />
-        <Button active>Log in</Button>
+        {state.error === "Invalid login credentials" && (
+          <p className={styles.errorMessage}>
+            Invalid email or password. Please try again.
+          </p>
+        )}
+        {state.error === "Email not confirmed" && (
+          <div className="flex-col">
+            <p className={styles.errorMessage}>
+              Your email is not confirmed. Please check your inbox.
+            </p>
+            <p>Did not receive email?</p>
+            <Button active>Resend email</Button>
+          </div>
+        )}
+        <Button active>{isPending ? "Logging in..." : "Log in"}</Button>
       </Form>
       <h4>——— or ———</h4>
       <Button

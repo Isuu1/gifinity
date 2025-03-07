@@ -35,8 +35,6 @@ export default function Page() {
     setShowModal(false);
   };
 
-  console.log("localFavouriteGifs", localFavouriteGifs);
-
   return (
     <div className="page">
       <PageHeadline title="Favourites" imageUrl="/images/heart.svg" />

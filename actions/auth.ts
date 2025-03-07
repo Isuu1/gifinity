@@ -52,22 +52,35 @@ export async function signup(prevState: SignupError, formData: FormData) {
   }
 
   //Check if user is already registered
-  const { error: duplicateUserError } = await supabase.auth.signInWithPassword({
-    email: data.email,
-    password: data.password,
-  });
+  const checkUserInDb = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("email", data.email) //eq() is a filter method to check for email
+    .single(); //single() returns only one record
 
-  if (!duplicateUserError) {
-    return { error: "This email is already registered. Please log in." };
+  if (checkUserInDb) {
+    return { data, error: "User already exists" };
   }
 
-  const { error } = await supabase.auth.signUp(data);
+  // Include all initial user data in metadata to insert them in the database
+  const { error } = await supabase.auth.signUp({
+    email: data.email,
+    password: data.password,
+    options: {
+      data: {
+        user_email: data.email,
+        user_name: "",
+        favourites: JSON.stringify({
+          gifs: [],
+          stickers: [],
+        }), // Ensuring it's a valid JSON
+      },
+    },
+  });
 
   if (error) {
     return { error: error.message };
   }
-
-  //revalidatePath("/", "layout");
 
   //Upon successful registration, return success message
   return {

@@ -4,6 +4,7 @@ import React, { useActionState, useEffect, useState } from "react";
 import Button from "@/components/UI/Button";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
+import Error from "../Error/Error";
 
 //Icons
 import { MdEmail } from "react-icons/md";
@@ -16,7 +17,6 @@ import styles from "./LoginForm.module.scss";
 
 //Utils
 import { login } from "@/actions/auth";
-import Error from "../Error/Error";
 
 const LoginForm: React.FC = () => {
   const initialState = {
@@ -69,8 +69,10 @@ const LoginForm: React.FC = () => {
           icon={<RiLockPasswordFill />}
           onFocus={handleFocus}
         />
-
-        {error.length > 0 && <Error error={error} />}
+        {/* Passing userEmail to Error component for handling resend email confirmation  */}
+        {error.length > 0 && (
+          <Error key="error" error={error} userEmail={state.data.email} />
+        )}
 
         <Button active>{isPending ? "Logging in..." : "Log in"}</Button>
       </Form>

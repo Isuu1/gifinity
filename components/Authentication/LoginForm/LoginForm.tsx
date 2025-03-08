@@ -1,4 +1,4 @@
-import React, { useActionState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 
 //Components
 import Button from "@/components/UI/Button";
@@ -18,6 +18,10 @@ import styles from "./LoginForm.module.scss";
 import { login } from "@/actions/auth";
 
 const LoginForm: React.FC = () => {
+  const [error, setError] = useState<string[]>([]);
+
+  console.log("error", error);
+
   const initialState = {
     error: null,
     success: "",
@@ -25,6 +29,17 @@ const LoginForm: React.FC = () => {
   };
 
   const [state, formAction, isPending] = useActionState(login, initialState);
+
+  useEffect(() => {
+    if (state.error) {
+      setError([state.error]);
+    }
+  }, [state.error]);
+
+  // Function to clear the error when user focuses on an input
+  const handleFocus = () => {
+    setError([]);
+  };
 
   return (
     <div className={styles.loginFormContainer}>
@@ -40,6 +55,7 @@ const LoginForm: React.FC = () => {
           labelHidden
           placeholder="Email"
           icon={<MdEmail />}
+          onFocus={handleFocus}
         />
         <Input
           type="password"
@@ -50,7 +66,9 @@ const LoginForm: React.FC = () => {
           labelHidden
           placeholder="Password"
           icon={<RiLockPasswordFill />}
+          onFocus={handleFocus}
         />
+
         {state.error === "Invalid login credentials" && (
           <p className={styles.errorMessage}>
             Invalid email or password. Please try again.

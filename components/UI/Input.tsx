@@ -14,6 +14,7 @@ interface IProps {
   defaultValue?: string;
   icon?: React.ReactNode;
   theme: "light" | "dark" | "white";
+  onFocus?: () => void;
 }
 
 const neucha = Neucha({
@@ -31,6 +32,7 @@ const Input: React.FC<IProps> = ({
   defaultValue,
   placeholder,
   icon,
+  onFocus,
 }) => {
   //Icon color is based on the theme
   const iconColor = theme === "white" ? "dark" : "white";
@@ -46,6 +48,7 @@ const Input: React.FC<IProps> = ({
         name={id}
         type={type}
         defaultValue={defaultValue}
+        onFocus={onFocus}
       />
     </div>
   );

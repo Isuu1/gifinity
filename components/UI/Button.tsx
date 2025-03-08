@@ -5,7 +5,7 @@ import styles from "./Button.module.scss";
 
 interface IProps {
   children: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   icon?: React.ReactNode;
   active?: boolean;
   iconPosition?: "left" | "right";

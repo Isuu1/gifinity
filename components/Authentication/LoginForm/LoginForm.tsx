@@ -16,6 +16,7 @@ import styles from "./LoginForm.module.scss";
 
 //Utils
 import { login } from "@/actions/auth";
+import Error from "../Error/Error";
 
 const LoginForm: React.FC = () => {
   const initialState = {
@@ -40,12 +41,11 @@ const LoginForm: React.FC = () => {
     setError([]);
   };
 
-  console.log("error", error);
-
   return (
     <div className={styles.loginFormContainer}>
       <h2>Log in to Gifinity</h2>
       <h4>Access your favorites, sync across devices, and more!</h4>
+
       <Form action={formAction}>
         <Input
           type="email"
@@ -69,23 +69,14 @@ const LoginForm: React.FC = () => {
           icon={<RiLockPasswordFill />}
           onFocus={handleFocus}
         />
-        {state.error === "Invalid login credentials" && (
-          <p className={styles.errorMessage}>
-            Invalid email or password. Please try again.
-          </p>
-        )}
-        {state.error === "Email not confirmed" && (
-          <div className="flex-col">
-            <p className={styles.errorMessage}>
-              Your email is not confirmed. Please check your inbox.
-            </p>
-            <p>Did not receive email?</p>
-            <Button active>Resend email</Button>
-          </div>
-        )}
+
+        {error.length > 0 && <Error error={error} />}
+
         <Button active>{isPending ? "Logging in..." : "Log in"}</Button>
       </Form>
+
       <h4>——— or ———</h4>
+
       <Button
         className={styles.loginWithGoogleButton}
         icon={<FcGoogle />}

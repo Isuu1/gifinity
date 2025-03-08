@@ -15,8 +15,9 @@ export async function login(prevData: SignupError, formData: FormData) {
 
   const { error } = await supabase.auth.signInWithPassword(data);
 
+  //resetKey is crucial to trigger useEffect in form component even if the error is the same
   if (error) {
-    return { data, error: error.message };
+    return { data, error: error.message, resetKey: Date.now() };
   }
 
   revalidatePath("/", "layout");

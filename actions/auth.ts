@@ -43,12 +43,16 @@ export async function signup(prevState: SignupError, formData: FormData) {
 
   //Return data along with error message to to able to set email as default value (prevent clearing the input)
   if (!validateSignupData.success) {
-    return { data, error: validateSignupData.error.format() };
+    return {
+      data,
+      error: validateSignupData.error.format(),
+      resetKey: Date.now(),
+    };
   }
 
   //Return data along with error message to to able to set email as default value (prevent clearing the input)
   if (data.password !== data.confirmPassword) {
-    return { data, error: "Passwords do not match" };
+    return { data, error: "Passwords do not match", resetKey: Date.now() };
   }
 
   //Check if user is already registered
@@ -59,7 +63,7 @@ export async function signup(prevState: SignupError, formData: FormData) {
     .single(); //single() returns only one record
 
   if (checkUserInDb) {
-    return { data, error: "User already exists" };
+    return { data, error: "User already exists", resetKey: Date.now() };
   }
 
   // Include all initial user data in metadata to insert them in the database

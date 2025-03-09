@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useActionState } from "react";
 
 //Components
@@ -18,6 +18,7 @@ import styles from "./SignupForm.module.scss";
 
 //Utils
 import { signup } from "@/actions/auth";
+import Error from "../Error/Error";
 
 const SignupForm: React.FC = () => {
   const initialState = {
@@ -26,7 +27,44 @@ const SignupForm: React.FC = () => {
     data: { email: "", password: "", confirmPassword: "" },
   };
 
+  const [error, setError] = useState<string[]>([]);
+
   const [state, formAction, isPending] = useActionState(signup, initialState);
+
+  //Function to normalize error messages to keep the same format: Array of strings
+  function normalizeErrors(errors: any): string[] {
+    if (!errors) return []; // If there are no errors, return an empty array.
+
+    // If errors is already an array (simple case), filter and return only string messages.
+    if (Array.isArray(errors)) {
+      return errors.filter((msg) => typeof msg === "string");
+    }
+
+    // If errors is an object (like { password: { _errors: [...] } })
+    if (typeof errors === "object") {
+      return Object.values(errors) // Extract all object values (e.g., {password: {...}} → [{_errors: [...]}])
+        .flatMap((field) => field._errors || []) // Get `_errors` array from each field (or empty array if missing)
+        .filter((msg) => typeof msg === "string"); // Ensure only string messages are included.
+    }
+
+    return []; // Default case (shouldn't happen, but safe fallback)
+  }
+
+  //Set error message whenever form state returns one
+  useEffect(() => {
+    if (state.error) {
+      const normalizedErrors = normalizeErrors(state.error);
+      console.log("normalizedErrors", normalizedErrors);
+      setError(normalizedErrors);
+    }
+  }, [state.resetKey, state.error]);
+
+  // Function to clear the error when user focuses on an input
+  const handleFocus = () => {
+    setError([]);
+  };
+
+  console.log("error", error);
 
   return (
     <div className={styles.signupFormContainer}>
@@ -43,6 +81,7 @@ const SignupForm: React.FC = () => {
             Create account to access your favorites, sync across devices, and
             more!
           </h4>
+
           <Form action={formAction}>
             <Input
               type="email"
@@ -54,6 +93,7 @@ const SignupForm: React.FC = () => {
               placeholder="Email"
               icon={<MdEmail />}
               defaultValue={state.data?.email}
+              onFocus={handleFocus}
             />
             <Input
               type="password"
@@ -64,6 +104,7 @@ const SignupForm: React.FC = () => {
               labelHidden
               placeholder="Password"
               icon={<RiLockPasswordFill />}
+              onFocus={handleFocus}
             />
             <Input
               type="password"
@@ -74,29 +115,18 @@ const SignupForm: React.FC = () => {
               labelHidden
               placeholder="Confirm password"
               icon={<RiLockPasswordFill />}
+              onFocus={handleFocus}
             />
-            {typeof state.error === "string" && (
-              <p className={styles.errorMessage}>{state.error}</p>
-            )}
 
-            {state.error &&
-              typeof state.error === "object" &&
-              Object.entries(state.error).map(([key, value]) => {
-                const errorsArray = Array.isArray(value)
-                  ? value
-                  : value._errors;
+            {error.length > 0 && <Error key="error" error={error} />}
 
-                return errorsArray.map((error, index) => (
-                  <p key={`${key}-${index}`} className={styles.errorMessage}>
-                    {error}
-                  </p>
-                ));
-              })}
             <Button active disabled={isPending}>
               {isPending ? "Creating account..." : "Sign up"}
             </Button>
           </Form>
+
           <h4>——— or ———</h4>
+
           <Button
             className={styles.signupWithGoogleButton}
             icon={<FcGoogle />}

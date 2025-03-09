@@ -29,15 +29,14 @@ export async function resendConfirmation(email: string) {
     email,
   });
 
-  if (error) {
+  if (error)
     return { error: "Failed to resend confirmation email. Try again later." };
-  }
 
   return { success: "Confirmation email sent! Check your inbox." };
 }
 
 const Error: React.FC<IProps> = ({ error, userEmail }) => {
-  const handleResendConfirmation = async (
+  const handleResendeEmailConfirmation = async (
     e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
@@ -60,7 +59,7 @@ const Error: React.FC<IProps> = ({ error, userEmail }) => {
               <MdOutlineError className={styles.icon} />
               <span>Your email is not confirmed. Please check your inbox.</span>
             </p>
-            <Button active onClick={handleResendConfirmation}>
+            <Button active onClick={handleResendeEmailConfirmation}>
               Resend email
             </Button>
           </>

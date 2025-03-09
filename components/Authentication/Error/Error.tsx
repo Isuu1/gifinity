@@ -13,26 +13,12 @@ import { errorAnimation } from "@/styles/animations";
 //Icons
 import { MdOutlineError } from "react-icons/md";
 
-//Supabase
-import { createClient } from "@/utils/supabase/client";
+//Utils
+import { resendConfirmation } from "@/utils/authHelpers";
 
 interface IProps {
   error: string[];
   userEmail?: string;
-}
-
-export async function resendConfirmation(email: string) {
-  const supabase = createClient();
-
-  const { error } = await supabase.auth.resend({
-    type: "signup",
-    email,
-  });
-
-  if (error)
-    return { error: "Failed to resend confirmation email. Try again later." };
-
-  return { success: "Confirmation email sent! Check your inbox." };
 }
 
 const Error: React.FC<IProps> = ({ error, userEmail }) => {

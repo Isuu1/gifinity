@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useActionState, useEffect, useState } from "react";
 
 //Components

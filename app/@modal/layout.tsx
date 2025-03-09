@@ -1,6 +1,6 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 //Components
 import Modal from "@/components/Modal/Modal";
@@ -18,18 +18,28 @@ export default function ModalLayout({
 
   const router = useRouter();
 
+  const pathname = usePathname();
+
   const closeModal = () => {
     setShowModal(false);
   };
 
+  //Always show modal on login and signup pages
+  //This is necessary to put back modal state to true after closing it
+  useEffect(() => {
+    if (pathname === "/login" || pathname === "/signup") {
+      setShowModal(true);
+    }
+  }, [pathname]);
+
   return (
     <div>
       {/* Using onExitComplete here is necessary to keep modal exit animation working */}
-      <AnimatePresence mode="wait" onExitComplete={() => router.back()}>
+      <AnimatePresence mode="wait" onExitComplete={() => router.push("/")}>
         {showModal && (
           <Modal key="modal" theme="light">
             <div className="margin-left-auto">
-              <Button onClick={() => closeModal()}>X</Button>
+              <Button onClick={closeModal}>X</Button>
             </div>
             {children}
           </Modal>

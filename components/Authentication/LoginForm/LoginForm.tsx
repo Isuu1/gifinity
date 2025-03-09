@@ -19,6 +19,7 @@ import styles from "./LoginForm.module.scss";
 
 //Utils
 import { login } from "@/actions/auth";
+import Link from "next/link";
 
 const LoginForm: React.FC = () => {
   const initialState = {
@@ -78,6 +79,10 @@ const LoginForm: React.FC = () => {
 
         <Button active>{isPending ? "Logging in..." : "Log in"}</Button>
       </Form>
+
+      <Link href="reset/password">
+        <h3>Forgot your password?</h3>
+      </Link>
 
       <h4>——— or ———</h4>
 

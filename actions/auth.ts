@@ -94,3 +94,24 @@ export async function signup(prevState: SignupError, formData: FormData) {
       "Registration successful! Please check your email to confirm your account.",
   };
 }
+
+export async function resetPassword(prevData: SignupError, formData: FormData) {
+  const supabase = await createClient();
+
+  const data = {
+    email: formData.get("email") as string,
+  };
+
+  const { error } = await supabase.auth.resetPasswordForEmail(data.email);
+
+  if (error) {
+    return { data, error: error.message, resetKey: Date.now() };
+  }
+
+  return {
+    data,
+    error: null,
+    success:
+      "If this email exists in our system, you will receive a reset link.",
+  };
+}

@@ -4,6 +4,9 @@ import React, { useActionState, useEffect, useState } from "react";
 //Components
 import Button from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
+import Form from "@/components/UI/Form";
+import Error from "../Error/Error";
+import SignupSuccess from "../SignupSuccess/SignupSuccess";
 
 //Icons
 import { MdEmail } from "react-icons/md";
@@ -13,10 +16,7 @@ import styles from "./ForgotPassword.module.scss";
 
 //Utils
 import { resetPassword } from "@/actions/auth";
-import Form from "@/components/UI/Form";
 import { normalizeErrors } from "@/utils/authHelpers";
-import Error from "../Error/Error";
-import SignupSuccess from "../SignupSuccess/SignupSuccess";
 
 const ForgotPassword: React.FC = () => {
   const initialState = {
@@ -43,8 +43,6 @@ const ForgotPassword: React.FC = () => {
   const handleFocus = () => {
     setError([]);
   };
-
-  console.log("state", state);
 
   return (
     <div className={styles.forgotPasswordContainer}>

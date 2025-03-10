@@ -77,11 +77,13 @@ const LoginForm: React.FC = () => {
           <Error key="error" error={error} userEmail={state.data.email} />
         )}
 
-        <Button active>{isPending ? "Logging in..." : "Log in"}</Button>
+        <Button active type="submit">
+          {isPending ? "Logging in..." : "Log in"}
+        </Button>
       </Form>
 
       <Link href="forgot-password">
-        <h3>Forgot your password?</h3>
+        <h4>Forgot your password?</h4>
       </Link>
 
       <h4>——— or ———</h4>

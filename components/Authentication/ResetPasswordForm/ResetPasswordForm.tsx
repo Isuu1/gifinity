@@ -19,7 +19,8 @@ import styles from "./ResetPasswordForm.module.scss";
 import { createClient } from "@/utils/supabase/client";
 import { updatePasswordSchema } from "@/utils/authValidation";
 import { normalizeErrors } from "@/utils/authHelpers";
-import Link from "next/link";
+import toast from "react-hot-toast";
+import { toastStyle } from "@/styles/toast";
 
 const ResetPasswordForm: React.FC = () => {
   const [data, setData] = useState({
@@ -82,66 +83,62 @@ const ResetPasswordForm: React.FC = () => {
 
     setIsPending(false);
     setMessage("Password updated successfully");
+    toast.success("Password updated successfully", toastStyle);
   };
-
-  console.log("data", data);
-  console.log("error", error);
 
   return (
     <div className={styles.resetPasswordContainer}>
       <h3>Reset password</h3>
 
-      {message ? (
+      {/* {message ? (
         <>
           <p>{message}</p>
           <Link href="/login">
             <Button active>Login</Button>
           </Link>
         </>
-      ) : (
-        <>
-          <p>Enter your new password</p>
+      ) : ( */}
+      <>
+        <p>Enter your new password</p>
 
-          <Form onSubmit={handleUpdatePassword}>
-            <Input
-              type="password"
-              id="password"
-              label="Password"
-              required
-              theme="white"
-              labelHidden
-              placeholder="Password"
-              icon={<RiLockPasswordFill />}
-              onFocus={handleFocus}
-              onChange={(e) =>
-                setData({ ...data, newPassword: e.target.value })
-              }
-              value={data.newPassword}
-            />
-            <Input
-              type="password"
-              id="confirmPassword"
-              label="confirmPassword"
-              required
-              theme="white"
-              labelHidden
-              placeholder="Confirm password"
-              icon={<RiLockPasswordFill />}
-              onFocus={handleFocus}
-              onChange={(e) =>
-                setData({ ...data, confirmPassword: e.target.value })
-              }
-              value={data.confirmPassword}
-            />
+        <Form onSubmit={handleUpdatePassword}>
+          <Input
+            type="password"
+            id="password"
+            label="Password"
+            required
+            theme="white"
+            labelHidden
+            placeholder="Password"
+            icon={<RiLockPasswordFill />}
+            onFocus={handleFocus}
+            onChange={(e) => setData({ ...data, newPassword: e.target.value })}
+            value={data.newPassword}
+          />
+          <Input
+            type="password"
+            id="confirmPassword"
+            label="confirmPassword"
+            required
+            theme="white"
+            labelHidden
+            placeholder="Confirm password"
+            icon={<RiLockPasswordFill />}
+            onFocus={handleFocus}
+            onChange={(e) =>
+              setData({ ...data, confirmPassword: e.target.value })
+            }
+            value={data.confirmPassword}
+          />
 
-            {error.length > 0 && <Error key="error" error={error} />}
+          {error.length > 0 && <Error key="error" error={error} />}
 
-            <Button active type="submit" disabled={isPending}>
-              {isPending ? "Updating password" : "Update password"}
-            </Button>
-          </Form>
-        </>
-      )}
+          <Button active type="submit" disabled={isPending || message !== null}>
+            {isPending ? "Updating password" : "Update password"}
+          </Button>
+        </Form>
+      </>
+      {/* )} */}
     </div>
   );
 };

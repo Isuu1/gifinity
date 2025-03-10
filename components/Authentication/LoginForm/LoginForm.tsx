@@ -80,7 +80,7 @@ const LoginForm: React.FC = () => {
         <Button active>{isPending ? "Logging in..." : "Log in"}</Button>
       </Form>
 
-      <Link href="reset/password">
+      <Link href="forgot-password">
         <h3>Forgot your password?</h3>
       </Link>
 

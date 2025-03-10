@@ -3,11 +3,7 @@
 import { revalidatePath } from "next/cache";
 //import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import {
-  SignupError,
-  signupSchema,
-  updatePasswordSchema,
-} from "@/utils/authValidation";
+import { SignupError, signupSchema } from "@/utils/authValidation";
 
 export async function login(prevData: SignupError, formData: FormData) {
   const supabase = await createClient();
@@ -60,15 +56,15 @@ export async function signup(prevState: SignupError, formData: FormData) {
   }
 
   //Check if user is already registered
-  const checkUserInDb = await supabase
-    .from("profiles")
-    .select("id")
-    .eq("email", data.email) //eq() is a filter method to check for email
-    .single(); //single() returns only one record
+  // const checkUserInDb = await supabase
+  //   .from("profiles")
+  //   .select("id")
+  //   .eq("email", data.email) //eq() is a filter method to check for email
+  //   .single(); //single() returns only one record
 
-  if (checkUserInDb) {
-    return { data, error: "User already exists", resetKey: Date.now() };
-  }
+  // if (checkUserInDb) {
+  //   return { data, error: "User already exists", resetKey: Date.now() };
+  // }
 
   // Include all initial user data in metadata to insert them in the database
   const { error } = await supabase.auth.signUp({
@@ -120,35 +116,4 @@ export async function resetPassword(prevData: SignupError, formData: FormData) {
     success:
       "If this email exists in our system, you will receive a reset link.",
   };
-}
-
-export async function updatePassword(
-  prevState: SignupError,
-  formData: FormData
-) {
-  const supabase = await createClient();
-
-  //Form data from frontend form
-  const data = {
-    password: formData.get("password") as string,
-    confirmPassword: formData.get("confirmPassword") as string,
-  };
-
-  const validateSignupData = updatePasswordSchema.safeParse(data);
-  console.log(validateSignupData.error);
-  if (!validateSignupData.success) {
-    return {
-      data,
-      error: validateSignupData.error.format(),
-      resetKey: Date.now(),
-    };
-  }
-
-  const { error } = await supabase.auth.updateUser({ password: data.password });
-
-  if (error) {
-    return { data, error: error.message };
-  }
-
-  return { data, error: null, success: "Password updated successfully!" };
 }

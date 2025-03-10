@@ -68,7 +68,9 @@ const ForgotPassword: React.FC = () => {
               required
               onFocus={handleFocus}
             />
-            <Button active>{isPending ? "Sending..." : "Send"}</Button>
+            <Button active type="submit">
+              {isPending ? "Sending..." : "Send"}
+            </Button>
 
             {error.length > 0 && <Error error={error} />}
           </Form>

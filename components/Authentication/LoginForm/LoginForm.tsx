@@ -19,7 +19,6 @@ import styles from "./LoginForm.module.scss";
 
 //Utils
 import { login } from "@/actions/auth";
-import Link from "next/link";
 
 const LoginForm: React.FC = () => {
   const initialState = {
@@ -82,9 +81,9 @@ const LoginForm: React.FC = () => {
         </Button>
       </Form>
 
-      <Link href="forgot-password">
+      {/* <Link href="forgot-password">
         <h4>Forgot your password?</h4>
-      </Link>
+      </Link> */}
 
       <h4>——— or ———</h4>
 

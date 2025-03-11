@@ -15,7 +15,7 @@ import { MdEmail } from "react-icons/md";
 import styles from "./ForgotPassword.module.scss";
 
 //Utils
-import { resetPassword } from "@/actions/auth";
+import { forgotPassword } from "@/actions/auth";
 import { normalizeErrors } from "@/utils/authHelpers";
 
 const ForgotPassword: React.FC = () => {
@@ -28,7 +28,7 @@ const ForgotPassword: React.FC = () => {
   const [error, setError] = useState<string[]>([]);
 
   const [state, formAction, isPending] = useActionState(
-    resetPassword,
+    forgotPassword,
     initialState
   );
 

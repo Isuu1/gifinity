@@ -95,7 +95,10 @@ export async function signup(prevState: SignupError, formData: FormData) {
   };
 }
 
-export async function resetPassword(prevData: SignupError, formData: FormData) {
+export async function forgotPassword(
+  prevData: SignupError,
+  formData: FormData
+) {
   const supabase = await createClient();
 
   const data = {
@@ -115,5 +118,29 @@ export async function resetPassword(prevData: SignupError, formData: FormData) {
     error: null,
     success:
       "If this email exists in our system, you will receive a reset link.",
+  };
+}
+
+export async function resetPassword(prevData: SignupError, formData: FormData) {
+  const supabase = await createClient();
+
+  const data = {
+    newPassword: formData.get("email") as string,
+    confirmNewPassword: formData.get("confirmNewPassword") as string,
+  };
+
+  const { error } = await supabase.auth.updateUser({
+    password: data.newPassword,
+  });
+
+  if (error) {
+    return { data, error: error.message, resetKey: Date.now() };
+  }
+
+  return {
+    data,
+    error: null,
+    success:
+      "Password reset successful! You can now log in with your new password.",
   };
 }

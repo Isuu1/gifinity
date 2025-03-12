@@ -80,7 +80,7 @@ const SignupForm: React.FC = () => {
               onFocus={handleFocus}
             />
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               label="Password"
               required
@@ -98,7 +98,7 @@ const SignupForm: React.FC = () => {
               onFocus={handleFocus}
             />
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="confirmPassword"
               label="confirmPassword"
               required
@@ -118,7 +118,7 @@ const SignupForm: React.FC = () => {
 
             {error.length > 0 && <Error key="error" error={error} />}
 
-            <Button active disabled={isPending}>
+            <Button active type="submit" disabled={isPending}>
               {isPending ? "Creating account..." : "Sign up"}
             </Button>
           </Form>

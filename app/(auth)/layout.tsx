@@ -1,7 +1,9 @@
+import AuthPagesLayout from "@/layouts/AuthPagesLayout";
+
 export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <div> {children}</div>;
+  return <AuthPagesLayout>{children}</AuthPagesLayout>;
 }

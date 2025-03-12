@@ -9,12 +9,11 @@ import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import SignupSuccess from "../SignupSuccess/SignupSuccess";
 import Error from "../Error/Error";
+import Providers from "../Providers/Providers";
 
 //Icons
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { FcGoogle } from "react-icons/fc";
-import { ImFacebook2 } from "react-icons/im";
 
 //Styles
 import styles from "./SignupForm.module.scss";
@@ -31,6 +30,8 @@ const SignupForm: React.FC = () => {
   };
 
   const [error, setError] = useState<string[]>([]);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const [state, formAction, isPending] = useActionState(signup, initialState);
 
@@ -69,7 +70,7 @@ const SignupForm: React.FC = () => {
               id="email"
               label="Email"
               required
-              theme="white"
+              variant="white"
               labelHidden
               placeholder="Email"
               icon={<MdEmail />}
@@ -81,7 +82,7 @@ const SignupForm: React.FC = () => {
               id="password"
               label="Password"
               required
-              theme="white"
+              variant="white"
               labelHidden
               placeholder="Password"
               icon={<RiLockPasswordFill />}
@@ -92,7 +93,7 @@ const SignupForm: React.FC = () => {
               id="confirmPassword"
               label="confirmPassword"
               required
-              theme="white"
+              variant="white"
               labelHidden
               placeholder="Confirm password"
               icon={<RiLockPasswordFill />}
@@ -108,20 +109,7 @@ const SignupForm: React.FC = () => {
 
           <h4>——— or ———</h4>
 
-          <Button
-            className={styles.signupWithGoogleButton}
-            icon={<FcGoogle />}
-            iconPosition="right"
-          >
-            Sign up with Google
-          </Button>
-          <Button
-            className={styles.signupWithFacebookButton}
-            icon={<ImFacebook2 />}
-            iconPosition="right"
-          >
-            Sign up with Facebook
-          </Button>
+          <Providers />
         </>
       )}
     </div>

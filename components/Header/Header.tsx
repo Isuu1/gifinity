@@ -23,7 +23,6 @@ interface IProps {
 }
 
 const Header: React.FC<IProps> = ({ user }) => {
-  console.log(user);
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>

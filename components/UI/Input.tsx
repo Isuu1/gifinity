@@ -12,9 +12,12 @@ interface IProps {
   labelHidden?: boolean;
   required?: boolean;
   defaultValue?: string;
+  value?: string;
   icon?: React.ReactNode;
-  theme: "light" | "dark" | "white";
+  showPasswordIcon?: React.ReactNode;
+  variant: "light" | "dark" | "white";
   onFocus?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const neucha = Neucha({
@@ -27,28 +30,36 @@ const Input: React.FC<IProps> = ({
   labelHidden,
   id,
   type,
-  theme,
+  variant,
   required,
   defaultValue,
+  value,
   placeholder,
   icon,
+  showPasswordIcon,
   onFocus,
+  onChange,
 }) => {
   //Icon color is based on the theme
-  const iconColor = theme === "white" ? "dark" : "white";
+  const iconColor = variant === "white" ? "dark" : "white";
   return (
     <div className={styles.inputContainer}>
       <label htmlFor={label}>{!labelHidden && label}</label>
       <div className={`${styles.inputIcon} ${styles[iconColor]}`}>{icon}</div>
+      <div className={`${styles.showPasswordIcon} ${styles[iconColor]}`}>
+        {showPasswordIcon}
+      </div>
       <input
         placeholder={placeholder}
-        className={`${styles.input} ${styles[theme]} ${neucha.className}`}
+        className={`${styles.input} ${styles[variant]} ${neucha.className}`}
         required={required}
         id={id}
         name={id}
         type={type}
         defaultValue={defaultValue}
+        value={value}
         onFocus={onFocus}
+        onChange={onChange}
       />
     </div>
   );

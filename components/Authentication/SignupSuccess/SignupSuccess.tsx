@@ -31,7 +31,7 @@ const SignupSuccess: React.FC<IProps> = ({ email, successMessage }) => {
 
   return (
     <div className={styles.signupSuccessContainer}>
-      <h3>{successMessage}</h3>
+      <p>{successMessage}</p>
       {/* Extract domain from email and provide a button to open their email */}
       {email && (
         <Link href={getEmailProviderUrl(email)}>

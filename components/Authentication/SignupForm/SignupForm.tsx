@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { useActionState } from "react";
 
 //Components
@@ -6,18 +8,21 @@ import Button from "@/components/UI/Button";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import SignupSuccess from "../SignupSuccess/SignupSuccess";
+import Error from "../Error/Error";
+import Providers from "../Providers/Providers";
 
 //Icons
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { FcGoogle } from "react-icons/fc";
-import { ImFacebook2 } from "react-icons/im";
+import { IoMdEye } from "react-icons/io";
+import { IoMdEyeOff } from "react-icons/io";
 
 //Styles
 import styles from "./SignupForm.module.scss";
 
 //Utils
 import { signup } from "@/actions/auth";
+import { normalizeErrors } from "@/utils/authHelpers";
 
 const SignupForm: React.FC = () => {
   const initialState = {
@@ -26,7 +31,24 @@ const SignupForm: React.FC = () => {
     data: { email: "", password: "", confirmPassword: "" },
   };
 
+  const [error, setError] = useState<string[]>([]);
+
+  const [showPassword, setShowPassword] = useState(false);
+
   const [state, formAction, isPending] = useActionState(signup, initialState);
+
+  //Set error message whenever form state returns one
+  useEffect(() => {
+    if (state.error) {
+      const normalizedErrors = normalizeErrors(state.error);
+      setError(normalizedErrors);
+    }
+  }, [state.resetKey, state.error]);
+
+  // Function to clear the error when user focuses on an input
+  const handleFocus = () => {
+    setError([]);
+  };
 
   return (
     <div className={styles.signupFormContainer}>
@@ -43,74 +65,67 @@ const SignupForm: React.FC = () => {
             Create account to access your favorites, sync across devices, and
             more!
           </h4>
+
           <Form action={formAction}>
             <Input
               type="email"
               id="email"
               label="Email"
               required
-              theme="white"
+              variant="white"
               labelHidden
               placeholder="Email"
               icon={<MdEmail />}
               defaultValue={state.data?.email}
+              onFocus={handleFocus}
             />
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               label="Password"
               required
-              theme="white"
+              variant="white"
               labelHidden
               placeholder="Password"
               icon={<RiLockPasswordFill />}
+              showPasswordIcon={
+                showPassword ? (
+                  <IoMdEye onClick={() => setShowPassword(false)} />
+                ) : (
+                  <IoMdEyeOff onClick={() => setShowPassword(true)} />
+                )
+              }
+              onFocus={handleFocus}
             />
             <Input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="confirmPassword"
               label="confirmPassword"
               required
-              theme="white"
+              variant="white"
               labelHidden
               placeholder="Confirm password"
               icon={<RiLockPasswordFill />}
+              showPasswordIcon={
+                showPassword ? (
+                  <IoMdEye onClick={() => setShowPassword(false)} />
+                ) : (
+                  <IoMdEyeOff onClick={() => setShowPassword(true)} />
+                )
+              }
+              onFocus={handleFocus}
             />
-            {typeof state.error === "string" && (
-              <p className={styles.errorMessage}>{state.error}</p>
-            )}
 
-            {state.error &&
-              typeof state.error === "object" &&
-              Object.entries(state.error).map(([key, value]) => {
-                const errorsArray = Array.isArray(value)
-                  ? value
-                  : value._errors;
+            {error.length > 0 && <Error key="error" error={error} />}
 
-                return errorsArray.map((error, index) => (
-                  <p key={`${key}-${index}`} className={styles.errorMessage}>
-                    {error}
-                  </p>
-                ));
-              })}
-            <Button active disabled={isPending}>
+            <Button active type="submit" disabled={isPending}>
               {isPending ? "Creating account..." : "Sign up"}
             </Button>
           </Form>
+
           <h4>——— or ———</h4>
-          <Button
-            className={styles.signupWithGoogleButton}
-            icon={<FcGoogle />}
-            iconPosition="right"
-          >
-            Sign up with Google
-          </Button>
-          <Button
-            className={styles.signupWithFacebookButton}
-            icon={<ImFacebook2 />}
-            iconPosition="right"
-          >
-            Sign up with Facebook
-          </Button>
+
+          <Providers />
         </>
       )}
     </div>

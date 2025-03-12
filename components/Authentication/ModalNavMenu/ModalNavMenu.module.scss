@@ -1,0 +1,23 @@
+$backgroundLight: #36343a;
+$backgroundDark: #1d1d1d;
+
+.modalNavMenuContainer {
+  margin-bottom: 1rem;
+  width: fit-content;
+  display: flex;
+  gap: 0.3rem;
+  border-radius: 34px;
+  padding: 0.4rem 0.5rem;
+}
+
+.default {
+  background: transparent;
+}
+
+.light {
+  background: $backgroundLight;
+}
+
+.dark {
+  background: $backgroundDark;
+}

@@ -1,9 +1,12 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-//import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { SignupError, signupSchema } from "@/utils/authValidation";
+
+//
+// Login process
+//
 
 export async function login(prevData: SignupError, formData: FormData) {
   const supabase = await createClient();
@@ -21,8 +24,7 @@ export async function login(prevData: SignupError, formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  // redirect("/");
-  return { data, error: null, success: "Login successful!" };
+  return { data, error: null, success: "You're logged in now!" };
 }
 
 //
@@ -43,27 +45,20 @@ export async function signup(prevState: SignupError, formData: FormData) {
 
   //Return data along with error message to to able to set email as default value (prevent clearing the input)
   if (!validateSignupData.success) {
-    return { data, error: validateSignupData.error.format() };
+    return {
+      data,
+      error: validateSignupData.error.format(),
+      resetKey: Date.now(),
+    };
   }
 
   //Return data along with error message to to able to set email as default value (prevent clearing the input)
   if (data.password !== data.confirmPassword) {
-    return { data, error: "Passwords do not match" };
-  }
-
-  //Check if user is already registered
-  const checkUserInDb = await supabase
-    .from("profiles")
-    .select("id")
-    .eq("email", data.email) //eq() is a filter method to check for email
-    .single(); //single() returns only one record
-
-  if (checkUserInDb) {
-    return { data, error: "User already exists" };
+    return { data, error: "Passwords do not match", resetKey: Date.now() };
   }
 
   // Include all initial user data in metadata to insert them in the database
-  const { error } = await supabase.auth.signUp({
+  const { data: user, error } = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
     options: {
@@ -79,7 +74,7 @@ export async function signup(prevState: SignupError, formData: FormData) {
   });
 
   if (error) {
-    return { error: error.message };
+    return { error: error.message, resetKey: Date.now() };
   }
 
   //Upon successful registration, return success message

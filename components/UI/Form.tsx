@@ -4,13 +4,14 @@ import React from "react";
 import styles from "./Form.module.scss";
 
 interface IProps {
-  action: (formData: FormData) => void;
+  action?: (formData: FormData) => void;
+  onSubmit?: (e: React.FormEvent) => void;
   children: React.ReactNode;
 }
 
-const Form: React.FC<IProps> = ({ action, children }) => {
+const Form: React.FC<IProps> = ({ action, onSubmit, children }) => {
   return (
-    <form className={styles.form} action={action}>
+    <form className={styles.form} action={action} onSubmit={onSubmit}>
       {children}
     </form>
   );

@@ -5,16 +5,6 @@ import { Toaster } from "react-hot-toast";
 //Styles
 import "@/styles/globals.scss";
 
-//Components
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
-
-//Context
-import { StorageProvider } from "@/context/StorageContext";
-
-//Supabase
-import { createClient } from "@/utils/supabase/server";
-
 const neucha = Neucha({
   subsets: ["latin"],
   weight: "400",
@@ -32,20 +22,12 @@ export default async function RootLayout({
   children: React.ReactNode;
   modal: React.ReactNode;
 }>) {
-  const supabase = await createClient();
-
-  const { data } = await supabase.auth.getUser();
-
   return (
     <html lang="en">
       <body className={`${neucha.className}`}>
-        <StorageProvider>
-          <Toaster />
-          <Header user={data.user} />
-          {children}
-          {modal}
-          <Footer />
-        </StorageProvider>
+        <Toaster />
+        {children}
+        {modal}
       </body>
     </html>
   );

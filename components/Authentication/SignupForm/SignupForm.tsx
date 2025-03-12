@@ -14,6 +14,8 @@ import Providers from "../Providers/Providers";
 //Icons
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
+import { IoMdEye } from "react-icons/io";
+import { IoMdEyeOff } from "react-icons/io";
 
 //Styles
 import styles from "./SignupForm.module.scss";
@@ -86,6 +88,13 @@ const SignupForm: React.FC = () => {
               labelHidden
               placeholder="Password"
               icon={<RiLockPasswordFill />}
+              showPasswordIcon={
+                showPassword ? (
+                  <IoMdEye onClick={() => setShowPassword(false)} />
+                ) : (
+                  <IoMdEyeOff onClick={() => setShowPassword(true)} />
+                )
+              }
               onFocus={handleFocus}
             />
             <Input
@@ -97,6 +106,13 @@ const SignupForm: React.FC = () => {
               labelHidden
               placeholder="Confirm password"
               icon={<RiLockPasswordFill />}
+              showPasswordIcon={
+                showPassword ? (
+                  <IoMdEye onClick={() => setShowPassword(false)} />
+                ) : (
+                  <IoMdEyeOff onClick={() => setShowPassword(true)} />
+                )
+              }
               onFocus={handleFocus}
             />
 

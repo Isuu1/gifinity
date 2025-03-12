@@ -57,19 +57,8 @@ export async function signup(prevState: SignupError, formData: FormData) {
     return { data, error: "Passwords do not match", resetKey: Date.now() };
   }
 
-  //Check if user is already registered
-  // const checkUserInDb = await supabase
-  //   .from("profiles")
-  //   .select("id")
-  //   .eq("email", data.email) //eq() is a filter method to check for email
-  //   .single(); //single() returns only one record
-
-  // if (checkUserInDb) {
-  //   return { data, error: "User already exists", resetKey: Date.now() };
-  // }
-
   // Include all initial user data in metadata to insert them in the database
-  const { error } = await supabase.auth.signUp({
+  const { data: user, error } = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
     options: {
@@ -84,8 +73,11 @@ export async function signup(prevState: SignupError, formData: FormData) {
     },
   });
 
+  console.log("error", error);
+  console.log("user", user);
+
   if (error) {
-    return { error: error.message };
+    return { error: error.message, resetKey: Date.now() };
   }
 
   //Upon successful registration, return success message

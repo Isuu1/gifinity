@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useActionState, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 //Components
 import Button from "@/components/UI/Button";
@@ -13,15 +15,15 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
+import { IoMdEye } from "react-icons/io";
+import { IoMdEyeOff } from "react-icons/io";
 
 //Styles
 import styles from "./LoginForm.module.scss";
+import { toastStyle } from "@/styles/toast";
 
 //Utils
 import { login } from "@/actions/auth";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import { toastStyle } from "@/styles/toast";
 
 const LoginForm: React.FC = () => {
   const initialState = {
@@ -32,7 +34,11 @@ const LoginForm: React.FC = () => {
 
   const [error, setError] = useState<string[]>([]);
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const [state, formAction, isPending] = useActionState(login, initialState);
+
+  const router = useRouter();
 
   //Set error message whenever form state returns one
   useEffect(() => {
@@ -45,7 +51,8 @@ const LoginForm: React.FC = () => {
   const handleFocus = () => {
     setError([]);
   };
-  const router = useRouter();
+
+  //Redirect to home page and show success message when user is logged in
   useEffect(() => {
     if (state.success) {
       toast.success(state.success, toastStyle);
@@ -71,7 +78,7 @@ const LoginForm: React.FC = () => {
           onFocus={handleFocus}
         />
         <Input
-          type="password"
+          type={showPassword ? "text" : "password"}
           id="password"
           label="Password"
           required
@@ -79,6 +86,13 @@ const LoginForm: React.FC = () => {
           labelHidden
           placeholder="Password"
           icon={<RiLockPasswordFill />}
+          showPasswordIcon={
+            showPassword ? (
+              <IoMdEye onClick={() => setShowPassword(false)} />
+            ) : (
+              <IoMdEyeOff onClick={() => setShowPassword(true)} />
+            )
+          }
           onFocus={handleFocus}
         />
         {/* Passing userEmail to Error component for handling resend email confirmation  */}

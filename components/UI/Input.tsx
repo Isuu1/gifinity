@@ -14,6 +14,7 @@ interface IProps {
   defaultValue?: string;
   value?: string;
   icon?: React.ReactNode;
+  showPasswordIcon?: React.ReactNode;
   theme: "light" | "dark" | "white";
   onFocus?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -35,6 +36,7 @@ const Input: React.FC<IProps> = ({
   value,
   placeholder,
   icon,
+  showPasswordIcon,
   onFocus,
   onChange,
 }) => {
@@ -44,6 +46,9 @@ const Input: React.FC<IProps> = ({
     <div className={styles.inputContainer}>
       <label htmlFor={label}>{!labelHidden && label}</label>
       <div className={`${styles.inputIcon} ${styles[iconColor]}`}>{icon}</div>
+      <div className={`${styles.showPasswordIcon} ${styles[iconColor]}`}>
+        {showPasswordIcon}
+      </div>
       <input
         placeholder={placeholder}
         className={`${styles.input} ${styles[theme]} ${neucha.className}`}

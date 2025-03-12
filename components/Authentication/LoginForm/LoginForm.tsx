@@ -71,7 +71,7 @@ const LoginForm: React.FC = () => {
           id="email"
           label="Email"
           required
-          theme="white"
+          variant="white"
           labelHidden
           placeholder="Email"
           icon={<MdEmail />}
@@ -82,7 +82,7 @@ const LoginForm: React.FC = () => {
           id="password"
           label="Password"
           required
-          theme="white"
+          variant="white"
           labelHidden
           placeholder="Password"
           icon={<RiLockPasswordFill />}

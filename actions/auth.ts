@@ -73,9 +73,6 @@ export async function signup(prevState: SignupError, formData: FormData) {
     },
   });
 
-  console.log("error", error);
-  console.log("user", user);
-
   if (error) {
     return { error: error.message, resetKey: Date.now() };
   }

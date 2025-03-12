@@ -19,6 +19,9 @@ import styles from "./LoginForm.module.scss";
 
 //Utils
 import { login } from "@/actions/auth";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import { toastStyle } from "@/styles/toast";
 
 const LoginForm: React.FC = () => {
   const initialState = {
@@ -42,6 +45,13 @@ const LoginForm: React.FC = () => {
   const handleFocus = () => {
     setError([]);
   };
+  const router = useRouter();
+  useEffect(() => {
+    if (state.success) {
+      toast.success(state.success, toastStyle);
+      router.push("/");
+    }
+  }, [state, router]);
 
   return (
     <div className={styles.loginFormContainer}>

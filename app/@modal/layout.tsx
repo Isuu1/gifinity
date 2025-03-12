@@ -29,6 +29,8 @@ export default function ModalLayout({
   useEffect(() => {
     if (pathname === "/login" || pathname === "/signup") {
       setShowModal(true);
+    } else {
+      setShowModal(false);
     }
   }, [pathname]);
 

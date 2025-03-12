@@ -1,9 +1,12 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-//import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { SignupError, signupSchema } from "@/utils/authValidation";
+
+//
+// Login process
+//
 
 export async function login(prevData: SignupError, formData: FormData) {
   const supabase = await createClient();
@@ -21,8 +24,7 @@ export async function login(prevData: SignupError, formData: FormData) {
   }
 
   revalidatePath("/", "layout");
-  // redirect("/");
-  return { data, error: null, success: "Login successful!" };
+  return { data, error: null, success: "You're logged in now!" };
 }
 
 //

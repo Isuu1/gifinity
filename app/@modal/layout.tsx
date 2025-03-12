@@ -8,6 +8,7 @@ import Button from "@/components/UI/Button";
 
 //Animations
 import { AnimatePresence } from "framer-motion";
+import ModalNavMenu from "@/components/Authentication/ModalNavMenu/ModalNavMenu";
 
 export default function ModalLayout({
   children,
@@ -43,6 +44,7 @@ export default function ModalLayout({
             <div className="margin-left-auto">
               <Button onClick={closeModal}>X</Button>
             </div>
+            <ModalNavMenu variant="dark" />
             {children}
           </Modal>
         )}

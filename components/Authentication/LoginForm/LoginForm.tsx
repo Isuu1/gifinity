@@ -9,12 +9,11 @@ import Button from "@/components/UI/Button";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Error from "../Error/Error";
+import Providers from "../Providers/Providers";
 
 //Icons
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { FcGoogle } from "react-icons/fc";
-import { ImFacebook2 } from "react-icons/im";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 
@@ -111,20 +110,7 @@ const LoginForm: React.FC = () => {
 
       <h4>——— or ———</h4>
 
-      <Button
-        className={styles.loginWithGoogleButton}
-        icon={<FcGoogle />}
-        iconPosition="right"
-      >
-        Log in with Google
-      </Button>
-      <Button
-        className={styles.loginWithFacebookButton}
-        icon={<ImFacebook2 />}
-        iconPosition="right"
-      >
-        Log in with Facebook
-      </Button>
+      <Providers />
     </div>
   );
 };

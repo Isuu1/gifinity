@@ -100,7 +100,7 @@ const LoginForm: React.FC = () => {
           <Error key="error" error={error} userEmail={state.data.email} />
         )}
 
-        <Button active type="submit">
+        <Button active type="submit" disabled={isPending}>
           {isPending ? "Logging in..." : "Log in"}
         </Button>
       </Form>

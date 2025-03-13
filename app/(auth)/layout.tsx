@@ -1,5 +1,5 @@
 "use client";
-import ModalNavMenu from "@/components/Authentication/ModalNavMenu/ModalNavMenu";
+import AuthPageNavMenu from "@/components/Authentication/AuthPageNavMenu/AuthPageNavMenu";
 import AuthPagesLayout from "@/layouts/AuthPagesLayout";
 
 export default function AuthLayout({
@@ -9,7 +9,7 @@ export default function AuthLayout({
 }) {
   return (
     <AuthPagesLayout>
-      <ModalNavMenu variant="dark" />
+      <AuthPageNavMenu variant="dark" />
       {children}
     </AuthPagesLayout>
   );

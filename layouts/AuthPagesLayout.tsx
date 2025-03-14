@@ -6,8 +6,11 @@ import styles from "./AuthPagesLayout.module.scss";
 const AuthPagesLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={styles.authPageLayout}>
-      <h1>Gifinity</h1>
-      <div className={styles.innerWrapper}>{children}</div>
+      <div className={styles.formWrapper}>
+        <h1>Gifinity</h1>
+        <div className={styles.form}>{children}</div>
+      </div>
+      <div className={styles.authBackground}></div>
     </div>
   );
 };

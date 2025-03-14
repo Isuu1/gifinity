@@ -61,7 +61,7 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className={styles.loginFormContainer}>
-      <h2>Log in to Gifinity</h2>
+      <h2>Login</h2>
       <h4>Access your favorites, sync across devices, and more!</h4>
 
       <Form action={formAction}>
@@ -99,7 +99,12 @@ const LoginForm: React.FC = () => {
           <Error key="error" error={error} userEmail={state.data.email} />
         )}
 
-        <Button active type="submit" disabled={isPending}>
+        <Button
+          active
+          type="submit"
+          disabled={isPending}
+          className={styles.loginButton}
+        >
           {isPending ? "Logging in..." : "Log in"}
         </Button>
       </Form>

@@ -52,7 +52,7 @@ const SignupForm: React.FC = () => {
 
   return (
     <div className={styles.signupFormContainer}>
-      <h2>Signup to Gifinity</h2>
+      <h2>Signup</h2>
 
       {state.success ? (
         <SignupSuccess
@@ -118,7 +118,12 @@ const SignupForm: React.FC = () => {
 
             {error.length > 0 && <Error key="error" error={error} />}
 
-            <Button active type="submit" disabled={isPending}>
+            <Button
+              active
+              type="submit"
+              disabled={isPending}
+              className={styles.signupButton}
+            >
               {isPending ? "Creating account..." : "Sign up"}
             </Button>
           </Form>

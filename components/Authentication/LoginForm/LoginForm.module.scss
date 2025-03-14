@@ -4,4 +4,10 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  .loginButton {
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
 }

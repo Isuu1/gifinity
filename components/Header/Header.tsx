@@ -17,6 +17,7 @@ import { FaHeart } from "react-icons/fa";
 
 //Supabase
 import { User } from "@supabase/supabase-js";
+import Image from "next/image";
 
 interface IProps {
   user: User | null;
@@ -27,7 +28,7 @@ const Header: React.FC<IProps> = ({ user }) => {
     <header className={styles.header}>
       <div className={styles.headerTop}>
         <Link href="/">
-          <h1>Gifinity</h1>
+          <Image src="/images/logo.png" alt="Gifinity" width={95} height={95} />
         </Link>
         <div className={styles.nav}>
           <CategoriesMenu />

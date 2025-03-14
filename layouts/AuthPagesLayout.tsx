@@ -9,6 +9,7 @@ import * as THREE from "three";
 
 //Styles
 import styles from "./AuthPagesLayout.module.scss";
+import Image from "next/image";
 
 const AuthPagesLayout = ({ children }: { children: React.ReactNode }) => {
   const [vantaEffect, setVantaEffect] = useState(null);
@@ -32,7 +33,8 @@ const AuthPagesLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={styles.authPageLayout}>
       <div className={styles.formWrapper}>
-        <h1>Gifinity</h1>
+        {/* <h1>Gifinity</h1> */}
+        <Image src="/images/logo.png" alt="Gifinity" width={95} height={95} />
         <div className={styles.form}>{children}</div>
       </div>
       <div className={styles.authBackground} ref={authBackgroundRef}></div>

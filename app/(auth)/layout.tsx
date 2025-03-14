@@ -9,7 +9,7 @@ export default function AuthLayout({
 }) {
   return (
     <AuthPagesLayout>
-      <AuthPageNavMenu variant="dark" />
+      <AuthPageNavMenu variant="light" />
       {children}
     </AuthPagesLayout>
   );

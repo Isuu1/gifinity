@@ -13,8 +13,6 @@ import styles from "./AuthPagesLayout.module.scss";
 const AuthPagesLayout = ({ children }: { children: React.ReactNode }) => {
   const [vantaEffect, setVantaEffect] = useState(null);
   const authBackgroundRef = useRef(null);
-  console.log("Ref element:", authBackgroundRef.current);
-  // console.log(document.querySelector(".authBackground canvas"));
   useEffect(() => {
     if (typeof window !== "undefined" && !vantaEffect) {
       setVantaEffect(

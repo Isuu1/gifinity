@@ -33,7 +33,6 @@ const AuthPagesLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={styles.authPageLayout}>
       <div className={styles.formWrapper}>
-        {/* <h1>Gifinity</h1> */}
         <Image src="/images/logo.png" alt="Gifinity" width={95} height={95} />
         <div className={styles.form}>{children}</div>
       </div>

@@ -9,6 +9,7 @@ export default function AuthLayout({
 }) {
   return (
     <AuthPagesLayout>
+      <h1>Welcome to Gifinity</h1>
       <AuthPageNavMenu variant="light" />
       {children}
     </AuthPagesLayout>

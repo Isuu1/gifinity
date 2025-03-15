@@ -1,4 +1,7 @@
-@use "../../styles/variables.scss" as *;
+$buttonLight: #ff204e;
+$buttonDark: #a0153e;
+$buttonDisabled: #8d8d8d;
+$buttonActive: #ff204e;
 
 .button {
   font-family: "Neucha", serif;
@@ -16,16 +19,17 @@
   gap: 0.3rem;
   &:disabled {
     cursor: not-allowed;
-    background: $secondaryColorLight;
+    background: $buttonDisabled;
   }
   &.active {
-    background: $secondaryColorLight;
+    background: $buttonActive;
     &:hover {
-      background: $secondaryColorDark;
+      background: $buttonDark;
     }
   }
+  //Button hover for default style
   &:hover {
-    background: $secondaryColorDark;
+    background: $buttonDark;
     color: #fff !important;
   }
   .icon {
@@ -37,5 +41,19 @@
   .text {
     font-size: 1.1rem;
     color: #fff;
+  }
+}
+
+.light {
+  background: $buttonLight;
+  &:hover {
+    background: $buttonDark;
+  }
+}
+
+.dark {
+  background: $buttonDark;
+  &:hover {
+    background: $buttonLight;
   }
 }

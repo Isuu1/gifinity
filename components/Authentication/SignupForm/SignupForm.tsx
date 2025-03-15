@@ -72,7 +72,7 @@ const SignupForm: React.FC = () => {
               id="email"
               label="Email"
               required
-              variant="white"
+              disabled={isPending}
               labelHidden
               placeholder="Email"
               icon={<MdEmail />}
@@ -84,7 +84,7 @@ const SignupForm: React.FC = () => {
               id="password"
               label="Password"
               required
-              variant="white"
+              disabled={isPending}
               labelHidden
               placeholder="Password"
               icon={<RiLockPasswordFill />}
@@ -102,7 +102,7 @@ const SignupForm: React.FC = () => {
               id="confirmPassword"
               label="confirmPassword"
               required
-              variant="white"
+              disabled={isPending}
               labelHidden
               placeholder="Confirm password"
               icon={<RiLockPasswordFill />}
@@ -119,7 +119,7 @@ const SignupForm: React.FC = () => {
             {error.length > 0 && <Error key="error" error={error} />}
 
             <Button
-              active
+              variant="light"
               type="submit"
               disabled={isPending}
               className={styles.signupButton}

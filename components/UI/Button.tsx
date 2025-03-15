@@ -12,6 +12,7 @@ interface IProps {
   className?: string;
   disabled?: boolean;
   type?: "button" | "submit" | "reset";
+  variant?: "light" | "dark";
 }
 
 const Button: React.FC<IProps> = ({
@@ -23,10 +24,13 @@ const Button: React.FC<IProps> = ({
   className,
   disabled,
   type = "button",
+  variant = "default",
 }) => {
   return (
     <button
-      className={`${styles.button} ${className} ${active && styles.active}`}
+      className={`${styles.button} ${className} ${active && styles.active} ${
+        styles[variant]
+      }`}
       onClick={onClick}
       style={{
         flexDirection: iconPosition === "right" ? "row-reverse" : "row",

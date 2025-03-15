@@ -45,7 +45,7 @@ const Header: React.FC<IProps> = ({ user }) => {
                 <Button>Log in</Button>
               </Link>
               <Link href="/signup" scroll={false}>
-                <Button active>Sign up</Button>
+                <Button variant="light">Sign up</Button>
               </Link>
               <Link href="/favourites">
                 <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">

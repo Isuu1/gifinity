@@ -70,7 +70,7 @@ const LoginForm: React.FC = () => {
           id="email"
           label="Email"
           required
-          variant="white"
+          disabled={isPending}
           labelHidden
           placeholder="Email"
           icon={<MdEmail />}
@@ -81,7 +81,7 @@ const LoginForm: React.FC = () => {
           id="password"
           label="Password"
           required
-          variant="white"
+          disabled={isPending}
           labelHidden
           placeholder="Password"
           icon={<RiLockPasswordFill />}
@@ -100,7 +100,7 @@ const LoginForm: React.FC = () => {
         )}
 
         <Button
-          active
+          variant="light"
           type="submit"
           disabled={isPending}
           className={styles.loginButton}

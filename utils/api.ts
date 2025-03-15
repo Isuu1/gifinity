@@ -1,4 +1,8 @@
-async function fetchTrendingMediaData(endpoint: string) {
+async function fetchTrendingMediaData(
+  endpoint: string,
+  offset: number = 0,
+  limit: number = 25
+) {
   try {
     // Use server environment detection
     const isServer = typeof window === "undefined";
@@ -9,7 +13,7 @@ async function fetchTrendingMediaData(endpoint: string) {
       : process.env.NEXT_PUBLIC_API_KEY;
 
     const data = await fetch(
-      `https://api.giphy.com/v1/${endpoint}?api_key=${apiKey}`,
+      `https://api.giphy.com/v1/${endpoint}?api_key=${apiKey}&offset=${offset}&limit=${limit}`,
       { next: { revalidate: 0 } }
     );
     const response = await data.json();

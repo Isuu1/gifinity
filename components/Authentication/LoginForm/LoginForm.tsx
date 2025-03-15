@@ -70,6 +70,7 @@ const LoginForm: React.FC = () => {
           id="email"
           label="Email"
           required
+          disabled={isPending}
           labelHidden
           placeholder="Email"
           icon={<MdEmail />}
@@ -80,6 +81,7 @@ const LoginForm: React.FC = () => {
           id="password"
           label="Password"
           required
+          disabled={isPending}
           labelHidden
           placeholder="Password"
           icon={<RiLockPasswordFill />}

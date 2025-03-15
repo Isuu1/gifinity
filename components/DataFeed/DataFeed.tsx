@@ -10,8 +10,8 @@ import styles from "./DataFeed.module.scss";
 import { AnimatePresence } from "framer-motion";
 
 //Components
-import Button from "../UI/Button";
 import MediaOverlay from "../MediaOverlay/MediaOverlay";
+import MediaTypeMenu from "../MediaTypeMenu/MediaTypeMenu";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
@@ -42,20 +42,10 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
 
   return (
     <div>
-      <div className={styles.submenuContainer}>
-        <Button
-          active={activeButton === "gifs" && true}
-          onClick={() => setActiveButton("gifs")}
-        >
-          Gifs
-        </Button>
-        <Button
-          active={activeButton === "stickers" && true}
-          onClick={() => setActiveButton("stickers")}
-        >
-          Stickers
-        </Button>
-      </div>
+      <MediaTypeMenu
+        activeButton={activeButton}
+        setActiveButton={setActiveButton}
+      />
       <div className={styles.feedContainer}>
         {displayedContent &&
           displayedContent.data.map((media) => (

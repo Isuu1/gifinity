@@ -11,6 +11,7 @@ interface IProps {
   placeholder?: string;
   labelHidden?: boolean;
   required?: boolean;
+  disabled?: boolean;
   defaultValue?: string;
   value?: string;
   icon?: React.ReactNode;
@@ -32,6 +33,7 @@ const Input: React.FC<IProps> = ({
   type,
   variant = "default",
   required,
+  disabled,
   defaultValue,
   value,
   placeholder,
@@ -49,6 +51,7 @@ const Input: React.FC<IProps> = ({
         placeholder={placeholder}
         className={`${styles.input} ${neucha.className}`}
         required={required}
+        disabled={disabled}
         id={id}
         name={id}
         type={type}

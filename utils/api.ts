@@ -1,7 +1,15 @@
-async function fetchData(endpoint: string) {
+async function fetchTrendingMediaData(endpoint: string) {
   try {
+    // Use server environment detection
+    const isServer = typeof window === "undefined";
+
+    // Choose appropriate API key based on environment
+    const apiKey = isServer
+      ? process.env.API_KEY
+      : process.env.NEXT_PUBLIC_API_KEY;
+
     const data = await fetch(
-      `https://api.giphy.com/v1/${endpoint}?api_key=${process.env.API_KEY}`,
+      `https://api.giphy.com/v1/${endpoint}?api_key=${apiKey}`,
       { next: { revalidate: 0 } }
     );
     const response = await data.json();
@@ -12,11 +20,11 @@ async function fetchData(endpoint: string) {
 }
 
 export async function getTrendingGifs() {
-  return fetchData("gifs/trending");
+  return fetchTrendingMediaData("gifs/trending");
 }
 
 export async function getTrendingStickers() {
-  return fetchData("stickers/trending");
+  return fetchTrendingMediaData("stickers/trending");
 }
 
 async function fetchSearchData(searchQuery: string, type: string) {

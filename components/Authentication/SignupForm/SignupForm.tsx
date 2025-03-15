@@ -119,7 +119,7 @@ const SignupForm: React.FC = () => {
             {error.length > 0 && <Error key="error" error={error} />}
 
             <Button
-              active
+              variant="light"
               type="submit"
               disabled={isPending}
               className={styles.signupButton}

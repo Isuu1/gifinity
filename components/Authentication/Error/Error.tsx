@@ -45,7 +45,7 @@ const Error: React.FC<IProps> = ({ error, userEmail }) => {
               <MdOutlineError className={styles.icon} />
               <span>Your email is not confirmed. Please check your inbox.</span>
             </p>
-            <Button active onClick={handleResendeEmailConfirmation}>
+            <Button variant="dark" onClick={handleResendeEmailConfirmation}>
               Resend email
             </Button>
           </>

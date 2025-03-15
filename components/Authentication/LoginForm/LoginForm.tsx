@@ -100,7 +100,7 @@ const LoginForm: React.FC = () => {
         )}
 
         <Button
-          active
+          variant="light"
           type="submit"
           disabled={isPending}
           className={styles.loginButton}

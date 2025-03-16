@@ -30,9 +30,9 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
 
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
 
-  const [displayedContent, setDisplayedContent] = useState<
-    Gifs | Stickers | null
-  >(gifs);
+  const [displayedContent, setDisplayedContent] = useState<Gifs | Stickers>(
+    gifs
+  );
 
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
@@ -41,7 +41,7 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
     setDisplayedContent(activeButton === "gifs" ? gifs : stickers);
   }, [gifs, stickers, activeButton]);
 
-  console.log(displayedContent);
+  console.log("displayed content", displayedContent);
 
   return (
     <div>
@@ -49,36 +49,36 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
         activeButton={activeButton}
         setActiveButton={setActiveButton}
       />
-      {/* <LoadMoreDataOnScroll
+      <LoadMoreDataOnScroll
         displayedContent={displayedContent}
         setDisplayedContent={setDisplayedContent}
         activeButton={activeButton}
-      > */}
-      <div className={styles.feedContainer}>
-        {displayedContent &&
-          displayedContent.data.map((media) => (
-            <div
-              key={media.id}
-              className={styles.gif}
-              onMouseEnter={() => setShowOverlay(media.id)}
-              onMouseLeave={() => setShowOverlay(null)}
-            >
-              <AnimatePresence initial={false}>
-                {showOverlay === media.id && (
-                  <MediaOverlay key={media.id} media={media} />
-                )}
-              </AnimatePresence>
-              <Image
-                className={styles.image}
-                src={media.images.original.url}
-                alt={media.title}
-                fill
-                unoptimized
-              />
-            </div>
-          ))}
-      </div>
-      {/* </LoadMoreDataOnScroll> */}
+      >
+        <div className={styles.feedContainer}>
+          {displayedContent &&
+            displayedContent.data.map((media) => (
+              <div
+                key={media.id}
+                className={styles.gif}
+                onMouseEnter={() => setShowOverlay(media.id)}
+                onMouseLeave={() => setShowOverlay(null)}
+              >
+                <AnimatePresence initial={false}>
+                  {showOverlay === media.id && (
+                    <MediaOverlay key={media.id} media={media} />
+                  )}
+                </AnimatePresence>
+                <Image
+                  className={styles.image}
+                  src={media.images.original.url}
+                  alt={media.title}
+                  fill
+                  unoptimized
+                />
+              </div>
+            ))}
+        </div>
+      </LoadMoreDataOnScroll>
     </div>
   );
 };

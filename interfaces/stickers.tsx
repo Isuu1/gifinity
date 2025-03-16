@@ -1,5 +1,6 @@
 export interface Stickers {
   data: Sticker[];
+  error?: string | null;
 }
 
 export interface Sticker {

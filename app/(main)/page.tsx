@@ -18,10 +18,13 @@ export default function Home() {
     null
   );
 
+  console.log("Trending gifs:", trendingGifs);
+
   useEffect(() => {
     async function fetchData() {
       try {
         const gifsResponse = await fetch("/api/trending-gifs");
+
         const gifsData = await gifsResponse.json();
         console.log(gifsData);
         setTrendingGifs(gifsData);
@@ -42,8 +45,9 @@ export default function Home() {
       <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
 
       <SliderMenu />
+
       <Suspense fallback={<Loading />}>
-        {trendingGifs && trendingStickers && (
+        {trendingGifs?.data && trendingStickers?.data && (
           <DataFeed
             data={{
               gifs: trendingGifs,
@@ -52,6 +56,7 @@ export default function Home() {
           />
         )}
       </Suspense>
+      {trendingGifs?.error && <p>{trendingGifs.error}</p>}
     </div>
   );
 }

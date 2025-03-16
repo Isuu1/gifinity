@@ -2,16 +2,12 @@
 
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
-import { getTrendingGifs } from "@/utils/api";
-import { fetchTrendingMediaData } from "@/utils/api";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 interface IProps {
-  displayedContent: Gifs | Stickers | undefined;
-  setDisplayedContent: React.Dispatch<
-    React.SetStateAction<Gifs | Stickers | undefined>
-  >;
+  displayedContent: Gifs | Stickers;
+  setDisplayedContent: React.Dispatch<React.SetStateAction<Gifs | Stickers>>;
   children: React.ReactNode;
   activeButton: string;
 }
@@ -29,15 +25,25 @@ const LoadMoreDataOnScroll: React.FC<IProps> = ({
   const limit = 25;
 
   const loadMoreData = async () => {
-    // const response = await getTrendingGifs(offset, limit);
-    // const response = await fetchTrendingMediaData("gifs/trending", 50, limit);
+    const gifsResponse = await fetch(`/api/trending-gifs?offset=${offset}`);
+    const stickersResponse = await fetch(
+      `/api/trending-stickers?offset=${offset}`
+    );
 
-    if (!response || !response.data || response.data.length === 0) {
+    const gifsData = await gifsResponse.json();
+    const stickersData = await stickersResponse.json();
+
+    if (!gifsResponse || !stickersResponse) {
       setHasMore(false); // No more data to load
       return;
     }
 
-    const newContent = response.data;
+    console.log("Gifs response:", gifsResponse);
+
+    console.log("Gifs response:", gifsData);
+    console.log("Stickers response:", stickersData);
+
+    const newGifs = gifsData.data;
     setOffset((prevOffset) => {
       console.log("Offset being set to:", prevOffset + limit); // Debugging: Check new offset
       return prevOffset + limit;
@@ -45,9 +51,25 @@ const LoadMoreDataOnScroll: React.FC<IProps> = ({
     setTimeout(() => {
       setDisplayedContent({
         ...displayedContent,
-        data: [...displayedContent.data, ...newContent],
+        data: [...displayedContent.data, ...newGifs],
       });
     }, 2000);
+
+    function checkForRepeatedIds(
+      gifsData: Gifs | undefined,
+      displayedContent: Gifs | Stickers | null
+    ) {
+      if (!gifsData?.data || !displayedContent?.data) {
+        return; // Return early if data is missing
+      }
+
+      gifsData.data.forEach((media) => {
+        if (displayedContent.data.some((m) => m.id === media.id)) {
+          console.error("Repeated ID found:", media.id);
+        }
+      });
+    }
+    checkForRepeatedIds(gifsData, displayedContent);
   };
 
   return (

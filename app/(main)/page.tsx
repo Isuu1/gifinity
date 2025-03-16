@@ -14,14 +14,14 @@ import Loading from "@/components/Loading/Loading";
 import Error from "@/components/Error/Error";
 
 export default async function Home() {
-  const trendingGifsResponse = await fetch(
-    `${process.env.SITE_URL}/api/trending/gifs`
-  );
-  const trendingGifs: Gifs = await trendingGifsResponse.json();
-  const trendingStickersResponse = await fetch(
-    `${process.env.SITE_URL}/api/trending/stickers`
-  );
-  const trendingStickers: Stickers = await trendingStickersResponse.json();
+  // const trendingGifsResponse = await fetch(
+  //   `${process.env.SITE_URL}/api/trending/gifs`
+  // );
+  // const trendingGifs: Gifs = await trendingGifsResponse.json();
+  // const trendingStickersResponse = await fetch(
+  //   `${process.env.SITE_URL}/api/trending/stickers`
+  // );
+  // const trendingStickers: Stickers = await trendingStickersResponse.json();
 
   return (
     <div className="page">
@@ -29,7 +29,7 @@ export default async function Home() {
 
       <SliderMenu />
 
-      <Suspense fallback={<Loading />}>
+      {/* <Suspense fallback={<Loading />}>
         {trendingGifs?.data && trendingStickers?.data && (
           <DataFeed
             data={{
@@ -39,7 +39,7 @@ export default async function Home() {
           />
         )}
       </Suspense>
-      {trendingGifs?.error && <Error errorMessage={trendingGifs.error} />}
+      {trendingGifs?.error && <Error errorMessage={trendingGifs.error} />} */}
     </div>
   );
 }

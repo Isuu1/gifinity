@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 //Components
-import SliderMenu from "@/components/SliderMenu/SliderMenu";
+import TrendingSearchesSlider from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
 // Lazy load the DataFeed component
 // const DataFeed = lazy(() => import("@/components/DataFeed/DataFeed"));
 import DataFeed from "@/components/DataFeed/DataFeed";
@@ -27,7 +27,7 @@ export default async function Home() {
     <div className="page">
       <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
 
-      <SliderMenu />
+      <TrendingSearchesSlider />
 
       <Suspense fallback={<Loading />}>
         {trendingGifs?.data && trendingStickers?.data && (

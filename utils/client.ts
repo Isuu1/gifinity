@@ -52,20 +52,20 @@ export async function fetchTrendingByTag(searchQuery: string, type: string) {
   }
 }
 
-export async function fetchTrendingSearches() {
-  try {
-    const response = await fetch(
-      `https://api.giphy.com/v1/trending/searches?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    );
+// export async function fetchTrendingSearches() {
+//   try {
+//     const response = await fetch(
+//       `https://api.giphy.com/v1/trending/searches?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+//     );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
 
-    const data = await response.json();
+//     const data = await response.json();
 
-    return { data, error: null };
-  } catch (error) {
-    return { data: null, error: `Error fetching trending searches: ${error}` };
-  }
-}
+//     return { data, error: null };
+//   } catch (error) {
+//     return { data: null, error: `Error fetching trending searches: ${error}` };
+//   }
+// }

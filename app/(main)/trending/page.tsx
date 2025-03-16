@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 //Components
 import DataFeed from "@/components/DataFeed/DataFeed";
 import Loading from "@/components/Loading/Loading";
-import SliderMenu from "@/components/SliderMenu/SliderMenu";
+import SliderMenu from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces

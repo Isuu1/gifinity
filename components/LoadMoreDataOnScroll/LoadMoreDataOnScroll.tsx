@@ -53,22 +53,6 @@ const LoadMoreDataOnScroll: React.FC<IProps> = ({
         data: [...displayedContent.data, ...newGifs],
       });
     }, 2000);
-
-    function checkForRepeatedIds(
-      gifsData: Gifs | undefined,
-      displayedContent: Gifs | Stickers | null
-    ) {
-      if (!gifsData?.data || !displayedContent?.data) {
-        return; // Return early if data is missing
-      }
-
-      gifsData.data.forEach((media) => {
-        if (displayedContent.data.some((m) => m.id === media.id)) {
-          console.error("Repeated ID found:", media.id);
-        }
-      });
-    }
-    checkForRepeatedIds(gifsData, displayedContent);
   };
 
   return (

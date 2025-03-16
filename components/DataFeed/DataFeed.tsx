@@ -16,7 +16,7 @@ import MediaTypeMenu from "../MediaTypeMenu/MediaTypeMenu";
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
-import LoadMoreDataOnScroll from "../LoadMoreDataOnScroll/LoadMoreDataOnScroll";
+//import LoadMoreDataOnScroll from "../LoadMoreDataOnScroll/LoadMoreDataOnScroll";
 
 interface IProps {
   data: {
@@ -49,36 +49,36 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
         activeButton={activeButton}
         setActiveButton={setActiveButton}
       />
-      <LoadMoreDataOnScroll
+      {/* <LoadMoreDataOnScroll
         displayedContent={displayedContent}
         setDisplayedContent={setDisplayedContent}
         activeButton={activeButton}
-      >
-        <div className={styles.feedContainer}>
-          {displayedContent &&
-            displayedContent.data.map((media) => (
-              <div
-                key={media.id}
-                className={styles.gif}
-                onMouseEnter={() => setShowOverlay(media.id)}
-                onMouseLeave={() => setShowOverlay(null)}
-              >
-                <AnimatePresence initial={false}>
-                  {showOverlay === media.id && (
-                    <MediaOverlay key={media.id} media={media} />
-                  )}
-                </AnimatePresence>
-                <Image
-                  className={styles.image}
-                  src={media.images.original.url}
-                  alt={media.title}
-                  fill
-                  unoptimized
-                />
-              </div>
-            ))}
-        </div>
-      </LoadMoreDataOnScroll>
+      > */}
+      <div className={styles.feedContainer}>
+        {displayedContent &&
+          displayedContent.data.map((media) => (
+            <div
+              key={media.id}
+              className={styles.gif}
+              onMouseEnter={() => setShowOverlay(media.id)}
+              onMouseLeave={() => setShowOverlay(null)}
+            >
+              <AnimatePresence initial={false}>
+                {showOverlay === media.id && (
+                  <MediaOverlay key={media.id} media={media} />
+                )}
+              </AnimatePresence>
+              <Image
+                className={styles.image}
+                src={media.images.original.url}
+                alt={media.title}
+                fill
+                unoptimized
+              />
+            </div>
+          ))}
+      </div>
+      {/* </LoadMoreDataOnScroll> */}
     </div>
   );
 };

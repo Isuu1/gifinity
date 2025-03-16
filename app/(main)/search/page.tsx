@@ -1,9 +1,7 @@
 //Components
 import DataFeed from "@/components/DataFeed/DataFeed";
+import Error from "@/components/Error/Error";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
-
-//Utils
-import { getSearchedGifs, getSearchedStickers } from "@/utils/api";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
@@ -20,8 +18,15 @@ export default async function Page({
     ? searchQueryParam[0]
     : searchQueryParam;
 
-  const gifs: Gifs = await getSearchedGifs(searchQuery);
-  const stickers: Stickers = await getSearchedStickers(searchQuery);
+  const gifsResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/search/gifs?q=${searchQuery}`
+  );
+  const gifs: Gifs = await gifsResponse.json();
+
+  const stickersResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/search/stickers?q=${searchQuery}`
+  );
+  const stickers: Stickers = await stickersResponse.json();
 
   return (
     <div className="page">
@@ -29,8 +34,10 @@ export default async function Page({
         title={`Search results for: ${searchQuery}`}
         imageUrl="/images/search.svg"
       />
-
-      <DataFeed data={{ gifs: gifs, stickers: stickers }} />
+      {gifs.data && stickers.data && (
+        <DataFeed data={{ gifs: gifs, stickers: stickers }} />
+      )}
+      {gifs?.error && <Error errorMessage={gifs.error} />}
     </div>
   );
 }

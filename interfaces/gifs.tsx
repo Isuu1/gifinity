@@ -1,5 +1,6 @@
 export interface Gifs {
   data: Gif[];
+  error?: string | null;
 }
 
 export interface Gif {

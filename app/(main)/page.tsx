@@ -1,30 +1,63 @@
-//Utils
-import { getTrendingGifs, getTrendingStickers } from "@/utils/api";
+"use client";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 //Components
 import SliderMenu from "@/components/SliderMenu/SliderMenu";
-import DataFeed from "@/components/DataFeed/DataFeed";
+// Lazy load the DataFeed component
+const DataFeed = lazy(() => import("@/components/DataFeed/DataFeed"));
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
+import Loading from "@/components/Loading/Loading";
+import Error from "@/components/Error/Error";
 
-export default async function Home() {
-  const trendingGifs: Gifs = await getTrendingGifs();
-  const trendingStickers: Stickers = await getTrendingStickers();
+export default function Home() {
+  const [trendingGifs, setTrendingGifs] = useState<Gifs | null>(null);
+  const [trendingStickers, setTrendingStickers] = useState<Stickers | null>(
+    null
+  );
+
+  console.log("Trending gifs:", trendingGifs);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const gifsResponse = await fetch("/api/trending-gifs");
+
+        const gifsData = await gifsResponse.json();
+        console.log(gifsData);
+        setTrendingGifs(gifsData);
+
+        const stickersResponse = await fetch("/api/trending-stickers");
+        const stickersData = await stickersResponse.json();
+        setTrendingStickers(stickersData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
+  }, []); // Empty dependency array means this runs only once on mount
 
   return (
     <div className="page">
       <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
 
       <SliderMenu />
-      <DataFeed
-        data={{
-          gifs: trendingGifs,
-          stickers: trendingStickers,
-        }}
-      />
+
+      <Suspense fallback={<Loading />}>
+        {trendingGifs?.data && trendingStickers?.data && (
+          <DataFeed
+            data={{
+              gifs: trendingGifs,
+              stickers: trendingStickers,
+            }}
+          />
+        )}
+      </Suspense>
+      {trendingGifs?.error && <Error errorMessage={trendingGifs.error} />}
     </div>
   );
 }

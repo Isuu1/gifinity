@@ -16,11 +16,12 @@ import MediaTypeMenu from "../MediaTypeMenu/MediaTypeMenu";
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
+//import LoadMoreDataOnScroll from "../LoadMoreDataOnScroll/LoadMoreDataOnScroll";
 
 interface IProps {
   data: {
-    gifs?: Gifs;
-    stickers?: Stickers;
+    gifs: Gifs;
+    stickers: Stickers;
   };
 }
 
@@ -29,9 +30,9 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
 
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
 
-  const [displayedContent, setDisplayedContent] = useState<
-    Gifs | Stickers | undefined
-  >(gifs);
+  const [displayedContent, setDisplayedContent] = useState<Gifs | Stickers>(
+    gifs
+  );
 
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
@@ -40,12 +41,19 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
     setDisplayedContent(activeButton === "gifs" ? gifs : stickers);
   }, [gifs, stickers, activeButton]);
 
+  console.log("displayed content", displayedContent);
+
   return (
     <div>
       <MediaTypeMenu
         activeButton={activeButton}
         setActiveButton={setActiveButton}
       />
+      {/* <LoadMoreDataOnScroll
+        displayedContent={displayedContent}
+        setDisplayedContent={setDisplayedContent}
+        activeButton={activeButton}
+      > */}
       <div className={styles.feedContainer}>
         {displayedContent &&
           displayedContent.data.map((media) => (
@@ -70,6 +78,7 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
             </div>
           ))}
       </div>
+      {/* </LoadMoreDataOnScroll> */}
     </div>
   );
 };

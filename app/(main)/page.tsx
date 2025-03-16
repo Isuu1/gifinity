@@ -1,5 +1,5 @@
-"use client";
-import { lazy, Suspense, useEffect, useState } from "react";
+// "use client";
+import { lazy, Suspense } from "react";
 
 //Components
 import SliderMenu from "@/components/SliderMenu/SliderMenu";
@@ -13,33 +13,41 @@ import { Stickers } from "@/interfaces/stickers";
 import Loading from "@/components/Loading/Loading";
 import Error from "@/components/Error/Error";
 
-export default function Home() {
-  const [trendingGifs, setTrendingGifs] = useState<Gifs | null>(null);
-  const [trendingStickers, setTrendingStickers] = useState<Stickers | null>(
-    null
+export default async function Home() {
+  const trendingGifsResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/trending-gifs`
   );
+  const trendingGifs: Gifs = await trendingGifsResponse.json();
+  const trendingStickersResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/trending-stickers`
+  );
+  const trendingStickers: Stickers = await trendingStickersResponse.json();
+  // const [trendingGifs, setTrendingGifs] = useState<Gifs | null>(null);
+  // const [trendingStickers, setTrendingStickers] = useState<Stickers | null>(
+  //   null
+  // );
 
-  console.log("Trending gifs:", trendingGifs);
+  // console.log("Trending gifs:", trendingGifs);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const gifsResponse = await fetch("/api/trending-gifs");
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const gifsResponse = await fetch("/api/trending-gifs");
 
-        const gifsData = await gifsResponse.json();
-        console.log(gifsData);
-        setTrendingGifs(gifsData);
+  //       const gifsData = await gifsResponse.json();
+  //       console.log(gifsData);
+  //       setTrendingGifs(gifsData);
 
-        const stickersResponse = await fetch("/api/trending-stickers");
-        const stickersData = await stickersResponse.json();
-        setTrendingStickers(stickersData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
+  //       const stickersResponse = await fetch("/api/trending-stickers");
+  //       const stickersData = await stickersResponse.json();
+  //       setTrendingStickers(stickersData);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   }
 
-    fetchData();
-  }, []); // Empty dependency array means this runs only once on mount
+  //   fetchData();
+  // }, []); // Empty dependency array means this runs only once on mount
 
   return (
     <div className="page">

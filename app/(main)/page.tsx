@@ -13,8 +13,6 @@ import { Stickers } from "@/interfaces/stickers";
 import Loading from "@/components/Loading/Loading";
 import Error from "@/components/Error/Error";
 
-console.log(process.env.SITE_URL);
-
 export default async function Home() {
   const trendingGifsResponse = await fetch(
     `${process.env.SITE_URL}/api/trending/gifs`

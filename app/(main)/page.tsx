@@ -1,5 +1,4 @@
-// "use client";
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 
 //Components
 import SliderMenu from "@/components/SliderMenu/SliderMenu";

@@ -16,7 +16,6 @@ const LoadMoreDataOnScroll: React.FC<IProps> = ({
   children,
   displayedContent,
   setDisplayedContent,
-  activeButton,
 }) => {
   const [hasMore, setHasMore] = useState<boolean>(true);
 

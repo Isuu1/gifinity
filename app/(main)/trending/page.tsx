@@ -6,15 +6,12 @@ import { useEffect, useState } from "react";
 //Components
 import DataFeed from "@/components/DataFeed/DataFeed";
 import Loading from "@/components/Loading/Loading";
-import SliderMenu from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
+import TrendingSearchesSlider from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
-
-//Utils
-import { fetchTrendingByTag } from "@/utils/client";
 
 export default function Page() {
   const [gifs, setGifs] = useState<Gifs | null>(null);
@@ -30,13 +27,15 @@ export default function Page() {
       setIsLoading(true);
       setError(null);
 
-      const gifs = await fetchTrendingByTag(searchQuery, "gifs");
-      const stickers = await fetchTrendingByTag(searchQuery, "stickers");
+      const gifsResponse = await fetch(`/api/search/gifs?q=${searchQuery}`);
+      const gifs: Gifs = await gifsResponse.json();
+      setGifs(gifs);
 
-      if (gifs.error || stickers.error) setError(gifs.error || stickers.error);
-
-      if (gifs.data) setGifs(gifs.data);
-      if (stickers.data) setStickers(stickers.data);
+      const stickersResponse = await fetch(
+        `/api/search/stickers?q=${searchQuery}`
+      );
+      const stickers: Stickers = await stickersResponse.json();
+      setStickers(stickers);
 
       setIsLoading(false);
     }
@@ -54,7 +53,7 @@ export default function Page() {
         imageUrl="/images/trending4.svg"
       />
 
-      <SliderMenu />
+      <TrendingSearchesSlider />
 
       {error !== null && <p>{error}</p>}
       {gifs !== null && stickers !== null && (

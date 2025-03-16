@@ -4,7 +4,8 @@ import { lazy, Suspense } from "react";
 //Components
 import SliderMenu from "@/components/SliderMenu/SliderMenu";
 // Lazy load the DataFeed component
-const DataFeed = lazy(() => import("@/components/DataFeed/DataFeed"));
+// const DataFeed = lazy(() => import("@/components/DataFeed/DataFeed"));
+import DataFeed from "@/components/DataFeed/DataFeed";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces

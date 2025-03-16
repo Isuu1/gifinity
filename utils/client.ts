@@ -1,19 +1,19 @@
-export async function fetchCategories() {
-  try {
-    const response = await fetch(
-      `https://api.giphy.com/v1/gifs/categories?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
-    );
+// export async function fetchCategories() {
+//   try {
+//     const response = await fetch(
+//       `https://api.giphy.com/v1/gifs/categories?api_key=${process.env.NEXT_PUBLIC_API_KEY}`
+//     );
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
 
-    const data = await response.json();
-    return { data, error: null };
-  } catch (error) {
-    return { data: null, error: `Error fetching categories: ${error}` };
-  }
-}
+//     const data = await response.json();
+//     return { data, error: null };
+//   } catch (error) {
+//     return { data: null, error: `Error fetching categories: ${error}` };
+//   }
+// }
 
 export async function fetchCategoryData(categoryName: string, type: string) {
   const encodedSearchQuery = encodeURIComponent(categoryName);

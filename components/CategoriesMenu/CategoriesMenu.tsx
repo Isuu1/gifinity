@@ -22,9 +22,6 @@ import {
 //Interfaces
 import { Categories } from "@/interfaces/categories";
 
-//Utils
-import { fetchCategories } from "@/utils/client";
-
 const CategoriesMenu: React.FC = () => {
   const [showCategories, setShowCategories] = useState<boolean>(false);
 
@@ -32,12 +29,14 @@ const CategoriesMenu: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetchCategories();
-      setCategories(response.data);
+      const data = await fetch("api/categories");
+      const response = await data.json();
+
+      setCategories(response);
     }
     fetchData();
   }, []);
-
+  console.log(categories);
   const router = useRouter();
 
   const handleCategories = () => {

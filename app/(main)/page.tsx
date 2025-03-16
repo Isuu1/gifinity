@@ -15,11 +15,11 @@ import Error from "@/components/Error/Error";
 
 export default async function Home() {
   const trendingGifsResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/trending-gifs`
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/trending/gifs`
   );
   const trendingGifs: Gifs = await trendingGifsResponse.json();
   const trendingStickersResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/trending-stickers`
+    `${process.env.NEXT_PUBLIC_SITE_URL}/api/trending/stickers`
   );
   const trendingStickers: Stickers = await trendingStickersResponse.json();
   // const [trendingGifs, setTrendingGifs] = useState<Gifs | null>(null);

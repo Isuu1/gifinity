@@ -1,19 +1,22 @@
-import { Suspense } from "react";
+// import { Suspense } from "react";
 
 //Components
 import SliderMenu from "@/components/SliderMenu/SliderMenu";
 // Lazy load the DataFeed component
 // const DataFeed = lazy(() => import("@/components/DataFeed/DataFeed"));
-import DataFeed from "@/components/DataFeed/DataFeed";
+// import DataFeed from "@/components/DataFeed/DataFeed";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
-import Loading from "@/components/Loading/Loading";
-import Error from "@/components/Error/Error";
+// import { Gifs } from "@/interfaces/gifs";
+// import { Stickers } from "@/interfaces/stickers";
+// import Loading from "@/components/Loading/Loading";
+// import Error from "@/components/Error/Error";
 
 export default async function Home() {
+  const example = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+  const data = await example.json();
+  console.log(data);
   // const trendingGifsResponse = await fetch(
   //   `${process.env.SITE_URL}/api/trending/gifs`
   // );

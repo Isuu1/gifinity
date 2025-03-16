@@ -41,7 +41,7 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
     setDisplayedContent(activeButton === "gifs" ? gifs : stickers);
   }, [gifs, stickers, activeButton]);
 
-  console.log("displayed content", displayedContent);
+  // console.log("displayed content", displayedContent);
 
   return (
     <div>

@@ -1,35 +1,42 @@
-async function fetchTrendingMediaData(
-  endpoint: string,
-  offset: number = 0,
-  limit: number = 25
-) {
-  try {
-    // Use server environment detection
-    const isServer = typeof window === "undefined";
+// export async function fetchTrendingMediaData(
+//   endpoint: string,
+//   offset: number = 0,
+//   limit: number = 25
+// ) {
+//   try {
+//     // Use server environment detection
+//     const isServer = typeof window === "undefined";
 
-    // Choose appropriate API key based on environment
-    const apiKey = isServer
-      ? process.env.API_KEY
-      : process.env.NEXT_PUBLIC_API_KEY;
+//     // Choose appropriate API key based on environment
+//     const apiKey = isServer
+//       ? process.env.API_KEY
+//       : process.env.NEXT_PUBLIC_API_KEY;
 
-    const data = await fetch(
-      `https://api.giphy.com/v1/${endpoint}?api_key=${apiKey}&offset=${offset}&limit=${limit}`,
-      { next: { revalidate: 0 } }
-    );
-    const response = await data.json();
-    return response;
-  } catch (error) {
-    console.error(`Error fetching ${endpoint}`, error);
-  }
-}
+//     const url = `https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&offset=${offset}&limit=${limit}`;
 
-export async function getTrendingGifs() {
-  return fetchTrendingMediaData("gifs/trending");
-}
+//     console.log("Fetching URL:", url); // Debugging: Check the URL
 
-export async function getTrendingStickers() {
-  return fetchTrendingMediaData("stickers/trending");
-}
+//     const data = await fetch(url, {
+//       next: { revalidate: 0 },
+//       headers: {
+//         "Cache-Control": "no-cache",
+//       },
+//     });
+//     const response = await data.json();
+//     return response;
+//   } catch (error) {
+//     console.error(`Error fetching ${endpoint}`, error);
+//   }
+// }
+
+// export async function getTrendingGifs(offset: number = 0, limit: number = 25) {
+//   console.log(offset, limit);
+//   return fetchTrendingMediaData("gifs/trending", offset, limit);
+// }
+
+// export async function getTrendingStickers() {
+//   return fetchTrendingMediaData("stickers/trending");
+// }
 
 async function fetchSearchData(searchQuery: string, type: string) {
   try {

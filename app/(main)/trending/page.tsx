@@ -1,11 +1,6 @@
-"use client";
-
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-
 //Components
 import DataFeed from "@/components/DataFeed/DataFeed";
-import Loading from "@/components/Loading/Loading";
+
 import TrendingSearchesSlider from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
@@ -13,38 +8,24 @@ import PageHeadline from "@/components/PageHeadline/PageHeadline";
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
 
-export default function Page() {
-  const [gifs, setGifs] = useState<Gifs | null>(null);
-  const [stickers, setStickers] = useState<Stickers | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get("q") || "";
-
-  useEffect(() => {
-    async function fetchData() {
-      setIsLoading(true);
-      setError(null);
-
-      const gifsResponse = await fetch(`/api/search/gifs?q=${searchQuery}`);
-      const gifs: Gifs = await gifsResponse.json();
-      setGifs(gifs);
-
-      const stickersResponse = await fetch(
-        `/api/search/stickers?q=${searchQuery}`
-      );
-      const stickers: Stickers = await stickersResponse.json();
-      setStickers(stickers);
-
-      setIsLoading(false);
-    }
-    fetchData();
-  }, [searchQuery]);
-
-  if (isLoading) {
-    return <Loading />;
-  }
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const searchQueryParam =
+    (await searchParams.then((params) => params.q)) || "";
+  const searchQuery = Array.isArray(searchQueryParam)
+    ? searchQueryParam[0]
+    : searchQueryParam;
+  const gifsResponse = await fetch(
+    `${process.env.SITE_URL}/api/search/gifs?q=${searchQuery}`
+  );
+  const gifs: Gifs = await gifsResponse.json();
+  const stickersResponse = await fetch(
+    `${process.env.SITE_URL}/api/search/stickers?q=${searchQuery}`
+  );
+  const stickers: Stickers = await stickersResponse.json();
 
   return (
     <div className="page">
@@ -55,8 +36,7 @@ export default function Page() {
 
       <TrendingSearchesSlider />
 
-      {error !== null && <p>{error}</p>}
-      {gifs !== null && stickers !== null && (
+      {gifs?.data && stickers?.data && (
         <DataFeed data={{ gifs: gifs, stickers: stickers }} />
       )}
     </div>

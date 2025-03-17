@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 //Styles
 import styles from "./MediaOverlay.module.scss";
@@ -44,32 +45,36 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
       initial="hidden"
       exit="exit"
     >
-      <div className={styles.overlay_element}>
+      <div className={styles.overlay_icons}>
         <FaCopy
           className={styles.icon}
           onClick={() => copyToClipboard(media.images.original.url)}
         />
-        <FaHeart
-          className={`${styles.icon} ${
-            isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
-          }`}
-          onClick={() => addItemToLocalStorage(media)}
-        />
+
+        <motion.div
+          whileTap={{ scale: 1.6 }} // Apply scale animation on tap
+          transition={{ duration: 0.2 }}
+        >
+          <FaHeart
+            className={`${styles.icon} ${
+              isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
+            }`}
+            onClick={() => addItemToLocalStorage(media)}
+          />
+        </motion.div>
       </div>
-      {/* {gif.user?.display_name && (
-                  <div className={styles.overlay_element}>
-                    <p className={styles.overlayText}>
-                      {gif.user?.display_name}
-                    </p>
-                    <Image
-                      className={styles.avatar}
-                      src={gif.user?.avatar_url}
-                      alt={gif.user?.display_name}
-                      width={30}
-                      height={30}
-                    />
-                  </div>
-                )} */}
+      {media.user?.display_name && (
+        <div className={styles.overlay_author}>
+          <Image
+            className={styles.avatar}
+            src={media.user?.avatar_url}
+            alt={media.user?.display_name}
+            width={30}
+            height={30}
+          />
+          <p className={styles.name}>{media.user?.display_name}</p>
+        </div>
+      )}
     </motion.div>
   );
 };

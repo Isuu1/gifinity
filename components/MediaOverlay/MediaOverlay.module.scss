@@ -3,26 +3,43 @@
   position: absolute;
   height: 100%;
   width: 100%;
+  padding: 0.3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  .overlay_element {
-    background: #feba00;
+  .overlay_icons {
+    background: #ff204db6;
+    border-radius: 5px;
     padding: 0.5rem;
     display: flex;
     gap: 0.5rem;
     margin-right: auto;
-    opacity: 0.9;
     .icon {
       cursor: pointer;
-      color: #5c4300;
+      color: #ffffff;
       font-size: 1.5rem;
       :hover {
-        color: #000;
+        color: #700c2a;
       }
     }
     .filled {
-      color: red;
+      color: #6e0226;
+    }
+  }
+  .overlay_author {
+    background: #ff204db6;
+    border-radius: 5px;
+    margin-bottom: 0.3rem;
+    padding: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    .avatar {
+      border-radius: 5px;
+    }
+    .name {
+      font-size: 1rem;
+      font-weight: 700;
     }
   }
 }

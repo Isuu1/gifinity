@@ -1,9 +1,32 @@
 .mediaTypeMenu {
   margin-bottom: 1rem;
   width: fit-content;
-  display: flex;
-  gap: 0.3rem;
   background: #36343a;
   border-radius: 34px;
   padding: 0.4rem 0.5rem;
+  .buttonsContainer {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem;
+    .button {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      &:hover {
+        background: transparent;
+      }
+    }
+    .indicator {
+      z-index: 1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background: #a0153e;
+      border-radius: 34px;
+    }
+  }
 }

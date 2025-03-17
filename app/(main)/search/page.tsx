@@ -1,32 +1,71 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
 //Components
 import DataFeed from "@/components/DataFeed/DataFeed";
 import Error from "@/components/Error/Error";
+import Loading from "@/components/Loading/Loading";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const searchQueryParam =
-    (await searchParams.then((params) => params.q)) || "";
-  const searchQuery = Array.isArray(searchQueryParam)
-    ? searchQueryParam[0]
-    : searchQueryParam;
+export default function Page() {
+  const searchParams = useSearchParams();
 
-  const gifsResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/search/gifs?q=${searchQuery}`
-  );
-  const gifs: Gifs = await gifsResponse.json();
+  const searchQuery = searchParams.get("q") || "";
 
-  const stickersResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/search/stickers?q=${searchQuery}`
+  const [searchedGifs, setSearchedGifs] = useState<Gifs | null>(null);
+  const [searchedStickers, setSearchedStickers] = useState<Stickers | null>(
+    null
   );
-  const stickers: Stickers = await stickersResponse.json();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const gifsResponse = await fetch(`/api/search/gifs?q=${searchQuery}`);
+
+        const gifsData: Gifs = await gifsResponse.json();
+        setSearchedGifs(gifsData);
+
+        const stickersResponse = await fetch(
+          `/api/search/stickers?q=${searchQuery}`
+        );
+
+        const stickersData: Stickers = await stickersResponse.json();
+        setSearchedStickers(stickersData);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError((error as Error).message);
+        } else {
+          setError("An unknown error occurred.");
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [searchQuery]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return (
+      <div className="page">
+        <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
+
+        <Error errorMessage={error} />
+      </div>
+    );
+  }
 
   return (
     <div className="page">
@@ -34,10 +73,10 @@ export default async function Page({
         title={`Search results for: ${searchQuery}`}
         imageUrl="/images/search.svg"
       />
-      {gifs.data && stickers.data && (
-        <DataFeed data={{ gifs: gifs, stickers: stickers }} />
+
+      {searchedGifs?.data && searchedStickers?.data && (
+        <DataFeed data={{ gifs: searchedGifs, stickers: searchedStickers }} />
       )}
-      {gifs?.error && <Error errorMessage={gifs.error} />}
     </div>
   );
 }

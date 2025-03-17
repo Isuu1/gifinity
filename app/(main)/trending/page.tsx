@@ -18,27 +18,42 @@ export default async function Page({
   const searchQuery = Array.isArray(searchQueryParam)
     ? searchQueryParam[0]
     : searchQueryParam;
-  const gifsResponse = await fetch(
-    `${process.env.SITE_URL}/api/search/gifs?q=${searchQuery}`
-  );
-  const gifs: Gifs = await gifsResponse.json();
-  const stickersResponse = await fetch(
-    `${process.env.SITE_URL}/api/search/stickers?q=${searchQuery}`
-  );
-  const stickers: Stickers = await stickersResponse.json();
 
-  return (
-    <div className="page">
-      <PageHeadline
-        title={`Trending for: ${searchQuery}`}
-        imageUrl="/images/trending4.svg"
-      />
+  try {
+    const gifsResponse = await fetch(
+      `${process.env.SITE_URL}/api/search/gifs?q=${searchQuery}`
+    );
+    const gifs: Gifs = await gifsResponse.json();
+    const stickersResponse = await fetch(
+      `${process.env.SITE_URL}/api/search/stickers?q=${searchQuery}`
+    );
+    const stickers: Stickers = await stickersResponse.json();
 
-      <TrendingSearchesSlider />
+    return (
+      <div className="page">
+        <PageHeadline
+          title={`Trending for: ${searchQuery}`}
+          imageUrl="/images/trending4.svg"
+        />
 
-      {gifs?.data && stickers?.data && (
-        <DataFeed data={{ gifs: gifs, stickers: stickers }} />
-      )}
-    </div>
-  );
+        <TrendingSearchesSlider />
+
+        {gifs?.data && stickers?.data && (
+          <DataFeed data={{ gifs: gifs, stickers: stickers }} />
+        )}
+      </div>
+    );
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return (
+        <div className="page">
+          <PageHeadline
+            title={`Trending for: ${searchQuery}`}
+            imageUrl="/images/trending4.svg"
+          />
+          <p>{error.message}</p>
+        </div>
+      );
+    }
+  }
 }

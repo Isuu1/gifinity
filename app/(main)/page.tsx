@@ -1,27 +1,65 @@
-import { Suspense } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 
 //Components
 import TrendingSearchesSlider from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
-// Lazy load the DataFeed component
-// const DataFeed = lazy(() => import("@/components/DataFeed/DataFeed"));
 import DataFeed from "@/components/DataFeed/DataFeed";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
+import Loading from "@/components/Loading/Loading";
+import Error from "@/components/Error/Error";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
-import Loading from "@/components/Loading/Loading";
-import Error from "@/components/Error/Error";
 
-export default async function Home() {
-  const trendingGifsResponse = await fetch(
-    `${process.env.SITE_URL}/api/trending/gifs`
+export default function Home() {
+  const [trendingGifs, setTrendingGifs] = useState<Gifs | null>(null);
+  const [trendingStickers, setTrendingStickers] = useState<Stickers | null>(
+    null
   );
-  const trendingGifs: Gifs = await trendingGifsResponse.json();
-  const trendingStickersResponse = await fetch(
-    `${process.env.SITE_URL}/api/trending/stickers`
-  );
-  const trendingStickers: Stickers = await trendingStickersResponse.json();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const gifsResponse = await fetch("/api/trending/gifs");
+
+        const gifsData: Gifs = await gifsResponse.json();
+        setTrendingGifs(gifsData);
+
+        const stickersResponse = await fetch("/api/trending/stickers");
+
+        const stickersData: Stickers = await stickersResponse.json();
+        setTrendingStickers(stickersData);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError((error as Error).message);
+        } else {
+          setError("An unknown error occurred.");
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return (
+      <div className="page">
+        <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
+
+        <Error errorMessage={error} />
+      </div>
+    );
+  }
 
   return (
     <div className="page">
@@ -29,17 +67,14 @@ export default async function Home() {
 
       <TrendingSearchesSlider />
 
-      <Suspense fallback={<Loading />}>
-        {trendingGifs?.data && trendingStickers?.data && (
-          <DataFeed
-            data={{
-              gifs: trendingGifs,
-              stickers: trendingStickers,
-            }}
-          />
-        )}
-      </Suspense>
-      {trendingGifs?.error && <Error errorMessage={trendingGifs.error} />}
+      {trendingGifs?.data && trendingStickers?.data && (
+        <DataFeed
+          data={{
+            gifs: trendingGifs,
+            stickers: trendingStickers,
+          }}
+        />
+      )}
     </div>
   );
 }

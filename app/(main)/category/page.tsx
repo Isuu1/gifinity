@@ -6,18 +6,18 @@ import { useEffect, useState } from "react";
 //Components
 import DataFeed from "@/components/DataFeed/DataFeed";
 import Loading from "@/components/Loading/Loading";
+import PageHeadline from "@/components/PageHeadline/PageHeadline";
+import Error from "@/components/Error/Error";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
 
-//Utils
-import { fetchCategoryData } from "@/utils/client";
-import PageHeadline from "@/components/PageHeadline/PageHeadline";
-
 export default function Page() {
-  const [gifs, setGifs] = useState<Gifs | null>(null);
-  const [stickers, setStickers] = useState<Stickers | null>(null);
+  const [searchedGifs, setSearchedGifs] = useState<Gifs | null>(null);
+  const [searchedStickers, setSearchedStickers] = useState<Stickers | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,26 +26,44 @@ export default function Page() {
 
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);
-      setError(null);
+      try {
+        const gifsResponse = await fetch(`/api/search/gifs?q=${category}`);
 
-      const gifs = await fetchCategoryData(category, "gifs");
-      const stickers = await fetchCategoryData(category, "stickers");
+        const gifsData: Gifs = await gifsResponse.json();
+        setSearchedGifs(gifsData);
 
-      if (gifs.error || stickers.error) {
-        setError(gifs.error || stickers.error);
+        const stickersResponse = await fetch(
+          `/api/search/stickers?q=${category}`
+        );
+
+        const stickersData: Stickers = await stickersResponse.json();
+        setSearchedStickers(stickersData);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setError((error as Error).message);
+        } else {
+          setError("An unknown error occurred.");
+        }
+      } finally {
+        setIsLoading(false);
       }
-
-      if (gifs.data) setGifs(gifs.data);
-      if (stickers.data) setStickers(stickers.data);
-
-      setIsLoading(false);
     }
+
     fetchData();
   }, [category]);
 
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (error) {
+    return (
+      <div className="page">
+        <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
+
+        <Error errorMessage={error} />
+      </div>
+    );
   }
 
   return (
@@ -54,9 +72,9 @@ export default function Page() {
         title={`Results for category: ${category}`}
         imageUrl="/images/category.svg"
       />
-      {error !== null && <p>{error}</p>}
-      {gifs !== null && stickers !== null && (
-        <DataFeed data={{ gifs: gifs, stickers: stickers }} />
+
+      {searchedGifs?.data && searchedStickers?.data && (
+        <DataFeed data={{ gifs: searchedGifs, stickers: searchedStickers }} />
       )}
     </div>
   );

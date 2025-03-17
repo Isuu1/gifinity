@@ -15,9 +15,10 @@ import { FaSearch } from "react-icons/fa";
 const Search: React.FC = () => {
   const router = useRouter();
 
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string | null>(null);
 
   const handleSearch = () => {
+    if (!searchQuery) return;
     router.push(`/search?q=${searchQuery}`);
   };
 
@@ -34,11 +35,22 @@ const Search: React.FC = () => {
       <input
         className={styles.inputField}
         onChange={handleChange}
-        value={searchQuery}
+        value={searchQuery || ""}
+        placeholder="🚀 Explore endless GIFs & stickers!"
+        maxLength={40}
       />
       <div className={styles.buttons}>
-        {searchQuery.length > 0 && <Button onClick={clearInput}>x</Button>}
-        <Button onClick={handleSearch} icon={<FaSearch />}>
+        {searchQuery && (
+          <Button className={styles.clearButton} onClick={clearInput}>
+            X
+          </Button>
+        )}
+        <Button
+          className={styles.searchButton}
+          onClick={handleSearch}
+          icon={<FaSearch />}
+          variant="light"
+        >
           Search
         </Button>
       </div>

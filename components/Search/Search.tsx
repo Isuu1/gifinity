@@ -8,25 +8,35 @@ import styles from "./Search.module.scss";
 
 //Components
 import Button from "../UI/Button";
+import Autocomplete from "./Autocomplete/Autocomplete";
 
 //Icons
 import { FaSearch } from "react-icons/fa";
 
+//Animations
+import { AnimatePresence } from "framer-motion";
+
 const Search: React.FC = () => {
   const router = useRouter();
 
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string | null>(null);
+
+  const [showAutocomplete, setShowAutocomplete] = useState(false);
 
   const handleSearch = () => {
+    if (!searchQuery) return;
+    setShowAutocomplete(false);
     router.push(`/search?q=${searchQuery}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
+    setShowAutocomplete(true);
   };
 
   const clearInput = () => {
-    setSearchQuery("");
+    setSearchQuery(null);
+    setShowAutocomplete(false);
   };
 
   return (
@@ -34,11 +44,33 @@ const Search: React.FC = () => {
       <input
         className={styles.inputField}
         onChange={handleChange}
-        value={searchQuery}
+        value={searchQuery || ""}
+        placeholder="🚀 Explore endless GIFs & stickers!"
+        maxLength={40}
       />
+
+      <AnimatePresence>
+        {showAutocomplete && (
+          <Autocomplete
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            setShowAutocomplete={setShowAutocomplete}
+          />
+        )}
+      </AnimatePresence>
+
       <div className={styles.buttons}>
-        {searchQuery.length > 0 && <Button onClick={clearInput}>x</Button>}
-        <Button onClick={handleSearch} icon={<FaSearch />}>
+        {searchQuery && (
+          <Button className={styles.clearButton} onClick={clearInput}>
+            X
+          </Button>
+        )}
+        <Button
+          className={styles.searchButton}
+          onClick={handleSearch}
+          icon={<FaSearch />}
+          variant="light"
+        >
           Search
         </Button>
       </div>

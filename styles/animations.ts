@@ -59,3 +59,24 @@ export const errorAnimation = {
     },
   },
 };
+
+export const autocompleteContainerAnimation = {
+  hidden: {
+    opacity: 0,
+    maxHeight: 0,
+  },
+  visible: {
+    opacity: 1,
+    maxHeight: 300, //Can be any value as long as it fits content
+    transition: {
+      duration: 0.2,
+    },
+  },
+  exit: {
+    opacity: 0,
+    maxHeight: 0,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};

@@ -13,12 +13,12 @@ $autoCompleteItemHover: #ff204e;
   line-height: 1.7rem;
   .autocompleteItem {
     cursor: pointer;
+    padding: 0.2rem;
+    border-radius: 5px;
     font-size: 1.1rem;
-    //transition: background 0.2s;
-    transition: color 0.2s;
+    transition: background 0.2s;
     &:hover {
-      //background: $secondaryColorLight;
-      color: $autoCompleteItemHover;
+      background: $autoCompleteItemHover;
     }
   }
 }

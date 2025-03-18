@@ -74,6 +74,8 @@ const Autocomplete: React.FC<IProps> = ({
     router.push(`/search?q=${search}`);
   };
 
+  if (!autocompleteSearches || autocompleteSearches.length === 0) return null;
+
   return (
     <motion.div
       className={styles.autocompleteContainer}
@@ -83,16 +85,15 @@ const Autocomplete: React.FC<IProps> = ({
       animate="visible"
       exit="exit"
     >
-      {autocompleteSearches &&
-        autocompleteSearches.map((search) => (
-          <p
-            key={search.name}
-            className={styles.autocompleteItem}
-            onClick={() => handleAutoCompleteClick(search.name)}
-          >
-            {search.name}
-          </p>
-        ))}
+      {autocompleteSearches.map((search) => (
+        <p
+          key={search.name}
+          className={styles.autocompleteItem}
+          onClick={() => handleAutoCompleteClick(search.name)}
+        >
+          {search.name}
+        </p>
+      ))}
     </motion.div>
   );
 };

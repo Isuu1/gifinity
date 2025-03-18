@@ -1,29 +1,25 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 //Styles
 import styles from "./Search.module.scss";
 
 //Components
 import Button from "../UI/Button";
+import Autocomplete from "./Autocomplete/Autocomplete";
 
 //Icons
 import { FaSearch } from "react-icons/fa";
 
-type AutocompleteSearch = {
-  name: string;
-};
+//Animations
+import { AnimatePresence } from "framer-motion";
 
 const Search: React.FC = () => {
   const router = useRouter();
 
   const [searchQuery, setSearchQuery] = useState<string | null>(null);
-
-  const [autocompleteSearches, setAutocompleteSearches] = useState<
-    AutocompleteSearch[] | null
-  >(null);
 
   const [showAutocomplete, setShowAutocomplete] = useState(false);
 
@@ -40,34 +36,8 @@ const Search: React.FC = () => {
 
   const clearInput = () => {
     setSearchQuery(null);
-    setAutocompleteSearches(null);
     setShowAutocomplete(false);
   };
-
-  const handleAutoCompleteClick = (search: string) => {
-    setSearchQuery(search);
-    setAutocompleteSearches(null);
-    setShowAutocomplete(false);
-    router.push(`/search?q=${search}`);
-  };
-  console.log("searchQuery", searchQuery);
-
-  useEffect(() => {
-    const fetchAutocompleteSearches = async () => {
-      try {
-        const response = await fetch(
-          `/api/search/autocomplete?q=${searchQuery}`
-        );
-        const data = await response.json();
-        setAutocompleteSearches(data.data);
-      } catch (error) {
-        console.error("Error fetching autocomplete searches", error);
-      }
-    };
-    if (searchQuery) {
-      fetchAutocompleteSearches();
-    }
-  }, [searchQuery]);
 
   return (
     <div className={styles.searchContainer}>
@@ -79,19 +49,15 @@ const Search: React.FC = () => {
         maxLength={40}
       />
 
-      {showAutocomplete && autocompleteSearches && (
-        <div className={styles.autocompleteContainer}>
-          {autocompleteSearches.map((search) => (
-            <div
-              key={search.name}
-              className={styles.autocompleteItem}
-              onClick={() => handleAutoCompleteClick(search.name)}
-            >
-              {search.name}
-            </div>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {showAutocomplete && (
+          <Autocomplete
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            setShowAutocomplete={setShowAutocomplete}
+          />
+        )}
+      </AnimatePresence>
 
       <div className={styles.buttons}>
         {searchQuery && (

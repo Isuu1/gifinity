@@ -25,6 +25,11 @@
     .searchButton {
       border-radius: 34px;
       padding: 0.4rem 1.4rem;
+      & span {
+        &:nth-last-child(1) {
+          display: none;
+        }
+      }
     }
     .clearButton {
       &:hover {

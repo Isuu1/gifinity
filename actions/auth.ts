@@ -65,10 +65,12 @@ export async function signup(prevState: SignupError, formData: FormData) {
       data: {
         user_email: data.email,
         user_name: "",
-        favourites: JSON.stringify({
-          gifs: [],
-          stickers: [],
-        }), // Ensuring it's a valid JSON
+        favouriteGifs: {
+          data: [],
+        },
+        favouriteStickers: {
+          data: [],
+        },
       },
     },
   });

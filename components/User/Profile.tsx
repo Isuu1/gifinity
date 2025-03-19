@@ -1,11 +1,14 @@
-import Image from "next/image";
 import React from "react";
+
+//Styles
+import styles from "./Profile.module.scss";
 
 const Profile: React.FC = () => {
   return (
-    <div>
+    <div className={styles.profile}>
       <h1>Profile</h1>
       <h3>My work</h3>
+
       <p>You did not uploaded any gifs or stickers yet</p>
     </div>
   );

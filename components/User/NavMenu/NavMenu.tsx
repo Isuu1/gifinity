@@ -10,7 +10,8 @@ import styles from "./NavMenu.module.scss";
 //Icons
 import { FaUserAlt } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
+import { IoSettings } from "react-icons/io5";
+
 import { FaSignOutAlt } from "react-icons/fa";
 import Link from "next/link";
 
@@ -57,7 +58,7 @@ const NavMenu: React.FC = () => {
               pathname === "/user/details" && styles.active
             }`}
           >
-            <IoMdSettings />
+            <IoSettings />
             Account details
           </li>
         </Link>

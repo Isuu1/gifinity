@@ -1,5 +1,6 @@
 $navMenuBackground: #f5f5f5;
 $navMenuItemHoverBackground: #ff204e;
+$navMenuItemActiveBackground: #a0153e;
 
 .navMenu {
   display: flex;
@@ -42,4 +43,8 @@ $navMenuItemHoverBackground: #ff204e;
       background-color: $navMenuItemHoverBackground;
     }
   }
+}
+
+.active {
+  background-color: $navMenuItemActiveBackground;
 }

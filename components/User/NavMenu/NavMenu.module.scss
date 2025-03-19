@@ -10,6 +10,26 @@ $navMenuItemHoverBackground: #ff204e;
   padding: 1rem;
   border-radius: 24px;
   font-size: 1.1rem;
+  .avatarContainer {
+    padding: 0.5rem;
+    line-height: 2rem;
+    // border-width: 2px;
+    // border-left: 0;
+    // border-right: 0;
+    // border-top: 0;
+    // border-style: solid;
+    // border-image: linear-gradient(to right, transparent, #ffffff6b, transparent)
+    //   1;
+    .avatar {
+      position: relative !important;
+      width: 150px !important;
+      height: 150px !important;
+      border-radius: 24px;
+      margin: auto;
+      background: #ff204e;
+    }
+  }
+
   .item {
     cursor: pointer;
     border-radius: 14px;

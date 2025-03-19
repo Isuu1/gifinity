@@ -8,11 +8,24 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { FaSignOutAlt } from "react-icons/fa";
+import Image from "next/image";
 
 const NavMenu: React.FC = () => {
   return (
     <nav>
       <ul className={styles.navMenu}>
+        <div className={styles.avatarContainer}>
+          <Image
+            className={styles.avatar}
+            src="/images/avatar.gif"
+            fill
+            alt="avatar"
+            priority
+            unoptimized
+          />
+          <h3>@Username</h3>
+        </div>
+
         <li className={styles.item}>
           <FaUserAlt />
           Profile

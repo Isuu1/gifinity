@@ -1,4 +1,5 @@
 import NavMenu from "@/components/UserProfile/NavMenu/NavMenu";
+import UserPageLayout from "@/layouts/UserPageLayout";
 //import Image from "next/image";
 
 export default function Page({
@@ -6,9 +7,7 @@ export default function Page({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className="page">
-      <div
-        style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 20 }}
-      >
+      <UserPageLayout>
         <div>
           {/* <div>
             <Image
@@ -22,7 +21,7 @@ export default function Page({
           <NavMenu />
         </div>
         {children}
-      </div>
+      </UserPageLayout>
     </div>
   );
 }

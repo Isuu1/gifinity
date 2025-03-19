@@ -1,0 +1,29 @@
+.userPageLayout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .userPageLayout {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .userPageLayout {
+    padding: 0 6rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .userPageLayout {
+    padding: 0 6rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .userPageLayout {
+    padding: 0 8rem;
+  }
+}

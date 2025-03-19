@@ -12,6 +12,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { FaSignOutAlt } from "react-icons/fa";
+import Link from "next/link";
 
 const NavMenu: React.FC = () => {
   const pathname = usePathname();
@@ -30,31 +31,36 @@ const NavMenu: React.FC = () => {
           />
           <h3>@Username</h3>
         </div>
-
-        <li
-          className={`${styles.item} ${
-            pathname === "/user/profile" && styles.active
-          }`}
-        >
-          <FaUserAlt />
-          Profile
-        </li>
-        <li
-          className={`${styles.item} ${
-            pathname === "/user/favourites" && styles.active
-          }`}
-        >
-          <FaHeart />
-          Favourites
-        </li>
-        <li
-          className={`${styles.item} ${
-            pathname === "/user/details" && styles.active
-          }`}
-        >
-          <IoMdSettings />
-          Account details
-        </li>
+        <Link href="/user/profile">
+          <li
+            className={`${styles.item} ${
+              pathname === "/user/profile" && styles.active
+            }`}
+          >
+            <FaUserAlt />
+            Profile
+          </li>
+        </Link>
+        <Link href="/user/favourites">
+          <li
+            className={`${styles.item} ${
+              pathname === "/user/favourites" && styles.active
+            }`}
+          >
+            <FaHeart />
+            Favourites
+          </li>
+        </Link>
+        <Link href="/user/account-details">
+          <li
+            className={`${styles.item} ${
+              pathname === "/user/details" && styles.active
+            }`}
+          >
+            <IoMdSettings />
+            Account details
+          </li>
+        </Link>
         <li className={styles.item}>
           <FaSignOutAlt />
           Sign out

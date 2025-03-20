@@ -14,6 +14,7 @@ import { FaHeart } from "react-icons/fa";
 
 //Animations
 import { motion } from "framer-motion";
+import { useAuth } from "@/context/AuthContext";
 
 //Styles
 //import styles from "./FavouriteButtonLoggedOut.module.scss";
@@ -23,8 +24,11 @@ interface IProps {
 }
 
 const FavouriteButtonLoggedIn: React.FC<IProps> = ({ media }) => {
+  const { fetchUser } = useAuth();
+
   const handleAddToDb = async () => {
-    await saveFavouriteMediaToDb(media);
+    const result = await saveFavouriteMediaToDb(media);
+    if (result?.success) fetchUser();
   };
 
   return (

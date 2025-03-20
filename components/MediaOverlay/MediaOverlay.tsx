@@ -22,8 +22,9 @@ import { Sticker } from "@/interfaces/stickers";
 
 //Components
 import FavouriteButtonLoggedOut from "./FavouriteButtonLoggedOut/FavouriteButtonLoggedOut";
-import { createClient } from "@/utils/supabase/client";
 import FavouriteButtonLoggedIn from "./FavouriteButtonLoggedIn/FavouriteButtonLoggedIn";
+
+//Context
 import { useAuth } from "@/context/AuthContext";
 
 interface IProps {

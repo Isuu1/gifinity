@@ -16,7 +16,7 @@ import { FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 //Styles
-import styles from "./FavouriteButtonLoggedOut.module.scss";
+//import styles from "./FavouriteButtonLoggedOut.module.scss";
 
 interface IProps {
   media: Gif | Sticker;

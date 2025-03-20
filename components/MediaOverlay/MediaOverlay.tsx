@@ -23,6 +23,7 @@ import { Sticker } from "@/interfaces/stickers";
 //Components
 import FavouriteButtonLoggedOut from "./FavouriteButtonLoggedOut/FavouriteButtonLoggedOut";
 import { createClient } from "@/utils/supabase/client";
+import FavouriteButtonLoggedIn from "./FavouriteButtonLoggedIn/FavouriteButtonLoggedIn";
 
 interface IProps {
   media: Gif | Sticker;
@@ -44,6 +45,7 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
         />
 
         <FavouriteButtonLoggedOut media={media} />
+        <FavouriteButtonLoggedIn media={media} />
       </div>
       {media.user?.display_name && (
         <div className={styles.overlay_author}>

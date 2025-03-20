@@ -17,19 +17,26 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 
 //Styles
-//import styles from "./FavouriteButtonLoggedOut.module.scss";
+import styles from "./FavouriteButtonLoggedIn.module.scss";
 
 interface IProps {
   media: Gif | Sticker;
 }
 
 const FavouriteButtonLoggedIn: React.FC<IProps> = ({ media }) => {
-  const { fetchUser } = useAuth();
+  const { fetchUser, favouriteGifs, favouriteStickers } = useAuth();
 
   const handleAddToDb = async () => {
     const result = await saveFavouriteMediaToDb(media);
     if (result?.success) fetchUser();
   };
+
+  const isGifOnWishlist = favouriteGifs.data.some(
+    (gif: Gif) => gif.id === media.id
+  );
+  const isStickerOnWishlist = favouriteStickers.data.some(
+    (sticker: Sticker) => sticker.id === media.id
+  );
 
   return (
     <motion.div
@@ -37,9 +44,9 @@ const FavouriteButtonLoggedIn: React.FC<IProps> = ({ media }) => {
       transition={{ duration: 0.2 }}
     >
       <FaHeart
-        // className={`${styles.icon} ${
-        //   isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
-        // }`}
+        className={`${styles.icon} ${
+          isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
+        }`}
         onClick={handleAddToDb}
       />
     </motion.div>

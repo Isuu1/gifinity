@@ -10,11 +10,6 @@ import { useStorage } from "@/context/StorageContext";
 
 export default function Page() {
   const { localFavouriteGifs, localFavouriteStickers } = useStorage();
-  console.log(
-    "favourites feed local",
-    localFavouriteGifs,
-    localFavouriteStickers
-  );
 
   return (
     <div className="page">

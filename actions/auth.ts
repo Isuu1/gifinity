@@ -65,10 +65,10 @@ export async function signup(prevState: SignupError, formData: FormData) {
       data: {
         user_email: data.email,
         user_name: "",
-        favouriteGifs: {
+        favourite_gifs: {
           data: [],
         },
-        favouriteStickers: {
+        favourite_stickers: {
           data: [],
         },
       },

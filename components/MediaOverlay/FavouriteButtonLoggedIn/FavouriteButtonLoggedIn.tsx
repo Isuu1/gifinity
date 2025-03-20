@@ -14,6 +14,8 @@ import { FaHeart } from "react-icons/fa";
 
 //Animations
 import { motion } from "framer-motion";
+
+//Context
 import { useAuth } from "@/context/AuthContext";
 
 //Styles
@@ -28,6 +30,7 @@ const FavouriteButtonLoggedIn: React.FC<IProps> = ({ media }) => {
 
   const handleAddToDb = async () => {
     const result = await saveFavouriteMediaToDb(media);
+    //Refetch the user data to update the favourite gifs and stickers on client
     if (result?.success) fetchUser();
   };
 

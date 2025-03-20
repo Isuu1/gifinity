@@ -13,6 +13,7 @@ import { FaHeart } from "react-icons/fa";
 //Utils
 import { copyToClipboard } from "@/utils/utils";
 import { useStorage } from "@/context/StorageContext";
+import { saveFavouriteMediaToDb } from "@/utils/user/saveFavouriteMediaToDb";
 
 //Animations
 import { motion } from "framer-motion";
@@ -37,6 +38,12 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
     (item) => item.id === media.id
   );
 
+  const handleAddToDb = async () => {
+    await saveFavouriteMediaToDb(media);
+  };
+
+  console.log("media", media);
+
   return (
     <motion.div
       className={styles.overlay}
@@ -50,6 +57,8 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
           className={styles.icon}
           onClick={() => copyToClipboard(media.images.original.url)}
         />
+
+        <button onClick={handleAddToDb}>Test add to db</button>
 
         <motion.div
           whileTap={{ scale: 1.6 }} // Apply scale animation on tap

@@ -8,12 +8,9 @@ import styles from "./MediaOverlay.module.scss";
 
 //Icons
 import { FaCopy } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
 
 //Utils
 import { copyToClipboard } from "@/utils/utils";
-import { useStorage } from "@/context/StorageContext";
-import { saveFavouriteMediaToDb } from "@/utils/user/saveFavouriteMediaToDb";
 
 //Animations
 import { motion } from "framer-motion";
@@ -23,27 +20,15 @@ import { overlayAnimation } from "@/styles/animations";
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
 
+//Components
+import FavouriteButtonLoggedOut from "./FavouriteButtonLoggedOut/FavouriteButtonLoggedOut";
+import { createClient } from "@/utils/supabase/client";
+
 interface IProps {
   media: Gif | Sticker;
 }
 
 const MediaOverlay: React.FC<IProps> = ({ media }) => {
-  const { localFavouriteGifs, localFavouriteStickers, addItemToLocalStorage } =
-    useStorage();
-
-  const isGifOnWishlist = localFavouriteGifs.data.find(
-    (item) => item.id === media.id
-  );
-  const isStickerOnWishlist = localFavouriteStickers.data.find(
-    (item) => item.id === media.id
-  );
-
-  const handleAddToDb = async () => {
-    await saveFavouriteMediaToDb(media);
-  };
-
-  console.log("media", media);
-
   return (
     <motion.div
       className={styles.overlay}
@@ -58,19 +43,7 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
           onClick={() => copyToClipboard(media.images.original.url)}
         />
 
-        <button onClick={handleAddToDb}>Test add to db</button>
-
-        <motion.div
-          whileTap={{ scale: 1.6 }} // Apply scale animation on tap
-          transition={{ duration: 0.2 }}
-        >
-          <FaHeart
-            className={`${styles.icon} ${
-              isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
-            }`}
-            onClick={() => addItemToLocalStorage(media)}
-          />
-        </motion.div>
+        <FavouriteButtonLoggedOut media={media} />
       </div>
       {media.user?.display_name && (
         <div className={styles.overlay_author}>

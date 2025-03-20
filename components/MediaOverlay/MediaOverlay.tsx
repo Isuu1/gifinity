@@ -24,12 +24,16 @@ import { Sticker } from "@/interfaces/stickers";
 import FavouriteButtonLoggedOut from "./FavouriteButtonLoggedOut/FavouriteButtonLoggedOut";
 import { createClient } from "@/utils/supabase/client";
 import FavouriteButtonLoggedIn from "./FavouriteButtonLoggedIn/FavouriteButtonLoggedIn";
+import { useAuth } from "@/context/AuthContext";
 
 interface IProps {
   media: Gif | Sticker;
 }
 
 const MediaOverlay: React.FC<IProps> = ({ media }) => {
+  const user = useAuth();
+  console.log(user);
+
   return (
     <motion.div
       className={styles.overlay}

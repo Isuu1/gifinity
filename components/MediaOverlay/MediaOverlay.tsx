@@ -49,8 +49,11 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
           onClick={() => copyToClipboard(media.images.original.url)}
         />
 
-        <FavouriteButtonLoggedOut media={media} />
-        <FavouriteButtonLoggedIn media={media} />
+        {user ? (
+          <FavouriteButtonLoggedIn media={media} />
+        ) : (
+          <FavouriteButtonLoggedOut media={media} />
+        )}
       </div>
       {media.user?.display_name && (
         <div className={styles.overlay_author}>

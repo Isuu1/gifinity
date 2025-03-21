@@ -3,11 +3,11 @@
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
 import { createClient } from "@/utils/supabase/client";
-import { UserMetadata } from "@supabase/supabase-js";
+import { User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextType {
-  user: UserMetadata | null;
+  user: User | null;
   favouriteGifs: { data: Gif[] };
   favouriteStickers: { data: Sticker[] };
   fetchUser: () => void;
@@ -16,7 +16,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [user, setUser] = useState<UserMetadata | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [favouriteGifs, setFavouriteGifs] = useState({ data: [] }); // State for favourite GIFs
   const [favouriteStickers, setFavouriteStickers] = useState({ data: [] }); // State for favourite stickers
 
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return;
     }
 
-    setUser(authData.user?.user_metadata);
+    setUser(authData.user);
     setFavouriteGifs(profileData?.favourite_gifs || []);
     setFavouriteStickers(profileData?.favourite_stickers || []);
   };

@@ -41,27 +41,20 @@ const FavouriteButtonLoggedIn: React.FC<IProps> = ({ media }) => {
     const result = await saveFavouriteMediaToDb(media);
     //Refetch the user data to update the favourite gifs and stickers on client
     if (result?.success) fetchUser();
-    // if (result?.success && !isGifOnWishlist && media.type === "gif") {
-    //   toast.success("Gif added to wishlist", toastStyle);
-    // } else if (result?.success && isGifOnWishlist) {
-    //   toast.success("Gif removed from wishlist", toastStyle);
-    // }
-    // if (result?.success && !isStickerOnWishlist && media.type === "sticker") {
-    //   toast.success("Sticker added to wishlist", toastStyle);
-    // } else if (result?.success && isStickerOnWishlist) {
-    //   toast.success("Sticker removed from wishlist", toastStyle);
-    // }
+
     if (result?.success && media.type === "gif") {
       toast.success(
-        isGifOnWishlist ? "Gif removed from wishlist" : "Gif added to wishlist",
+        isGifOnWishlist
+          ? "Gif removed from favourites"
+          : "Gif added to favourites",
         toastStyle
       );
     }
     if (result?.success && media.type === "sticker") {
       toast.success(
         isStickerOnWishlist
-          ? "Sticker removed from wishlist"
-          : "Sticker added to wishlist",
+          ? "Sticker removed from favourites"
+          : "Sticker added to favourites",
         toastStyle
       );
     }

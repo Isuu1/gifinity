@@ -42,6 +42,11 @@ const FavouriteButtonLoggedIn: React.FC<IProps> = ({ media }) => {
     //Refetch the user data to update the favourite gifs and stickers on client
     if (result?.success) fetchUser();
 
+    if (result?.error) {
+      toast.error(result.error, toastStyle);
+      return;
+    }
+
     if (result?.success && media.type === "gif") {
       toast.success(
         isGifOnWishlist

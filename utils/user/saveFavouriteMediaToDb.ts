@@ -18,18 +18,6 @@ export async function saveFavouriteMediaToDb(media: Gif | Sticker) {
 
     const userId = userData.user.id;
 
-    // Create the media data object
-    const mediaData = {
-      type: media.type,
-      id: media.id,
-      title: media.title,
-      url: media.images?.original?.url || null,
-      user: {
-        display_name: media.user?.display_name || null,
-        avatar_url: media.user?.avatar_url || null,
-      },
-    };
-
     //Select the user's profile favourite gifs table
     const { data: userFavouriteGifs } = await supabase
       .from("profiles")
@@ -40,7 +28,7 @@ export async function saveFavouriteMediaToDb(media: Gif | Sticker) {
     if (media.type === "gif") {
       // Check if the gif is already in the user's favourite gifs
       const isGifInFavourites = userFavouriteGifs?.favourite_gifs.data.some(
-        (gif: Gif) => gif.id === mediaData.id
+        (gif: Gif) => gif.id === media.id
       );
 
       //Create a new variable to hold the updated favourite gifs
@@ -51,13 +39,13 @@ export async function saveFavouriteMediaToDb(media: Gif | Sticker) {
         // Remove the gif from the user's favourite gifs
         updatedFavouriteGifs = {
           data: userFavouriteGifs?.favourite_gifs.data.filter(
-            (gif: Gif) => gif.id !== mediaData.id
+            (gif: Gif) => gif.id !== media.id
           ),
         };
       } else {
         // Update the favouriteStickers array
         updatedFavouriteGifs = {
-          data: [...userFavouriteGifs?.favourite_gifs.data, mediaData],
+          data: [...userFavouriteGifs?.favourite_gifs.data, media],
         };
       }
 

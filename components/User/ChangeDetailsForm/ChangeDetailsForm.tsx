@@ -16,32 +16,38 @@ const ChangeDetailsForm: React.FC = () => {
   console.log(user);
 
   return (
-    <Form>
-      <div className={styles.inputContainer}>
-        <h3>Email</h3>
+    <>
+      <h1>Account details</h1>
+      <Form>
+        <div className={styles.inputContainer}>
+          <h3 className={styles.label}>Email</h3>
 
-        <Input
-          label="Email"
-          defaultValue={user?.email}
-          labelHidden
-          icon={<MdEmail />}
-        />
-      </div>
+          <Input
+            label="Email"
+            defaultValue={user?.email}
+            labelHidden
+            icon={<MdEmail />}
+          />
+        </div>
 
-      <div className={styles.inputContainer}>
-        <h3>Username</h3>
+        <div className={styles.inputContainer}>
+          <h3 className={styles.label}>Username</h3>
 
-        <Input
-          label="Username"
-          value={user?.user_metadata.user_name}
-          labelHidden
-          icon={<FaUser />}
-        />
-      </div>
-      <Button className={styles.submitButton} variant="light" type="submit">
-        Save details
-      </Button>
-    </Form>
+          <Input
+            label="Username"
+            value={user?.user_metadata.user_name}
+            labelHidden
+            icon={<FaUser />}
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <h3 className={styles.label}></h3>
+          <Button className={styles.submitButton} variant="light" type="submit">
+            Save details
+          </Button>
+        </div>
+      </Form>
+    </>
   );
 };
 

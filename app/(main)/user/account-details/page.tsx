@@ -9,7 +9,6 @@ export default function Page() {
 
   return (
     <div>
-      <h1>Account details</h1>
       <ChangeDetailsForm />
     </div>
   );

@@ -1,9 +1,15 @@
 .inputContainer {
   display: flex;
-  flex-direction: column;
   gap: 0.6rem;
+  margin-right: auto;
+  align-items: center;
+  .label {
+    width: 100px;
+  }
 }
 .submitButton {
   min-width: 250px;
   justify-content: center;
+  margin-top: 1rem;
+  margin-right: auto;
 }

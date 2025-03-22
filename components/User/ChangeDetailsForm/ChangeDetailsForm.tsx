@@ -16,13 +16,15 @@ const ChangeDetailsForm: React.FC = () => {
   console.log(user);
 
   return (
-    <>
-      <h1>Account details</h1>
+    <div className={styles.formContainer}>
+      <h1 className={styles.title}>Account details</h1>
       <Form>
         <div className={styles.inputContainer}>
           <h3 className={styles.label}>Email</h3>
 
           <Input
+            id="email"
+            type="email"
             label="Email"
             defaultValue={user?.email}
             labelHidden
@@ -34,6 +36,8 @@ const ChangeDetailsForm: React.FC = () => {
           <h3 className={styles.label}>Username</h3>
 
           <Input
+            id="username"
+            type="text"
             label="Username"
             value={user?.user_metadata.user_name}
             labelHidden
@@ -47,7 +51,7 @@ const ChangeDetailsForm: React.FC = () => {
           </Button>
         </div>
       </Form>
-    </>
+    </div>
   );
 };
 

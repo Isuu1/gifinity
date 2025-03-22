@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //Styles
 import styles from "./ChangePasswordForm.module.scss";
@@ -6,11 +6,14 @@ import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 
 //Icons
+import { RiLockPasswordFill } from "react-icons/ri";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import Button from "@/components/UI/Button";
 
 const ChangePasswordForm: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className={styles.formContainer}>
       <h1 className={styles.title}>Password</h1>
@@ -22,7 +25,14 @@ const ChangePasswordForm: React.FC = () => {
             type="password"
             label="Old password"
             labelHidden
-            icon={<IoMdEye />}
+            icon={<RiLockPasswordFill />}
+            showPasswordIcon={
+              showPassword ? (
+                <IoMdEye onClick={() => setShowPassword(false)} />
+              ) : (
+                <IoMdEyeOff onClick={() => setShowPassword(true)} />
+              )
+            }
           />
         </div>
         <div className={styles.inputContainer}>
@@ -32,7 +42,14 @@ const ChangePasswordForm: React.FC = () => {
             type="password"
             label="New password"
             labelHidden
-            icon={<IoMdEye />}
+            icon={<RiLockPasswordFill />}
+            showPasswordIcon={
+              showPassword ? (
+                <IoMdEye onClick={() => setShowPassword(false)} />
+              ) : (
+                <IoMdEyeOff onClick={() => setShowPassword(true)} />
+              )
+            }
           />
         </div>
         <div className={styles.inputContainer}>
@@ -42,7 +59,14 @@ const ChangePasswordForm: React.FC = () => {
             type="password"
             label="Confirm password"
             labelHidden
-            icon={<IoMdEye />}
+            icon={<RiLockPasswordFill />}
+            showPasswordIcon={
+              showPassword ? (
+                <IoMdEye onClick={() => setShowPassword(false)} />
+              ) : (
+                <IoMdEyeOff onClick={() => setShowPassword(true)} />
+              )
+            }
           />
         </div>
         <div className={styles.inputContainer}>

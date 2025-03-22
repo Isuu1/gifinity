@@ -19,9 +19,10 @@ const ChangeDetailsForm: React.FC = () => {
     <Form>
       <div className={styles.inputContainer}>
         <h3>Email</h3>
+
         <Input
           label="Email"
-          value={user?.email}
+          defaultValue={user?.email}
           labelHidden
           icon={<MdEmail />}
         />
@@ -29,6 +30,7 @@ const ChangeDetailsForm: React.FC = () => {
 
       <div className={styles.inputContainer}>
         <h3>Username</h3>
+
         <Input
           label="Username"
           value={user?.user_metadata.user_name}
@@ -36,7 +38,7 @@ const ChangeDetailsForm: React.FC = () => {
           icon={<FaUser />}
         />
       </div>
-      <Button variant="light" type="submit">
+      <Button className={styles.submitButton} variant="light" type="submit">
         Save details
       </Button>
     </Form>

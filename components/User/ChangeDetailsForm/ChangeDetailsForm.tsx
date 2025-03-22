@@ -1,7 +1,7 @@
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import { useAuth } from "@/context/AuthContext";
-import React, { useState } from "react";
+import React from "react";
 
 //Icons
 import { MdEmail } from "react-icons/md";

@@ -55,7 +55,7 @@ const NavMenu: React.FC = () => {
         <Link href="/user/account-details">
           <li
             className={`${styles.item} ${
-              pathname === "/user/details" && styles.active
+              pathname === "/user/account-details" && styles.active
             }`}
           >
             <IoSettings />

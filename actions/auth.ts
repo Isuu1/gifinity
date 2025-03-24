@@ -2,7 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
-import { SignupError, signupSchema } from "@/utils/authValidation";
+import { signupSchema } from "@/schemas/signup";
+import { SignupError } from "@/types/signup";
 
 //
 // Login process

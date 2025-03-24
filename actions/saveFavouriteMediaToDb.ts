@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "../supabase/server";
+import { createClient } from "../utils/supabase/server";
 //Interfaces
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";

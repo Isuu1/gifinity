@@ -3,7 +3,7 @@
 import React from "react";
 
 //Utils
-import { saveFavouriteMediaToDb } from "@/utils/user/saveFavouriteMediaToDb";
+import { saveFavouriteMediaToDb } from "@/actions/saveFavouriteMediaToDb";
 
 //Interfaces
 import { Gif } from "@/interfaces/gifs";

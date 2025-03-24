@@ -8,9 +8,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextType {
   user: User | null;
-  username: string | null;
-  userEmail: string | null;
-  userAvatar: string | null;
+  username: string | "";
+  email: string | "";
+  avatar: string | "";
   favouriteGifs: { data: Gif[] };
   favouriteStickers: { data: Sticker[] };
   fetchUser: () => void;
@@ -23,9 +23,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   //It is not used to store user data, for that we use the profiles table
   const [user, setUser] = useState<User | null>(null);
   //This represents the user data stored in the profiles table
-  const [username, setUsername] = useState<string | null>(null);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [userAvatar, setUserAvatar] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | "">("");
+  const [email, setEmail] = useState<string | "">("");
+  const [avatar, setAvatar] = useState<string | "">("");
   const [favouriteGifs, setFavouriteGifs] = useState({ data: [] });
   const [favouriteStickers, setFavouriteStickers] = useState({ data: [] });
 
@@ -54,8 +54,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     setUser(authData.user);
     setUsername(profileData?.username);
-    setUserEmail(profileData?.email);
-    setUserAvatar(profileData?.avatar);
+    setEmail(profileData?.email);
+    setAvatar(profileData?.avatar);
     setFavouriteGifs(profileData?.favourite_gifs || []);
     setFavouriteStickers(profileData?.favourite_stickers || []);
   };
@@ -69,8 +69,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         user,
         username,
-        userEmail,
-        userAvatar,
+        email,
+        avatar,
         favouriteGifs,
         favouriteStickers,
         fetchUser,

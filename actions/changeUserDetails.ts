@@ -51,7 +51,7 @@ export async function changeUserDetails(
   //Update user email and username in users table
   const { error: profileError } = await supabase
     .from("profiles")
-    .update({ user_name: data.username, user_email: data.email })
+    .update({ username: data.username, email: data.email })
     .eq("id", userId);
 
   if (profileError) {

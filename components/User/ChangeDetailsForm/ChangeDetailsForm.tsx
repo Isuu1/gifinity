@@ -29,7 +29,7 @@ const initialState: FormState = {
 };
 
 const ChangeDetailsForm: React.FC = () => {
-  const { user } = useAuth();
+  const { user, email, username, fetchUser } = useAuth();
   console.log(user);
 
   const [state, formAction, isPending] = useActionState(
@@ -39,14 +39,15 @@ const ChangeDetailsForm: React.FC = () => {
 
   useEffect(() => {
     if (state.success) {
-      if (user?.email !== state.data.email) {
-        toast.success("Email updated succesfuly", toastStyle);
-      }
-      if (user?.user_metadata.user_name !== state.data.username) {
-        toast.success("Username updated succesfuly", toastStyle);
-      }
+      fetchUser();
     }
-  }, [state.success, state.resetKey, state.data, user]);
+  }, [state.success, state.resetKey]);
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success("Details updated successfully", toastStyle);
+    }
+  }, [state.success, state.resetKey]);
 
   console.log(state);
 
@@ -61,7 +62,7 @@ const ChangeDetailsForm: React.FC = () => {
             id="email"
             type="email"
             label="Email"
-            defaultValue={user?.email}
+            defaultValue={email}
             labelHidden
             icon={<MdEmail />}
           />
@@ -74,7 +75,7 @@ const ChangeDetailsForm: React.FC = () => {
             id="username"
             type="text"
             label="Username"
-            defaultValue={user?.user_metadata.user_name}
+            defaultValue={username}
             labelHidden
             icon={<FaUser />}
           />

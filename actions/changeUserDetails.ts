@@ -23,6 +23,7 @@ export async function changeUserDetails(
       data,
       error: "User not authenticated",
       success: false,
+      resetKey: Date.now(),
     };
   }
 
@@ -54,6 +55,7 @@ export async function changeUserDetails(
       data,
       error: "Failed to update username",
       success: false,
+      resetKey: Date.now(),
     };
   }
 

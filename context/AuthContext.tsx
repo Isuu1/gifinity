@@ -8,6 +8,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextType {
   user: User | null;
+  username: string | null;
   favouriteGifs: { data: Gif[] };
   favouriteStickers: { data: Sticker[] };
   fetchUser: () => void;
@@ -16,9 +17,13 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  //This represents the user object coming from auth table, it is used only for authentication purposes
+  //It is not used to store user data, for that we use the profiles table
   const [user, setUser] = useState<User | null>(null);
-  const [favouriteGifs, setFavouriteGifs] = useState({ data: [] }); // State for favourite GIFs
-  const [favouriteStickers, setFavouriteStickers] = useState({ data: [] }); // State for favourite stickers
+  //This represents the user data stored in the profiles table
+  const [username, setUsername] = useState<string | null>(null);
+  const [favouriteGifs, setFavouriteGifs] = useState({ data: [] });
+  const [favouriteStickers, setFavouriteStickers] = useState({ data: [] });
 
   const supabase = createClient();
 
@@ -34,7 +39,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Fetch the user's profile data from the Profiles table
     const { data: profileData, error: profileError } = await supabase
       .from("profiles")
-      .select("favourite_gifs, favourite_stickers")
+      .select("favourite_gifs, favourite_stickers, username")
       .eq("id", authData.user.id)
       .single();
 
@@ -44,6 +49,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     setUser(authData.user);
+    setUsername(profileData?.username);
     setFavouriteGifs(profileData?.favourite_gifs || []);
     setFavouriteStickers(profileData?.favourite_stickers || []);
   };
@@ -54,7 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, favouriteGifs, favouriteStickers, fetchUser }}
+      value={{ user, username, favouriteGifs, favouriteStickers, fetchUser }}
     >
       {children}
     </AuthContext.Provider>

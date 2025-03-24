@@ -24,13 +24,13 @@ import styles from "./SignupForm.module.scss";
 import { signup } from "@/actions/auth";
 import { normalizeErrors } from "@/utils/authHelpers";
 
-const SignupForm: React.FC = () => {
-  const initialState = {
-    error: null,
-    success: "",
-    data: { email: "", password: "", confirmPassword: "" },
-  };
+const initialState = {
+  error: null,
+  success: "",
+  data: { email: "", password: "", confirmPassword: "" },
+};
 
+const SignupForm: React.FC = () => {
   const [error, setError] = useState<string[]>([]);
 
   const [showPassword, setShowPassword] = useState(false);

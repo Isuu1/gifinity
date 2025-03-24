@@ -14,8 +14,6 @@ export async function changeUserDetails(
     username: formData.get("username") as string,
   };
 
-  console.log(data);
-
   // Get the authenticated user
   const { data: userData, error: authError } = await supabase.auth.getUser();
   if (authError || !userData.user) {

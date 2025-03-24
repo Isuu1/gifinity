@@ -1,18 +1,26 @@
-import Form from "@/components/UI/Form";
-import Input from "@/components/UI/Input";
+import React, { useActionState, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+
+//Context
 import { useAuth } from "@/context/AuthContext";
-import React, { useActionState, useEffect } from "react";
 
 //Icons
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 
+//Components
+import Form from "@/components/UI/Form";
+import Input from "@/components/UI/Input";
+import Button from "@/components/UI/Button";
+import Error from "@/components/Authentication/Error/Error";
+
 //Styles
 import styles from "./ChangeDetailsForm.module.scss";
-import Button from "@/components/UI/Button";
-import { changeUserDetails } from "@/actions/changeUserDetails";
-import toast from "react-hot-toast";
 import { toastStyle } from "@/styles/toast";
+
+//Utils
+import { changeUserDetails } from "@/actions/changeUserDetails";
+import { normalizeErrors } from "@/utils/authHelpers";
 
 interface FormState {
   data: { email: string; username: string };
@@ -29,8 +37,9 @@ const initialState: FormState = {
 };
 
 const ChangeDetailsForm: React.FC = () => {
-  const { user, email, username, fetchUser } = useAuth();
-  console.log(user);
+  const { email, username, fetchUser } = useAuth();
+
+  const [error, setError] = useState<string[]>([]);
 
   const [state, formAction, isPending] = useActionState(
     changeUserDetails,
@@ -38,13 +47,15 @@ const ChangeDetailsForm: React.FC = () => {
   );
 
   useEffect(() => {
-    if (state.success) {
-      fetchUser();
+    if (state.error) {
+      const normalizedErrors = normalizeErrors(state.error);
+      setError(normalizedErrors);
     }
-  }, [state.success, state.resetKey]);
+  }, [state.error, state.resetKey]);
 
   useEffect(() => {
     if (state.success) {
+      fetchUser();
       toast.success("Details updated successfully", toastStyle);
     }
   }, [state.success, state.resetKey]);
@@ -54,10 +65,10 @@ const ChangeDetailsForm: React.FC = () => {
   return (
     <div className={styles.formContainer}>
       <h1 className={styles.title}>Account details</h1>
+
       <Form action={formAction}>
         <div className={styles.inputContainer}>
           <h3 className={styles.label}>Email</h3>
-
           <Input
             id="email"
             type="email"
@@ -67,10 +78,8 @@ const ChangeDetailsForm: React.FC = () => {
             icon={<MdEmail />}
           />
         </div>
-
         <div className={styles.inputContainer}>
           <h3 className={styles.label}>Username</h3>
-
           <Input
             id="username"
             type="text"
@@ -82,6 +91,9 @@ const ChangeDetailsForm: React.FC = () => {
         </div>
         <div className={styles.inputContainer}>
           <h3 className={styles.label}></h3>
+
+          {error.length > 0 && <Error key="error" error={error} />}
+
           <Button
             className={styles.submitButton}
             variant="light"

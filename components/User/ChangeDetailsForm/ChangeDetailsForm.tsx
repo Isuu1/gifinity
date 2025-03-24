@@ -81,7 +81,12 @@ const ChangeDetailsForm: React.FC = () => {
         </div>
         <div className={styles.inputContainer}>
           <h3 className={styles.label}></h3>
-          <Button className={styles.submitButton} variant="light" type="submit">
+          <Button
+            className={styles.submitButton}
+            variant="light"
+            type="submit"
+            disabled={isPending}
+          >
             Save details
           </Button>
         </div>

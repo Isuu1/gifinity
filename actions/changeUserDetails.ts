@@ -18,7 +18,49 @@ export async function changeUserDetails(
     email: formData.get("email") as string,
     username: formData.get("username") as string,
   };
+
   console.log(data);
+
+  // Get the authenticated user
+  const { data: userData, error: authError } = await supabase.auth.getUser();
+  if (authError || !userData.user) {
+    return {
+      data,
+      error: "User not authenticated",
+      success: false,
+    };
+  }
+
+  const userId = userData.user.id;
+
+  // // Update email in the Auth table
+  // if (data.email !== userData.user.email) {
+  //   const { error: emailError } = await supabase.auth.updateUser({
+  //     email: data.email,
+  //   });
+
+  //   if (emailError) {
+  //     return {
+  //       data,
+  //       error: "Failed to update email",
+  //       success: false,
+  //     };
+  //   }
+  // }
+
+  //Update user email and username in users table
+  const { error: profileError } = await supabase
+    .from("profiles")
+    .update({ user_name: data.username, user_email: data.email })
+    .eq("id", userId);
+
+  if (profileError) {
+    return {
+      data,
+      error: "Failed to update username",
+      success: false,
+    };
+  }
 
   return {
     data,

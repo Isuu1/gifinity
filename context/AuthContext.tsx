@@ -9,6 +9,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 interface AuthContextType {
   user: User | null;
   username: string | null;
+  userEmail: string | null;
+  userAvatar: string | null;
   favouriteGifs: { data: Gif[] };
   favouriteStickers: { data: Sticker[] };
   fetchUser: () => void;
@@ -22,6 +24,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   //This represents the user data stored in the profiles table
   const [username, setUsername] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userAvatar, setUserAvatar] = useState<string | null>(null);
   const [favouriteGifs, setFavouriteGifs] = useState({ data: [] });
   const [favouriteStickers, setFavouriteStickers] = useState({ data: [] });
 
@@ -39,7 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Fetch the user's profile data from the Profiles table
     const { data: profileData, error: profileError } = await supabase
       .from("profiles")
-      .select("favourite_gifs, favourite_stickers, username")
+      .select("email, username, avatar, favourite_gifs, favourite_stickers")
       .eq("id", authData.user.id)
       .single();
 
@@ -50,6 +54,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     setUser(authData.user);
     setUsername(profileData?.username);
+    setUserEmail(profileData?.email);
+    setUserAvatar(profileData?.avatar);
     setFavouriteGifs(profileData?.favourite_gifs || []);
     setFavouriteStickers(profileData?.favourite_stickers || []);
   };
@@ -60,7 +66,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, username, favouriteGifs, favouriteStickers, fetchUser }}
+      value={{
+        user,
+        username,
+        userEmail,
+        userAvatar,
+        favouriteGifs,
+        favouriteStickers,
+        fetchUser,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -9,20 +9,19 @@ import { Stickers } from "@/interfaces/stickers";
 
 //Components
 import MediaOverlay from "../MediaOverlay/MediaOverlay";
+import Modal from "../Modal/Modal";
+import ConfirmDeleteFavourites from "../ConfirmDeleteFavourites/ConfirmDeleteFavourites";
+import MediaTypeMenu from "../MediaTypeMenu/MediaTypeMenu";
+import Button from "../UI/Button";
 
 //Styles
 import styles from "./FavouritesFeed.module.scss";
 
 //Animations
-import { AnimatePresence } from "motion/react";
-import MediaTypeMenu from "../MediaTypeMenu/MediaTypeMenu";
-import Button from "../UI/Button";
+import { AnimatePresence } from "framer-motion";
 
 //Icons
 import { IoTrashBin } from "react-icons/io5";
-import Modal from "../Modal/Modal";
-import ConfirmAction from "../ConfirmAction/ConfirmAction";
-import { useStorage } from "@/context/StorageContext";
 
 interface IProps {
   data: {
@@ -40,24 +39,12 @@ const FavouritesFeed: React.FC<IProps> = ({ data }) => {
     gifs || { data: [] }
   );
 
-  console.log("gifs", gifs);
-  console.log("stickers", stickers);
-
-  console.log("displayedContent", displayedContent);
-
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
   //Check if the favourites are empty depending on currently displayed content
   const isFavouritesEmpty = displayedContent?.data.length === 0;
-
-  const handleRemoveItems = () => {
-    removeFavouritesFromLocalStorage();
-    setShowModal(false);
-  };
-
-  const { removeFavouritesFromLocalStorage } = useStorage();
 
   useEffect(() => {
     // Ensure it updates when props change
@@ -71,10 +58,7 @@ const FavouritesFeed: React.FC<IProps> = ({ data }) => {
       <AnimatePresence initial={false} mode="wait">
         {showModal && (
           <Modal key="modal" theme="light">
-            <ConfirmAction
-              onConfirm={handleRemoveItems}
-              onCancel={() => setShowModal(false)}
-            />
+            <ConfirmDeleteFavourites onCancel={() => setShowModal(false)} />
           </Modal>
         )}
       </AnimatePresence>

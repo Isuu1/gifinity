@@ -27,31 +27,49 @@ export async function changeUserDetails(
 
   const userId = userData.user.id;
 
-  // // Update email in the Auth table
-  // if (data.email !== userData.user.email) {
-  //   const { error: emailError } = await supabase.auth.updateUser({
-  //     email: data.email,
-  //   });
+  //Update  username in users table
+  const { error: profileUsernameError } = await supabase
+    .from("profiles")
+    .update({ username: data.username })
+    .eq("id", userId);
 
-  //   if (emailError) {
-  //     return {
-  //       data,
-  //       error: "Failed to update email",
-  //       success: false,
-  //     };
-  //   }
-  // }
+  if (profileUsernameError) {
+    return {
+      data,
+      error: "Failed to update username",
+      success: false,
+      resetKey: Date.now(),
+    };
+  }
 
-  //Update user email and username in users table
-  const { error: profileError } = await supabase
+  // Update email in the Auth table
+  const { error: emailError } = await supabase.auth.updateUser(
+    {
+      email: data.email,
+    },
+    {
+      emailRedirectTo: `${process.env.SITE_URL}/user/account-details?email_updated=true`,
+    }
+  );
+
+  if (emailError) {
+    return {
+      data,
+      error: "Failed to update email",
+      success: false,
+    };
+  }
+
+  //Update user email in users table
+  const { error: profileEmailError } = await supabase
     .from("profiles")
     .update({ username: data.username, email: data.email })
     .eq("id", userId);
 
-  if (profileError) {
+  if (profileEmailError) {
     return {
       data,
-      error: "Failed to update username",
+      error: "Failed to update email",
       success: false,
       resetKey: Date.now(),
     };

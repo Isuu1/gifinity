@@ -7,6 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 //Icons
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import { MdOutlineError } from "react-icons/md";
 
 //Components
 import Form from "@/components/UI/Form";
@@ -21,6 +22,7 @@ import { toastStyle } from "@/styles/toast";
 //Utils
 import { changeUserDetails } from "@/actions/changeUserDetails";
 import { normalizeErrors } from "@/utils/authHelpers";
+import { createClient } from "@/utils/supabase/client";
 
 interface FormState {
   data: { email: string; username: string };
@@ -37,7 +39,7 @@ const initialState: FormState = {
 };
 
 const ChangeDetailsForm: React.FC = () => {
-  const { email, username, fetchUser } = useAuth();
+  const { user, email, username, fetchUser } = useAuth();
 
   const [error, setError] = useState<string[]>([]);
 
@@ -45,6 +47,14 @@ const ChangeDetailsForm: React.FC = () => {
     changeUserDetails,
     initialState
   );
+
+  const handleResendEmail = async () => {
+    const supabase = createClient();
+    await supabase.auth.resend({
+      type: "email_change",
+      email: email,
+    });
+  };
 
   useEffect(() => {
     if (state.error) {
@@ -78,6 +88,22 @@ const ChangeDetailsForm: React.FC = () => {
             icon={<MdEmail />}
           />
         </div>
+        {user?.new_email && user?.email !== user?.new_email && (
+          <>
+            <div className={styles.confirmEmail}>
+              <p className={styles.confirmEmailText}>
+                <MdOutlineError className={styles.icon} />
+                <span>
+                  You need to confirm your new email before you can use it.
+                  We`ve sent you a confirmation email to your new email address.
+                </span>
+              </p>
+              <Button onClick={handleResendEmail} variant="light">
+                Resend email
+              </Button>
+            </div>
+          </>
+        )}
         <div className={styles.inputContainer}>
           <h3 className={styles.label}>Username</h3>
           <Input

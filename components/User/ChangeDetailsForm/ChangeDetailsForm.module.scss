@@ -5,6 +5,25 @@
   .title {
     margin-bottom: 2rem;
   }
+
+  .confirmEmail {
+    display: flex;
+    margin-right: auto;
+    background: #a0153e;
+    border-radius: 14px;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+    padding: 1rem;
+    .confirmEmailText {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      .icon {
+        font-size: 1.2rem;
+      }
+    }
+  }
 }
 
 .inputContainer {

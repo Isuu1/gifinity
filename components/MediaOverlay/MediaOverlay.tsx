@@ -8,11 +8,9 @@ import styles from "./MediaOverlay.module.scss";
 
 //Icons
 import { FaCopy } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
 
 //Utils
 import { copyToClipboard } from "@/utils/utils";
-import { useStorage } from "@/context/StorageContext";
 
 //Animations
 import { motion } from "framer-motion";
@@ -22,20 +20,20 @@ import { overlayAnimation } from "@/styles/animations";
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
 
+//Components
+import FavouriteButtonLoggedOut from "./FavouriteButtonLoggedOut/FavouriteButtonLoggedOut";
+import FavouriteButtonLoggedIn from "./FavouriteButtonLoggedIn/FavouriteButtonLoggedIn";
+
+//Context
+import { useAuth } from "@/context/AuthContext";
+
 interface IProps {
   media: Gif | Sticker;
 }
 
 const MediaOverlay: React.FC<IProps> = ({ media }) => {
-  const { localFavouriteGifs, localFavouriteStickers, addItemToLocalStorage } =
-    useStorage();
-
-  const isGifOnWishlist = localFavouriteGifs.data.find(
-    (item) => item.id === media.id
-  );
-  const isStickerOnWishlist = localFavouriteStickers.data.find(
-    (item) => item.id === media.id
-  );
+  const user = useAuth();
+  console.log(user);
 
   return (
     <motion.div
@@ -51,17 +49,11 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
           onClick={() => copyToClipboard(media.images.original.url)}
         />
 
-        <motion.div
-          whileTap={{ scale: 1.6 }} // Apply scale animation on tap
-          transition={{ duration: 0.2 }}
-        >
-          <FaHeart
-            className={`${styles.icon} ${
-              isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
-            }`}
-            onClick={() => addItemToLocalStorage(media)}
-          />
-        </motion.div>
+        {user ? (
+          <FavouriteButtonLoggedIn media={media} />
+        ) : (
+          <FavouriteButtonLoggedOut media={media} />
+        )}
       </div>
       {media.user?.display_name && (
         <div className={styles.overlay_author}>

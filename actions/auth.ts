@@ -2,7 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
-import { SignupError, signupSchema } from "@/utils/authValidation";
+import { signupSchema } from "@/schemas/signup";
+import { SignupError } from "@/types/signup";
 
 //
 // Login process
@@ -58,17 +59,20 @@ export async function signup(prevState: SignupError, formData: FormData) {
   }
 
   // Include all initial user data in metadata to insert them in the database
-  const { data: user, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
     options: {
       data: {
-        user_email: data.email,
-        user_name: "",
-        favourites: JSON.stringify({
-          gifs: [],
-          stickers: [],
-        }), // Ensuring it's a valid JSON
+        email: data.email,
+        username: "",
+        avatar: "",
+        favourite_gifs: {
+          data: [],
+        },
+        favourite_stickers: {
+          data: [],
+        },
       },
     },
   });

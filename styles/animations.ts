@@ -80,3 +80,23 @@ export const autocompleteContainerAnimation = {
     },
   },
 };
+
+export const userModalAnimation = {
+  hidden: { opacity: 0, height: 0 },
+  visible: {
+    opacity: 1,
+    height: "200px",
+    transition: {
+      ease: "linear",
+      duration: 0.2,
+      delayChildren: 0.1,
+      staggerChildren: 0.02,
+    },
+  },
+  exit: { opacity: 0, height: 0 },
+};
+
+export const userModalMenuItemsAnimation = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};

@@ -73,8 +73,8 @@ export const StorageProvider = ({
       });
       toast.success(
         localFavouriteGifs.data.some((gif) => gif.id === item.id)
-          ? "Gif removed from wishlist"
-          : "Gif added to wishlist",
+          ? "Gif removed from favourites"
+          : "Gif added to favourites",
         toastStyle
       );
     } else if (item.type === "sticker") {
@@ -92,8 +92,8 @@ export const StorageProvider = ({
       });
       toast.success(
         localFavouriteStickers.data.some((sticker) => sticker.id === item.id)
-          ? "Sticker removed from wishlist"
-          : "Sticker added to wishlist",
+          ? "Sticker removed from favourites"
+          : "Sticker added to favourites",
         toastStyle
       );
     }

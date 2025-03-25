@@ -1,45 +1,80 @@
-import React, { useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 //Styles
 import styles from "./ChangePasswordForm.module.scss";
+import { toastStyle } from "@/styles/toast";
+
+//Components
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
+import Button from "@/components/UI/Button";
+import ChangeDetailsError from "@/components/User/ChangeDetailsError/ChangeDetailsError";
 
 //Icons
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-import Button from "@/components/UI/Button";
+
+//Utils
+import { changeUserPassword } from "@/actions/changeUserPassword";
+import { normalizeErrors } from "@/utils/authHelpers";
+
+interface FormState {
+  data: { newPassword: string; confirmPassword: string };
+  error: string | null;
+  success: boolean;
+  resetKey: number;
+}
+
+const initialState: FormState = {
+  data: { newPassword: "", confirmPassword: "" },
+  error: null,
+  success: false,
+  resetKey: Date.now(),
+};
 
 const ChangePasswordForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const [error, setError] = useState<string[]>([]);
+
+  const [state, formAction, isPending] = useActionState(
+    changeUserPassword,
+    initialState
+  );
+
+  // Function to clear the error when user focuses on an input
+  const handleFocus = () => {
+    setError([]);
+  };
+
+  //Set error message whenever form state returns one
+  useEffect(() => {
+    if (state.error) {
+      const normalizedErrors = normalizeErrors(state.error);
+      setError(normalizedErrors);
+    }
+  }, [state.resetKey, state.error]);
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success("Password updated successfully.", toastStyle);
+      setError([]);
+    }
+  }, [state.success, state.resetKey]);
+
+  console.log("state", state);
+
   return (
     <div className={styles.formContainer}>
       <h1 className={styles.title}>Password</h1>
-      <Form>
-        <div className={styles.inputContainer}>
-          <h3 className={styles.label}>Old password</h3>
-          <Input
-            id="old-password"
-            type="password"
-            label="Old password"
-            labelHidden
-            icon={<RiLockPasswordFill />}
-            showPasswordIcon={
-              showPassword ? (
-                <IoMdEye onClick={() => setShowPassword(false)} />
-              ) : (
-                <IoMdEyeOff onClick={() => setShowPassword(true)} />
-              )
-            }
-          />
-        </div>
+      <Form action={formAction}>
         <div className={styles.inputContainer}>
           <h3 className={styles.label}>New password</h3>
           <Input
             id="new-password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             label="New password"
             labelHidden
             icon={<RiLockPasswordFill />}
@@ -50,13 +85,14 @@ const ChangePasswordForm: React.FC = () => {
                 <IoMdEyeOff onClick={() => setShowPassword(true)} />
               )
             }
+            onFocus={handleFocus}
           />
         </div>
         <div className={styles.inputContainer}>
           <h3 className={styles.label}>Confirm password</h3>
           <Input
             id="confirm-password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             label="Confirm password"
             labelHidden
             icon={<RiLockPasswordFill />}
@@ -67,11 +103,20 @@ const ChangePasswordForm: React.FC = () => {
                 <IoMdEyeOff onClick={() => setShowPassword(true)} />
               )
             }
+            onFocus={handleFocus}
           />
         </div>
+
+        {error.length > 0 && <ChangeDetailsError key="error" message={error} />}
+
         <div className={styles.inputContainer}>
           <h3 className={styles.label}></h3>
-          <Button className={styles.submitButton} variant="light" type="submit">
+          <Button
+            className={styles.submitButton}
+            variant="light"
+            type="submit"
+            disabled={isPending}
+          >
             Save password
           </Button>
         </div>

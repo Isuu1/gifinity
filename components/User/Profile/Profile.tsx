@@ -7,9 +7,9 @@ const Profile: React.FC = () => {
   return (
     <div className={styles.profile}>
       <h1>Profile</h1>
-      <h3>My work</h3>
-
-      <p>You did not uploaded any gifs or stickers yet</p>
+      <h3 className={styles.noContent}>
+        You did not uploaded any gifs or stickers yet.
+      </h3>
     </div>
   );
 };

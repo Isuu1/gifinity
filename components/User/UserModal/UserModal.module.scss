@@ -1,0 +1,59 @@
+$modalMenuItemHoverBackground: #ff204e;
+$modalMenuItemActiveBackground: #a0153e;
+
+.modalContainer {
+  position: relative;
+  display: flex;
+  min-width: 170px;
+  .avatar {
+    border-radius: 14px;
+    position: absolute;
+  }
+  .button {
+    font-family: "Neucha", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.1rem;
+    cursor: pointer;
+    background: #36343a;
+    border-radius: 14px;
+    border: none;
+    padding: 1rem 1rem 1rem 55px;
+    color: #fff;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    height: 45px;
+    width: 100%;
+  }
+  .modal {
+    z-index: 5;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: #36343a;
+    list-style: none;
+    padding: 1rem;
+    border-radius: 24px;
+    line-height: 2rem;
+    width: 100%;
+    overflow: hidden;
+    .item {
+      cursor: pointer;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      transition: background 0.2s;
+      border-radius: 14px;
+      padding: 0.3rem;
+      &:hover {
+        background-color: $modalMenuItemHoverBackground;
+      }
+    }
+  }
+}
+
+.active {
+  background-color: $modalMenuItemActiveBackground;
+}

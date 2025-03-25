@@ -14,9 +14,12 @@ import { IoSettings } from "react-icons/io5";
 
 import { FaSignOutAlt } from "react-icons/fa";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 
 const NavMenu: React.FC = () => {
   const pathname = usePathname();
+
+  const { avatar, username } = useAuth();
 
   return (
     <nav>
@@ -24,13 +27,13 @@ const NavMenu: React.FC = () => {
         <div className={styles.avatarContainer}>
           <Image
             className={styles.avatar}
-            src="/images/avatar.gif"
+            src={avatar || "/images/avatar.gif"}
             fill
             alt="avatar"
             priority
             unoptimized
           />
-          <h3>@Username</h3>
+          <h3>@{username}</h3>
         </div>
         <Link href="/user/profile">
           <li

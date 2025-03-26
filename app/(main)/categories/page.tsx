@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 //Components
@@ -23,6 +23,15 @@ export default function Page() {
 
   const searchParams = useSearchParams();
   const category = decodeURIComponent(searchParams.get("q") || "");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!category) {
+      router.replace("/categories?q=actions");
+      return;
+    }
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -58,7 +67,7 @@ export default function Page() {
 
   if (error) {
     return (
-      <div className="page">
+      <div>
         <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
 
         <Error errorMessage={error} />
@@ -67,7 +76,7 @@ export default function Page() {
   }
 
   return (
-    <div className="page">
+    <div>
       <PageHeadline
         title={`Results for category: ${category}`}
         imageUrl="/images/category.svg"

@@ -8,7 +8,6 @@ import Image from "next/image";
 import styles from "./Header.module.scss";
 
 //Components
-import CategoriesMenu from "../CategoriesMenu/CategoriesMenu";
 import Button from "../UI/Button";
 import Search from "../Search/Search";
 import UserModal from "../User/UserModal/UserModal";
@@ -46,7 +45,9 @@ const Header: React.FC = () => {
           <Image src="/images/logo.png" alt="Gifinity" width={95} height={95} />
         </Link>
         <div className={styles.nav}>
-          <CategoriesMenu />
+          <Link href="/categories" scroll={false}>
+            <Button>Categories</Button>
+          </Link>
           {user ? (
             <UserModal />
           ) : (

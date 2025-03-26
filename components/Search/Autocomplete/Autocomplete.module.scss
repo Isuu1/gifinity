@@ -3,7 +3,7 @@ $autoCompleteItemHover: #ff204e;
 .autocompleteContainer {
   z-index: 6;
   position: absolute;
-  top: 55px;
+  top: 65px;
   left: 0;
   overflow: hidden;
   background: #36343a;
@@ -15,7 +15,7 @@ $autoCompleteItemHover: #ff204e;
     cursor: pointer;
     padding: 0.2rem;
     border-radius: 5px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     transition: background 0.2s;
     &:hover {
       background: $autoCompleteItemHover;

@@ -15,7 +15,7 @@ import UserModal from "../User/UserModal/UserModal";
 
 //Icons
 import { TiThMenu } from "react-icons/ti";
-import CategoriesMenu from "../CategoriesMenu/CategoriesMenu";
+//import CategoriesMenu from "../CategoriesMenu/CategoriesMenu";
 import Button from "../UI/Button";
 
 const stickyHeaderAnimation = {
@@ -59,7 +59,6 @@ const StickyHeader = () => {
         <Image src="/images/logo.png" alt="Gifinity" width={75} height={75} />
       </Link>
       <Search />
-      <CategoriesMenu />
       {user ? <UserModal /> : null}
       <Button icon={<TiThMenu />}>Menu</Button>
     </motion.header>

@@ -39,10 +39,6 @@ const CategoriesMenu: React.FC = () => {
   console.log(categories);
   const router = useRouter();
 
-  const handleCategories = () => {
-    setShowCategories(!showCategories);
-  };
-
   const handleCategoryChange = (categoryName: string) => {
     //Encode category name to handle special character '&'
     const encodedCategoryName = encodeURIComponent(categoryName);
@@ -52,8 +48,8 @@ const CategoriesMenu: React.FC = () => {
   return (
     <div
       className={styles.categoriesContainer}
-      onMouseEnter={handleCategories}
-      onMouseLeave={handleCategories}
+      onMouseEnter={() => setShowCategories(true)}
+      onMouseLeave={() => setShowCategories(false)}
     >
       <button className={`${styles.button} ${showCategories && styles.active}`}>
         Categories

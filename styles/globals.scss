@@ -22,6 +22,10 @@ a {
   text-decoration: none;
 }
 
+.main-layout {
+  margin: 0 auto;
+}
+
 .page {
   padding: 1rem;
   min-height: 100vh;
@@ -38,26 +42,32 @@ a {
   margin-left: auto;
 }
 
-@media (min-width: 768px) {
-  .page {
-    padding: 1rem 2rem;
-  }
-}
+// @media (min-width: 1024px) {
+//   .main-layout {
+//     width: 100%;
+//   }
+// }
 
 @media (min-width: 1024px) {
-  .page {
-    padding: 1rem 3rem;
+  .main-layout {
+    width: 90%;
   }
 }
 
-@media (min-width: 1200px) {
-  .page {
-    padding: 1rem 8rem;
+@media (min-width: 1250px) {
+  .main-layout {
+    width: 80%;
   }
 }
 
 @media (min-width: 1400px) {
-  .page {
-    padding: 1rem 11rem;
+  .main-layout {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1600px) {
+  .main-layout {
+    width: 60%;
   }
 }

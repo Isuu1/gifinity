@@ -13,7 +13,7 @@ export default async function MainLayout({
 
   const { data } = await supabase.auth.getUser();
   return (
-    <div>
+    <div className="main-layout">
       <StorageProvider>
         <AuthProvider>
           <Header user={data.user} />

@@ -16,14 +16,12 @@ import UserModal from "../User/UserModal/UserModal";
 //Icons
 import { FaHeart } from "react-icons/fa";
 
-//Supabase
-import { User } from "@supabase/supabase-js";
+//Context
+import { useAuth } from "@/context/AuthContext";
 
-interface IProps {
-  user: User | null;
-}
+const Header: React.FC = () => {
+  const { user } = useAuth();
 
-const Header: React.FC<IProps> = ({ user }) => {
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>

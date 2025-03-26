@@ -1,60 +1,27 @@
-@use "../../styles/variables.scss" as *;
-
-.rotateAnimation {
-  transform: rotate(180deg);
-}
+$categoryItemBackground: #36343a;
+$categoryItemBackgroundHover: #ff204e;
 
 .categoriesContainer {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  .button {
-    font-family: "Neucha", serif;
-    font-weight: 700;
-    font-style: normal;
-    font-size: 1.1rem;
-    cursor: pointer;
-    background: transparent;
-    border-radius: 24px;
-    border: none;
-    padding: 0.4rem 1rem;
-    color: #fff;
-    transition: background 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    .icon {
-      transition: transform 0.3s;
-      font-size: 1.2rem;
-    }
-    &.active {
-      background: $secondaryColorDark;
-      &:hover {
-        background: $secondaryColorDark;
-      }
-    }
-    &:hover {
-      background: $secondaryColorDark;
-      color: #fff !important;
-    }
-  }
-  z-index: 4;
-  position: relative;
+  margin-bottom: 2rem;
   .categoriesWrapper {
+    z-index: 16;
     padding: 0.5rem;
-    border-radius: 24px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
     list-style: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: #36343a;
-    margin-top: 80px;
+    width: 100%;
     .navItem {
-      .button {
-        text-align: left;
+      cursor: pointer;
+      background: $categoryItemBackground;
+      padding: 0.4rem 1rem;
+      border-radius: 24px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: background 0.3s;
+      &:hover {
+        background: $categoryItemBackgroundHover;
       }
     }
   }

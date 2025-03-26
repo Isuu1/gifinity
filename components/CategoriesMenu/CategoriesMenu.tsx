@@ -3,28 +3,15 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-//Icons
-import { PiArrowBendRightDownBold } from "react-icons/pi";
-
 //Styles
 import styles from "./CategoriesMenu.module.scss";
 
 //Components
-import Button from "../UI/Button";
-
-//Animation
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  categoriesMenuAnimation,
-  categoryMenuItemsAnimation,
-} from "@/styles/animations";
 
 //Interfaces
 import { Categories } from "@/interfaces/categories";
 
 const CategoriesMenu: React.FC = () => {
-  const [showCategories, setShowCategories] = useState<boolean>(false);
-
   const [categories, setCategories] = useState<Categories>({ data: [] });
 
   useEffect(() => {
@@ -36,56 +23,28 @@ const CategoriesMenu: React.FC = () => {
     }
     fetchData();
   }, []);
-  console.log(categories);
+
   const router = useRouter();
 
   const handleCategoryChange = (categoryName: string) => {
     //Encode category name to handle special character '&'
     const encodedCategoryName = encodeURIComponent(categoryName);
-    router.push(`/category?q=${encodedCategoryName}`);
+    router.push(`/categories?q=${encodedCategoryName}`);
   };
 
   return (
-    <div
-      className={styles.categoriesContainer}
-      onMouseEnter={() => setShowCategories(true)}
-      onMouseLeave={() => setShowCategories(false)}
-    >
-      <button className={`${styles.button} ${showCategories && styles.active}`}>
-        Categories
-        <PiArrowBendRightDownBold
-          className={`${styles.icon} ${
-            showCategories && styles.rotateAnimation
-          }`}
-        />
-      </button>
-
-      <AnimatePresence mode="wait">
-        {showCategories && (
-          <motion.ul
-            className={styles.categoriesWrapper}
-            variants={categoriesMenuAnimation}
-            initial="hidden"
-            animate={showCategories ? "visible" : "hidden"}
-            exit="exit"
+    <div className={styles.categoriesContainer}>
+      <ul className={styles.categoriesWrapper}>
+        {categories.data.map((category, index: number) => (
+          <li
+            key={index}
+            className={styles.navItem}
+            onClick={() => handleCategoryChange(category.name)}
           >
-            {categories.data.map((category, index: number) => (
-              <motion.li
-                key={index}
-                className={styles.navItem}
-                variants={categoryMenuItemsAnimation}
-              >
-                <Button
-                  className={styles.button}
-                  onClick={() => handleCategoryChange(category.name)}
-                >
-                  {category.name}
-                </Button>
-              </motion.li>
-            ))}
-          </motion.ul>
-        )}
-      </AnimatePresence>
+            {category.name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

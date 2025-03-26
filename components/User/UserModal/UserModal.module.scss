@@ -4,6 +4,7 @@ $modalMenuItemActiveBackground: #a0153e;
 .modalContainer {
   position: relative;
   display: flex;
+  align-items: center;
   min-width: 170px;
   .avatar {
     border-radius: 14px;
@@ -30,7 +31,7 @@ $modalMenuItemActiveBackground: #a0153e;
   .modal {
     z-index: 5;
     position: absolute;
-    top: 45px;
+    top: 80px;
     right: 0;
     background: #36343a;
     list-style: none;

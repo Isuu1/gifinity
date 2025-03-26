@@ -1,26 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-
-//Animations
-import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import Link from "next/link";
 import Image from "next/image";
 
 //Styles
 import styles from "./StickyHeader.module.scss";
-import Search from "../Search/Search";
+
+//Context
 import { useAuth } from "@/context/AuthContext";
+
+//Components
 import UserModal from "../User/UserModal/UserModal";
+import Search from "../Search/Search";
 
 //Icons
-import { TiThMenu } from "react-icons/ti";
-//import CategoriesMenu from "../CategoriesMenu/CategoriesMenu";
-import Button from "../UI/Button";
+//import { TiThMenu } from "react-icons/ti";
+import { FaHeart } from "react-icons/fa";
+
+//Animations
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
 
 const stickyHeaderAnimation = {
   initial: {
-    y: -100,
+    y: -300,
     transition: {
       duration: 0.3,
     },
@@ -55,12 +58,36 @@ const StickyHeader = () => {
       initial="initial"
       animate={isVisible ? "animate" : "initial"}
     >
-      <Link href="/">
-        <Image src="/images/logo.png" alt="Gifinity" width={75} height={75} />
-      </Link>
+      <div className={styles.stickyHeaderTop}>
+        <Link href="/">
+          <Image src="/images/logo.png" alt="Gifinity" width={75} height={75} />
+        </Link>
+        <div className={styles.nav}>
+          <Link href="/categories" scroll={false} className={styles.item}>
+            Categories
+          </Link>
+          <Link href="#" scroll={false} className={styles.item}>
+            Upload
+          </Link>
+          {!user && (
+            <>
+              <Link href="/login" scroll={false} className={styles.item}>
+                Log in
+              </Link>
+              <Link href="/signup" scroll={false} className={styles.item}>
+                Sign up
+              </Link>
+              <Link href="/favourites" className={styles.item}>
+                <FaHeart color="#ff204e" />
+                Favourites
+              </Link>
+            </>
+          )}
+        </div>
+        {user && <UserModal />}
+      </div>
+
       <Search />
-      {user ? <UserModal /> : null}
-      <Button icon={<TiThMenu />}>Menu</Button>
     </motion.header>
   );
 };

@@ -45,27 +45,28 @@ const Header: React.FC = () => {
           <Image src="/images/logo.png" alt="Gifinity" width={95} height={95} />
         </Link>
         <div className={styles.nav}>
-          <Link href="/categories" scroll={false}>
-            <Button>Categories</Button>
+          <Link href="/categories" scroll={false} className={styles.item}>
+            Categories
           </Link>
-          {user ? (
-            <UserModal />
-          ) : (
+          <Link href="#" scroll={false} className={styles.item}>
+            Upload
+          </Link>
+          {!user && (
             <>
-              <Link href="/login" scroll={false}>
-                <Button>Log in</Button>
+              <Link href="/login" scroll={false} className={styles.item}>
+                Log in
               </Link>
-              <Link href="/signup" scroll={false}>
-                <Button variant="light">Sign up</Button>
+              <Link href="/signup" scroll={false} className={styles.item}>
+                Sign up
               </Link>
-              <Link href="/favourites">
-                <Button icon={<FaHeart color="#ff204e" />} iconPosition="right">
-                  Favourites
-                </Button>
+              <Link href="/favourites" className={styles.item}>
+                <FaHeart color="#ff204e" />
+                Favourites
               </Link>
             </>
           )}
         </div>
+        {user && <UserModal />}
       </div>
       <div className={styles.headerBottom}>
         <h2>Find the Perfect GIF for Every Moment!</h2>

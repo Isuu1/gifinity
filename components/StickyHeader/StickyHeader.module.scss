@@ -1,15 +1,46 @@
+$navItemHoverBackgroundColor: #a0153e;
+
 .stickyHeader {
   z-index: 13;
   position: fixed;
   top: 0;
   width: 100%;
   background: #1d1d1d;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  .menuIcon {
-    font-size: 2rem;
+  display: grid;
+  grid-template-rows: auto auto;
+  .stickyHeaderTop {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    .nav {
+      flex-shrink: 0;
+      position: relative;
+      display: flex;
+      gap: 0.3rem;
+      align-items: center;
+      .item {
+        padding: 0.5rem 1rem;
+        background: transparent;
+        transition: background 0.3s;
+        border-radius: 14px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #fff;
+        cursor: pointer;
+        &:hover {
+          background: $navItemHoverBackgroundColor;
+        }
+      }
+    }
   }
+  // .nav {
+  //   flex-shrink: 0;
+  //   position: relative;
+  //   display: flex;
+  //   gap: 0.3rem;
+  //   margin-left: auto;
+  //   align-items: center;
+  // }
 }
 
 @media (min-width: 1024px) {

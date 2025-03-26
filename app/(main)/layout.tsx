@@ -1,22 +1,20 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
+import StickyHeader from "@/components/StickyHeader/StickyHeader";
 import { AuthProvider } from "@/context/AuthContext";
 import { StorageProvider } from "@/context/StorageContext";
-import { createClient } from "@/utils/supabase/server";
 
 export default async function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createClient();
-
-  const { data } = await supabase.auth.getUser();
   return (
     <div className="main-layout">
       <StorageProvider>
         <AuthProvider>
-          <Header user={data.user} />
+          <Header />
+          <StickyHeader />
           {children}
           <Footer />
         </AuthProvider>

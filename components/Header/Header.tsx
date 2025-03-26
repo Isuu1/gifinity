@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -16,16 +16,31 @@ import UserModal from "../User/UserModal/UserModal";
 //Icons
 import { FaHeart } from "react-icons/fa";
 
-//Supabase
-import { User } from "@supabase/supabase-js";
+//Context
+import { useAuth } from "@/context/AuthContext";
 
-interface IProps {
-  user: User | null;
-}
+//Animations
+import { useMotionValueEvent, useScroll } from "motion/react";
 
-const Header: React.FC<IProps> = ({ user }) => {
+const Header: React.FC = () => {
+  const { user } = useAuth();
+
+  const { scrollY } = useScroll();
+
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (headerRef.current) {
+      if (latest > 300) {
+        headerRef.current.style.opacity = "0";
+      } else {
+        headerRef.current.style.opacity = "1";
+      }
+    }
+  });
+
   return (
-    <header className={styles.header}>
+    <header className={styles.header} ref={headerRef}>
       <div className={styles.headerTop}>
         <Link href="/">
           <Image src="/images/logo.png" alt="Gifinity" width={95} height={95} />

@@ -23,6 +23,7 @@ a {
 }
 
 .main-layout {
+  position: relative;
   margin: 0 auto;
 }
 
@@ -41,12 +42,6 @@ a {
 .margin-left-auto {
   margin-left: auto;
 }
-
-// @media (min-width: 1024px) {
-//   .main-layout {
-//     width: 100%;
-//   }
-// }
 
 @media (min-width: 1024px) {
   .main-layout {

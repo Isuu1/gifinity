@@ -7,23 +7,38 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  .overlay_icons {
-    background: #ff204db6;
-    border-radius: 5px;
-    padding: 0.5rem;
+  overflow: hidden;
+  .overlayIconsContainer {
     display: flex;
-    gap: 0.5rem;
-    margin-right: auto;
-    .icon {
-      cursor: pointer;
-      color: #ffffff;
-      font-size: 1.5rem;
-      :hover {
-        color: #700c2a;
+    justify-content: space-between;
+    .addToFavouritesButton {
+      background: #ff204db6;
+      border-radius: 10px;
+      padding: 0.5rem;
+      display: flex;
+      gap: 0.5rem;
+      .icon {
+        cursor: pointer;
+        color: #000000de;
+        font-size: 1.5rem;
+        :hover {
+          color: #700c2a;
+        }
       }
     }
-    .filled {
-      color: #6e0226;
+    .shareButton {
+      position: relative;
+      background: #ff204db6;
+      border-radius: 10px;
+      padding: 0.5rem;
+      .icon {
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 1.6rem;
+        :hover {
+          color: #700c2a;
+        }
+      }
     }
   }
   .overlay_author {

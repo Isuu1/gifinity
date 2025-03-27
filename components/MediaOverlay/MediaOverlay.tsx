@@ -1,16 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 //Styles
 import styles from "./MediaOverlay.module.scss";
 
 //Icons
-import { FaCopy } from "react-icons/fa";
-
-//Utils
-import { copyToClipboard } from "@/utils/utils";
+import { TfiSharethis } from "react-icons/tfi";
 
 //Animations
 import { motion } from "framer-motion";
@@ -23,6 +20,7 @@ import { Sticker } from "@/interfaces/stickers";
 //Components
 import FavouriteButtonLoggedOut from "./FavouriteButtonLoggedOut/FavouriteButtonLoggedOut";
 import FavouriteButtonLoggedIn from "./FavouriteButtonLoggedIn/FavouriteButtonLoggedIn";
+import ShareMedia from "../ShareMedia/ShareMedia";
 
 //Context
 import { useAuth } from "@/context/AuthContext";
@@ -32,8 +30,10 @@ interface IProps {
 }
 
 const MediaOverlay: React.FC<IProps> = ({ media }) => {
+  const [shareContainer, setShareContainer] = useState(false);
+
   const user = useAuth();
-  console.log(user);
+  console.log(media);
 
   return (
     <motion.div
@@ -43,18 +43,25 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
       initial="hidden"
       exit="exit"
     >
-      <div className={styles.overlay_icons}>
-        <FaCopy
-          className={styles.icon}
-          onClick={() => copyToClipboard(media.images.original.url)}
-        />
+      <div className={styles.overlayIconsContainer}>
+        {shareContainer && <ShareMedia url={media?.images.original.url} />}
 
-        {user ? (
-          <FavouriteButtonLoggedIn media={media} />
-        ) : (
-          <FavouriteButtonLoggedOut media={media} />
-        )}
+        <div className={styles.addToFavouritesButton}>
+          {user ? (
+            <FavouriteButtonLoggedIn media={media} />
+          ) : (
+            <FavouriteButtonLoggedOut media={media} />
+          )}
+        </div>
+
+        <div className={styles.shareButton}>
+          <TfiSharethis
+            className={styles.icon}
+            onClick={() => setShareContainer(true)}
+          />
+        </div>
       </div>
+
       {media.user?.display_name && (
         <div className={styles.overlay_author}>
           <Image

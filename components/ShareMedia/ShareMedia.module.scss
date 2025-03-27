@@ -1,0 +1,44 @@
+.shareContainer {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  bottom: 0;
+  background: #fffffff1;
+  padding: 0.6rem;
+  border-radius: 0 0 5px 5px;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  .shareButton {
+    cursor: pointer;
+    font-size: 2rem;
+  }
+  .fbIcon {
+    color: #1877f2;
+    transition: color 0.3s;
+    &:hover {
+      color: #3b5998;
+    }
+  }
+  .messengerIcon {
+    color: #00c6ff;
+    transition: color 0.3s;
+    &:hover {
+      color: #0088cc;
+    }
+  }
+  .xIcon {
+    color: #000;
+    transition: color 0.3s;
+    &:hover {
+      color: #808080de;
+    }
+  }
+  .copyIcon {
+    color: #000000d0;
+    transition: color 0.3s;
+    &:hover {
+      color: #353535de;
+    }
+  }
+}

@@ -22,7 +22,7 @@ import styles from "./LoginForm.module.scss";
 import { toastStyle } from "@/styles/toast";
 
 //Utils
-import { login } from "@/actions/auth";
+import { login } from "@/features/auth/actions/auth";
 
 const LoginForm: React.FC = () => {
   const initialState = {

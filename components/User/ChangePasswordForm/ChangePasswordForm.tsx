@@ -18,7 +18,7 @@ import { IoMdEyeOff } from "react-icons/io";
 
 //Utils
 import { changeUserPassword } from "@/actions/changeUserPassword";
-import { normalizeErrors } from "@/utils/authHelpers";
+import { normalizeErrors } from "@/features/auth/utils/authHelpers";
 
 interface FormState {
   data: { newPassword: string; confirmPassword: string };

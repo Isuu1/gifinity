@@ -1,5 +1,5 @@
 import { ZodFormattedError } from "zod";
-import { createClient } from "./supabase/client";
+import { createClient } from "../../../utils/supabase/client";
 
 //Function to normalize error messages to keep the same format: Array of strings
 export function normalizeErrors(

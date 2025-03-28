@@ -21,7 +21,7 @@ import { toastStyle } from "@/styles/toast";
 
 //Utils
 import { changeUserDetails } from "@/actions/changeUserDetails";
-import { normalizeErrors } from "@/utils/authHelpers";
+import { normalizeErrors } from "@/features/auth/utils/authHelpers";
 import { createClient } from "@/utils/supabase/client";
 
 interface FormState {

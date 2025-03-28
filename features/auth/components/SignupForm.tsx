@@ -21,8 +21,8 @@ import { IoMdEyeOff } from "react-icons/io";
 import styles from "./SignupForm.module.scss";
 
 //Utils
-import { signup } from "@/actions/auth";
-import { normalizeErrors } from "@/utils/authHelpers";
+import { signup } from "@/features/auth/actions/auth";
+import { normalizeErrors } from "@/features/auth/utils/authHelpers";
 
 const initialState = {
   error: null,

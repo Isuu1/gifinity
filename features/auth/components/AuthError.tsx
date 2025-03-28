@@ -14,7 +14,7 @@ import { errorAnimation } from "@/styles/animations";
 import { MdOutlineError } from "react-icons/md";
 
 //Utils
-import { resendConfirmation } from "@/utils/authHelpers";
+import { resendConfirmation } from "@/features/auth/utils/authHelpers";
 
 interface IProps {
   error: string[];

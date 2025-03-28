@@ -73,6 +73,7 @@ export async function signup(prevState: SignupError, formData: FormData) {
         favourite_stickers: {
           data: [],
         },
+        collections: [],
       },
     },
   });

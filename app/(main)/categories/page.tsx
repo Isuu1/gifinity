@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 //Components
-import DataFeed from "@/components/DataFeed/DataFeed";
+import DataFeed from "@/features/media/components/DataGrid";
 import Loading from "@/components/Loading/Loading";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 import Error from "@/components/Error/Error";

@@ -3,12 +3,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 //Components
-import Modal from "@/components/Modal/Modal";
+import Modal from "@/components/UI/Modal";
 import Button from "@/components/UI/Button";
 
 //Animations
 import { AnimatePresence } from "framer-motion";
-import ModalNavMenu from "@/components/Authentication/ModalNavMenu/ModalNavMenu";
+import AuthModalNavMenu from "@/features/auth/components/AuthModalNavMenu";
 
 export default function ModalLayout({
   children,
@@ -44,7 +44,7 @@ export default function ModalLayout({
             <div className="margin-left-auto">
               <Button onClick={closeModal}>X</Button>
             </div>
-            <ModalNavMenu variant="dark" />
+            <AuthModalNavMenu variant="dark" />
             {children}
           </Modal>
         )}

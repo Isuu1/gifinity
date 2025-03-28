@@ -11,8 +11,8 @@ import styles from "./StickyHeader.module.scss";
 import { useAuth } from "@/context/AuthContext";
 
 //Components
-import UserModal from "../User/UserModal/UserModal";
-import Search from "../Search/Search";
+import UserModal from "../../features/user/components/UserModal";
+import Search from "../../features/search/components/Search";
 
 //Icons
 //import { TiThMenu } from "react-icons/ti";

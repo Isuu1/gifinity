@@ -1,6 +1,6 @@
 "use client";
 
-import FavouritesFeed from "@/components/FavouritesFeed/FavouritesFeed";
+import FavouritesGrid from "@/features/favourites/components/FavouritesGrid";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Page() {
@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <div>
       <h1>Favourites</h1>
-      <FavouritesFeed
+      <FavouritesGrid
         data={{
           gifs: favouriteGifs,
           stickers: favouriteStickers,

@@ -1,4 +1,4 @@
-import NavMenu from "@/components/User/NavMenu/NavMenu";
+import UserNavMenu from "@/features/user/components/UserNavMenu";
 import UserPageLayout from "@/layouts/UserPageLayout";
 //import Image from "next/image";
 
@@ -8,7 +8,7 @@ export default function Page({
   return (
     <div className="page">
       <UserPageLayout>
-        <NavMenu />
+        <UserNavMenu />
         {children}
       </UserPageLayout>
     </div>

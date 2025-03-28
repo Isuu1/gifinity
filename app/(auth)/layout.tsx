@@ -1,5 +1,5 @@
 "use client";
-import AuthPageNavMenu from "@/components/Authentication/AuthPageNavMenu/AuthPageNavMenu";
+import AuthPageNavMenu from "@/features/auth/components/AuthPageNavMenu";
 import AuthPagesLayout from "@/layouts/AuthPagesLayout";
 
 export default function AuthLayout({

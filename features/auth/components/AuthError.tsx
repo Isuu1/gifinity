@@ -1,7 +1,7 @@
 import React from "react";
 
 //Styles
-import styles from "./Error.module.scss";
+import styles from "./AuthError.module.scss";
 
 //Components
 import Button from "@/components/UI/Button";

@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/UI/Button";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
-import Error from "../Error/Error";
-import Providers from "../Providers/Providers";
+import AuthError from "./AuthError";
+import AuthProviders from "./AuthProviders";
 
 //Icons
 import { MdEmail } from "react-icons/md";
@@ -96,7 +96,7 @@ const LoginForm: React.FC = () => {
         />
         {/* Passing userEmail to Error component for handling resend email confirmation  */}
         {error.length > 0 && (
-          <Error key="error" error={error} userEmail={state.data.email} />
+          <AuthError key="error" error={error} userEmail={state.data.email} />
         )}
 
         <Button
@@ -115,7 +115,7 @@ const LoginForm: React.FC = () => {
 
       <h4>——— or ———</h4>
 
-      <Providers />
+      <AuthProviders />
     </div>
   );
 };

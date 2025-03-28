@@ -7,9 +7,9 @@ import { useActionState } from "react";
 import Button from "@/components/UI/Button";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
-import SignupSuccess from "../SignupSuccess/SignupSuccess";
-import Error from "../Error/Error";
-import Providers from "../Providers/Providers";
+import SignupSuccess from "./SignupSuccess";
+import AuthError from "./AuthError";
+import AuthProviders from "./AuthProviders";
 
 //Icons
 import { MdEmail } from "react-icons/md";
@@ -116,7 +116,7 @@ const SignupForm: React.FC = () => {
               onFocus={handleFocus}
             />
 
-            {error.length > 0 && <Error key="error" error={error} />}
+            {error.length > 0 && <AuthError key="error" error={error} />}
 
             <Button
               variant="light"
@@ -130,7 +130,7 @@ const SignupForm: React.FC = () => {
 
           <h4>——— or ———</h4>
 
-          <Providers />
+          <AuthProviders />
         </>
       )}
     </div>

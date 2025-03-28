@@ -13,7 +13,7 @@ import { MdOutlineError } from "react-icons/md";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
-import Error from "@/components/Authentication/Error/Error";
+import Error from "@/features/auth/components/AuthError";
 
 //Styles
 import styles from "./ChangeDetailsForm.module.scss";

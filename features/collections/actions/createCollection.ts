@@ -1,7 +1,7 @@
 "use server";
 
 import { CreateCollectionFormState } from "@/types/forms";
-import { createClient } from "../utils/supabase/server";
+import { createClient } from "../../../utils/supabase/server";
 import { v4 as uuidv4 } from "uuid";
 
 export async function createCollection(

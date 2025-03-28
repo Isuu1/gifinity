@@ -1,11 +1,11 @@
 "use server";
 
-import { createClient } from "../utils/supabase/server";
+import { createClient } from "../../../utils/supabase/server";
 //Interfaces
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
 
-export async function saveFavouriteMediaToDb(media: Gif | Sticker) {
+export async function saveToCollection(media: Gif | Sticker) {
   try {
     const supabase = await createClient();
 

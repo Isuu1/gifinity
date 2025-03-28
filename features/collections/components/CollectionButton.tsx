@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 //Utils
-import { saveFavouriteMediaToDb } from "@/actions/saveFavouriteMediaToDb";
+import { saveToCollection } from "@/features/collections/actions/saveToCollection";
 
 //Interfaces
 import { Gif } from "@/interfaces/gifs";
@@ -45,7 +45,7 @@ const CollectionButton: React.FC<IProps> = ({ media }) => {
   );
 
   const handleAddToDb = async () => {
-    const result = await saveFavouriteMediaToDb(media);
+    const result = await saveToCollection(media);
     //Refetch the user data to update the favourite gifs and stickers on client
     if (result?.success) fetchUser();
 

@@ -6,7 +6,7 @@ import React, { useActionState, useState } from "react";
 import styles from "./AddToCollectionModal.module.scss";
 import { useAuth } from "@/context/AuthContext";
 import Input from "@/components/UI/Input";
-import { createCollection } from "@/actions/createCollection";
+import { createCollection } from "@/features/collections/actions/createCollection";
 import Form from "@/components/UI/Form";
 import { CreateCollectionFormState } from "@/types/forms";
 

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 //Styles
-import styles from "./NavMenu.module.scss";
+import styles from "./UserNavMenu.module.scss";
 
 //Icons
 import { FaUserAlt } from "react-icons/fa";

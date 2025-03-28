@@ -9,7 +9,7 @@ import { toastStyle } from "@/styles/toast";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
-import ChangeDetailsError from "@/components/User/ChangeDetailsError/ChangeDetailsError";
+import ChangeDetailsError from "@/features/user/components/ChangeDetailsError";
 
 //Icons
 import { RiLockPasswordFill } from "react-icons/ri";
@@ -17,7 +17,7 @@ import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 
 //Utils
-import { changeUserPassword } from "@/actions/changeUserPassword";
+import { changeUserPassword } from "@/features/user/actions/changeUserPassword";
 import { normalizeErrors } from "@/features/auth/utils/authHelpers";
 
 interface FormState {

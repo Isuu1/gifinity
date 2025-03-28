@@ -1,8 +1,8 @@
 "use client";
 
-import ChangeDetailsForm from "@/components/User/ChangeDetailsForm/ChangeDetailsForm";
-import ChangePasswordForm from "@/components/User/ChangePasswordForm/ChangePasswordForm";
-import ChangeUserAvatar from "@/components/User/ChangeUserAvatar/ChangeUserAvatar";
+import ChangeDetailsForm from "@/features/user/components/ChangeDetailsForm";
+import ChangePasswordForm from "@/features/user/components/ChangePasswordForm";
+import ChangeUserAvatar from "@/features/user/components/ChangeUserAvatar";
 import { useAuth } from "@/context/AuthContext";
 
 export default function Page() {

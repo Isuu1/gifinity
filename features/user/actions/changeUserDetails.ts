@@ -1,6 +1,6 @@
 "use server";
 
-import { ChangeDetailsError } from "@/types/changeDetails";
+import { ChangeDetailsError } from "@/features/user/types/changeDetails";
 import { createClient } from "@/utils/supabase/server";
 
 export async function changeUserDetails(

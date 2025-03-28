@@ -1,7 +1,7 @@
 "use server";
 
-import { changePasswordSchema } from "@/schemas/changePassword";
-import { ChangeDetailsError } from "@/types/changeDetails";
+import { changePasswordSchema } from "@/features/user/schemas/changePassword";
+import { ChangeDetailsError } from "@/features/user/types/changeDetails";
 import { createClient } from "@/utils/supabase/server";
 
 export async function changeUserPassword(

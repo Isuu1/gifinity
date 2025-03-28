@@ -11,7 +11,7 @@ import styles from "./StickyHeader.module.scss";
 import { useAuth } from "@/context/AuthContext";
 
 //Components
-import UserModal from "../User/UserModal/UserModal";
+import UserModal from "../../features/user/components/UserModal";
 import Search from "../Search/Search";
 
 //Icons

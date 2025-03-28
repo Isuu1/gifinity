@@ -24,10 +24,15 @@ import styles from "./SignupForm.module.scss";
 import { signup } from "@/features/auth/actions/auth";
 import { normalizeErrors } from "@/features/auth/utils/authHelpers";
 
-const initialState = {
+//Types
+import { SignupFormState } from "../types/forms";
+
+const initialState: SignupFormState = {
   error: null,
-  success: "",
+  success: false,
   data: { email: "", password: "", confirmPassword: "" },
+  status: 0,
+  resetKey: Date.now(),
 };
 
 const SignupForm: React.FC = () => {
@@ -50,6 +55,8 @@ const SignupForm: React.FC = () => {
     setError([]);
   };
 
+  console.log("state", state);
+
   return (
     <div className={styles.signupFormContainer}>
       <h2>Signup</h2>
@@ -57,7 +64,7 @@ const SignupForm: React.FC = () => {
       {state.success ? (
         <SignupSuccess
           email={state.data.email}
-          successMessage={state.success}
+          successMessage="Your account has been created!"
         />
       ) : (
         <>

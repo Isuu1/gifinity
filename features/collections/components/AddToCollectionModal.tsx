@@ -8,7 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import Input from "@/components/UI/Input";
 import { createCollection } from "@/features/collections/actions/createCollection";
 import Form from "@/components/UI/Form";
-import { CreateCollectionFormState } from "@/types/forms";
+import { CreateCollectionFormState } from "@/features/collections/types/forms";
 
 interface IProps {
   message: string;

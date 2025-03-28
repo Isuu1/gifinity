@@ -10,13 +10,13 @@ import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 
 //Styles
-import styles from "./FavouriteButtonLoggedOut.module.scss";
+import styles from "./FavouriteButton.module.scss";
 
 interface IProps {
   media: Gif | Sticker;
 }
 
-const FavouriteButtonLoggedOut: React.FC<IProps> = ({ media }) => {
+const FavouriteButton: React.FC<IProps> = ({ media }) => {
   const { localFavouriteGifs, localFavouriteStickers, addItemToLocalStorage } =
     useStorage();
 
@@ -42,4 +42,4 @@ const FavouriteButtonLoggedOut: React.FC<IProps> = ({ media }) => {
   );
 };
 
-export default FavouriteButtonLoggedOut;
+export default FavouriteButton;

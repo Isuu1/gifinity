@@ -1,5 +1,5 @@
 //Components
-import DataFeed from "@/components/DataFeed/DataFeed";
+import DataFeed from "@/features/media/components/DataGrid";
 
 import TrendingSearchesSlider from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";

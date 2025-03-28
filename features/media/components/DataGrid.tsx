@@ -4,14 +4,14 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 //Styles
-import styles from "./DataFeed.module.scss";
+import styles from "./DataGrid.module.scss";
 
 //Animations
 import { AnimatePresence } from "framer-motion";
 
 //Components
-import MediaOverlay from "../MediaOverlay/MediaOverlay";
-import MediaTypeMenu from "../MediaTypeMenu/MediaTypeMenu";
+import MediaOverlay from "./MediaOverlay";
+import MediaTypeMenu from "./MediaTypeMenu";
 
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";

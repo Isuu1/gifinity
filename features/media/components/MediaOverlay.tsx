@@ -18,8 +18,8 @@ import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
 
 //Components
-import FavouriteLoggedOut from "./buttons/FavouriteLoggedOut";
-import FavouriteLoggedIn from "./buttons/FavouriteLoggedIn";
+import FavouriteButton from "@/features/favourites/components/FavouriteButton";
+import CollectionButton from "@/features/collections/components/CollectionButton";
 import ShareMedia from "./ShareMedia";
 
 //Context
@@ -48,9 +48,9 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
 
         <div className={styles.addToFavouritesButton}>
           {user ? (
-            <FavouriteLoggedIn media={media} />
+            <FavouriteButton media={media} />
           ) : (
-            <FavouriteLoggedOut media={media} />
+            <CollectionButton media={media} />
           )}
         </div>
 

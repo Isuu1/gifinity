@@ -1,8 +1,8 @@
 "use client";
 
 //Components
-import FavouritesFeed from "@/components/FavouritesFeed/FavouritesFeed";
-import NotificationMessage from "@/components/NotificationMessage/NotificationMessage";
+import FavouritesGrid from "@/features/favourites/components/FavouritesGrid";
+import NotificationMessage from "@/features/favourites/components/NotificationMessage";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Context
@@ -21,7 +21,7 @@ export default function Page() {
         to access them on any device.
       </NotificationMessage>
 
-      <FavouritesFeed
+      <FavouritesGrid
         data={{ gifs: localFavouriteGifs, stickers: localFavouriteStickers }}
       />
     </div>

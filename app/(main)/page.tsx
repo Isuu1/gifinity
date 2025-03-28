@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 //Components
 import TrendingSearchesSlider from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
-import DataFeed from "@/components/DataFeed/DataFeed";
+import DataFeed from "@/features/media/components/DataGrid";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 import Loading from "@/components/Loading/Loading";
 import Error from "@/components/Error/Error";

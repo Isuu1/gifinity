@@ -1,4 +1,4 @@
-import Modal from "@/components/Modal/Modal";
+import Modal from "@/components/UI/Modal";
 import Button from "@/components/UI/Button";
 import React, { useActionState, useState } from "react";
 

@@ -8,14 +8,13 @@ import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
 
 //Components
-import MediaOverlay from "../MediaOverlay/MediaOverlay";
-import Modal from "../Modal/Modal";
-import ConfirmDeleteFavourites from "../ConfirmDeleteFavourites/ConfirmDeleteFavourites";
-import MediaTypeMenu from "../MediaTypeMenu/MediaTypeMenu";
-import Button from "../UI/Button";
+import MediaOverlay from "@/features/media/components/MediaOverlay";
+import ConfirmDeleteFavourites from "./ConfirmDeleteFavourites";
+import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
+import Button from "@/components/UI/Button";
 
 //Styles
-import styles from "./FavouritesFeed.module.scss";
+import styles from "./FavouritesGrid.module.scss";
 
 //Animations
 import { AnimatePresence } from "framer-motion";
@@ -30,7 +29,7 @@ interface IProps {
   };
 }
 
-const FavouritesFeed: React.FC<IProps> = ({ data }) => {
+const FavouritesGrid: React.FC<IProps> = ({ data }) => {
   const { gifs, stickers } = data;
 
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
@@ -55,11 +54,9 @@ const FavouritesFeed: React.FC<IProps> = ({ data }) => {
 
   return (
     <div>
-      <AnimatePresence initial={false} mode="wait">
+      <AnimatePresence>
         {showModal && (
-          <Modal key="modal" theme="light">
-            <ConfirmDeleteFavourites onCancel={() => setShowModal(false)} />
-          </Modal>
+          <ConfirmDeleteFavourites onClose={() => setShowModal(false)} />
         )}
       </AnimatePresence>
       <div className="flex-row">
@@ -110,4 +107,4 @@ const FavouritesFeed: React.FC<IProps> = ({ data }) => {
   );
 };
 
-export default FavouritesFeed;
+export default FavouritesGrid;

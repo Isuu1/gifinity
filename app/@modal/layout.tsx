@@ -3,7 +3,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 //Components
-import Modal from "@/components/Modal/Modal";
+import Modal from "@/components/UI/Modal";
 import Button from "@/components/UI/Button";
 
 //Animations

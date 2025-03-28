@@ -20,17 +20,17 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/context/AuthContext";
 
 //Styles
-import styles from "./FavouriteButtonLoggedIn.module.scss";
+import styles from "./CollectionButton.module.scss";
 import { toastStyle } from "@/styles/toast";
 
 //Components
-import AddToCollectionModal from "../AddToCollectionModal";
+import AddToCollectionModal from "./AddToCollectionModal";
 
 interface IProps {
   media: Gif | Sticker;
 }
 
-const FavouriteButtonLoggedIn: React.FC<IProps> = ({ media }) => {
+const CollectionButton: React.FC<IProps> = ({ media }) => {
   const { fetchUser, favouriteGifs, favouriteStickers } = useAuth();
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -90,4 +90,4 @@ const FavouriteButtonLoggedIn: React.FC<IProps> = ({ media }) => {
   );
 };
 
-export default FavouriteButtonLoggedIn;
+export default CollectionButton;

@@ -24,13 +24,18 @@ import { toastStyle } from "@/styles/toast";
 //Utils
 import { login } from "@/features/auth/actions/auth";
 
-const LoginForm: React.FC = () => {
-  const initialState = {
-    error: null,
-    success: "",
-    data: { email: "", password: "" },
-  };
+//Types
+import { LoginFormState } from "../types/forms";
 
+const initialState: LoginFormState = {
+  error: null,
+  success: false,
+  data: { email: "", password: "" },
+  status: 0,
+  resetKey: Date.now(),
+};
+
+const LoginForm: React.FC = () => {
   const [error, setError] = useState<string[]>([]);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -54,7 +59,7 @@ const LoginForm: React.FC = () => {
   //Redirect to home page and show success message when user is logged in
   useEffect(() => {
     if (state.success) {
-      toast.success(state.success, toastStyle);
+      toast.success("You are logged in", toastStyle);
       router.push("/");
     }
   }, [state, router]);

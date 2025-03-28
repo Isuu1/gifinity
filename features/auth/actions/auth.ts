@@ -3,13 +3,13 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/utils/supabase/server";
 import { signupSchema } from "@/features/auth/schemas/signup";
-import { SignupError } from "@/features/auth/types/signup";
+import { LoginFormState, SignupFormState } from "../types/forms";
 
 //
 // Login process
 //
 
-export async function login(prevData: SignupError, formData: FormData) {
+export async function login(prevData: LoginFormState, formData: FormData) {
   const supabase = await createClient();
 
   const data = {
@@ -21,18 +21,30 @@ export async function login(prevData: SignupError, formData: FormData) {
 
   //resetKey is crucial to trigger useEffect in form component even if the error is the same
   if (error) {
-    return { data, error: error.message, resetKey: Date.now() };
+    return {
+      error: error.message,
+      success: false,
+      data,
+      status: 400,
+      resetKey: Date.now(),
+    };
   }
 
   revalidatePath("/", "layout");
-  return { data, error: null, success: "You're logged in now!" };
+  return {
+    error: null,
+    success: true,
+    data,
+    status: 200,
+    resetKey: Date.now(),
+  };
 }
 
 //
 // Signup process
 //
 
-export async function signup(prevState: SignupError, formData: FormData) {
+export async function signup(prevState: SignupFormState, formData: FormData) {
   const supabase = await createClient();
 
   //Form data from frontend form
@@ -47,15 +59,23 @@ export async function signup(prevState: SignupError, formData: FormData) {
   //Return data along with error message to to able to set email as default value (prevent clearing the input)
   if (!validateSignupData.success) {
     return {
-      data,
       error: validateSignupData.error.format(),
+      success: false,
+      data,
+      status: 400,
       resetKey: Date.now(),
     };
   }
 
   //Return data along with error message to to able to set email as default value (prevent clearing the input)
   if (data.password !== data.confirmPassword) {
-    return { data, error: "Passwords do not match", resetKey: Date.now() };
+    return {
+      error: "Passwords do not match",
+      success: false,
+      data,
+      status: 400,
+      resetKey: Date.now(),
+    };
   }
 
   // Include all initial user data in metadata to insert them in the database
@@ -79,14 +99,21 @@ export async function signup(prevState: SignupError, formData: FormData) {
   });
 
   if (error) {
-    return { error: error.message, resetKey: Date.now() };
+    return {
+      error: error.message,
+      success: false,
+      data,
+      status: 400,
+      resetKey: Date.now(),
+    };
   }
 
   //Upon successful registration, return success message
   return {
-    data,
     error: null,
-    success:
-      "Registration successful! Please check your email to confirm your account.",
+    success: true,
+    data,
+    status: 200,
+    resetKey: Date.now(),
   };
 }

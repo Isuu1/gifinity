@@ -1,4 +1,4 @@
-import CategoriesMenu from "@/components/CategoriesMenu/CategoriesMenu";
+import CategoriesMenu from "@/features/categories/components/CategoriesMenu";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 export default function Categories({

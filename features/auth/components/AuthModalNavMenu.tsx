@@ -4,7 +4,7 @@ import React from "react";
 import Button from "@/components/UI/Button";
 
 //Styles
-import styles from "./ModalNavMenu.module.scss";
+import styles from "./AuthModalNavMenu.module.scss";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 

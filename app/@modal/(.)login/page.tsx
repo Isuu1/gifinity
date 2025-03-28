@@ -1,5 +1,5 @@
 //Components
-import LoginForm from "@/components/Authentication/LoginForm/LoginForm";
+import LoginForm from "@/features/auth/components/LoginForm";
 
 export default function InterceptedLogin() {
   return <LoginForm />;

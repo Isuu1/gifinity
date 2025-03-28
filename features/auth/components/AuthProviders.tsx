@@ -6,7 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 
 //Styles
-import styles from "./Providers.module.scss";
+import styles from "./AuthProviders.module.scss";
 
 const Providers: React.FC = () => {
   return (

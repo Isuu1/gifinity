@@ -12,7 +12,7 @@ import { useAuth } from "@/context/AuthContext";
 
 //Components
 import UserModal from "../../features/user/components/UserModal";
-import Search from "../Search/Search";
+import Search from "../../features/search/components/Search";
 
 //Icons
 //import { TiThMenu } from "react-icons/ti";

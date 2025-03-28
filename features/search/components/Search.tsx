@@ -7,8 +7,8 @@ import React, { useState } from "react";
 import styles from "./Search.module.scss";
 
 //Components
-import Button from "../UI/Button";
-import Autocomplete from "./Autocomplete/Autocomplete";
+import Button from "../../../components/UI/Button";
+import Autocomplete from "./Autocomplete";
 
 //Icons
 import { FaSearch } from "react-icons/fa";

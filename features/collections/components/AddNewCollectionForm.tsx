@@ -13,6 +13,7 @@ import Button from "@/components/UI/Button";
 //Icons
 import { BsFillCollectionFill } from "react-icons/bs";
 import { useAuth } from "@/context/AuthContext";
+import CollectionError from "./CollectionError";
 
 const initialState: CreateCollectionFormState = {
   error: null,
@@ -55,7 +56,7 @@ const AddNewCollectionForm = () => {
         <Button variant="light" type="submit" disabled={isPending}>
           Create
         </Button>
-        {error && <p className={styles.error}>{error}</p>}
+        {error && <CollectionError error={error} />}
       </Form>
     </div>
   );

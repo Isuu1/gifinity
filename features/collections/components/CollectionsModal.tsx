@@ -1,11 +1,17 @@
-import Modal from "@/components/UI/Modal";
-import Button from "@/components/UI/Button";
+"use client";
+
 import React, { useState } from "react";
 
 //Styles
-import styles from "./AddToCollectionModal.module.scss";
+import styles from "./CollectionsModal.module.scss";
+
+//Context
 import { useAuth } from "@/context/AuthContext";
+
+//Components
 import AddNewCollectionForm from "./AddNewCollectionForm";
+import Modal from "@/components/UI/Modal";
+import Button from "@/components/UI/Button";
 
 interface IProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

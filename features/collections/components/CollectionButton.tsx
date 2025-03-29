@@ -12,6 +12,7 @@ import { Sticker } from "@/interfaces/stickers";
 
 //Icons
 import { FaHeart } from "react-icons/fa";
+import { FaHeartCirclePlus } from "react-icons/fa6";
 
 //Animations
 import { motion } from "framer-motion";
@@ -31,17 +32,17 @@ interface IProps {
 }
 
 const CollectionButton: React.FC<IProps> = ({ media }) => {
-  const { fetchUser, favouriteGifs, favouriteStickers, collections } =
-    useAuth();
+  // const { fetchUser, favouriteGifs, favouriteStickers, collections } =
+  //   useAuth();
 
   const [modalOpen, setModalOpen] = useState(false);
 
-  const isGifOnWishlist = favouriteGifs.data.some(
-    (gif: Gif) => gif.id === media.id
-  );
-  const isStickerOnWishlist = favouriteStickers.data.some(
-    (sticker: Sticker) => sticker.id === media.id
-  );
+  // const isGifOnWishlist = favouriteGifs.data.some(
+  //   (gif: Gif) => gif.id === media.id
+  // );
+  // const isStickerOnWishlist = favouriteStickers.data.some(
+  //   (sticker: Sticker) => sticker.id === media.id
+  // );
 
   // const handleAddToDb = async () => {
   //   const result = await saveToCollection(media);
@@ -76,10 +77,8 @@ const CollectionButton: React.FC<IProps> = ({ media }) => {
         whileTap={{ scale: 1.6 }} // Apply scale animation on tap
         transition={{ duration: 0.2 }}
       >
-        <FaHeart
-          className={`${styles.icon} ${
-            isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
-          }`}
+        <FaHeartCirclePlus
+          className={styles.icon}
           onClick={() => setModalOpen(true)}
         />
       </motion.div>

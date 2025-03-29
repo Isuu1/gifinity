@@ -52,6 +52,7 @@ const AddNewCollectionForm = () => {
           labelHidden
           placeholder="Collection name"
           icon={<BsFillCollectionFill />}
+          onFocus={() => setError(null)}
         />
         <Button variant="light" type="submit" disabled={isPending}>
           Create

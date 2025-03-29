@@ -13,6 +13,15 @@ export async function createCollection(
     name: formData.get("name") as string,
   };
 
+  if (!data.name) {
+    return {
+      error: "Please name your collection",
+      success: false,
+      data: { name: data.name },
+      status: 400,
+    };
+  }
+
   try {
     const supabase = await createClient();
 

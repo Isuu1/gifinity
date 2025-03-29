@@ -1,19 +1,27 @@
 "use client";
 
 import React, { useActionState, useEffect, useState } from "react";
+
+//Types
 import { CreateCollectionFormState } from "../types/forms";
+
+//Actions
 import { createCollection } from "../actions/createCollection";
 
 //Styles
 import styles from "./AddNewCollectionForm.module.scss";
+
+//Components
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
+import CollectionError from "./CollectionError";
 
 //Icons
 import { BsFillCollectionFill } from "react-icons/bs";
+
+//Hooks
 import { useAuth } from "@/context/AuthContext";
-import CollectionError from "./CollectionError";
 
 const initialState: CreateCollectionFormState = {
   error: null,

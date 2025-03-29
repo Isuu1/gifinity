@@ -1,4 +1,6 @@
-import React, { useActionState } from "react";
+"use client";
+
+import React, { useActionState, useEffect, useState } from "react";
 import { CreateCollectionFormState } from "../types/forms";
 import { createCollection } from "../actions/createCollection";
 
@@ -7,6 +9,10 @@ import styles from "./AddNewCollectionForm.module.scss";
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
+
+//Icons
+import { BsFillCollectionFill } from "react-icons/bs";
+import { useAuth } from "@/context/AuthContext";
 
 const initialState: CreateCollectionFormState = {
   error: null,
@@ -21,13 +27,35 @@ const AddNewCollectionForm = () => {
     initialState
   );
 
+  const [error, setError] = useState<string | null>(null);
+
+  const { fetchUser } = useAuth();
+
+  useEffect(() => {
+    if (state.error) {
+      setError(state.error);
+    }
+    if (state.success) {
+      fetchUser();
+    }
+  }, [state]);
+
   return (
     <div className={styles.newCollectionContainer}>
       <Form action={formAction}>
-        <Input id="name" type="text" label="name" variant="light" />
-        <Button variant="light" type="submit">
+        <Input
+          id="name"
+          type="text"
+          label="name"
+          variant="light"
+          labelHidden
+          placeholder="Collection name"
+          icon={<BsFillCollectionFill />}
+        />
+        <Button variant="light" type="submit" disabled={isPending}>
           Create
         </Button>
+        {error && <p className={styles.error}>{error}</p>}
       </Form>
     </div>
   );

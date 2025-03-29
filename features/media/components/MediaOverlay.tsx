@@ -47,7 +47,7 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
         {shareContainer && <ShareMedia url={media?.images.original.url} />}
 
         <div className={styles.addToFavouritesButton}>
-          {user ? (
+          {!user ? (
             <FavouriteButton media={media} />
           ) : (
             <CollectionButton media={media} />

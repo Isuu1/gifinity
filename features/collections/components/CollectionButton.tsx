@@ -24,18 +24,17 @@ import styles from "./CollectionButton.module.scss";
 import { toastStyle } from "@/styles/toast";
 
 //Components
-import AddToCollectionModal from "./AddToCollectionModal";
+import CollectionsModal from "./CollectionsModal";
 
 interface IProps {
   media: Gif | Sticker;
 }
 
 const CollectionButton: React.FC<IProps> = ({ media }) => {
-  const { fetchUser, favouriteGifs, favouriteStickers } = useAuth();
+  const { fetchUser, favouriteGifs, favouriteStickers, collections } =
+    useAuth();
 
   const [modalOpen, setModalOpen] = useState(false);
-
-  const [message, setMessage] = useState("");
 
   const isGifOnWishlist = favouriteGifs.data.some(
     (gif: Gif) => gif.id === media.id
@@ -44,37 +43,35 @@ const CollectionButton: React.FC<IProps> = ({ media }) => {
     (sticker: Sticker) => sticker.id === media.id
   );
 
-  const handleAddToDb = async () => {
-    const result = await saveToCollection(media);
-    //Refetch the user data to update the favourite gifs and stickers on client
-    if (result?.success) fetchUser();
+  // const handleAddToDb = async () => {
+  //   const result = await saveToCollection(media);
+  //   //Refetch the user data to update the favourite gifs and stickers on client
+  //   if (result?.success) fetchUser();
 
-    if (result?.error) {
-      toast.error(result.error, toastStyle);
-      return;
-    }
+  //   if (result?.error) {
+  //     toast.error(result.error, toastStyle);
+  //     return;
+  //   }
 
-    if (result?.success && media.type === "gif" && isGifOnWishlist) {
-      toast.success("Gif removed from favourites", toastStyle);
-    }
-    if (result?.success && media.type === "gif" && !isGifOnWishlist) {
-      setModalOpen(true);
-      setMessage("✅ Gif added to favourites");
-    }
-    if (result?.success && media.type === "sticker" && isStickerOnWishlist) {
-      toast.success("Sticker removed from favourites", toastStyle);
-    }
-    if (result?.success && media.type === "sticker" && !isStickerOnWishlist) {
-      setModalOpen(true);
-      setMessage("✅ Sticker added to favourites");
-    }
-  };
+  //   if (result?.success && media.type === "gif" && isGifOnWishlist) {
+  //     toast.success("Gif removed from favourites", toastStyle);
+  //   }
+  //   if (result?.success && media.type === "gif" && !isGifOnWishlist) {
+  //     setModalOpen(true);
+  //     setMessage("✅ Gif added to favourites");
+  //   }
+  //   if (result?.success && media.type === "sticker" && isStickerOnWishlist) {
+  //     toast.success("Sticker removed from favourites", toastStyle);
+  //   }
+  //   if (result?.success && media.type === "sticker" && !isStickerOnWishlist) {
+  //     setModalOpen(true);
+  //     setMessage("✅ Sticker added to favourites");
+  //   }
+  // };
 
   return (
     <>
-      {modalOpen && (
-        <AddToCollectionModal message={message} setModalOpen={setModalOpen} />
-      )}
+      {modalOpen && <CollectionsModal setModalOpen={setModalOpen} />}
       <motion.div
         whileTap={{ scale: 1.6 }} // Apply scale animation on tap
         transition={{ duration: 0.2 }}
@@ -83,7 +80,7 @@ const CollectionButton: React.FC<IProps> = ({ media }) => {
           className={`${styles.icon} ${
             isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
           }`}
-          onClick={handleAddToDb}
+          onClick={() => setModalOpen(true)}
         />
       </motion.div>
     </>

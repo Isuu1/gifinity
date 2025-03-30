@@ -29,8 +29,6 @@ const MediaOverlay: React.FC = () => {
 
   const user = useAuth();
 
-  console.log(user);
-
   return (
     <motion.div
       className={styles.overlay}

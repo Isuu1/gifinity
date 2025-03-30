@@ -72,7 +72,9 @@ const CollectionButton: React.FC<IProps> = ({ media }) => {
 
   return (
     <>
-      {modalOpen && <CollectionsModal setModalOpen={setModalOpen} />}
+      {modalOpen && (
+        <CollectionsModal setModalOpen={setModalOpen} media={media} />
+      )}
       <motion.div
         whileTap={{ scale: 1.6 }} // Apply scale animation on tap
         transition={{ duration: 0.2 }}

@@ -13,11 +13,16 @@ import AddNewCollectionForm from "./AddNewCollectionForm";
 import Modal from "@/components/UI/Modal";
 import Button from "@/components/UI/Button";
 
+//Interfaces
+import { Gif } from "@/interfaces/gifs";
+import { Sticker } from "@/interfaces/stickers";
+
 interface IProps {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  media: Gif | Sticker;
 }
 
-const CollectionsModal: React.FC<IProps> = ({ setModalOpen }) => {
+const CollectionsModal: React.FC<IProps> = ({ setModalOpen, media }) => {
   const { collections } = useAuth();
 
   const [newCollectionForm, setNewCollectionForm] = useState<boolean>(false);

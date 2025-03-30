@@ -29,6 +29,8 @@ const MediaOverlay: React.FC = () => {
 
   const user = useAuth();
 
+  console.log(user);
+
   return (
     <motion.div
       className={styles.overlay}
@@ -41,7 +43,7 @@ const MediaOverlay: React.FC = () => {
         {shareContainer && <ShareMedia />}
 
         <div className={styles.addToFavouritesButton}>
-          {!user ? <FavouriteButton /> : <CollectionButton />}
+          {!user.user ? <FavouriteButton /> : <CollectionButton />}
         </div>
 
         <div className={styles.shareButton}>

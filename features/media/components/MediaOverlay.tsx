@@ -28,7 +28,6 @@ const MediaOverlay: React.FC = () => {
   const { media } = useCollections();
 
   const user = useAuth();
-  console.log(media);
 
   return (
     <motion.div

@@ -84,9 +84,7 @@ const FavouritesGrid: React.FC<IProps> = ({ data }) => {
               onMouseLeave={() => setShowOverlay(null)}
             >
               <AnimatePresence initial={false}>
-                {showOverlay === media.id && (
-                  <MediaOverlay key={media.id} media={media} />
-                )}
+                {showOverlay === media.id && <MediaOverlay key={media.id} />}
               </AnimatePresence>
               <Image
                 className={styles.image}

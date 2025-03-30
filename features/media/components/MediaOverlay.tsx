@@ -13,10 +13,6 @@ import { TfiSharethis } from "react-icons/tfi";
 import { motion } from "framer-motion";
 import { overlayAnimation } from "@/styles/animations";
 
-//Interfaces
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
-
 //Components
 import FavouriteButton from "@/features/favourites/components/FavouriteButton";
 import CollectionButton from "@/features/collections/components/CollectionButton";
@@ -24,13 +20,12 @@ import ShareMedia from "./ShareMedia";
 
 //Context
 import { useAuth } from "@/context/AuthContext";
+import { useCollections } from "@/context/CollectionsProvider";
 
-interface IProps {
-  media: Gif | Sticker;
-}
-
-const MediaOverlay: React.FC<IProps> = ({ media }) => {
+const MediaOverlay: React.FC = () => {
   const [shareContainer, setShareContainer] = useState(false);
+
+  const { media } = useCollections();
 
   const user = useAuth();
   console.log(media);
@@ -44,14 +39,10 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
       exit="exit"
     >
       <div className={styles.overlayIconsContainer}>
-        {shareContainer && <ShareMedia url={media?.images.original.url} />}
+        {shareContainer && <ShareMedia />}
 
         <div className={styles.addToFavouritesButton}>
-          {!user ? (
-            <FavouriteButton media={media} />
-          ) : (
-            <CollectionButton media={media} />
-          )}
+          {!user ? <FavouriteButton /> : <CollectionButton />}
         </div>
 
         <div className={styles.shareButton}>
@@ -62,7 +53,7 @@ const MediaOverlay: React.FC<IProps> = ({ media }) => {
         </div>
       </div>
 
-      {media.user?.display_name && (
+      {media && media.user?.display_name && (
         <div className={styles.overlay_author}>
           <Image
             className={styles.avatar}

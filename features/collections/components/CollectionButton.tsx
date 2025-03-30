@@ -1,87 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
-import toast from "react-hot-toast";
-
-//Utils
-import { saveToCollection } from "@/features/collections/actions/saveToCollection";
-
-//Interfaces
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
+import React from "react";
 
 //Icons
-import { FaHeart } from "react-icons/fa";
 import { FaHeartCirclePlus } from "react-icons/fa6";
 
 //Animations
 import { motion } from "framer-motion";
 
-//Context
-import { useAuth } from "@/context/AuthContext";
-
 //Styles
 import styles from "./CollectionButton.module.scss";
-import { toastStyle } from "@/styles/toast";
 
 //Components
-import CollectionsModal from "./CollectionsModal";
+import { useCollections } from "@/context/CollectionsProvider";
 
-interface IProps {
-  media: Gif | Sticker;
-}
-
-const CollectionButton: React.FC<IProps> = ({ media }) => {
-  // const { fetchUser, favouriteGifs, favouriteStickers, collections } =
-  //   useAuth();
-
-  const [modalOpen, setModalOpen] = useState(false);
-
-  // const isGifOnWishlist = favouriteGifs.data.some(
-  //   (gif: Gif) => gif.id === media.id
-  // );
-  // const isStickerOnWishlist = favouriteStickers.data.some(
-  //   (sticker: Sticker) => sticker.id === media.id
-  // );
-
-  // const handleAddToDb = async () => {
-  //   const result = await saveToCollection(media);
-  //   //Refetch the user data to update the favourite gifs and stickers on client
-  //   if (result?.success) fetchUser();
-
-  //   if (result?.error) {
-  //     toast.error(result.error, toastStyle);
-  //     return;
-  //   }
-
-  //   if (result?.success && media.type === "gif" && isGifOnWishlist) {
-  //     toast.success("Gif removed from favourites", toastStyle);
-  //   }
-  //   if (result?.success && media.type === "gif" && !isGifOnWishlist) {
-  //     setModalOpen(true);
-  //     setMessage("✅ Gif added to favourites");
-  //   }
-  //   if (result?.success && media.type === "sticker" && isStickerOnWishlist) {
-  //     toast.success("Sticker removed from favourites", toastStyle);
-  //   }
-  //   if (result?.success && media.type === "sticker" && !isStickerOnWishlist) {
-  //     setModalOpen(true);
-  //     setMessage("✅ Sticker added to favourites");
-  //   }
-  // };
+const CollectionButton: React.FC = () => {
+  const { setCollectionsModalOpen } = useCollections();
 
   return (
     <>
-      {modalOpen && (
-        <CollectionsModal setModalOpen={setModalOpen} media={media} />
-      )}
       <motion.div
         whileTap={{ scale: 1.6 }} // Apply scale animation on tap
         transition={{ duration: 0.2 }}
       >
         <FaHeartCirclePlus
           className={styles.icon}
-          onClick={() => setModalOpen(true)}
+          onClick={() => setCollectionsModalOpen(true)}
         />
       </motion.div>
     </>

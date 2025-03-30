@@ -6,24 +6,15 @@ import React, { useState } from "react";
 import styles from "./CollectionsModal.module.scss";
 
 //Context
-import { useAuth } from "@/context/AuthContext";
+import { useCollections } from "@/context/CollectionsProvider";
 
 //Components
 import AddNewCollectionForm from "./AddNewCollectionForm";
 import Modal from "@/components/UI/Modal";
 import Button from "@/components/UI/Button";
 
-//Interfaces
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
-
-interface IProps {
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  media: Gif | Sticker;
-}
-
-const CollectionsModal: React.FC<IProps> = ({ setModalOpen, media }) => {
-  const { collections } = useAuth();
+const CollectionsModal: React.FC = () => {
+  const { collections, setCollectionsModalOpen } = useCollections();
 
   const [newCollectionForm, setNewCollectionForm] = useState<boolean>(false);
 
@@ -34,7 +25,7 @@ const CollectionsModal: React.FC<IProps> = ({ setModalOpen, media }) => {
       <div className={styles.addToCollectionContainer}>
         <Button
           className={styles.closeButton}
-          onClick={() => setModalOpen(false)}
+          onClick={() => setCollectionsModalOpen(false)}
         >
           x
         </Button>

@@ -16,6 +16,8 @@ import MediaTypeMenu from "./MediaTypeMenu";
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
+import { useCollections } from "@/context/CollectionsProvider";
+import CollectionsModal from "@/features/collections/components/CollectionsModal";
 //import LoadMoreDataOnScroll from "../LoadMoreDataOnScroll/LoadMoreDataOnScroll";
 
 interface IProps {
@@ -36,6 +38,8 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
 
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
+  const { setMedia, collectionsModalOpen } = useCollections();
+
   useEffect(() => {
     // Ensure it updates when props change
     setDisplayedContent(activeButton === "gifs" ? gifs : stickers);
@@ -45,6 +49,7 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
 
   return (
     <div>
+      {collectionsModalOpen && <CollectionsModal />}
       <MediaTypeMenu
         activeButton={activeButton}
         setActiveButton={setActiveButton}
@@ -60,13 +65,17 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
             <div
               key={media.id}
               className={styles.gif}
-              onMouseEnter={() => setShowOverlay(media.id)}
-              onMouseLeave={() => setShowOverlay(null)}
+              onMouseEnter={() => {
+                setShowOverlay(media.id);
+                setMedia(media);
+              }}
+              onMouseLeave={() => {
+                setShowOverlay(null);
+                setMedia(null);
+              }}
             >
               <AnimatePresence initial={false}>
-                {showOverlay === media.id && (
-                  <MediaOverlay key={media.id} media={media} />
-                )}
+                {showOverlay === media.id && <MediaOverlay key={media.id} />}
               </AnimatePresence>
               <Image
                 className={styles.image}

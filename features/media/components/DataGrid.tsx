@@ -49,7 +49,9 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
 
   return (
     <div>
-      {collectionsModalOpen && <CollectionsModal />}
+      <AnimatePresence>
+        {collectionsModalOpen && <CollectionsModal />}
+      </AnimatePresence>
       <MediaTypeMenu
         activeButton={activeButton}
         setActiveButton={setActiveButton}

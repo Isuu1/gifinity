@@ -1,4 +1,4 @@
-.collectionsMenu {
+.collectionsGrid {
   //background: #36343a;
   margin-top: 2rem;
   border-radius: 34px;
@@ -16,17 +16,18 @@
     gap: 1rem;
     overflow: hidden;
     transition: all 0.2s ease-in-out;
-    .deleteButton {
-      margin-left: auto;
-      font-size: 1.5rem;
-      color: #fff;
-      cursor: pointer;
-      transition: color 0.2s ease-in-out;
-      &:hover {
-        color: #ff204e;
-      }
-    }
+    // .deleteButton {
+    //   margin-left: auto;
+    //   font-size: 1.5rem;
+    //   color: #fff;
+    //   cursor: pointer;
+    //   transition: color 0.2s ease-in-out;
+    //   &:hover {
+    //     color: #ff204e;
+    //   }
+    // }
     .image {
+      z-index: 5;
       border-radius: 14px;
       position: relative !important;
     }

@@ -20,10 +20,12 @@ import { AnimatePresence } from "framer-motion";
 
 //Icons
 import { MdDeleteForever } from "react-icons/md";
+import { HiMenuAlt3 } from "react-icons/hi";
 
 //import { IoTrashBin } from "react-icons/io5";
 import { useCollections } from "@/context/CollectionsProvider";
 import { Collection } from "@/interfaces/collections";
+import CollectionMenu from "./CollectionMenu";
 // import Button from "@/components/UI/Button";
 
 const CollectionsGrid: React.FC = () => {
@@ -69,15 +71,11 @@ const CollectionsGrid: React.FC = () => {
         {/* {showModal && (
           <ConfirmDeleteFavourites onClose={() => setShowModal(false)} />
         )} */}
-        <ul className={styles.collectionsMenu}>
+        <ul className={styles.collectionsGrid}>
           {collections.map((collection) => (
             <li className={styles.collectionItem} key={collection.id}>
-              <div className={styles.deleteButton}>
-                {/* <Button variant="light" icon={<MdDeleteForever />}>
-                  Delete
-                </Button> */}
-                <MdDeleteForever />
-              </div>
+              <CollectionMenu />
+
               <Image
                 className={styles.image}
                 src={generateCollectionThumbnail(collection)}

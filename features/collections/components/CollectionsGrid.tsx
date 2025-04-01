@@ -3,54 +3,20 @@
 import React from "react";
 import Image from "next/image";
 
-//Interfaces
-// import { Gifs } from "@/interfaces/gifs";
-// import { Stickers } from "@/interfaces/stickers";
-
 //Components
-// import MediaOverlay from "@/features/media/components/MediaOverlay";
-// import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
-// import Button from "@/components/UI/Button";
-
+import CollectionMenu from "./CollectionMenu";
 //Styles
 import styles from "./CollectionsGrid.module.scss";
-
 //Animations
 import { AnimatePresence } from "framer-motion";
-
-//Icons
-import { MdDeleteForever } from "react-icons/md";
-import { HiMenuAlt3 } from "react-icons/hi";
-
-//import { IoTrashBin } from "react-icons/io5";
+//Hooks
 import { useCollections } from "@/context/CollectionsProvider";
+//Types
 import { Collection } from "@/interfaces/collections";
-import CollectionMenu from "./CollectionMenu";
-// import Button from "@/components/UI/Button";
 
 const CollectionsGrid: React.FC = () => {
-  //const [showOverlay, setShowOverlay] = useState<string | null>(null);
-
-  // const [displayedContent, setDisplayedContent] = useState<
-  //   Gifs | Stickers | null
-  // >(null);
-
-  // const [activeButton, setActiveButton] = useState<string>("gifs");
-
-  // const [showModal, setShowModal] = useState<boolean>(false);
-
-  // const { setMedia, collections } = useCollections();
   const { collections } = useCollections();
 
-  //Check if the favourites are empty depending on currently displayed content
-  //const isFavouritesEmpty = displayedContent?.data.length === 0;
-
-  // useEffect(() => {
-  //   // Ensure it updates when props change
-  //   setDisplayedContent(
-  //     activeButton === "gifs" ? gifs || { data: [] } : stickers || { data: [] }
-  //   );
-  // }, [gifs, stickers, activeButton]);
   console.log("collections", collections);
 
   const generateCollectionThumbnail = (collection: Collection) => {
@@ -68,12 +34,9 @@ const CollectionsGrid: React.FC = () => {
   return (
     <div>
       <AnimatePresence>
-        {/* {showModal && (
-          <ConfirmDeleteFavourites onClose={() => setShowModal(false)} />
-        )} */}
-        <ul className={styles.collectionsGrid}>
+        <div className={styles.collectionsGrid}>
           {collections.map((collection) => (
-            <li className={styles.collectionItem} key={collection.id}>
+            <div className={styles.collectionTile} key={collection.id}>
               <CollectionMenu />
 
               <Image
@@ -87,58 +50,10 @@ const CollectionsGrid: React.FC = () => {
                 <h5>{collection.gifs.length} gifs</h5>
                 <h5>{collection.stickers.length} stickers</h5>
               </div>
-            </li>
-          ))}
-        </ul>
-      </AnimatePresence>
-      {/* <div className="flex-row">
-        <MediaTypeMenu
-          activeButton={activeButton}
-          setActiveButton={setActiveButton}
-        />
-        <div className="margin-left-auto">
-          <Button
-            icon={<IoTrashBin />}
-            iconPosition="right"
-            onClick={() => setShowModal(true)}
-          >
-            Clear favourites
-          </Button>
-        </div>
-      </div> */}
-      {/* <div className={styles.feedContainer}>
-        {displayedContent &&
-          displayedContent.data.map((media) => (
-            <div
-              key={media.id}
-              className={styles.gif}
-              onMouseEnter={() => {
-                setShowOverlay(media.id);
-                setMedia(media);
-              }}
-              onMouseLeave={() => {
-                setShowOverlay(null);
-                setMedia(null);
-              }}
-            >
-              <AnimatePresence initial={false}>
-                {showOverlay === media.id && <MediaOverlay key={media.id} />}
-              </AnimatePresence>
-              <Image
-                className={styles.image}
-                src={media.images.original.url}
-                alt={media.title}
-                fill
-                unoptimized
-              />
             </div>
           ))}
-      </div> */}
-      {/* {isFavouritesEmpty && (
-        <div className={styles.emptyFavourites}>
-          <h3>You don`t have any favourite {activeButton} yet!</h3>
         </div>
-      )} */}
+      </AnimatePresence>
     </div>
   );
 };

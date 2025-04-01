@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdEditDocument } from "react-icons/md";
 import { RiDeleteBin7Fill } from "react-icons/ri";
-
 //Styles
 import styles from "./CollectionMenu.module.scss";
 //Animations
@@ -32,7 +31,7 @@ const menuVariants = {
 const CollectionMenu: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const menuRef = useRef<HTMLUListElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -49,7 +48,7 @@ const CollectionMenu: React.FC = () => {
   }, [menuRef]);
 
   return (
-    <div className={styles.collectionMenuContainer}>
+    <div className={styles.collectionMenuContainer} ref={menuRef}>
       <HiMenuAlt3
         className={styles.icon}
         onClick={() => setMenuOpen(!menuOpen)}
@@ -57,7 +56,6 @@ const CollectionMenu: React.FC = () => {
       <AnimatePresence>
         {menuOpen && (
           <motion.ul
-            ref={menuRef}
             className={styles.menu}
             variants={menuVariants}
             initial="hidden"

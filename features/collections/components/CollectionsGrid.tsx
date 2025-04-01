@@ -37,7 +37,7 @@ const CollectionsGrid: React.FC = () => {
         <div className={styles.collectionsGrid}>
           {collections.map((collection) => (
             <div className={styles.collectionTile} key={collection.id}>
-              <CollectionMenu />
+              <CollectionMenu collection={collection} />
 
               <Image
                 className={styles.image}

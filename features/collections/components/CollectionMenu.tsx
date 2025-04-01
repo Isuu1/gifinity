@@ -8,6 +8,13 @@ import { RiDeleteBin7Fill } from "react-icons/ri";
 import styles from "./CollectionMenu.module.scss";
 //Animations
 import { AnimatePresence, motion } from "framer-motion";
+//Types
+import { Collection } from "@/interfaces/collections";
+//Actions
+import { deleteCollection } from "@/features/collections/lib/actions/deleteCollection";
+//Hooks
+import { useCollections } from "@/context/CollectionsProvider";
+import ConfirmAction from "@/components/ConfirmAction/ConfirmAction";
 
 const menuVariants = {
   hidden: {
@@ -28,8 +35,16 @@ const menuVariants = {
   },
 };
 
-const CollectionMenu: React.FC = () => {
+interface CollectionProps {
+  collection: Collection;
+}
+
+const CollectionMenu: React.FC<CollectionProps> = ({ collection }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [deletePromptOpen, setDeletePromptOpen] = useState<boolean>(false);
+
+  const { fetchCollections } = useCollections();
 
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -47,33 +62,53 @@ const CollectionMenu: React.FC = () => {
     };
   }, [menuRef]);
 
+  const handleDeleteCollection = async (collection: Collection) => {
+    const result = await deleteCollection(collection);
+    console.log("result", result);
+    fetchCollections();
+  };
+
   return (
-    <div className={styles.collectionMenuContainer} ref={menuRef}>
-      <HiMenuAlt3
-        className={styles.icon}
-        onClick={() => setMenuOpen(!menuOpen)}
-      />
+    <>
       <AnimatePresence>
-        {menuOpen && (
-          <motion.ul
-            className={styles.menu}
-            variants={menuVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <li className={styles.item}>
-              <MdEditDocument />
-              Rename
-            </li>
-            <li className={styles.item}>
-              <RiDeleteBin7Fill />
-              Delete
-            </li>
-          </motion.ul>
+        {deletePromptOpen && (
+          <ConfirmAction
+            onConfirm={() => handleDeleteCollection(collection)}
+            onCancel={() => setDeletePromptOpen(false)}
+            message={`Delete collection ${collection.name}?`}
+          />
         )}
       </AnimatePresence>
-    </div>
+      <div className={styles.collectionMenuContainer} ref={menuRef}>
+        <HiMenuAlt3
+          className={styles.icon}
+          onClick={() => setMenuOpen(!menuOpen)}
+        />
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.ul
+              className={styles.menu}
+              variants={menuVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <li className={styles.item}>
+                <MdEditDocument />
+                Rename
+              </li>
+              <li
+                className={styles.item}
+                onClick={() => setDeletePromptOpen(true)}
+              >
+                <RiDeleteBin7Fill />
+                Delete
+              </li>
+            </motion.ul>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   );
 };
 

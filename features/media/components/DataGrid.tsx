@@ -27,7 +27,7 @@ interface IProps {
   };
 }
 
-const DataFeed: React.FC<IProps> = ({ data }) => {
+const DataGrid: React.FC<IProps> = ({ data }) => {
   const { gifs, stickers } = data;
 
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
@@ -73,7 +73,7 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
               }}
               onMouseLeave={() => {
                 setShowOverlay(null);
-                setMedia(null);
+                //setMedia(null);
               }}
             >
               <AnimatePresence initial={false}>
@@ -94,4 +94,4 @@ const DataFeed: React.FC<IProps> = ({ data }) => {
   );
 };
 
-export default DataFeed;
+export default DataGrid;

@@ -52,16 +52,8 @@ export async function createCollection(
     const newCollection = {
       id: uuidv4(),
       name: data.name,
-      items: [
-        {
-          type: "gifs",
-          data: [],
-        },
-        {
-          type: "stickers",
-          data: [],
-        },
-      ],
+      gifs: [],
+      stickers: [],
       createdAt: new Date().toISOString(),
     };
 

@@ -47,6 +47,13 @@ const CollectionsModal: React.FC = () => {
 
       return isGifInCollection ? <IoIosRemoveCircle /> : <IoIosAddCircle />;
     }
+    if (media && media.type === "sticker") {
+      const isStickerInCollection = collection.stickers.some(
+        (sticker) => sticker.id === media.id
+      );
+
+      return isStickerInCollection ? <IoIosRemoveCircle /> : <IoIosAddCircle />;
+    }
   };
 
   const handleCollection = async (collection: Collection) => {
@@ -59,6 +66,10 @@ const CollectionsModal: React.FC = () => {
 
     const isGifInCollection = collection.gifs.some(
       (gif) => gif.id === media.id
+    );
+
+    const isStickerInCollection = collection.stickers.some(
+      (sticker) => sticker.id === media.id
     );
 
     const result = await saveToCollection(media, collection.name);
@@ -75,6 +86,15 @@ const CollectionsModal: React.FC = () => {
     if (result?.success && result?.gif && !isGifInCollection) {
       toast.success("Gif added to collection", toastStyle);
     }
+
+    if (result?.success && result?.sticker && isStickerInCollection) {
+      toast.success("Sticker removed from collection", toastStyle);
+    }
+
+    if (result?.success && result?.sticker && !isStickerInCollection) {
+      toast.success("Sticker added to collection", toastStyle);
+    }
+
     fetchCollections(); // Fetch collections again to update the state
   };
 

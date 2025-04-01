@@ -8,7 +8,7 @@ import Link from "next/link";
 
 //Icons
 import { FaUserAlt } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { BsFillCollectionFill } from "react-icons/bs";
 import { IoSettings } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -77,9 +77,9 @@ const UserModal: React.FC = () => {
             </motion.li>
 
             <motion.li variants={userModalMenuItemsAnimation}>
-              <Link href="/user/favourites" className={styles.item}>
-                <FaHeart />
-                Favourites
+              <Link href="/user/collections" className={styles.item}>
+                <BsFillCollectionFill />
+                Collections
               </Link>
             </motion.li>
 

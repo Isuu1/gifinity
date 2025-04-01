@@ -1,20 +1,10 @@
-"use client";
-
-import FavouritesGrid from "@/features/favourites/components/FavouritesGrid";
-import { useAuth } from "@/context/AuthContext";
+import CollectionsGrid from "@/features/collections/components/CollectionsGrid";
 
 export default function Page() {
-  const { favouriteGifs, favouriteStickers } = useAuth();
-
   return (
     <div>
-      <h1>Favourites</h1>
-      <FavouritesGrid
-        data={{
-          gifs: favouriteGifs,
-          stickers: favouriteStickers,
-        }}
-      />
+      <h1>Collections</h1>
+      <CollectionsGrid />
     </div>
   );
 }

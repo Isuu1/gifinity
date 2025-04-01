@@ -1,27 +1,21 @@
 "use client";
 
 import React, { useActionState, useEffect, useState } from "react";
-
 //Types
 import { CreateCollectionFormState } from "../types/forms";
-
 //Actions
 import { createCollection } from "../actions/createCollection";
-
 //Styles
 import styles from "./AddNewCollectionForm.module.scss";
-
 //Components
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import CollectionError from "./CollectionError";
-
 //Icons
 import { BsFillCollectionFill } from "react-icons/bs";
-
 //Hooks
-import { useAuth } from "@/context/AuthContext";
+import { useCollections } from "@/context/CollectionsProvider";
 
 const initialState: CreateCollectionFormState = {
   error: null,
@@ -30,7 +24,11 @@ const initialState: CreateCollectionFormState = {
   status: 0,
 };
 
-const AddNewCollectionForm = () => {
+interface FormProps {
+  closeForm: () => void;
+}
+
+const AddNewCollectionForm: React.FC<FormProps> = ({ closeForm }) => {
   const [state, formAction, isPending] = useActionState(
     createCollection,
     initialState
@@ -38,19 +36,20 @@ const AddNewCollectionForm = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  const { fetchUser } = useAuth();
+  const { fetchCollections } = useCollections();
 
   useEffect(() => {
     if (state.error) {
       setError(state.error);
     }
     if (state.success) {
-      fetchUser();
+      fetchCollections();
+      closeForm();
     }
   }, [state]);
 
   return (
-    <div className={styles.newCollectionContainer}>
+    <div className={styles.newCollectionFormContainer}>
       <Form action={formAction}>
         <Input
           id="name"
@@ -62,9 +61,14 @@ const AddNewCollectionForm = () => {
           icon={<BsFillCollectionFill />}
           onFocus={() => setError(null)}
         />
-        <Button variant="light" type="submit" disabled={isPending}>
-          Create
-        </Button>
+        <div className={styles.newCollectionFormButtons}>
+          <Button variant="light" type="submit" disabled={isPending}>
+            Create
+          </Button>
+          <Button type="submit" onClick={closeForm}>
+            Cancel
+          </Button>
+        </div>
         {error && <CollectionError error={error} />}
       </Form>
     </div>

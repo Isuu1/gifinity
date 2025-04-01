@@ -1,35 +1,28 @@
 "use client";
 
 import React, { useState } from "react";
-
+import toast from "react-hot-toast";
 //Styles
 import styles from "./CollectionsModal.module.scss";
-
+import { toastStyle } from "@/styles/toast";
 //Icons
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { IoIosCloseCircle } from "react-icons/io";
 import { BsFillCollectionFill } from "react-icons/bs";
-
 //Animations
 import { motion } from "motion/react";
-
 //Context
 import { useCollections } from "@/context/CollectionsProvider";
-
 //Components
 import AddNewCollectionForm from "./AddNewCollectionForm";
 import Modal from "@/components/UI/Modal";
 import Button from "@/components/UI/Button";
-
+import CollectionError from "./CollectionError";
 //Actions
 import { saveToCollection } from "../actions/saveToCollection";
-
 //Types
 import { Collection } from "@/interfaces/collections";
-import toast from "react-hot-toast";
-import { toastStyle } from "@/styles/toast";
-import CollectionError from "./CollectionError";
 
 const CollectionsModal: React.FC = () => {
   const { collections, setCollectionsModalOpen, media, fetchCollections } =
@@ -139,7 +132,11 @@ const CollectionsModal: React.FC = () => {
             New collection
           </Button>
 
-          {newCollectionForm && <AddNewCollectionForm />}
+          {newCollectionForm && (
+            <AddNewCollectionForm
+              closeForm={() => setNewCollectionForm(false)}
+            />
+          )}
         </div>
       </div>
     </Modal>

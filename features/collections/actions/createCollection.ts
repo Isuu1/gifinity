@@ -3,6 +3,7 @@
 import { CreateCollectionFormState } from "@/features/collections/types/forms";
 import { createClient } from "../../../utils/supabase/server";
 import { v4 as uuidv4 } from "uuid";
+import { Collection } from "@/interfaces/collections";
 
 export async function createCollection(
   prevState: CreateCollectionFormState,
@@ -47,6 +48,19 @@ export async function createCollection(
       .single();
 
     const currentCollections = profileData?.collections || [];
+
+    //Check if collection name already exists
+    const collectionExists = currentCollections.some(
+      (collection: Collection) => collection.name === data.name
+    );
+    if (collectionExists) {
+      return {
+        error: `Collection with name "${data.name}" already exists`,
+        success: false,
+        data: { name: data.name },
+        status: 400,
+      };
+    }
 
     // Create new collection
     const newCollection = {

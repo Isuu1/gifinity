@@ -45,10 +45,12 @@ const CollectionsGrid: React.FC = () => {
                 alt="collection-thumbnail"
                 fill
               />
-              <h3>{collection.name}</h3>
               <div className={styles.data}>
-                <h5>{collection.gifs.length} gifs</h5>
-                <h5>{collection.stickers.length} stickers</h5>
+                <h3 className={styles.name}>{collection.name}</h3>
+                <div className={styles.stats}>
+                  <h5>{collection.gifs.length} gifs</h5>
+                  <h5>{collection.stickers.length} stickers</h5>
+                </div>
               </div>
             </div>
           ))}

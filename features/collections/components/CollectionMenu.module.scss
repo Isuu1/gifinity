@@ -1,6 +1,8 @@
 .collectionMenuContainer {
   z-index: 11;
-  position: relative;
+  position: absolute;
+  top: 5px;
+  right: 5px;
   margin-left: auto;
   .icon {
     position: relative;

@@ -86,8 +86,8 @@ const CollectionsGrid: React.FC = () => {
               />
               <h3>{collection.name}</h3>
               <div className={styles.data}>
-                <h4>{collection.gifs.length} gifs</h4>
-                <h4>{collection.stickers.length} stickers</h4>
+                <h5>{collection.gifs.length} gifs</h5>
+                <h5>{collection.stickers.length} stickers</h5>
               </div>
             </li>
           ))}

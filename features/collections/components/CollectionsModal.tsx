@@ -5,6 +5,15 @@ import React, { useState } from "react";
 //Styles
 import styles from "./CollectionsModal.module.scss";
 
+//Icons
+import { IoIosAddCircle } from "react-icons/io";
+import { IoIosRemoveCircle } from "react-icons/io";
+import { IoIosCloseCircle } from "react-icons/io";
+import { BsFillCollectionFill } from "react-icons/bs";
+
+//Animations
+import { motion } from "motion/react";
+
 //Context
 import { useCollections } from "@/context/CollectionsProvider";
 
@@ -12,8 +21,15 @@ import { useCollections } from "@/context/CollectionsProvider";
 import AddNewCollectionForm from "./AddNewCollectionForm";
 import Modal from "@/components/UI/Modal";
 import Button from "@/components/UI/Button";
+
+//Actions
 import { saveToCollection } from "../actions/saveToCollection";
+
+//Types
 import { Collection } from "@/interfaces/collections";
+import toast from "react-hot-toast";
+import { toastStyle } from "@/styles/toast";
+import CollectionError from "./CollectionError";
 
 const CollectionsModal: React.FC = () => {
   const { collections, setCollectionsModalOpen, media, fetchCollections } =
@@ -21,54 +37,74 @@ const CollectionsModal: React.FC = () => {
 
   const [newCollectionForm, setNewCollectionForm] = useState<boolean>(false);
 
+  const [error, setError] = useState<string | null>(null);
+
   const generateCollectionButton = (collection: Collection) => {
     if (media && media.type === "gif") {
-      const isAdded = collection.gifs.some((gif) => gif.id === media.id);
+      const isGifInCollection = collection.gifs.some(
+        (gif) => gif.id === media.id
+      );
 
-      return isAdded ? "Added" : "+";
+      return isGifInCollection ? <IoIosRemoveCircle /> : <IoIosAddCircle />;
     }
   };
 
-  console.log(collections);
-  console.log("media", media);
+  const handleCollection = async (collection: Collection) => {
+    setError(null); // Reset error state
 
-  const handleAddToCollection = async (collectionName: string) => {
-    console.log("Add to collection clicked for:", collectionName);
     if (!media) {
       console.error("No media to add to collection");
       return;
     }
-    const result = await saveToCollection(media, collectionName);
-    console.log("Result of saveToCollection:", result);
+
+    const isGifInCollection = collection.gifs.some(
+      (gif) => gif.id === media.id
+    );
+
+    const result = await saveToCollection(media, collection.name);
+
+    if (result?.error) {
+      setError(result.error);
+      return;
+    }
+
+    if (result?.success && result?.gif && isGifInCollection) {
+      toast.success("Gif removed from collection", toastStyle);
+    }
+
+    if (result?.success && result?.gif && !isGifInCollection) {
+      toast.success("Gif added to collection", toastStyle);
+    }
     fetchCollections(); // Fetch collections again to update the state
   };
 
   return (
     <Modal theme="dark">
-      <div className={styles.addToCollectionContainer}>
-        <Button
+      <div className={styles.collectionsWrapper}>
+        <IoIosCloseCircle
           className={styles.closeButton}
           onClick={() => setCollectionsModalOpen(false)}
-        >
-          x
-        </Button>
-        <h2 className={styles.title}>Add to collection</h2>
+        />
+
         <div className={styles.collectionsContainer}>
           <h2>Collections</h2>
 
           {collections?.length > 0 ? (
             collections.map((collection, index) => (
               <div key={index} className={styles.collection}>
-                <h3>{collection.name}</h3>
-
-                {generateCollectionButton(collection)}
-
-                <Button
-                  variant="light"
-                  onClick={() => handleAddToCollection(collection.name)}
+                <h3 className={styles.name}>
+                  <BsFillCollectionFill />
+                  {collection.name}
+                </h3>
+                <motion.button
+                  whileTap={{ scale: 1.4 }}
+                  className={styles.collectionButton}
+                  onClick={() => handleCollection(collection)}
                 >
-                  +
-                </Button>
+                  {generateCollectionButton(collection)}
+                </motion.button>
+
+                {error && <CollectionError error={error} />}
               </div>
             ))
           ) : (
@@ -82,6 +118,7 @@ const CollectionsModal: React.FC = () => {
           >
             New collection
           </Button>
+
           {newCollectionForm && <AddNewCollectionForm />}
         </div>
       </div>

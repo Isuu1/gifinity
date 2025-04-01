@@ -65,7 +65,7 @@ export async function saveToCollection(
           status: 500,
         };
       }
-      return { success: true, status: 200 };
+      return { success: true, gif: true, status: 200 };
     }
 
     // //Add Gif to favourites

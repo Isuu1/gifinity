@@ -45,10 +45,10 @@ const NavMenu: React.FC = () => {
             Profile
           </li>
         </Link>
-        <Link href="/user/favourites">
+        <Link href="/user/collections">
           <li
             className={`${styles.item} ${
-              pathname === "/user/favourites" && styles.active
+              pathname === "/user/collections" && styles.active
             }`}
           >
             <BsFillCollectionFill />

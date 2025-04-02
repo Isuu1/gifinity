@@ -50,33 +50,43 @@ const CollectionsModal: React.FC = () => {
       (sticker) => sticker.id === media.id
     );
 
-    const result = await saveToCollection(media, collection.name);
+    try {
+      const result = await saveToCollection(media, collection.name);
 
-    if (result?.error) {
-      setError(result.error);
-      return;
-    }
-
-    if (result?.success && result?.gif && isGifInCollection) {
-      toast.success("Gif removed from collection", toastStyle);
-      if (pathname.startsWith("/user/collections")) {
-        setCollectionsModalOpen(false);
+      if (result?.error) {
+        setError(result.error);
+        return;
       }
-    }
 
-    if (result?.success && result?.gif && !isGifInCollection) {
-      toast.success("Gif added to collection", toastStyle);
-    }
+      if (media.type === "gif") {
+        if (result?.success) {
+          if (isGifInCollection) {
+            toast.success("Gif removed from collection", toastStyle);
+            if (pathname.startsWith("/user/collections")) {
+              setCollectionsModalOpen(false);
+            }
+          } else {
+            toast.success("Gif added to collection", toastStyle);
+          }
+        }
+      } else if (media.type === "sticker") {
+        if (result?.success) {
+          if (isStickerInCollection) {
+            toast.success("Sticker removed from collection", toastStyle);
+            if (pathname.startsWith("/user/collections")) {
+              setCollectionsModalOpen(false);
+            }
+          } else {
+            toast.success("Sticker added to collection", toastStyle);
+          }
+        }
+      }
 
-    if (result?.success && result?.sticker && isStickerInCollection) {
-      toast.success("Sticker removed from collection", toastStyle);
+      fetchCollections(); // Fetch collections again to update the state
+    } catch (error) {
+      console.error("Error saving to collection:", error);
+      setError("Failed to save to collection. Please try again.");
     }
-
-    if (result?.success && result?.sticker && !isStickerInCollection) {
-      toast.success("Sticker added to collection", toastStyle);
-    }
-
-    fetchCollections(); // Fetch collections again to update the state
   };
 
   if (!collections || !media) {

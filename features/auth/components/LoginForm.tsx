@@ -67,7 +67,9 @@ const LoginForm: React.FC = () => {
   return (
     <div className={styles.loginFormContainer}>
       <h2>Login</h2>
-      <h4>Access your favorites, sync across devices, and more!</h4>
+      <h4 className={styles.loginFormDescription}>
+        Access your favorites, sync across devices, and more!
+      </h4>
 
       <Form action={formAction}>
         <Input
@@ -110,7 +112,7 @@ const LoginForm: React.FC = () => {
           disabled={isPending}
           className={styles.loginButton}
         >
-          {isPending ? "Logging in..." : "Log in"}
+          {isPending ? "Logging in..." : "Login"}
         </Button>
       </Form>
 

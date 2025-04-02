@@ -68,8 +68,8 @@ const SignupForm: React.FC = () => {
         />
       ) : (
         <>
-          <h4>
-            Create account to access your favorites, sync across devices, and
+          <h4 className={styles.signupFormDescription}>
+            Create account to access your collections, sync across devices, and
             more!
           </h4>
 
@@ -131,7 +131,7 @@ const SignupForm: React.FC = () => {
               disabled={isPending}
               className={styles.signupButton}
             >
-              {isPending ? "Creating account..." : "Sign up"}
+              {isPending ? "Creating account..." : "Signup"}
             </Button>
           </Form>
 

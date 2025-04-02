@@ -1,6 +1,6 @@
 "use client";
 
-import { Collection } from "@/interfaces/collections";
+import { Collection } from "@/features/collections/types/collection";
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
 import { createClient } from "@/utils/supabase/client";

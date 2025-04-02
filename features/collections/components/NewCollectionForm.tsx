@@ -50,6 +50,7 @@ const NewCollectionForm: React.FC<FormProps> = ({ closeForm }) => {
 
   return (
     <div className={styles.newCollectionFormContainer}>
+      <h3 className={styles.title}>Add new collection</h3>
       <Form action={formAction}>
         <Input
           id="name"

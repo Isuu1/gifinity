@@ -21,7 +21,7 @@ import { BsFillCollectionFill } from "react-icons/bs";
 //Hooks
 import { useCollections } from "@/context/CollectionsProvider";
 //Types
-import { Collection } from "@/interfaces/collections";
+import { Collection } from "@/features/collections/types/collection";
 
 const initialState: CollectionNameFormState = {
   error: null,

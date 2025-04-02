@@ -63,11 +63,11 @@ const NewCollectionForm: React.FC<FormProps> = ({ closeForm }) => {
           onFocus={() => setError(null)}
         />
         <div className={styles.newCollectionFormButtons}>
-          <Button variant="light" type="submit" disabled={isPending}>
-            Create
-          </Button>
           <Button type="submit" onClick={closeForm}>
             Cancel
+          </Button>
+          <Button variant="light" type="submit" disabled={isPending}>
+            Create
           </Button>
         </div>
         {error && <CollectionError error={error} />}

@@ -9,5 +9,5 @@ export const generateCollectionThumbnail = (collection: Collection) => {
     const stickersLength = collection.stickers.length;
     return collection.stickers[stickersLength - 1].images.original.url;
   }
-  return "/images/avatar.gif"; // Fallback thumbnail
+  return "/images/empty.webp"; // Fallback thumbnail
 };

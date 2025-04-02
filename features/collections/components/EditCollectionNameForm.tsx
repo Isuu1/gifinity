@@ -22,6 +22,7 @@ import { BsFillCollectionFill } from "react-icons/bs";
 import { useCollections } from "@/context/CollectionsProvider";
 //Types
 import { Collection } from "@/features/collections/types/collection";
+import { usePathname, useRouter } from "next/navigation";
 
 const initialState: CollectionNameFormState = {
   error: null,
@@ -50,6 +51,10 @@ const EditCollectionNameForm: React.FC<FormProps> = ({
 
   const { fetchCollections } = useCollections();
 
+  const router = useRouter();
+
+  const pathname = usePathname();
+
   useEffect(() => {
     if (state.error) {
       setError(state.error);
@@ -58,6 +63,10 @@ const EditCollectionNameForm: React.FC<FormProps> = ({
       toast.success("Collection name updated successfully", toastStyle);
       fetchCollections();
       closeForm();
+      //Push new URL to the router when user is on the collection page
+      if (pathname !== "/user/collections") {
+        router.push(`/user/collections/${state.data.name}`);
+      }
     }
   }, [state]);
 

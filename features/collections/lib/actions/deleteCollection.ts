@@ -1,7 +1,7 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { Collection } from "@/interfaces/collections";
+import { Collection } from "@/features/collections/types/collection";
 
 export async function deleteCollection(collection: Collection) {
   try {

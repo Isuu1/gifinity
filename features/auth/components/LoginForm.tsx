@@ -2,7 +2,6 @@
 
 import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 
 //Components
 import Button from "@/components/UI/Button";
@@ -42,8 +41,6 @@ const LoginForm: React.FC = () => {
 
   const [state, formAction, isPending] = useActionState(login, initialState);
 
-  const router = useRouter();
-
   //Set error message whenever form state returns one
   useEffect(() => {
     if (state.error) {
@@ -59,10 +56,15 @@ const LoginForm: React.FC = () => {
   //Redirect to home page and show success message when user is logged in
   useEffect(() => {
     if (state.success) {
-      toast.success("You are logged in", toastStyle);
-      router.push("/");
+      toast.success(
+        "Welcome back! Ready to explore more GIFs and stickers?",
+        toastStyle
+      );
+      setTimeout(() => {
+        window.location.pathname = "/";
+      }, 1000);
     }
-  }, [state, router]);
+  }, [state]);
 
   return (
     <div className={styles.loginFormContainer}>

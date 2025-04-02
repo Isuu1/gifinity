@@ -5,9 +5,7 @@ import Loading from "@/components/Loading/Loading";
 import CollectionItemsGrid from "@/features/collections/components/CollectionItemsGrid";
 
 interface PageProps {
-  params: {
-    collectionId: string;
-  };
+  params: Promise<{ collectionId: string }>;
 }
 
 export default async function Page({ params }: PageProps) {

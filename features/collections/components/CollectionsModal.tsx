@@ -6,8 +6,6 @@ import toast from "react-hot-toast";
 import styles from "./CollectionsModal.module.scss";
 import { toastStyle } from "@/styles/toast";
 //Icons
-import { IoIosAddCircle } from "react-icons/io";
-import { IoIosRemoveCircle } from "react-icons/io";
 import { IoIosCloseCircle } from "react-icons/io";
 import { BsFillCollectionFill } from "react-icons/bs";
 //Animations
@@ -23,6 +21,7 @@ import CollectionError from "./CollectionError";
 import { saveToCollection } from "../lib/actions/saveToCollection";
 import { Collection } from "../types/collection";
 import { usePathname } from "next/navigation";
+import { generateCollectionButton } from "../lib/utils/generateCollectionButton";
 //Types
 
 const CollectionsModal: React.FC = () => {
@@ -34,23 +33,6 @@ const CollectionsModal: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const pathname = usePathname();
-
-  const generateCollectionButton = (collection: Collection) => {
-    if (media && media.type === "gif") {
-      const isGifInCollection = collection.gifs.some(
-        (gif) => gif.id === media.id
-      );
-
-      return isGifInCollection ? <IoIosRemoveCircle /> : <IoIosAddCircle />;
-    }
-    if (media && media.type === "sticker") {
-      const isStickerInCollection = collection.stickers.some(
-        (sticker) => sticker.id === media.id
-      );
-
-      return isStickerInCollection ? <IoIosRemoveCircle /> : <IoIosAddCircle />;
-    }
-  };
 
   const handleCollection = async (collection: Collection) => {
     setError(null); // Reset error state
@@ -97,6 +79,10 @@ const CollectionsModal: React.FC = () => {
     fetchCollections(); // Fetch collections again to update the state
   };
 
+  if (!collections || !media) {
+    return <h1>Loading...</h1>;
+  }
+
   return (
     <Modal theme="dark">
       <div className={styles.collectionsWrapper}>
@@ -107,28 +93,24 @@ const CollectionsModal: React.FC = () => {
 
         <div className={styles.collectionsContainer}>
           <h2>Collections</h2>
+          {collections.length === 0 && <h4>No collections found</h4>}
+          {collections.map((collection, index) => (
+            <div key={index} className={styles.collection}>
+              <h3 className={styles.name}>
+                <BsFillCollectionFill />
+                {collection.name}
+              </h3>
+              <motion.button
+                whileTap={{ scale: 1.4 }}
+                className={styles.collectionButton}
+                onClick={() => handleCollection(collection)}
+              >
+                {generateCollectionButton(collection, media)}
+              </motion.button>
 
-          {collections?.length > 0 ? (
-            collections.map((collection, index) => (
-              <div key={index} className={styles.collection}>
-                <h3 className={styles.name}>
-                  <BsFillCollectionFill />
-                  {collection.name}
-                </h3>
-                <motion.button
-                  whileTap={{ scale: 1.4 }}
-                  className={styles.collectionButton}
-                  onClick={() => handleCollection(collection)}
-                >
-                  {generateCollectionButton(collection)}
-                </motion.button>
-
-                {error && <CollectionError error={error} />}
-              </div>
-            ))
-          ) : (
-            <h4>No collections found</h4>
-          )}
+              {error && <CollectionError error={error} />}
+            </div>
+          ))}
 
           <Button
             className={styles.addNewCollectionButton}

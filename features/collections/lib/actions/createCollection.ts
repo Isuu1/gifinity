@@ -3,7 +3,7 @@
 import { CollectionNameFormState } from "@/features/collections/types/forms";
 import { createClient } from "../../../../utils/supabase/server";
 import { v4 as uuidv4 } from "uuid";
-import { Collection } from "@/interfaces/collections";
+import { Collection } from "@/features/collections/types/collection";
 
 export async function createCollection(
   prevState: CollectionNameFormState,

@@ -15,7 +15,7 @@ import { motion } from "motion/react";
 //Context
 import { useCollections } from "@/context/CollectionsProvider";
 //Components
-import AddNewCollectionForm from "./AddNewCollectionForm";
+import NewCollectionForm from "./NewCollectionForm";
 import Modal from "@/components/UI/Modal";
 import Button from "@/components/UI/Button";
 import CollectionError from "./CollectionError";
@@ -133,9 +133,7 @@ const CollectionsModal: React.FC = () => {
           </Button>
 
           {newCollectionForm && (
-            <AddNewCollectionForm
-              closeForm={() => setNewCollectionForm(false)}
-            />
+            <NewCollectionForm closeForm={() => setNewCollectionForm(false)} />
           )}
         </div>
       </div>

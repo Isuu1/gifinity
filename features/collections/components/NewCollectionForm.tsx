@@ -6,7 +6,7 @@ import { CreateCollectionFormState } from "../types/forms";
 //Actions
 import { createCollection } from "../actions/createCollection";
 //Styles
-import styles from "./AddNewCollectionForm.module.scss";
+import styles from "./NewCollectionForm.module.scss";
 //Components
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
@@ -28,7 +28,7 @@ interface FormProps {
   closeForm: () => void;
 }
 
-const AddNewCollectionForm: React.FC<FormProps> = ({ closeForm }) => {
+const NewCollectionForm: React.FC<FormProps> = ({ closeForm }) => {
   const [state, formAction, isPending] = useActionState(
     createCollection,
     initialState
@@ -75,4 +75,4 @@ const AddNewCollectionForm: React.FC<FormProps> = ({ closeForm }) => {
   );
 };
 
-export default AddNewCollectionForm;
+export default NewCollectionForm;

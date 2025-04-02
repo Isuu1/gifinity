@@ -25,13 +25,12 @@ const CollectionsGrid: React.FC = () => {
       <AnimatePresence>
         <div className={styles.collectionsGrid}>
           {collections.map((collection: Collection) => (
-            <Link
-              key={collection.id}
-              href={`/user/collections/${collection.id}`}
-            >
-              <div className={styles.collectionTile} key={collection.id}>
-                <CollectionMenu collection={collection} />
-
+            <div className={styles.collectionTile} key={collection.id}>
+              <CollectionMenu collection={collection} />
+              <Link
+                key={collection.id}
+                href={`/user/collections/${collection.id}`}
+              >
                 <Image
                   className={styles.image}
                   src={generateCollectionThumbnail(collection)}
@@ -45,8 +44,8 @@ const CollectionsGrid: React.FC = () => {
                     <h5>{collection.stickers.length} stickers</h5>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
         </div>
       </AnimatePresence>

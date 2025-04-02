@@ -72,6 +72,12 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection }) => {
     fetchCollections();
   };
 
+  const handleMenuToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setMenuOpen((prev) => !prev);
+  };
+
   return (
     <>
       <AnimatePresence>
@@ -92,7 +98,7 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection }) => {
       <div className={styles.collectionMenuContainer} ref={menuRef}>
         <HiMenuAlt3
           className={styles.icon}
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={(e) => handleMenuToggle(e)}
         />
         <AnimatePresence>
           {menuOpen && (

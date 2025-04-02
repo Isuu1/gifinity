@@ -18,6 +18,8 @@ import { useCollections } from "@/context/CollectionsProvider";
 import ConfirmAction from "@/components/ConfirmAction/ConfirmAction";
 import EditCollectionNameForm from "./EditCollectionNameForm";
 import { usePathname } from "next/navigation";
+import { toastStyle } from "@/styles/toast";
+import toast from "react-hot-toast";
 
 const menuVariants = {
   hidden: {
@@ -50,6 +52,8 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection, variant }) => {
 
   const [editPromptOpen, setEditPromptOpen] = useState<boolean>(false);
 
+  const [error, setError] = useState<string | null>(null);
+
   const { fetchCollections } = useCollections();
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -71,12 +75,26 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection, variant }) => {
   }, [menuRef]);
 
   const handleDeleteCollection = async (collection: Collection) => {
-    const result = await deleteCollection(collection);
-    console.log("result", result);
-    fetchCollections();
-    //If user deletes the collection while viewing it, redirect to collections page
-    if (pathname === `/user/collections/${collection.id}`) {
-      window.location.href = "/user/collections";
+    try {
+      const result = await deleteCollection(collection);
+
+      console.log("result", result);
+
+      if (result.error) {
+        setError(result.error);
+        return;
+      }
+
+      if (result.success) {
+        toast.success("Collection deleted successfully", toastStyle);
+      }
+      fetchCollections();
+      //If user deletes the collection while viewing it, redirect to collections page
+      if (pathname === `/user/collections/${collection.id}`) {
+        window.location.href = "/user/collections";
+      }
+    } catch (error) {
+      setError(error as string);
     }
   };
 
@@ -94,6 +112,7 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection, variant }) => {
             onConfirm={() => handleDeleteCollection(collection)}
             onCancel={() => setDeletePromptOpen(false)}
             message={`Delete collection ${collection.name}?`}
+            errorMessage={error}
           />
         )}
       </AnimatePresence>
@@ -123,7 +142,10 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection, variant }) => {
               </li>
               <li
                 className={styles.item}
-                onClick={() => setDeletePromptOpen(true)}
+                onClick={() => {
+                  setDeletePromptOpen(true);
+                  setError(null);
+                }}
               >
                 <RiDeleteBin7Fill />
                 Delete

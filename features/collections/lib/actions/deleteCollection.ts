@@ -29,6 +29,18 @@ export async function deleteCollection(collection: Collection) {
 
     const currentCollections = profileData?.collections || [];
 
+    const collectionExists = currentCollections.some(
+      (col: Collection) => col.name === collection.name
+    );
+
+    if (!collectionExists) {
+      return {
+        error: "Collection not found",
+        success: false,
+        status: 404,
+      };
+    }
+
     const updatedCollections = currentCollections.filter(
       (col: Collection) => col.name !== collection.name
     );

@@ -3,16 +3,19 @@ import Modal from "../UI/Modal";
 import Button from "../UI/Button";
 //Styles
 import styles from "./ConfirmAction.module.scss";
+import CollectionError from "@/features/collections/components/CollectionError";
 interface ConfirmActionProps {
   onConfirm: () => void;
   onCancel: () => void;
   message: string;
+  errorMessage?: string | null;
 }
 
 const ConfirmAction: React.FC<ConfirmActionProps> = ({
   onConfirm,
   onCancel,
   message,
+  errorMessage,
 }) => {
   return (
     <Modal theme="dark">
@@ -23,6 +26,7 @@ const ConfirmAction: React.FC<ConfirmActionProps> = ({
           Confirm
         </Button>
       </div>
+      {errorMessage && <CollectionError error={errorMessage} />}
     </Modal>
   );
 };

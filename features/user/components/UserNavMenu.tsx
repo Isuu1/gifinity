@@ -9,7 +9,8 @@ import styles from "./UserNavMenu.module.scss";
 
 //Icons
 import { FaUserAlt } from "react-icons/fa";
-import { BsFillCollectionFill } from "react-icons/bs";
+import { IoBookmarks } from "react-icons/io5";
+
 import { IoSettings } from "react-icons/io5";
 
 import { FaSignOutAlt } from "react-icons/fa";
@@ -51,7 +52,7 @@ const NavMenu: React.FC = () => {
               pathname.startsWith("/user/collections") && styles.active
             }`}
           >
-            <BsFillCollectionFill />
+            <IoBookmarks />
             Collections
           </li>
         </Link>

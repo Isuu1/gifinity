@@ -48,7 +48,7 @@ const NavMenu: React.FC = () => {
         <Link href="/user/collections">
           <li
             className={`${styles.item} ${
-              pathname === "/user/collections" && styles.active
+              pathname.startsWith("/user/collections") && styles.active
             }`}
           >
             <BsFillCollectionFill />

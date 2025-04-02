@@ -17,6 +17,7 @@ import { useCollections } from "@/context/CollectionsProvider";
 //Components
 import ConfirmAction from "@/components/ConfirmAction/ConfirmAction";
 import EditCollectionNameForm from "./EditCollectionNameForm";
+import { usePathname } from "next/navigation";
 
 const menuVariants = {
   hidden: {
@@ -53,6 +54,8 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection, variant }) => {
 
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const pathname = usePathname();
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -71,6 +74,10 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection, variant }) => {
     const result = await deleteCollection(collection);
     console.log("result", result);
     fetchCollections();
+    //If user deletes the collection while viewing it, redirect to collections page
+    if (pathname === `/user/collections/${collection.id}`) {
+      window.location.href = "/user/collections";
+    }
   };
 
   return (

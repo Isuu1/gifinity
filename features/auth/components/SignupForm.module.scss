@@ -4,25 +4,13 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  max-width: 300px;
+  .signupFormDescription {
+    text-align: center;
+  }
   .signupButton {
-    min-width: 250px;
+    width: 100%;
     display: flex;
     justify-content: center;
-  }
-  .errorMessage {
-    color: rgb(238, 73, 73);
-    font-size: 1rem;
-  }
-  .signupWithGoogleButton {
-    background: #1a49ca;
-    &:hover {
-      background: #072b8d;
-    }
-  }
-  .signupWithFacebookButton {
-    background: #011857;
-    &:hover {
-      background: #2e4fa8;
-    }
   }
 }

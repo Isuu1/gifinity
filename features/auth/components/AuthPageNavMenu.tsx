@@ -18,7 +18,7 @@ const ModalNavMenu: React.FC<IProps> = ({ variant = "default" }) => {
     <div className={`${styles.authPageNavMenuContainer} ${styles[variant]}`}>
       {/* Use classic 'a' tag to avoid routes being intercepted */}
       <a href="/login">
-        <Button active={pathname === "/login"}>Signin</Button>
+        <Button active={pathname === "/login"}>Login</Button>
       </a>
       <a href="/signup">
         <Button active={pathname === "/signup"}>Signup</Button>

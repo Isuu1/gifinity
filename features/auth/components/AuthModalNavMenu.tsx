@@ -18,7 +18,7 @@ const ModalNavMenu: React.FC<IProps> = ({ variant = "default" }) => {
   return (
     <div className={`${styles.modalNavMenuContainer} ${styles[variant]}`}>
       <Link href="/login">
-        <Button active={pathname === "/login"}>Signin</Button>
+        <Button active={pathname === "/login"}>Login</Button>
       </Link>
       <Link href="/signup">
         <Button active={pathname === "/signup"}>Signup</Button>

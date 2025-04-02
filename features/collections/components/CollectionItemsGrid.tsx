@@ -6,6 +6,7 @@ import Image from "next/image";
 import Loading from "@/components/Loading/Loading";
 import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
 import MediaOverlay from "@/features/media/components/MediaOverlay";
+import PageHeadline from "@/components/PageHeadline/PageHeadline";
 //Styles
 import styles from "./CollectionItemsGrid.module.scss";
 //Hooks
@@ -60,7 +61,11 @@ const CollectionItemsGrid: React.FC<CollectionItemsGridProps> = ({
 
   return (
     <>
-      <h1>Collection: {collection.name}</h1>
+      <PageHeadline
+        title={`Collection: ${collection.name}`}
+        imageUrl="/images/collection.svg"
+      />
+
       <MediaTypeMenu
         activeButton={activeButton}
         setActiveButton={setActiveButton}

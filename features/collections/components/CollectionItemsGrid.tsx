@@ -19,11 +19,11 @@ import { Sticker } from "@/interfaces/stickers";
 import { AnimatePresence } from "framer-motion";
 
 interface CollectionItemsGridProps {
-  collectionId: string;
+  collectionName: string;
 }
 
 const CollectionItemsGrid: React.FC<CollectionItemsGridProps> = ({
-  collectionId,
+  collectionName,
 }) => {
   const { collections, setMedia } = useCollections();
 
@@ -34,9 +34,9 @@ const CollectionItemsGrid: React.FC<CollectionItemsGridProps> = ({
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
 
   const collection = collections.find(
-    (collection) => collection.id === collectionId
+    (collection) => collection.name === collectionName
   );
-
+  console.log(collectionName);
   //This useEffect calculates gifs/stickers internally
   useEffect(() => {
     if (!collection) {

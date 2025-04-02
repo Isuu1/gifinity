@@ -32,7 +32,7 @@ const CollectionsGrid: React.FC = () => {
               />
               <Link
                 key={collection.id}
-                href={`/user/collections/${collection.id}`}
+                href={`/user/collections/${collection.name}`}
               >
                 <Image
                   className={styles.image}

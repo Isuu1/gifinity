@@ -5,16 +5,16 @@ import Loading from "@/components/Loading/Loading";
 import CollectionItemsGrid from "@/features/collections/components/CollectionItemsGrid";
 
 interface PageProps {
-  params: Promise<{ collectionId: string }>;
+  params: Promise<{ collectionName: string }>;
 }
 
 export default async function Page({ params }: PageProps) {
-  const { collectionId } = await params;
-
+  const { collectionName } = await params;
+  console.log(collectionName);
   return (
     <div>
       <Suspense fallback={<Loading />}>
-        <CollectionItemsGrid collectionId={collectionId} />
+        <CollectionItemsGrid collectionName={collectionName} />
       </Suspense>
     </div>
   );

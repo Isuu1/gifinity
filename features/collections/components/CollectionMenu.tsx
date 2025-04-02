@@ -14,7 +14,9 @@ import { Collection } from "@/interfaces/collections";
 import { deleteCollection } from "@/features/collections/lib/actions/deleteCollection";
 //Hooks
 import { useCollections } from "@/context/CollectionsProvider";
+//Components
 import ConfirmAction from "@/components/ConfirmAction/ConfirmAction";
+import EditCollectionNameForm from "./EditCollectionNameForm";
 
 const menuVariants = {
   hidden: {
@@ -44,6 +46,8 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection }) => {
 
   const [deletePromptOpen, setDeletePromptOpen] = useState<boolean>(false);
 
+  const [editPromptOpen, setEditPromptOpen] = useState<boolean>(false);
+
   const { fetchCollections } = useCollections();
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -71,6 +75,12 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection }) => {
   return (
     <>
       <AnimatePresence>
+        {editPromptOpen && (
+          <EditCollectionNameForm
+            closeForm={() => setEditPromptOpen(false)}
+            collection={collection}
+          />
+        )}
         {deletePromptOpen && (
           <ConfirmAction
             onConfirm={() => handleDeleteCollection(collection)}
@@ -93,7 +103,10 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection }) => {
               animate="visible"
               exit="exit"
             >
-              <li className={styles.item}>
+              <li
+                className={styles.item}
+                onClick={() => setEditPromptOpen(true)}
+              >
                 <MdEditDocument />
                 Rename
               </li>

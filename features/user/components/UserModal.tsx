@@ -12,13 +12,14 @@ import { IoBookmarks } from "react-icons/io5";
 
 import { IoSettings } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   userModalAnimation,
   userModalMenuItemsAnimation,
 } from "@/styles/animations";
+import toast from "react-hot-toast";
+import { toastStyle } from "@/styles/toast";
 
 const UserModal: React.FC = () => {
   const { username, avatar } = useAuth();
@@ -29,13 +30,14 @@ const UserModal: React.FC = () => {
     setShowModal(!showModal);
   };
 
-  const router = useRouter();
-
   const handleSignOut = async () => {
     const supabase = createClient();
     async function signOut() {
       const { error } = await supabase.auth.signOut();
-      router.refresh();
+      toast.success("You've safely signed out. See you next time!", toastStyle);
+      setTimeout(() => {
+        window.location.pathname = "/";
+      }, 1000);
       if (error) {
         console.error("Error logging out:", error.message);
         return;

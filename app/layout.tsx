@@ -24,7 +24,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${neucha.className}`}>
+      <body className={`${neucha.className}`} id="modal-root">
         <Toaster />
         {children}
         {modal}

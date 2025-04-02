@@ -21,6 +21,7 @@ import { AnimatePresence } from "framer-motion";
 
 //Icons
 import { IoTrashBin } from "react-icons/io5";
+import { useCollections } from "@/context/CollectionsProvider";
 
 interface IProps {
   data: {
@@ -41,6 +42,8 @@ const FavouritesGrid: React.FC<IProps> = ({ data }) => {
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  const { setMedia } = useCollections();
 
   //Check if the favourites are empty depending on currently displayed content
   const isFavouritesEmpty = displayedContent?.data.length === 0;
@@ -80,13 +83,17 @@ const FavouritesGrid: React.FC<IProps> = ({ data }) => {
             <div
               key={media.id}
               className={styles.gif}
-              onMouseEnter={() => setShowOverlay(media.id)}
-              onMouseLeave={() => setShowOverlay(null)}
+              onMouseEnter={() => {
+                setShowOverlay(media.id);
+                setMedia(media);
+              }}
+              onMouseLeave={() => {
+                setShowOverlay(null);
+                setMedia(null);
+              }}
             >
               <AnimatePresence initial={false}>
-                {showOverlay === media.id && (
-                  <MediaOverlay key={media.id} media={media} />
-                )}
+                {showOverlay === media.id && <MediaOverlay key={media.id} />}
               </AnimatePresence>
               <Image
                 className={styles.image}

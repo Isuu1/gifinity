@@ -1,0 +1,46 @@
+.collectionsGrid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.4rem;
+  .collectionTile {
+    position: relative;
+    cursor: pointer;
+    background: #36343a;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    .image {
+      z-index: 5;
+      border-radius: 14px;
+      position: relative !important;
+    }
+    .data {
+      z-index: 6;
+      position: absolute;
+      bottom: 5px;
+      left: 5px;
+      right: 5px;
+      padding: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      background: #1d1d1d;
+      border-radius: 12px;
+      .name {
+        display: flex;
+        align-items: center;
+      }
+      .stats {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+    &:hover {
+      scale: 1.1;
+    }
+  }
+}

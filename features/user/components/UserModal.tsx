@@ -8,12 +8,12 @@ import Link from "next/link";
 
 //Icons
 import { FaUserAlt } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { IoBookmarks } from "react-icons/io5";
+
 import { IoSettings } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
-
 import { AnimatePresence, motion } from "framer-motion";
 import {
   userModalAnimation,
@@ -77,9 +77,9 @@ const UserModal: React.FC = () => {
             </motion.li>
 
             <motion.li variants={userModalMenuItemsAnimation}>
-              <Link href="/user/favourites" className={styles.item}>
-                <FaHeart />
-                Favourites
+              <Link href="/user/collections" className={styles.item}>
+                <IoBookmarks />
+                Collections
               </Link>
             </motion.li>
 

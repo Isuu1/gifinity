@@ -1,0 +1,69 @@
+.collectionMenuContainer {
+  .icon {
+    position: relative;
+    z-index: 10;
+    color: #fff;
+    border-radius: 12px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    &:hover {
+      color: #ff204e;
+    }
+  }
+  .menu {
+    z-index: 9;
+    position: absolute;
+    right: 0;
+    list-style: none;
+    padding: 1rem;
+    border-radius: 14px;
+    text-align: right;
+    transform-origin: top right;
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.2s ease-in-out;
+      cursor: pointer;
+      &:hover {
+        color: #ff204e;
+      }
+    }
+  }
+}
+
+//Variants
+.collectionsGrid {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin-left: auto;
+  .icon {
+    font-size: 2.1rem;
+    background: #1d1d1d;
+  }
+  .menu {
+    background: #1d1d1d;
+    top: 39px;
+    line-height: 2rem;
+  }
+}
+
+.collectionItemsGrid {
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  .icon {
+    font-size: 2.7rem;
+    background: #36343a;
+  }
+  .menu {
+    background: #36343a;
+    top: 48px;
+    line-height: 2.2rem;
+    .item {
+      font-size: 1.2rem;
+    }
+  }
+}

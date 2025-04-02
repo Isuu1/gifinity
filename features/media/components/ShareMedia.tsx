@@ -21,10 +21,7 @@ import { copyToClipboard } from "@/utils/utils";
 
 //Animations
 import { motion } from "motion/react";
-
-interface IProps {
-  url: string;
-}
+import { useCollections } from "@/context/CollectionsProvider";
 
 const shareMediaAnimation = {
   hidden: {
@@ -47,7 +44,11 @@ const shareMediaAnimation = {
   },
 };
 
-const ShareMedia: React.FC<IProps> = ({ url }) => {
+const ShareMedia: React.FC = () => {
+  const { media } = useCollections();
+
+  const url = media ? media.images.original.url : "";
+
   return (
     <motion.div
       className={styles.shareContainer}

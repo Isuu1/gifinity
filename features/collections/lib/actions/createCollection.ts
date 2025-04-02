@@ -1,17 +1,27 @@
 "use server";
 
-import { CreateCollectionFormState } from "@/features/collections/types/forms";
-import { createClient } from "../../../utils/supabase/server";
+import { CollectionNameFormState } from "@/features/collections/types/forms";
+import { createClient } from "../../../../utils/supabase/server";
 import { v4 as uuidv4 } from "uuid";
+import { Collection } from "@/features/collections/types/collection";
 
 export async function createCollection(
-  prevState: CreateCollectionFormState,
+  prevState: CollectionNameFormState,
   formData: FormData
 ) {
   //Form data from frontend form
   const data = {
     name: formData.get("name") as string,
   };
+
+  if (!data.name) {
+    return {
+      error: "Please name your collection",
+      success: false,
+      data: { name: data.name },
+      status: 400,
+    };
+  }
 
   try {
     const supabase = await createClient();
@@ -39,20 +49,25 @@ export async function createCollection(
 
     const currentCollections = profileData?.collections || [];
 
+    //Check if collection name already exists
+    const collectionExists = currentCollections.some(
+      (collection: Collection) => collection.name === data.name
+    );
+    if (collectionExists) {
+      return {
+        error: `Collection with name "${data.name}" already exists`,
+        success: false,
+        data: { name: data.name },
+        status: 400,
+      };
+    }
+
     // Create new collection
     const newCollection = {
       id: uuidv4(),
       name: data.name,
-      items: [
-        {
-          type: "gifs",
-          data: [],
-        },
-        {
-          type: "stickers",
-          data: [],
-        },
-      ],
+      gifs: [],
+      stickers: [],
       createdAt: new Date().toISOString(),
     };
 

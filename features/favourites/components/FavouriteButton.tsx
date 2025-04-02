@@ -1,6 +1,4 @@
 import { useStorage } from "@/context/StorageContext";
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
 import React from "react";
 
 //Animations
@@ -11,21 +9,19 @@ import { FaHeart } from "react-icons/fa";
 
 //Styles
 import styles from "./FavouriteButton.module.scss";
+import { useCollections } from "@/context/CollectionsProvider";
 
-interface IProps {
-  media: Gif | Sticker;
-}
-
-const FavouriteButton: React.FC<IProps> = ({ media }) => {
+const FavouriteButton: React.FC = () => {
   const { localFavouriteGifs, localFavouriteStickers, addItemToLocalStorage } =
     useStorage();
+  const { media } = useCollections();
 
-  const isGifOnWishlist = localFavouriteGifs.data.find(
-    (item) => item.id === media.id
-  );
-  const isStickerOnWishlist = localFavouriteStickers.data.find(
-    (item) => item.id === media.id
-  );
+  const isGifOnWishlist = media
+    ? localFavouriteGifs.data.find((item) => item.id === media.id)
+    : null;
+  const isStickerOnWishlist = media
+    ? localFavouriteStickers.data.find((item) => item.id === media.id)
+    : null;
 
   return (
     <motion.div
@@ -36,7 +32,7 @@ const FavouriteButton: React.FC<IProps> = ({ media }) => {
         className={`${styles.icon} ${
           isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
         }`}
-        onClick={() => addItemToLocalStorage(media)}
+        onClick={() => media && addItemToLocalStorage(media)}
       />
     </motion.div>
   );

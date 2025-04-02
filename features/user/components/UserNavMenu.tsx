@@ -9,7 +9,8 @@ import styles from "./UserNavMenu.module.scss";
 
 //Icons
 import { FaUserAlt } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { IoBookmarks } from "react-icons/io5";
+
 import { IoSettings } from "react-icons/io5";
 
 import { FaSignOutAlt } from "react-icons/fa";
@@ -45,14 +46,14 @@ const NavMenu: React.FC = () => {
             Profile
           </li>
         </Link>
-        <Link href="/user/favourites">
+        <Link href="/user/collections">
           <li
             className={`${styles.item} ${
-              pathname === "/user/favourites" && styles.active
+              pathname.startsWith("/user/collections") && styles.active
             }`}
           >
-            <FaHeart />
-            Favourites
+            <IoBookmarks />
+            Collections
           </li>
         </Link>
         <Link href="/user/account-details">

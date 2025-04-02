@@ -17,6 +17,9 @@ import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
 //Animations
 import { AnimatePresence } from "framer-motion";
+//Icons
+import { IoArrowUndo } from "react-icons/io5";
+import Link from "next/link";
 
 interface CollectionItemsGridProps {
   collectionName: string;
@@ -62,6 +65,10 @@ const CollectionItemsGrid: React.FC<CollectionItemsGridProps> = ({
 
   return (
     <>
+      <Link href="/user/collections" className={styles.backButton}>
+        <IoArrowUndo className={styles.icon} />
+        <h2>Back to collections</h2>
+      </Link>
       <div className="flex-row">
         <PageHeadline
           title={`Collection: ${collection.name}`}

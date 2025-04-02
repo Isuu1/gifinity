@@ -39,9 +39,10 @@ const menuVariants = {
 
 interface CollectionProps {
   collection: Collection;
+  variant: "collectionsGrid" | "collectionItemsGrid";
 }
 
-const CollectionMenu: React.FC<CollectionProps> = ({ collection }) => {
+const CollectionMenu: React.FC<CollectionProps> = ({ collection, variant }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const [deletePromptOpen, setDeletePromptOpen] = useState<boolean>(false);
@@ -89,7 +90,10 @@ const CollectionMenu: React.FC<CollectionProps> = ({ collection }) => {
           />
         )}
       </AnimatePresence>
-      <div className={styles.collectionMenuContainer} ref={menuRef}>
+      <div
+        className={`${styles.collectionMenuContainer} ${styles[variant]}`}
+        ref={menuRef}
+      >
         <HiMenuAlt3
           className={styles.icon}
           onClick={() => setMenuOpen(!menuOpen)}

@@ -1,15 +1,8 @@
 .collectionMenuContainer {
-  z-index: 11;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  margin-left: auto;
   .icon {
     position: relative;
     z-index: 10;
-    font-size: 2.1rem;
     color: #fff;
-    background: #1d1d1d;
     border-radius: 12px;
     padding: 0.5rem;
     cursor: pointer;
@@ -22,11 +15,8 @@
     z-index: 9;
     position: absolute;
     right: 0;
-    top: 39px;
-    background: #1d1d1d;
     list-style: none;
     padding: 1rem;
-    line-height: 2rem;
     border-radius: 14px;
     text-align: right;
     transform-origin: top right;
@@ -39,6 +29,41 @@
       &:hover {
         color: #ff204e;
       }
+    }
+  }
+}
+
+//Variants
+.collectionsGrid {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  margin-left: auto;
+  .icon {
+    font-size: 2.1rem;
+    background: #1d1d1d;
+  }
+  .menu {
+    background: #1d1d1d;
+    top: 39px;
+    line-height: 2rem;
+  }
+}
+
+.collectionItemsGrid {
+  position: relative;
+  width: fit-content;
+  margin-left: auto;
+  .icon {
+    font-size: 2.7rem;
+    background: #36343a;
+  }
+  .menu {
+    background: #36343a;
+    top: 48px;
+    line-height: 2.2rem;
+    .item {
+      font-size: 1.2rem;
     }
   }
 }

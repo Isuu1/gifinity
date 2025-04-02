@@ -26,7 +26,10 @@ const CollectionsGrid: React.FC = () => {
         <div className={styles.collectionsGrid}>
           {collections.map((collection: Collection) => (
             <div className={styles.collectionTile} key={collection.id}>
-              <CollectionMenu collection={collection} />
+              <CollectionMenu
+                collection={collection}
+                variant="collectionsGrid"
+              />
               <Link
                 key={collection.id}
                 href={`/user/collections/${collection.id}`}

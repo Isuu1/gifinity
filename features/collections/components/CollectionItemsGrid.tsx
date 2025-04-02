@@ -7,6 +7,7 @@ import Loading from "@/components/Loading/Loading";
 import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
 import MediaOverlay from "@/features/media/components/MediaOverlay";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
+import CollectionMenu from "./CollectionMenu";
 //Styles
 import styles from "./CollectionItemsGrid.module.scss";
 //Hooks
@@ -61,10 +62,13 @@ const CollectionItemsGrid: React.FC<CollectionItemsGridProps> = ({
 
   return (
     <>
-      <PageHeadline
-        title={`Collection: ${collection.name}`}
-        imageUrl="/images/collection.svg"
-      />
+      <div className="flex-row">
+        <PageHeadline
+          title={`Collection: ${collection.name}`}
+          imageUrl="/images/collection.svg"
+        />
+        <CollectionMenu collection={collection} variant="collectionItemsGrid" />
+      </div>
 
       <MediaTypeMenu
         activeButton={activeButton}

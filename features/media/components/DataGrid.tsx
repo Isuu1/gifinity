@@ -17,7 +17,6 @@ import MediaTypeMenu from "./MediaTypeMenu";
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
 import { useCollections } from "@/context/CollectionsProvider";
-import CollectionsModal from "@/features/collections/components/CollectionsModal";
 //import LoadMoreDataOnScroll from "../LoadMoreDataOnScroll/LoadMoreDataOnScroll";
 
 interface IProps {
@@ -38,7 +37,7 @@ const DataGrid: React.FC<IProps> = ({ data }) => {
 
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
-  const { setMedia, collectionsModalOpen } = useCollections();
+  const { setMedia } = useCollections();
 
   useEffect(() => {
     // Ensure it updates when props change
@@ -49,9 +48,6 @@ const DataGrid: React.FC<IProps> = ({ data }) => {
 
   return (
     <div>
-      <AnimatePresence>
-        {collectionsModalOpen && <CollectionsModal />}
-      </AnimatePresence>
       <MediaTypeMenu
         activeButton={activeButton}
         setActiveButton={setActiveButton}

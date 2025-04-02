@@ -15,6 +15,7 @@ import { useCollections } from "@/context/CollectionsProvider";
 import { generateCollectionThumbnail } from "../lib/utils/generateCollectionThumbnail";
 //Types
 import { Collection } from "../types/collection";
+import Link from "next/link";
 
 const CollectionsGrid: React.FC = () => {
   const { collections } = useCollections();
@@ -24,23 +25,28 @@ const CollectionsGrid: React.FC = () => {
       <AnimatePresence>
         <div className={styles.collectionsGrid}>
           {collections.map((collection: Collection) => (
-            <div className={styles.collectionTile} key={collection.id}>
-              <CollectionMenu collection={collection} />
+            <Link
+              key={collection.id}
+              href={`/user/collections/${collection.id}`}
+            >
+              <div className={styles.collectionTile} key={collection.id}>
+                <CollectionMenu collection={collection} />
 
-              <Image
-                className={styles.image}
-                src={generateCollectionThumbnail(collection)}
-                alt="collection-thumbnail"
-                fill
-              />
-              <div className={styles.data}>
-                <h3 className={styles.name}>{collection.name}</h3>
-                <div className={styles.stats}>
-                  <h5>{collection.gifs.length} gifs</h5>
-                  <h5>{collection.stickers.length} stickers</h5>
+                <Image
+                  className={styles.image}
+                  src={generateCollectionThumbnail(collection)}
+                  alt="collection-thumbnail"
+                  fill
+                />
+                <div className={styles.data}>
+                  <h3 className={styles.name}>{collection.name}</h3>
+                  <div className={styles.stats}>
+                    <h5>{collection.gifs.length} gifs</h5>
+                    <h5>{collection.stickers.length} stickers</h5>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </AnimatePresence>

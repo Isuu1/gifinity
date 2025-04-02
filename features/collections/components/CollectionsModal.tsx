@@ -22,6 +22,7 @@ import CollectionError from "./CollectionError";
 //Actions
 import { saveToCollection } from "../lib/actions/saveToCollection";
 import { Collection } from "../types/collection";
+import { usePathname } from "next/navigation";
 //Types
 
 const CollectionsModal: React.FC = () => {
@@ -31,6 +32,8 @@ const CollectionsModal: React.FC = () => {
   const [newCollectionForm, setNewCollectionForm] = useState<boolean>(false);
 
   const [error, setError] = useState<string | null>(null);
+
+  const pathname = usePathname();
 
   const generateCollectionButton = (collection: Collection) => {
     if (media && media.type === "gif") {
@@ -74,6 +77,9 @@ const CollectionsModal: React.FC = () => {
 
     if (result?.success && result?.gif && isGifInCollection) {
       toast.success("Gif removed from collection", toastStyle);
+      if (pathname.startsWith("/user/collections")) {
+        setCollectionsModalOpen(false);
+      }
     }
 
     if (result?.success && result?.gif && !isGifInCollection) {

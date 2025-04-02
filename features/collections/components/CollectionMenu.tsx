@@ -9,7 +9,7 @@ import styles from "./CollectionMenu.module.scss";
 //Animations
 import { AnimatePresence, motion } from "framer-motion";
 //Types
-import { Collection } from "@/interfaces/collections";
+import { Collection } from "@/features/collections/types/collection";
 //Actions
 import { deleteCollection } from "@/features/collections/lib/actions/deleteCollection";
 //Hooks

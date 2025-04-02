@@ -20,9 +20,9 @@ import Modal from "@/components/UI/Modal";
 import Button from "@/components/UI/Button";
 import CollectionError from "./CollectionError";
 //Actions
-import { saveToCollection } from "../actions/saveToCollection";
+import { saveToCollection } from "../lib/actions/saveToCollection";
+import { Collection } from "../types/collection";
 //Types
-import { Collection } from "@/interfaces/collections";
 
 const CollectionsModal: React.FC = () => {
   const { collections, setCollectionsModalOpen, media, fetchCollections } =

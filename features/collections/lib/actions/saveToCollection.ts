@@ -1,10 +1,10 @@
 "use server";
 
-import { Collection } from "@/interfaces/collections";
-import { createClient } from "../../../utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 //Interfaces
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
+import { Collection } from "../../types/collection";
 
 export async function saveToCollection(
   media: Gif | Sticker,

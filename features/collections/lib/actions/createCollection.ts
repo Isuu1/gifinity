@@ -1,12 +1,12 @@
 "use server";
 
-import { CreateCollectionFormState } from "@/features/collections/types/forms";
-import { createClient } from "../../../utils/supabase/server";
+import { CollectionNameFormState } from "@/features/collections/types/forms";
+import { createClient } from "../../../../utils/supabase/server";
 import { v4 as uuidv4 } from "uuid";
 import { Collection } from "@/interfaces/collections";
 
 export async function createCollection(
-  prevState: CreateCollectionFormState,
+  prevState: CollectionNameFormState,
   formData: FormData
 ) {
   //Form data from frontend form

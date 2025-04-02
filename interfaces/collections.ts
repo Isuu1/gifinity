@@ -1,9 +1,0 @@
-import { Gif } from "./gifs";
-import { Sticker } from "./stickers";
-
-export interface Collection {
-  id: string;
-  name: string;
-  gifs: Gif[];
-  stickers: Sticker[];
-}

@@ -2,9 +2,9 @@
 
 import React, { useActionState, useEffect, useState } from "react";
 //Types
-import { CreateCollectionFormState } from "../types/forms";
+import { CollectionNameFormState } from "../types/forms";
 //Actions
-import { createCollection } from "../actions/createCollection";
+import { createCollection } from "../lib/actions/createCollection";
 //Styles
 import styles from "./NewCollectionForm.module.scss";
 //Components
@@ -17,7 +17,7 @@ import { BsFillCollectionFill } from "react-icons/bs";
 //Hooks
 import { useCollections } from "@/context/CollectionsProvider";
 
-const initialState: CreateCollectionFormState = {
+const initialState: CollectionNameFormState = {
   error: null,
   success: false,
   data: { name: "" },

@@ -11,31 +11,19 @@ import styles from "./CollectionsGrid.module.scss";
 import { AnimatePresence } from "framer-motion";
 //Hooks
 import { useCollections } from "@/context/CollectionsProvider";
+//Utils
+import { generateCollectionThumbnail } from "../lib/utils/generateCollectionThumbnail";
 //Types
-import { Collection } from "@/interfaces/collections";
+import { Collection } from "../types/collection";
 
 const CollectionsGrid: React.FC = () => {
   const { collections } = useCollections();
-
-  console.log("collections", collections);
-
-  const generateCollectionThumbnail = (collection: Collection) => {
-    if (collection.gifs.length > 0) {
-      const gifslength = collection.gifs.length;
-      return collection.gifs[gifslength - 1].images.original.url;
-    }
-    if (collection.stickers.length > 0) {
-      const stickersLength = collection.stickers.length;
-      return collection.stickers[stickersLength - 1].images.original.url;
-    }
-    return "/images/avatar.gif"; // Fallback thumbnail
-  };
 
   return (
     <div>
       <AnimatePresence>
         <div className={styles.collectionsGrid}>
-          {collections.map((collection) => (
+          {collections.map((collection: Collection) => (
             <div className={styles.collectionTile} key={collection.id}>
               <CollectionMenu collection={collection} />
 

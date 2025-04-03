@@ -27,8 +27,14 @@ export default function Page() {
 
   useEffect(() => {
     async function fetchData() {
+      setIsLoading(true);
+      setError(null);
       try {
         const gifsResponse = await fetch(`/api/search/gifs?q=${searchQuery}`);
+
+        if (!gifsResponse.ok) {
+          setError("Failed to fetch data.");
+        }
 
         const gifsData: Gifs = await gifsResponse.json();
         setSearchedGifs(gifsData);
@@ -54,13 +60,24 @@ export default function Page() {
   }, [searchQuery]);
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <div className="page">
+        <PageHeadline
+          title={`Search results for: ${searchQuery}`}
+          imageUrl="/images/search.svg"
+        />
+        <Loading />
+      </div>
+    );
   }
 
   if (error) {
     return (
       <div className="page">
-        <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
+        <PageHeadline
+          title={`Search results for: ${searchQuery}`}
+          imageUrl="/images/search.svg"
+        />
 
         <Error errorMessage={error} />
       </div>

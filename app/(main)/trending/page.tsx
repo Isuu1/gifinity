@@ -7,6 +7,7 @@ import PageHeadline from "@/components/PageHeadline/PageHeadline";
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
+import Error from "@/components/Error/Error";
 
 export default async function Page({
   searchParams,
@@ -43,17 +44,16 @@ export default async function Page({
         )}
       </div>
     );
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      return (
-        <div className="page">
-          <PageHeadline
-            title={`Trending for: ${searchQuery}`}
-            imageUrl="/images/trending4.svg"
-          />
-          <p>{error.message}</p>
-        </div>
-      );
-    }
+  } catch (error) {
+    return (
+      <div className="page">
+        <PageHeadline
+          title={`Trending for: ${searchQuery}`}
+          imageUrl="/images/trending4.svg"
+        />
+        <TrendingSearchesSlider />
+        <Error errorMessage={error as string} />
+      </div>
+    );
   }
 }

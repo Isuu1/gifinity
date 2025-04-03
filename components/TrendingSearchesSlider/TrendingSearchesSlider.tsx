@@ -39,7 +39,7 @@ const TrendingSearchesSlider: React.FC = () => {
         const data = await fetch("api/trending-searches");
 
         if (!data.ok) {
-          setError("There was an error fetching the trending searches.");
+          setError("There was an error fetching data.");
           return;
         }
 
@@ -86,13 +86,12 @@ const TrendingSearchesSlider: React.FC = () => {
     >
       {trendingSearches.data.length > 0 &&
         trendingSearches.data.map((item, index) => (
-          <div key={index} className={styles.item}>
-            <Button
-              icon={<FaFireFlameSimple />}
-              onClick={() => handleTagClick(item)}
-            >
-              {item}
-            </Button>
+          <div
+            key={index}
+            className={styles.item}
+            onClick={() => handleTagClick(item)}
+          >
+            <Button icon={<FaFireFlameSimple />}>{item}</Button>
           </div>
         ))}
     </Marquee>

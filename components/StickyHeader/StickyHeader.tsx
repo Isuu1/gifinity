@@ -17,9 +17,12 @@ import Search from "../../features/search/components/Search";
 //Icons
 //import { TiThMenu } from "react-icons/ti";
 import { FaHeart } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
+import { MdCloudUpload } from "react-icons/md";
 
 //Animations
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { useStorage } from "@/providers/StorageProvider";
 
 const stickyHeaderAnimation = {
   initial: {
@@ -40,6 +43,11 @@ const StickyHeader = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const { user } = useAuth();
+
+  const { localFavouriteGifs, localFavouriteStickers } = useStorage();
+
+  const itemsInFavourites =
+    localFavouriteGifs.data.length + localFavouriteStickers.data.length;
 
   const { scrollY } = useScroll();
 
@@ -64,9 +72,11 @@ const StickyHeader = () => {
         </Link>
         <div className={styles.nav}>
           <Link href="/categories" scroll={false} className={styles.item}>
+            <BiSolidCategory />
             Categories
           </Link>
           <Link href="#" scroll={false} className={styles.item}>
+            <MdCloudUpload />
             Upload
           </Link>
           {!user && (
@@ -77,7 +87,11 @@ const StickyHeader = () => {
               <Link href="/signup" scroll={false} className={styles.item}>
                 Sign up
               </Link>
-              <Link href="/favourites" className={styles.item}>
+              <Link
+                href="/favourites"
+                className={`${styles.item} ${styles.favourites}`}
+              >
+                <span className={styles.counter}>{itemsInFavourites}</span>
                 <FaHeart color="#ff204e" />
                 Favourites
               </Link>

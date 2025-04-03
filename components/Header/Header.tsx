@@ -13,15 +13,25 @@ import UserModal from "../../features/user/components/UserModal";
 
 //Icons
 import { FaHeart } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
+import { MdCloudUpload } from "react-icons/md";
 
 //Context
 import { useAuth } from "@/providers/AuthProvider";
 
 //Animations
 import { useMotionValueEvent, useScroll } from "motion/react";
+import { useStorage } from "@/providers/StorageProvider";
 
 const Header: React.FC = () => {
   const { user } = useAuth();
+
+  console.log("user", user);
+
+  const { localFavouriteGifs, localFavouriteStickers } = useStorage();
+
+  const itemsInFavourites =
+    localFavouriteGifs.data.length + localFavouriteStickers.data.length;
 
   const { scrollY } = useScroll();
 
@@ -45,9 +55,11 @@ const Header: React.FC = () => {
         </Link>
         <div className={styles.nav}>
           <Link href="/categories" scroll={false} className={styles.item}>
+            <BiSolidCategory />
             Categories
           </Link>
           <Link href="#" scroll={false} className={styles.item}>
+            <MdCloudUpload />
             Upload
           </Link>
           {!user && (
@@ -58,7 +70,11 @@ const Header: React.FC = () => {
               <Link href="/signup" scroll={false} className={styles.item}>
                 Sign up
               </Link>
-              <Link href="/favourites" className={styles.item}>
+              <Link
+                href="/favourites"
+                className={`${styles.item} ${styles.favourites}`}
+              >
+                <span className={styles.counter}>{itemsInFavourites}</span>
                 <FaHeart color="#ff204e" />
                 Favourites
               </Link>

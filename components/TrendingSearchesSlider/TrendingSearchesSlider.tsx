@@ -48,7 +48,14 @@ const TrendingSearchesSlider: React.FC = () => {
     fetchData();
   }, []);
 
-  if (error) return <Error errorMessage={error} />;
+  if (error)
+    return (
+      <div className={styles.trendingSearchesContainer}>
+        <div className={styles.trendingSearchesInnerWrapper}>
+          <Error errorMessage={error} />
+        </div>
+      </div>
+    );
 
   if (isLoading)
     return (

@@ -76,7 +76,11 @@ const Header: React.FC = () => {
           <Image src="/images/logo.png" alt="Gifinity" width={95} height={95} />
         </Link>
         <div className={styles.nav}>
-          <Link href="/categories" scroll={false} className={styles.item}>
+          <Link
+            href="/categories?q=actions"
+            scroll={false}
+            className={styles.item}
+          >
             <BiSolidCategory />
             Categories
           </Link>

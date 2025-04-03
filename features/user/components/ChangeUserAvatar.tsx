@@ -5,7 +5,7 @@ import styles from "./ChangeUserAvatar.module.scss";
 import { useAuth } from "@/providers/AuthProvider";
 import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
-import { generateUploadToken } from "@/actions/generate-upload-token";
+import { generateUploadToken } from "@/features/user/lib/actions/generate-upload-token";
 import toast from "react-hot-toast";
 import { toastStyle } from "@/styles/toast";
 

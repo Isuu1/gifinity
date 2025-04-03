@@ -8,7 +8,6 @@ import DataFeed from "@/features/media/components/DataGrid";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 import Loading from "@/components/Loading/Loading";
 import Error from "@/components/Error/Error";
-
 //Interfaces
 import { Gifs } from "@/interfaces/gifs";
 import { Stickers } from "@/interfaces/stickers";
@@ -23,6 +22,8 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
+      setIsLoading(true);
+      setError(null);
       try {
         const gifsResponse = await fetch("/api/trending/gifs");
 
@@ -48,7 +49,13 @@ export default function Home() {
   }, []);
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <div className="page">
+        <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
+        <TrendingSearchesSlider />
+        <Loading />
+      </div>
+    );
   }
 
   if (error) {

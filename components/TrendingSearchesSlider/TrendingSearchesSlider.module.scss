@@ -1,65 +1,12 @@
-.trendingSearchesContainer {
-  position: relative;
+.trendingSearchesTicker {
   margin: 1rem auto;
-  overflow: hidden;
-  width: 100%;
-  .error {
-    text-align: center;
-  }
-  .trendingSearchesInnerWrapper {
-    display: flex;
-    gap: 0.3rem;
-    animation: scrollText 10s linear infinite;
-    &:hover {
-      animation-play-state: paused;
+  .item {
+    border-radius: 24px;
+    background: #36343a;
+    white-space: nowrap;
+    margin-right: 0.5rem;
+    .placeholder {
+      opacity: 0;
     }
-    .trendingSearchesMenuItem {
-      position: relative;
-      z-index: 2;
-      border-radius: 24px;
-      background: #36343a;
-      flex: 1 1;
-      white-space: nowrap;
-      .placeholder {
-        opacity: 0;
-      }
-    }
-  }
-  &:after {
-    z-index: 3;
-    content: "";
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    width: 50px;
-    background: linear-gradient(
-      90deg,
-      rgba(29, 29, 29, 1) 0%,
-      rgba(29, 29, 29, 0) 100%
-    );
-  }
-  &:before {
-    z-index: 3;
-    content: "";
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    right: 0;
-    width: 50px;
-    background: linear-gradient(
-      270deg,
-      rgba(29, 29, 29, 1) 0%,
-      rgba(29, 29, 29, 0) 100%
-    );
-  }
-}
-
-@keyframes scrollText {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
   }
 }

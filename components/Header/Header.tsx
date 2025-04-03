@@ -24,9 +24,7 @@ import { useMotionValueEvent, useScroll } from "motion/react";
 import { useStorage } from "@/providers/StorageProvider";
 
 const Header: React.FC = () => {
-  const { user } = useAuth();
-
-  console.log("user", user);
+  const { user, isLoading } = useAuth();
 
   const { localFavouriteGifs, localFavouriteStickers } = useStorage();
 
@@ -46,6 +44,30 @@ const Header: React.FC = () => {
       }
     }
   });
+
+  if (isLoading)
+    return (
+      <header className={styles.header} ref={headerRef}>
+        <div className={styles.headerTop}>
+          <Link href="/">
+            <Image
+              src="/images/logo.png"
+              alt="Gifinity"
+              width={95}
+              height={95}
+            />
+          </Link>
+        </div>
+        <div className={styles.headerBottom}>
+          <h2>Find the Perfect GIF for Every Moment!</h2>
+          <p>
+            Explore a world of fun with trending GIFs and stickers. Search,
+            share, and express yourself!
+          </p>
+        </div>
+        <Search />
+      </header>
+    );
 
   return (
     <header className={styles.header} ref={headerRef}>

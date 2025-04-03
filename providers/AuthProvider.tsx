@@ -10,11 +10,13 @@ interface AuthContextType {
   email: string | "";
   avatar: string | "";
   fetchUser: () => void;
+  isLoading: boolean;
 }
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [isLoading, setIsLoading] = useState(true);
   //This represents the user object coming from auth table, it is used only for authentication purposes
   //It is not used to store user data, for that we use the profiles table
   const [user, setUser] = useState<User | null>(null);
@@ -26,30 +28,38 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const supabase = createClient();
 
   const fetchUser = async () => {
-    // Fetch the authenticated user from the Auth table
-    const { data: authData, error: authError } = await supabase.auth.getUser();
+    setIsLoading(true);
+    try {
+      // Fetch the authenticated user from the Auth table
+      const { data: authData, error: authError } =
+        await supabase.auth.getUser();
 
-    if (authError || !authData.user) {
-      console.error("Error fetching user:", authError);
-      return;
+      if (authError || !authData.user) {
+        console.error("Error fetching user:", authError);
+        return;
+      }
+
+      // Fetch the user's profile data from the Profiles table
+      const { data: profileData, error: profileError } = await supabase
+        .from("profiles")
+        .select("email, username, avatar")
+        .eq("id", authData.user.id)
+        .single();
+
+      if (profileError) {
+        console.error("Error fetching profile data:", profileError);
+        return;
+      }
+
+      setUser(authData.user);
+      setUsername(profileData?.username);
+      setEmail(profileData?.email);
+      setAvatar(profileData?.avatar);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    } finally {
+      setIsLoading(false);
     }
-
-    // Fetch the user's profile data from the Profiles table
-    const { data: profileData, error: profileError } = await supabase
-      .from("profiles")
-      .select("email, username, avatar")
-      .eq("id", authData.user.id)
-      .single();
-
-    if (profileError) {
-      console.error("Error fetching profile data:", profileError);
-      return;
-    }
-
-    setUser(authData.user);
-    setUsername(profileData?.username);
-    setEmail(profileData?.email);
-    setAvatar(profileData?.avatar);
   };
 
   useEffect(() => {
@@ -64,6 +74,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         email,
         avatar,
         fetchUser,
+        isLoading,
       }}
     >
       {children}

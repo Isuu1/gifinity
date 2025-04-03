@@ -39,7 +39,6 @@ const CollectionItemsGrid: React.FC<CollectionItemsGridProps> = ({
   const collection = collections.find(
     (collection) => collection.name === collectionName
   );
-  console.log(collectionName);
   //This useEffect calculates gifs/stickers internally
   useEffect(() => {
     if (!collection) {
@@ -59,9 +58,20 @@ const CollectionItemsGrid: React.FC<CollectionItemsGridProps> = ({
     // Only depend on the source object and the toggle state
   }, [collection, activeButton]);
 
-  if (!collection) {
-    return <Loading />;
-  }
+  if (!collection)
+    return (
+      <>
+        <Link href="/user/collections" className={styles.backButton}>
+          <IoArrowUndo className={styles.icon} />
+          <h2>Back to collections</h2>
+        </Link>
+        <PageHeadline
+          title={`Collection: `}
+          imageUrl="/images/collection.svg"
+        />
+        <Loading />
+      </>
+    );
 
   return (
     <>

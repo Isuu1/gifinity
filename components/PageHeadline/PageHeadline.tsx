@@ -12,7 +12,7 @@ interface IProps {
 const PageHeadline: React.FC<IProps> = ({ title, imageUrl }) => {
   return (
     <div className={styles.headline}>
-      <Image src={imageUrl} alt="trending" width={40} height={40} />
+      <Image src={imageUrl} alt="trending" width={40} height={40} priority />
       <h2 className={styles.title}>{title}</h2>
     </div>
   );

@@ -6,6 +6,7 @@ $modalMenuItemActiveBackground: #a0153e;
   display: flex;
   align-items: center;
   min-width: 170px;
+  align-self: stretch;
   .avatar {
     border-radius: 14px;
     position: absolute;

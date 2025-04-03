@@ -17,9 +17,12 @@ import Search from "../../features/search/components/Search";
 //Icons
 //import { TiThMenu } from "react-icons/ti";
 import { FaHeart } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
+import { MdCloudUpload } from "react-icons/md";
 
 //Animations
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import { useStorage } from "@/providers/StorageProvider";
 
 const stickyHeaderAnimation = {
   initial: {
@@ -39,7 +42,12 @@ const stickyHeaderAnimation = {
 const StickyHeader = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
+
+  const { localFavouriteGifs, localFavouriteStickers } = useStorage();
+
+  const itemsInFavourites =
+    localFavouriteGifs.data.length + localFavouriteStickers.data.length;
 
   const { scrollY } = useScroll();
 
@@ -50,6 +58,30 @@ const StickyHeader = () => {
       setIsVisible(false);
     }
   });
+
+  if (isLoading)
+    return (
+      <header className={styles.header}>
+        <div className={styles.headerTop}>
+          <Link href="/">
+            <Image
+              src="/images/logo.png"
+              alt="Gifinity"
+              width={95}
+              height={95}
+            />
+          </Link>
+        </div>
+        <div className={styles.headerBottom}>
+          <h2>Find the Perfect GIF for Every Moment!</h2>
+          <p>
+            Explore a world of fun with trending GIFs and stickers. Search,
+            share, and express yourself!
+          </p>
+        </div>
+        <Search />
+      </header>
+    );
 
   return (
     <motion.header
@@ -64,9 +96,11 @@ const StickyHeader = () => {
         </Link>
         <div className={styles.nav}>
           <Link href="/categories" scroll={false} className={styles.item}>
+            <BiSolidCategory />
             Categories
           </Link>
           <Link href="#" scroll={false} className={styles.item}>
+            <MdCloudUpload />
             Upload
           </Link>
           {!user && (
@@ -77,7 +111,11 @@ const StickyHeader = () => {
               <Link href="/signup" scroll={false} className={styles.item}>
                 Sign up
               </Link>
-              <Link href="/favourites" className={styles.item}>
+              <Link
+                href="/favourites"
+                className={`${styles.item} ${styles.favourites}`}
+              >
+                <span className={styles.counter}>{itemsInFavourites}</span>
                 <FaHeart color="#ff204e" />
                 Favourites
               </Link>

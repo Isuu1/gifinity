@@ -13,15 +13,23 @@ import UserModal from "../../features/user/components/UserModal";
 
 //Icons
 import { FaHeart } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
+import { MdCloudUpload } from "react-icons/md";
 
 //Context
 import { useAuth } from "@/providers/AuthProvider";
 
 //Animations
 import { useMotionValueEvent, useScroll } from "motion/react";
+import { useStorage } from "@/providers/StorageProvider";
 
 const Header: React.FC = () => {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
+
+  const { localFavouriteGifs, localFavouriteStickers } = useStorage();
+
+  const itemsInFavourites =
+    localFavouriteGifs.data.length + localFavouriteStickers.data.length;
 
   const { scrollY } = useScroll();
 
@@ -37,6 +45,30 @@ const Header: React.FC = () => {
     }
   });
 
+  if (isLoading)
+    return (
+      <header className={styles.header} ref={headerRef}>
+        <div className={styles.headerTop}>
+          <Link href="/">
+            <Image
+              src="/images/logo.png"
+              alt="Gifinity"
+              width={95}
+              height={95}
+            />
+          </Link>
+        </div>
+        <div className={styles.headerBottom}>
+          <h2>Find the Perfect GIF for Every Moment!</h2>
+          <p>
+            Explore a world of fun with trending GIFs and stickers. Search,
+            share, and express yourself!
+          </p>
+        </div>
+        <Search />
+      </header>
+    );
+
   return (
     <header className={styles.header} ref={headerRef}>
       <div className={styles.headerTop}>
@@ -45,9 +77,11 @@ const Header: React.FC = () => {
         </Link>
         <div className={styles.nav}>
           <Link href="/categories" scroll={false} className={styles.item}>
+            <BiSolidCategory />
             Categories
           </Link>
           <Link href="#" scroll={false} className={styles.item}>
+            <MdCloudUpload />
             Upload
           </Link>
           {!user && (
@@ -58,7 +92,11 @@ const Header: React.FC = () => {
               <Link href="/signup" scroll={false} className={styles.item}>
                 Sign up
               </Link>
-              <Link href="/favourites" className={styles.item}>
+              <Link
+                href="/favourites"
+                className={`${styles.item} ${styles.favourites}`}
+              >
+                <span className={styles.counter}>{itemsInFavourites}</span>
                 <FaHeart color="#ff204e" />
                 Favourites
               </Link>

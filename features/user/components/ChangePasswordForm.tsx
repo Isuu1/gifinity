@@ -17,7 +17,7 @@ import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 
 //Utils
-import { changeUserPassword } from "@/features/user/actions/changeUserPassword";
+import { changeUserPassword } from "@/features/user/lib/actions/changeUserPassword";
 import { normalizeErrors } from "@/features/auth/utils/authHelpers";
 
 interface FormState {

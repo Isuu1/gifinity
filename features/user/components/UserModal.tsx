@@ -1,25 +1,25 @@
 import { useAuth } from "@/context/AuthContext";
 import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import toast from "react-hot-toast";
 
 //Styles
 import styles from "./UserModal.module.scss";
-import Image from "next/image";
-import Link from "next/link";
-
+import { toastStyle } from "@/styles/toast";
 //Icons
 import { FaUserAlt } from "react-icons/fa";
 import { IoBookmarks } from "react-icons/io5";
-
 import { IoSettings } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
-import { createClient } from "@/utils/supabase/client";
+//Animations
 import { AnimatePresence, motion } from "framer-motion";
 import {
   userModalAnimation,
   userModalMenuItemsAnimation,
 } from "@/styles/animations";
-import toast from "react-hot-toast";
-import { toastStyle } from "@/styles/toast";
+//Actions
+import { signout } from "@/features/auth/lib/actions/signout";
 
 const UserModal: React.FC = () => {
   const { username, avatar } = useAuth();
@@ -31,19 +31,15 @@ const UserModal: React.FC = () => {
   };
 
   const handleSignOut = async () => {
-    const supabase = createClient();
-    async function signOut() {
-      const { error } = await supabase.auth.signOut();
-      toast.success("You've safely signed out. See you next time!", toastStyle);
+    const result = await signout();
+    if (result?.error) {
+      toast.error(result.error);
+    } else {
+      toast.success("You've safely signed out.", toastStyle);
       setTimeout(() => {
         window.location.pathname = "/";
       }, 1000);
-      if (error) {
-        console.error("Error logging out:", error.message);
-        return;
-      }
     }
-    signOut();
   };
 
   return (

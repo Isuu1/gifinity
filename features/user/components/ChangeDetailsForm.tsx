@@ -20,7 +20,7 @@ import styles from "./ChangeDetailsForm.module.scss";
 import { toastStyle } from "@/styles/toast";
 
 //Utils
-import { changeUserDetails } from "@/features/user/actions/changeUserDetails";
+import { changeUserDetails } from "@/features/user/lib/actions/changeUserDetails";
 import { normalizeErrors } from "@/features/auth/utils/authHelpers";
 import { createClient } from "@/utils/supabase/client";
 

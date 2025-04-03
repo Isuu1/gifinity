@@ -11,7 +11,7 @@ import CollectionMenu from "./CollectionMenu";
 //Styles
 import styles from "./CollectionItemsGrid.module.scss";
 //Hooks
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 //Types
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";

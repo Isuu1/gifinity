@@ -2,7 +2,7 @@ import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 //Providers
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/providers/AuthProvider";
 //Icons
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";

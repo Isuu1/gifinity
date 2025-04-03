@@ -15,7 +15,7 @@ import UserModal from "../../features/user/components/UserModal";
 import { FaHeart } from "react-icons/fa";
 
 //Context
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/providers/AuthProvider";
 
 //Animations
 import { useMotionValueEvent, useScroll } from "motion/react";

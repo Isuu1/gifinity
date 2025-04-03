@@ -21,7 +21,7 @@ import { AnimatePresence } from "framer-motion";
 
 //Icons
 import { IoTrashBin } from "react-icons/io5";
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 
 interface IProps {
   data: {

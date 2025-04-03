@@ -8,7 +8,7 @@ import Modal from "@/components/UI/Modal";
 import styles from "./ConfirmDeleteFavourites.module.scss";
 
 //Context
-import { useStorage } from "@/context/StorageContext";
+import { useStorage } from "@/providers/StorageProvider";
 
 interface IProps {
   onClose: (value: boolean) => void;

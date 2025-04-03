@@ -21,7 +21,7 @@ import { copyToClipboard } from "@/utils/utils";
 
 //Animations
 import { motion } from "motion/react";
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 
 const shareMediaAnimation = {
   hidden: {

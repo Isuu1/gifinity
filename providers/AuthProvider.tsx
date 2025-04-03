@@ -1,8 +1,5 @@
 "use client";
 
-// import { Collection } from "@/interfaces/collections";
-// import { Gif } from "@/interfaces/gifs";
-// import { Sticker } from "@/interfaces/stickers";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -12,9 +9,6 @@ interface AuthContextType {
   username: string | "";
   email: string | "";
   avatar: string | "";
-  // favouriteGifs: { data: Gif[] };
-  // favouriteStickers: { data: Sticker[] };
-  // collections: Collection[]; // Adjust the type as per your collection structure
   fetchUser: () => void;
 }
 
@@ -28,9 +22,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [username, setUsername] = useState<string | "">("");
   const [email, setEmail] = useState<string | "">("");
   const [avatar, setAvatar] = useState<string | "">("");
-  // const [favouriteGifs, setFavouriteGifs] = useState({ data: [] });
-  // const [favouriteStickers, setFavouriteStickers] = useState({ data: [] });
-  // const [collections, setCollections] = useState([]);
 
   const supabase = createClient();
 
@@ -59,9 +50,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUsername(profileData?.username);
     setEmail(profileData?.email);
     setAvatar(profileData?.avatar);
-    // setFavouriteGifs(profileData?.favourite_gifs || []);
-    // setFavouriteStickers(profileData?.favourite_stickers || []);
-    // setCollections(profileData?.collections || []);
   };
 
   useEffect(() => {
@@ -75,9 +63,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         username,
         email,
         avatar,
-        // favouriteGifs,
-        // favouriteStickers,
-        // collections,
         fetchUser,
       }}
     >

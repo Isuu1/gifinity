@@ -19,7 +19,7 @@ import Modal from "@/components/UI/Modal";
 //Icons
 import { BsFillCollectionFill } from "react-icons/bs";
 //Hooks
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 //Types
 import { Collection } from "@/features/collections/types/collection";
 import { usePathname, useRouter } from "next/navigation";

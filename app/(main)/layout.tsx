@@ -1,9 +1,9 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import StickyHeader from "@/components/StickyHeader/StickyHeader";
-import { AuthProvider } from "@/context/AuthContext";
-import { CollectionsProvider } from "@/context/CollectionsProvider";
-import { StorageProvider } from "@/context/StorageContext";
+import { AuthProvider } from "@/providers/AuthProvider";
+import { CollectionsProvider } from "@/providers/CollectionsProvider";
+import { StorageProvider } from "@/providers/StorageProvider";
 
 export default async function MainLayout({
   children,

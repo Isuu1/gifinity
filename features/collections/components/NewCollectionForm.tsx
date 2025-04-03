@@ -15,7 +15,7 @@ import CollectionError from "./CollectionError";
 //Icons
 import { BsFillCollectionFill } from "react-icons/bs";
 //Hooks
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 
 const initialState: CollectionNameFormState = {
   error: null,

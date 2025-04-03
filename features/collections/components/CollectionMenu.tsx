@@ -13,7 +13,7 @@ import { Collection } from "@/features/collections/types/collection";
 //Actions
 import { deleteCollection } from "@/features/collections/lib/actions/deleteCollection";
 //Hooks
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import ConfirmAction from "@/components/ConfirmAction/ConfirmAction";
 import EditCollectionNameForm from "./EditCollectionNameForm";

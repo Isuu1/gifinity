@@ -1,10 +1,10 @@
 "use server";
 
-import { ChangeDetailsError } from "@/features/user/types/changeDetails";
 import { createClient } from "@/utils/supabase/server";
+import { ChangeDetailsFormState } from "@/features/user/types/forms";
 
 export async function changeUserDetails(
-  prevState: ChangeDetailsError,
+  prevState: ChangeDetailsFormState,
   formData: FormData
 ) {
   const supabase = await createClient();
@@ -57,6 +57,7 @@ export async function changeUserDetails(
       data,
       error: "Failed to update email",
       success: false,
+      resetKey: Date.now(),
     };
   }
 

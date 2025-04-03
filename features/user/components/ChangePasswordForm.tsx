@@ -4,30 +4,23 @@ import toast from "react-hot-toast";
 //Styles
 import styles from "./ChangePasswordForm.module.scss";
 import { toastStyle } from "@/styles/toast";
-
 //Components
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import ChangeDetailsError from "@/features/user/components/ChangeDetailsError";
-
 //Icons
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-
 //Utils
-import { changeUserPassword } from "@/features/user/lib/actions/changeUserPassword";
 import { normalizeErrors } from "@/features/auth/utils/authHelpers";
+//Actions
+import { changeUserPassword } from "@/features/user/lib/actions/changeUserPassword";
+//Types
+import { ChangePasswordFormState } from "@/features/user/types/forms";
 
-interface FormState {
-  data: { newPassword: string; confirmPassword: string };
-  error: string | null;
-  success: boolean;
-  resetKey: number;
-}
-
-const initialState: FormState = {
+const initialState: ChangePasswordFormState = {
   data: { newPassword: "", confirmPassword: "" },
   error: null,
   success: false,

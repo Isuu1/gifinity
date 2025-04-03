@@ -20,6 +20,9 @@ $categoryItemBackgroundHover: #ff204e;
       font-size: 1.1rem;
       font-weight: 600;
       transition: background 0.3s;
+      & span {
+        opacity: 0;
+      }
       &:hover {
         background: $categoryItemBackgroundHover;
       }

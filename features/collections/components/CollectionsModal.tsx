@@ -11,7 +11,7 @@ import { BsFillCollectionFill } from "react-icons/bs";
 //Animations
 import { motion } from "motion/react";
 //Context
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import NewCollectionForm from "./NewCollectionForm";
 import Modal from "@/components/UI/Modal";

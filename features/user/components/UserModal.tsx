@@ -1,4 +1,4 @@
-import { useAuth } from "@/context/AuthProvider";
+import { useAuth } from "@/providers/AuthProvider";
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";

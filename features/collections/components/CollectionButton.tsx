@@ -11,7 +11,7 @@ import styles from "./CollectionButton.module.scss";
 //Components
 import CollectionsModal from "./CollectionsModal";
 //Hooks
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 
 const CollectionButton: React.FC = () => {
   const { collectionsModalOpen, setCollectionsModalOpen } = useCollections();

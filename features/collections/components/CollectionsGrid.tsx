@@ -9,7 +9,7 @@ import CollectionMenu from "./CollectionMenu";
 //Styles
 import styles from "./CollectionsGrid.module.scss";
 //Hooks
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 //Utils
 import { generateCollectionThumbnail } from "../lib/utils/generateCollectionThumbnail";
 //Types

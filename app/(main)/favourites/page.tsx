@@ -6,7 +6,7 @@ import NotificationMessage from "@/features/favourites/components/NotificationMe
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Context
-import { useStorage } from "@/context/StorageProvider";
+import { useStorage } from "@/providers/StorageProvider";
 
 export default function Page() {
   const { localFavouriteGifs, localFavouriteStickers } = useStorage();

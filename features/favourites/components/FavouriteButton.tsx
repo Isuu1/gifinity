@@ -1,4 +1,4 @@
-import { useStorage } from "@/context/StorageProvider";
+import { useStorage } from "@/providers/StorageProvider";
 import React from "react";
 
 //Animations
@@ -9,7 +9,7 @@ import { FaHeart } from "react-icons/fa";
 
 //Styles
 import styles from "./FavouriteButton.module.scss";
-import { useCollections } from "@/context/CollectionsProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 
 const FavouriteButton: React.FC = () => {
   const { localFavouriteGifs, localFavouriteStickers, addItemToLocalStorage } =

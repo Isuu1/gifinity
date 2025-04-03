@@ -15,7 +15,7 @@ import { IoBookmarks } from "react-icons/io5";
 import { IoSettings } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 //Providers
-import { useAuth } from "@/context/AuthProvider";
+import { useAuth } from "@/providers/AuthProvider";
 //Actions
 import { signout } from "@/features/auth/lib/actions/signout";
 

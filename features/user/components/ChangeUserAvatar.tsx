@@ -2,7 +2,7 @@ import React from "react";
 
 //Styles
 import styles from "./ChangeUserAvatar.module.scss";
-import { useAuth } from "@/context/AuthProvider";
+import { useAuth } from "@/providers/AuthProvider";
 import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import { generateUploadToken } from "@/actions/generate-upload-token";

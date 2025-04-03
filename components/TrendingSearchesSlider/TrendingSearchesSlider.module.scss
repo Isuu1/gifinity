@@ -10,3 +10,18 @@
     }
   }
 }
+
+.placeholderContainer {
+  display: flex;
+  gap: 0.5rem;
+  overflow: hidden;
+  margin: 1rem auto;
+  .item {
+    border-radius: 24px;
+    background: #36343a;
+    white-space: nowrap;
+    .placeholder {
+      opacity: 0;
+    }
+  }
+}

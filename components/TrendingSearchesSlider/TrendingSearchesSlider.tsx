@@ -37,6 +37,12 @@ const TrendingSearchesSlider: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetch("api/trending-searches");
+
+        if (!data.ok) {
+          setError("There was an error fetching the trending searches.");
+          return;
+        }
+
         const response = await data.json();
 
         setTrendingSearches(response);
@@ -51,23 +57,14 @@ const TrendingSearchesSlider: React.FC = () => {
 
   if (error)
     return (
-      <div className={styles.trendingSearchesContainer}>
-        <div className={styles.trendingSearchesInnerWrapper}>
-          <Error errorMessage={error} />
-        </div>
+      <div className={styles.trendingSearchesTicker}>
+        <Error errorMessage={error} />
       </div>
     );
 
   if (isLoading)
     return (
-      <Marquee
-        pauseOnHover={true}
-        speed={50}
-        gradient={true}
-        gradientColor="#1d1d1d"
-        gradientWidth={50}
-        className={styles.trendingSearchesTicker}
-      >
+      <div className={styles.placeholderContainer}>
         {Array.from({ length: 20 }).map((item, index) => (
           <div key={index} className={styles.item}>
             <div className={styles.placeholder}>
@@ -75,7 +72,7 @@ const TrendingSearchesSlider: React.FC = () => {
             </div>
           </div>
         ))}
-      </Marquee>
+      </div>
     );
 
   return (
@@ -87,16 +84,17 @@ const TrendingSearchesSlider: React.FC = () => {
       gradientWidth={50}
       className={styles.trendingSearchesTicker}
     >
-      {trendingSearches.data.map((item, index) => (
-        <div key={index} className={styles.item}>
-          <Button
-            icon={<FaFireFlameSimple />}
-            onClick={() => handleTagClick(item)}
-          >
-            {item}
-          </Button>
-        </div>
-      ))}
+      {trendingSearches.data.length > 0 &&
+        trendingSearches.data.map((item, index) => (
+          <div key={index} className={styles.item}>
+            <Button
+              icon={<FaFireFlameSimple />}
+              onClick={() => handleTagClick(item)}
+            >
+              {item}
+            </Button>
+          </div>
+        ))}
     </Marquee>
   );
 };

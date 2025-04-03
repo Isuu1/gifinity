@@ -8,7 +8,7 @@ import Image from "next/image";
 import styles from "./StickyHeader.module.scss";
 
 //Context
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthProvider";
 
 //Components
 import UserModal from "../../features/user/components/UserModal";

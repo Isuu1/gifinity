@@ -19,7 +19,7 @@ import CollectionButton from "@/features/collections/components/CollectionButton
 import ShareMedia from "./ShareMedia";
 
 //Context
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthProvider";
 import { useCollections } from "@/context/CollectionsProvider";
 
 const MediaOverlay: React.FC = () => {

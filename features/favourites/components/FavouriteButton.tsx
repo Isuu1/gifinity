@@ -1,4 +1,4 @@
-import { useStorage } from "@/context/StorageContext";
+import { useStorage } from "@/context/StorageProvider";
 import React from "react";
 
 //Animations

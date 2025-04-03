@@ -1,37 +1,30 @@
 import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-//Context
+//Providers
 import { useAuth } from "@/context/AuthContext";
-
 //Icons
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdOutlineError } from "react-icons/md";
-
 //Components
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import Error from "@/features/auth/components/AuthError";
-
 //Styles
 import styles from "./ChangeDetailsForm.module.scss";
 import { toastStyle } from "@/styles/toast";
-
+//Actions
+import { changeUserDetails } from "@/features/user/lib/actions/changeUserDetails";
 //Utils
-import { changeUserDetails } from "@/features/user/actions/changeUserDetails";
 import { normalizeErrors } from "@/features/auth/utils/authHelpers";
+//Supabase
 import { createClient } from "@/utils/supabase/client";
+//Types
+import { ChangeDetailsFormState } from "@/features/user/types/forms";
 
-interface FormState {
-  data: { email: string; username: string };
-  error: string | null;
-  success: boolean;
-  resetKey: number;
-}
-
-const initialState: FormState = {
+const initialState: ChangeDetailsFormState = {
   data: { email: "", username: "" },
   error: null,
   success: false,

@@ -1,11 +1,11 @@
 "use server";
 
 import { changePasswordSchema } from "@/features/user/schemas/changePassword";
-import { ChangeDetailsError } from "@/features/user/types/changeDetails";
 import { createClient } from "@/utils/supabase/server";
+import { ChangePasswordFormState } from "@/features/user/types/forms";
 
 export async function changeUserPassword(
-  prevState: ChangeDetailsError,
+  prevState: ChangePasswordFormState,
   formData: FormData
 ) {
   const supabase = await createClient();
@@ -46,6 +46,7 @@ export async function changeUserPassword(
       data,
       error: passwordError.message,
       success: false,
+      resetKey: Date.now(),
     };
   }
 

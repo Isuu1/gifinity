@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 //Styles
 import styles from "./CategoriesMenu.module.scss";
@@ -17,7 +17,8 @@ const CategoriesMenu: React.FC = () => {
 
   const [error, setError] = useState<string | null>(null);
 
-  console.log(categories);
+  const params = useSearchParams();
+  const searchQuery = params.get("q");
 
   useEffect(() => {
     async function fetchData() {
@@ -74,7 +75,11 @@ const CategoriesMenu: React.FC = () => {
         {categories.data.map((category, index: number) => (
           <li
             key={index}
-            className={styles.navItem}
+            className={`${styles.navItem} ${
+              category.name.toLowerCase() === searchQuery?.toLowerCase()
+                ? styles.active
+                : ""
+            }`}
             onClick={() => handleCategoryChange(category.name)}
           >
             {category.name}

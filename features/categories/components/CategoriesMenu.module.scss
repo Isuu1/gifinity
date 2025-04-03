@@ -1,5 +1,6 @@
 $categoryItemBackground: #36343a;
 $categoryItemBackgroundHover: #ff204e;
+$categoryItemBackgroundActive: #a0153e;
 
 .categoriesContainer {
   margin-bottom: 2rem;
@@ -20,12 +21,16 @@ $categoryItemBackgroundHover: #ff204e;
       font-size: 1.1rem;
       font-weight: 600;
       transition: background 0.3s;
+
       & span {
         opacity: 0;
       }
       &:hover {
         background: $categoryItemBackgroundHover;
       }
+    }
+    .active {
+      background: $categoryItemBackgroundActive;
     }
   }
 }

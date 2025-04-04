@@ -26,6 +26,8 @@ export async function changeUserAvatar(formData: FormData) {
 
     const userId = userData.user.id;
 
+    console.log("Authenticated user ID:", userId);
+
     //Check for old avatar to remove it is user upload a new one
     //Fetch current profile upload to get old avatar info
     const { data: currentProfile, error: profileFetchError } = await supabase

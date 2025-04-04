@@ -16,17 +16,28 @@ const ChangeUserAvatar: React.FC = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChangeAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!user || !e.target.files?.[0]) return;
+
+    const file = e.target.files[0];
+
+    //Append file to FormData
+    const formData = new FormData();
+
+    formData.append("file", file);
+    //Pass formData to server action
+
+    if (file.size > 1 * 1024 * 1024) {
+      toast.error("File size exceeds 1MB limit.", {
+        duration: 5000,
+        style: toastStyle.style,
+      });
+      return;
+    }
+
     try {
-      if (!user || !e.target.files?.[0]) return;
-
-      const file = e.target.files[0];
-
-      //Append file to FormData
-      const formData = new FormData();
-      formData.append("file", file);
-      //Pass formData to server action
       const result = await changeUserAvatar(formData);
       console.log("Result:", result);
+
       if (result.error) {
         toast.error(result.error, {
           duration: 5000,
@@ -43,6 +54,7 @@ const ChangeUserAvatar: React.FC = () => {
       }
     } catch (error) {
       console.error("Error uploading avatar:", error);
+      throw { error: { error } }; // Rethrow the error to be handled by the caller
     }
   };
 

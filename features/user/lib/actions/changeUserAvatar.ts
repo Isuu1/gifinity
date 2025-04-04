@@ -26,8 +26,6 @@ export async function changeUserAvatar(formData: FormData) {
 
     const userId = userData.user.id;
 
-    console.log("Authenticated user ID:", userId);
-
     //Check for old avatar to remove it is user upload a new one
     //Fetch current profile upload to get old avatar info
     const { data: currentProfile, error: profileFetchError } = await supabase
@@ -60,10 +58,6 @@ export async function changeUserAvatar(formData: FormData) {
           // Join segments after the bucket name, decode URL encoding
           oldAvatarPath = decodeURIComponent(
             pathSegments.slice(bucketIndex + 1).join("/")
-          );
-          console.log(
-            "Identified old avatar path for potential deletion:",
-            oldAvatarPath
           );
         } else {
           console.warn(
@@ -177,9 +171,7 @@ export async function changeUserAvatar(formData: FormData) {
     }
 
     //If profile update succeeded, delete the OLD avatar
-    console.log(`Current user ID (auth.uid): ${userId}`);
     if (oldAvatarPath) {
-      console.log(`Attempting to delete old avatar: ${oldAvatarPath}`);
       // Perform deletion in a separate try/catch block so its failure doesn't break the success response
       try {
         const { error: deleteError } = await supabase.storage
@@ -192,8 +184,6 @@ export async function changeUserAvatar(formData: FormData) {
             `Failed to delete old avatar (${oldAvatarPath}):`,
             deleteError.message
           );
-        } else {
-          console.log(`Successfully deleted old avatar: ${oldAvatarPath}`);
         }
       } catch (deleteCatchError) {
         console.error("Error during old avatar deletion:", deleteCatchError);

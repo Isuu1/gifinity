@@ -1,4 +1,3 @@
-// actions/generate-upload-token.ts
 "use server";
 
 import { createClient } from "@/utils/supabase/server";

@@ -176,7 +176,7 @@ export async function changeUserAvatar(formData: FormData) {
 
     //If profile update succeeded, delete the OLD avatar
     console.log(`Current user ID (auth.uid): ${userId}`);
-    if (oldAvatarPath && oldAvatarPath.trim().length > 0) {
+    if (oldAvatarPath) {
       console.log(`Attempting to delete old avatar: ${oldAvatarPath}`);
       // Perform deletion in a separate try/catch block so its failure doesn't break the success response
       try {

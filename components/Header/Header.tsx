@@ -23,6 +23,7 @@ import { useAuth } from "@/providers/AuthProvider";
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { useStorage } from "@/providers/StorageProvider";
 import HamburgerNavMenu from "../HamburgerNavMenu/HamburgerNavMenu";
+import { usePathname } from "next/navigation";
 
 const Header: React.FC = () => {
   const { user, isLoading } = useAuth();
@@ -35,6 +36,10 @@ const Header: React.FC = () => {
   const { scrollY } = useScroll();
 
   const headerRef = useRef<HTMLDivElement>(null);
+
+  const pathname = usePathname();
+
+  console.log("pathname", pathname);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (headerRef.current) {
@@ -59,14 +64,18 @@ const Header: React.FC = () => {
             />
           </Link>
         </div>
-        <div className={styles.headerBottom}>
-          <h2>Find the Perfect GIF for Every Moment!</h2>
-          <p>
-            Explore a world of fun with trending GIFs and stickers. Search,
-            share, and express yourself!
-          </p>
-        </div>
-        <Search />
+        {pathname !== "/upload" && (
+          <>
+            <div className={styles.headerBottom}>
+              <h2>Find the Perfect GIF for Every Moment!</h2>
+              <p>
+                Explore a world of fun with trending GIFs and stickers. Search,
+                share, and express yourself!
+              </p>
+            </div>
+            <Search />
+          </>
+        )}
       </header>
     );
 
@@ -111,14 +120,18 @@ const Header: React.FC = () => {
         </div>
         {user && <UserModal />}
       </div>
-      <div className={styles.headerBottom}>
-        <h2>Find the Perfect GIF for Every Moment!</h2>
-        <p>
-          Explore a world of fun with trending GIFs and stickers. Search, share,
-          and express yourself!
-        </p>
-      </div>
-      <Search />
+      {pathname !== "/upload" && (
+        <>
+          <div className={styles.headerBottom}>
+            <h2>Find the Perfect GIF for Every Moment!</h2>
+            <p>
+              Explore a world of fun with trending GIFs and stickers. Search,
+              share, and express yourself!
+            </p>
+          </div>
+          <Search />
+        </>
+      )}
     </header>
   );
 };

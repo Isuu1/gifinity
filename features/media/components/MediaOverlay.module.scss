@@ -12,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     .addToFavouritesButton {
-      background: #ff204db6;
+      background: #1d1d1de3;
       border-radius: 10px;
       padding: 0.5rem;
       display: flex;
@@ -28,13 +28,15 @@
     }
     .shareButton {
       position: relative;
-      background: #ff204db6;
+      background: #1d1d1de3;
       border-radius: 10px;
       padding: 0.5rem;
+
       .icon {
         cursor: pointer;
         color: #ffffff;
         font-size: 1.6rem;
+        display: block;
         :hover {
           color: #700c2a;
         }
@@ -42,7 +44,7 @@
     }
   }
   .overlay_author {
-    background: #ff204db6;
+    background: #1d1d1de3;
     border-radius: 5px;
     margin-bottom: 0.3rem;
     padding: 0.5rem;

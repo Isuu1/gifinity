@@ -1,11 +1,14 @@
 export const toastStyle = {
   style: {
     borderRadius: "10px",
-    background: "#333",
+    background: "rgba(0, 0, 0, 1)",
     color: "#fff",
+    marginTop: "60px",
+    fontWeight: "800",
+    fontSize: "1.3rem",
   },
   iconTheme: {
-    primary: "#feba00",
-    secondary: "#333",
+    primary: "#13d95b",
+    secondary: "#fff",
   },
 };

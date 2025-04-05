@@ -112,7 +112,7 @@ const ChangePasswordForm: React.FC = () => {
             type="submit"
             disabled={isPending}
           >
-            Save password
+            {isPending ? "Saving..." : "Save password"}
           </Button>
         </div>
       </Form>

@@ -94,7 +94,7 @@ const ChangeDetailsForm: React.FC = () => {
                 </span>
               </p>
               <Button onClick={handleResendEmail} variant="light">
-                Resend email
+                {isPending ? "Sending email..." : "Resend email"}
               </Button>
             </div>
           </>
@@ -121,7 +121,7 @@ const ChangeDetailsForm: React.FC = () => {
             type="submit"
             disabled={isPending}
           >
-            Save details
+            {isPending ? "Saving..." : "Save details"}
           </Button>
         </div>
       </Form>

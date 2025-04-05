@@ -20,6 +20,9 @@ $buttonActive: #ff204e;
   &:disabled {
     cursor: not-allowed;
     background: $buttonDisabled;
+    &:hover {
+      background: $buttonDisabled;
+    }
   }
   &.active {
     background: $buttonActive;

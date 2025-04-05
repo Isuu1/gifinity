@@ -9,6 +9,7 @@ $navBackgroundColor: #36343a;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     .nav {
       position: relative;
       display: flex;
@@ -56,5 +57,14 @@ $navBackgroundColor: #36343a;
   .headerBottom {
     text-align: center;
     margin: 2.5rem auto 0.5rem auto;
+  }
+}
+@media (max-width: 768px) {
+  .header {
+    .headerTop {
+      .nav {
+        display: none;
+      }
+    }
   }
 }

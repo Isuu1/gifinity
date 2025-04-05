@@ -14,6 +14,7 @@ $navBackgroundColor: #36343a;
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     .nav {
       flex-shrink: 0;
       position: relative;
@@ -55,6 +56,16 @@ $navBackgroundColor: #36343a;
           align-items: center;
           justify-content: center;
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .stickyHeader {
+    .stickyHeaderTop {
+      .nav {
+        display: none;
       }
     }
   }

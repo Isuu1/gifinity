@@ -23,6 +23,7 @@ import { MdCloudUpload } from "react-icons/md";
 //Animations
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useStorage } from "@/providers/StorageProvider";
+import HamburgerNavMenu from "../HamburgerNavMenu/HamburgerNavMenu";
 
 const stickyHeaderAnimation = {
   initial: {
@@ -70,6 +71,7 @@ const StickyHeader = () => {
         <Link href="/">
           <Image src="/images/logo.png" alt="Gifinity" width={75} height={75} />
         </Link>
+        <HamburgerNavMenu />
         <div className={styles.nav}>
           <Link href="/categories" scroll={false} className={styles.item}>
             <BiSolidCategory />

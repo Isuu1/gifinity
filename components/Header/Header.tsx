@@ -22,6 +22,7 @@ import { useAuth } from "@/providers/AuthProvider";
 //Animations
 import { useMotionValueEvent, useScroll } from "motion/react";
 import { useStorage } from "@/providers/StorageProvider";
+import HamburgerNavMenu from "../HamburgerNavMenu/HamburgerNavMenu";
 
 const Header: React.FC = () => {
   const { user, isLoading } = useAuth();
@@ -75,6 +76,7 @@ const Header: React.FC = () => {
         <Link href="/">
           <Image src="/images/logo.png" alt="Gifinity" width={95} height={95} />
         </Link>
+        <HamburgerNavMenu />
         <div className={styles.nav}>
           <Link
             href="/categories?q=actions"

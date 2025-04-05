@@ -1,43 +1,20 @@
-.formContainer {
-  background: #36343a;
+.changeAvatarContainer {
+  z-index: 11;
+  position: absolute;
+  bottom: 40px;
+  right: 0;
   border-radius: 24px;
-  padding: 1rem 4rem;
   line-height: 2rem;
-  margin-bottom: 1rem;
+  width: fit-content;
   .title {
     margin-bottom: 2rem;
   }
-  .avatar {
-    position: relative !important;
-    width: 150px !important;
-    height: 150px !important;
-    border-radius: 24px;
-    margin: auto;
-    background: #ff204e;
-  }
   .fileInput {
-    & label {
+    .label {
       display: none;
     }
-    & input[type="file"]::file-selector-button {
-      font-family: "Neucha", serif;
-      font-weight: 700;
-      font-style: normal;
-      cursor: pointer;
-      background: #ff204e;
-      border-radius: 24px;
-      border: none;
-      padding: 0.4rem 1rem;
-      color: #fff;
-      transition: background 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      font-size: 1.1rem;
-      &:hover {
-        background: #a0153e;
-        color: #fff !important;
-      }
+    .input {
+      display: none;
     }
   }
 }

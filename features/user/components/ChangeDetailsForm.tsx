@@ -61,9 +61,7 @@ const ChangeDetailsForm: React.FC = () => {
       fetchUser();
       toast.success("Details updated successfully", toastStyle);
     }
-  }, [state.success, state.resetKey]);
-
-  console.log(state);
+  }, [state.success, state.resetKey, fetchUser]);
 
   return (
     <div className={styles.formContainer}>

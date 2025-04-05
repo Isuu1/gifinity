@@ -1,82 +1,94 @@
-import React from "react";
+import React, { useRef } from "react";
+import toast from "react-hot-toast";
 
 //Styles
 import styles from "./ChangeUserAvatar.module.scss";
-import { useAuth } from "@/providers/AuthProvider";
-import { createClient } from "@/utils/supabase/client";
-import Image from "next/image";
-import { generateUploadToken } from "@/features/user/lib/actions/generate-upload-token";
-import toast from "react-hot-toast";
 import { toastStyle } from "@/styles/toast";
+//Components
+import Button from "@/components/UI/Button";
+//Providers
+import { useAuth } from "@/providers/AuthProvider";
+//Actions
+import { changeUserAvatar } from "../lib/actions/changeUserAvatar";
+//Icons
+import { MdEditSquare } from "react-icons/md";
 
 const ChangeUserAvatar: React.FC = () => {
-  const { user, avatar, fetchUser } = useAuth();
+  const { user, fetchUser } = useAuth();
 
-  const supabase = createClient();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeAvatar = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!user || !e.target.files?.[0]) return;
+
+    const file = e.target.files[0];
+
+    //Append file to FormData
+    const formData = new FormData();
+
+    formData.append("file", file);
+    //Pass formData to server action
+
+    if (file.size > 1 * 1024 * 1024) {
+      toast.error("File size exceeds 1MB limit.", {
+        duration: 5000,
+        style: toastStyle.style,
+      });
+      return;
+    }
+
     try {
-      if (!user || !e.target.files?.[0]) return;
+      const result = await changeUserAvatar(formData);
 
-      // 1. Get fresh token from server action
-      const { token } = await generateUploadToken();
-
-      const file = e.target.files[0];
-      const fileName = `${user.id}/${Date.now()}-${file.name.replace(
-        /\s+/g,
-        "-"
-      )}`;
-
-      // 2. Upload with token
-      const { error: uploadError } = await supabase.storage
-        .from("gifinity-avatars")
-        .upload(fileName, file, {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: file.type,
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "x-upsert": "false",
-          },
+      if (result.error) {
+        toast.error(result.error, {
+          duration: 5000,
+          style: toastStyle.style,
         });
-
-      if (uploadError) throw uploadError;
-
-      // 3. Get public URL
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from("gifinity-avatars").getPublicUrl(fileName);
-
-      // 4. Update profile
-      const { error: updateError } = await supabase
-        .from("profiles")
-        .update({ avatar: publicUrl })
-        .eq("id", user.id);
-
-      if (updateError) throw updateError;
-
-      fetchUser();
-      toast.success("Avatar updated", toastStyle);
+        return;
+      }
+      if (result.success) {
+        toast.success("Avatar updated successfully.", {
+          duration: 5000,
+          style: toastStyle.style,
+        });
+        fetchUser(); //Fetch user again to get new avatar
+      }
     } catch (error) {
-      console.error("Upload error:", error);
-      alert("Upload failed");
+      console.error("Error uploading avatar:", error);
+      throw { error: { error } }; // Rethrow the error to be handled by the caller
+    }
+  };
+
+  const handleButtonClick = () => {
+    if (inputRef.current) {
+      inputRef.current.click();
     }
   };
 
   return (
-    <div className={styles.formContainer}>
-      <h1 className={styles.title}>Profile picture</h1>
-      <Image
-        src={avatar || "/images/avatar.gif"}
-        className={styles.avatar}
-        alt="Avatar"
-        fill
-        priority
-        unoptimized
-      />
+    <div className={styles.changeAvatarContainer}>
+      <Button
+        className={styles.button}
+        variant="light"
+        onClick={handleButtonClick}
+        icon={<MdEditSquare />}
+      >
+        Change
+      </Button>
       <div className={styles.fileInput}>
-        <label>Select file</label>
-        <input type="file" accept="image/*" onChange={handleUpload} />
+        <label htmlFor="file" className={styles.label}>
+          Select file
+        </label>
+        <input
+          className={styles.input}
+          ref={inputRef}
+          id="file"
+          name="file"
+          type="file"
+          accept="image/jpeg, image/png, image/gif, image/webp"
+          onChange={handleChangeAvatar}
+        />
       </div>
     </div>
   );

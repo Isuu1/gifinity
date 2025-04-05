@@ -1,9 +1,7 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import StickyHeader from "@/components/StickyHeader/StickyHeader";
-import { AuthProvider } from "@/providers/AuthProvider";
-import { CollectionsProvider } from "@/providers/CollectionsProvider";
-import { StorageProvider } from "@/providers/StorageProvider";
+import AppProviders from "@/providers/AppProviders";
 
 export default async function MainLayout({
   children,
@@ -12,16 +10,18 @@ export default async function MainLayout({
 }) {
   return (
     <div className="main-layout">
-      <StorageProvider>
+      {/* <StorageProvider>
         <AuthProvider>
-          <CollectionsProvider>
-            <Header />
-            <StickyHeader />
-            {children}
-            <Footer />
-          </CollectionsProvider>
+          <CollectionsProvider> */}
+      <AppProviders>
+        <Header />
+        <StickyHeader />
+        {children}
+        <Footer />
+      </AppProviders>
+      {/* </CollectionsProvider>
         </AuthProvider>
-      </StorageProvider>
+      </StorageProvider> */}
     </div>
   );
 }

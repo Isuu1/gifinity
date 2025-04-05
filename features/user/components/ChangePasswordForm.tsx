@@ -57,8 +57,6 @@ const ChangePasswordForm: React.FC = () => {
     }
   }, [state.success, state.resetKey]);
 
-  console.log("state", state);
-
   return (
     <div className={styles.formContainer}>
       <h1 className={styles.title}>Password</h1>

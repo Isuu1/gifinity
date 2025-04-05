@@ -18,6 +18,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "@/providers/AuthProvider";
 //Actions
 import { signout } from "@/features/auth/lib/actions/signout";
+import ChangeUserAvatar from "./ChangeUserAvatar";
 
 const NavMenu: React.FC = () => {
   const pathname = usePathname();
@@ -38,7 +39,7 @@ const NavMenu: React.FC = () => {
 
   return (
     <nav>
-      <ul className={styles.navMenu}>
+      <div className={styles.navMenuContainer}>
         <div className={styles.avatarContainer}>
           <Image
             className={styles.avatar}
@@ -48,43 +49,46 @@ const NavMenu: React.FC = () => {
             priority
             unoptimized
           />
-          <h3>@{username}</h3>
+          <h3 className={styles.username}>@{username}</h3>
+          <ChangeUserAvatar />
         </div>
-        <Link href="/user/profile">
-          <li
-            className={`${styles.item} ${
-              pathname === "/user/profile" && styles.active
-            }`}
-          >
-            <FaUserAlt />
-            Profile
+        <ul className={styles.navMenu}>
+          <Link href="/user/profile">
+            <li
+              className={`${styles.item} ${
+                pathname === "/user/profile" && styles.active
+              }`}
+            >
+              <FaUserAlt />
+              Profile
+            </li>
+          </Link>
+          <Link href="/user/collections">
+            <li
+              className={`${styles.item} ${
+                pathname.startsWith("/user/collections") && styles.active
+              }`}
+            >
+              <IoBookmarks />
+              Collections
+            </li>
+          </Link>
+          <Link href="/user/account-details">
+            <li
+              className={`${styles.item} ${
+                pathname === "/user/account-details" && styles.active
+              }`}
+            >
+              <IoSettings />
+              Account details
+            </li>
+          </Link>
+          <li className={styles.item} onClick={handleSignOut}>
+            <FaSignOutAlt />
+            Sign out
           </li>
-        </Link>
-        <Link href="/user/collections">
-          <li
-            className={`${styles.item} ${
-              pathname.startsWith("/user/collections") && styles.active
-            }`}
-          >
-            <IoBookmarks />
-            Collections
-          </li>
-        </Link>
-        <Link href="/user/account-details">
-          <li
-            className={`${styles.item} ${
-              pathname === "/user/account-details" && styles.active
-            }`}
-          >
-            <IoSettings />
-            Account details
-          </li>
-        </Link>
-        <li className={styles.item} onClick={handleSignOut}>
-          <FaSignOutAlt />
-          Sign out
-        </li>
-      </ul>
+        </ul>
+      </div>
     </nav>
   );
 };

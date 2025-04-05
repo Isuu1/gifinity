@@ -86,7 +86,7 @@ const Header: React.FC = () => {
             <BiSolidCategory />
             Categories
           </Link>
-          <Link href="#" scroll={false} className={styles.item}>
+          <Link href="/upload" scroll={false} className={styles.item}>
             <MdCloudUpload />
             Upload
           </Link>

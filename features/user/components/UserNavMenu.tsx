@@ -18,6 +18,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "@/providers/AuthProvider";
 //Actions
 import { signout } from "@/features/auth/lib/actions/signout";
+import ChangeUserAvatar from "./ChangeUserAvatar";
 
 const NavMenu: React.FC = () => {
   const pathname = usePathname();
@@ -48,7 +49,8 @@ const NavMenu: React.FC = () => {
             priority
             unoptimized
           />
-          <h3>@{username}</h3>
+          <h3 className={styles.username}>@{username}</h3>
+          <ChangeUserAvatar />
         </div>
         <Link href="/user/profile">
           <li

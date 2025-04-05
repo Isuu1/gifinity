@@ -65,15 +65,15 @@ const ChangeUserAvatar: React.FC = () => {
   };
 
   return (
-    <div className={styles.changeDetailsContainer}>
-      <h1 className={styles.title}>Profile picture</h1>
+    <div className={styles.changeAvatarContainer}>
+      {/* <h1 className={styles.title}>Profile picture</h1> */}
       <Button
         className={styles.button}
         variant="light"
         onClick={handleButtonClick}
         icon={<MdEditSquare />}
       >
-        Choose file
+        Change
       </Button>
       <div className={styles.fileInput}>
         <label htmlFor="file" className={styles.label}>

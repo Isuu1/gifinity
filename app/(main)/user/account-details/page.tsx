@@ -2,7 +2,6 @@
 
 import ChangeDetailsForm from "@/features/user/components/ChangeDetailsForm";
 import ChangePasswordForm from "@/features/user/components/ChangePasswordForm";
-import ChangeUserAvatar from "@/features/user/components/ChangeUserAvatar";
 import { useAuth } from "@/providers/AuthProvider";
 
 export default function Page() {
@@ -11,7 +10,6 @@ export default function Page() {
 
   return (
     <div>
-      <ChangeUserAvatar />
       <ChangeDetailsForm />
       <ChangePasswordForm />
     </div>

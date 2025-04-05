@@ -34,8 +34,10 @@ export default function UploadPageLayout({
 
   return (
     <div className={styles.uploadPageLayout} ref={uploadBackgroundRef}>
-      <Header />
-      <div className={styles.container}>{children}</div>
+      <div className={styles.wrapper}>
+        <Header />
+        <div className={styles.container}>{children}</div>
+      </div>
     </div>
   );
 }

@@ -6,7 +6,6 @@ $navMenuItemActiveBackground: #a0153e;
   flex-direction: column;
   gap: 0.5rem;
   list-style: none;
-
   border-radius: 24px;
   font-size: 1.1rem;
   .avatarContainer {
@@ -15,7 +14,6 @@ $navMenuItemActiveBackground: #a0153e;
     display: flex;
     gap: 2.5rem;
     flex-direction: column;
-
     .avatar {
       z-index: 7;
       position: relative !important;
@@ -27,7 +25,6 @@ $navMenuItemActiveBackground: #a0153e;
     }
     .username {
       margin-left: 0.5rem;
-      color: #ff204e;
     }
   }
 

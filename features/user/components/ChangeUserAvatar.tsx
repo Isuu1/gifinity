@@ -1,13 +1,16 @@
 import React, { useRef } from "react";
+import toast from "react-hot-toast";
 
 //Styles
 import styles from "./ChangeUserAvatar.module.scss";
-import { useAuth } from "@/providers/AuthProvider";
-import toast from "react-hot-toast";
 import { toastStyle } from "@/styles/toast";
-import { changeUserAvatar } from "../lib/actions/changeUserAvatar";
+//Components
 import Button from "@/components/UI/Button";
-
+//Providers
+import { useAuth } from "@/providers/AuthProvider";
+//Actions
+import { changeUserAvatar } from "../lib/actions/changeUserAvatar";
+//Icons
 import { MdEditSquare } from "react-icons/md";
 
 const ChangeUserAvatar: React.FC = () => {
@@ -36,7 +39,6 @@ const ChangeUserAvatar: React.FC = () => {
 
     try {
       const result = await changeUserAvatar(formData);
-      console.log("Result:", result);
 
       if (result.error) {
         toast.error(result.error, {
@@ -66,7 +68,6 @@ const ChangeUserAvatar: React.FC = () => {
 
   return (
     <div className={styles.changeAvatarContainer}>
-      {/* <h1 className={styles.title}>Profile picture</h1> */}
       <Button
         className={styles.button}
         variant="light"

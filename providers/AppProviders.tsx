@@ -5,7 +5,9 @@ import { CollectionsProvider } from "./CollectionsProvider";
 
 const AppProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
       <StorageProvider>
         <AuthProvider>
           <CollectionsProvider>{children}</CollectionsProvider>

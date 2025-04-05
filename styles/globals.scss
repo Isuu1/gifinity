@@ -25,11 +25,12 @@ a {
 .main-layout {
   position: relative;
   margin: 0 auto;
+  min-height: 100vh;
 }
 
 .page {
   padding: 1rem;
-  min-height: 100vh;
+  flex-grow: 1;
 }
 
 .flex-row {

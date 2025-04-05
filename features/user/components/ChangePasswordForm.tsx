@@ -52,7 +52,11 @@ const ChangePasswordForm: React.FC = () => {
 
   useEffect(() => {
     if (state.success) {
-      toast.success("Password updated successfully.", toastStyle);
+      toast.success("Password updated successfully", {
+        duration: 4000,
+        style: toastStyle.style,
+        iconTheme: toastStyle.iconTheme,
+      });
       setError([]);
     }
   }, [state.success, state.resetKey]);

@@ -59,7 +59,11 @@ const ChangeDetailsForm: React.FC = () => {
   useEffect(() => {
     if (state.success) {
       fetchUser();
-      toast.success("Details updated successfully", toastStyle);
+      toast.success("Details updated successfully", {
+        duration: 4000,
+        style: toastStyle.style,
+        iconTheme: toastStyle.iconTheme,
+      });
     }
   }, [state.success, state.resetKey, fetchUser]);
 

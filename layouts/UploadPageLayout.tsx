@@ -7,6 +7,7 @@ import WAVES from "vanta/dist/vanta.waves.min";
 import * as THREE from "three";
 //Styles
 import styles from "./UploadPageLayout.module.scss";
+import Header from "@/components/Header/Header";
 
 export default function UploadPageLayout({
   children,
@@ -33,10 +34,8 @@ export default function UploadPageLayout({
 
   return (
     <div className={styles.uploadPageLayout} ref={uploadBackgroundRef}>
-      <div className={styles.container}>
-        <h1>Upload media</h1>
-        {children}
-      </div>
+      <Header />
+      <div className={styles.container}>{children}</div>
     </div>
   );
 }

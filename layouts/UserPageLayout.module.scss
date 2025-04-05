@@ -1,29 +1,12 @@
 .userPageLayout {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 1rem;
+  gap: 2rem;
 }
 
-// @media (min-width: 768px) {
-//   .userPageLayout {
-//     padding: 0 2rem;
-//   }
-// }
-
-// @media (min-width: 1024px) {
-//   .userPageLayout {
-//     padding: 0 6rem;
-//   }
-// }
-
-// @media (min-width: 1200px) {
-//   .userPageLayout {
-//     padding: 0 6rem;
-//   }
-// }
-
-// @media (min-width: 1400px) {
-//   .userPageLayout {
-//     padding: 0 8rem;
-//   }
-// }
+@media (max-width: 670px) {
+  .userPageLayout {
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+  }
+}

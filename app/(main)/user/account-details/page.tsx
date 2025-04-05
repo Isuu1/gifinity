@@ -5,7 +5,7 @@ import ChangePasswordForm from "@/features/user/components/ChangePasswordForm";
 
 export default function Page() {
   return (
-    <div>
+    <div style={{ minWidth: 0 }}>
       <ChangeDetailsForm />
       <ChangePasswordForm />
     </div>

@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 //Styles
 import styles from "./FileInputs.module.scss";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const FileInputs = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -14,6 +15,8 @@ const FileInputs = () => {
 
   console.log("dragActive", dragActive);
   console.log("file", file);
+
+  const router = useRouter();
 
   const handleButtonClick = () => {
     if (!inputRef.current) return;
@@ -51,6 +54,10 @@ const FileInputs = () => {
       // }
     }
   };
+
+  if (file) {
+    router.push("/upload/summary");
+  }
   return (
     <div
       className={`${styles.inputFieldsContainer} ${

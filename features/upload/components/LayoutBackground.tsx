@@ -8,7 +8,7 @@ import { Gif } from "@/interfaces/gifs";
 
 const LayoutBackground: React.FC = async () => {
   const trendingGifsResponse = await fetch(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/api/trending/gifs`
+    `${process.env.SITE_URL}/api/trending/gifs`
   );
 
   const trendingGifs = await trendingGifsResponse.json();

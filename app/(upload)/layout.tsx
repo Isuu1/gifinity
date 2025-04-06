@@ -1,4 +1,5 @@
-import UploadPageLayout from "@/layouts/UploadPageLayout";
+import Header from "@/components/Header/Header";
+import LayoutBackground from "@/features/upload/components/LayoutBackground";
 import AppProviders from "@/providers/AppProviders";
 
 export default function UploadLayout({
@@ -8,7 +9,11 @@ export default function UploadLayout({
 }) {
   return (
     <AppProviders>
-      <UploadPageLayout>{children}</UploadPageLayout>
+      <LayoutBackground />
+      <div className="main-layout">
+        <Header />
+        {children}
+      </div>
     </AppProviders>
   );
 }

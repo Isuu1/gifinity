@@ -1,0 +1,26 @@
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  .innerWrapper {
+    column-count: 5;
+    .gifImage {
+      z-index: 10;
+      position: relative !important;
+      height: auto !important;
+    }
+  }
+
+  .blur {
+    z-index: 11;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #1d1d1d93;
+    backdrop-filter: blur(5px);
+  }
+}

@@ -1,8 +1,9 @@
 import React from "react";
+import Image from "next/image";
 
 //Styles
 import styles from "./LayoutBackground.module.scss";
-import Image from "next/image";
+
 import { Gif } from "@/interfaces/gifs";
 
 const LayoutBackground: React.FC = async () => {
@@ -23,7 +24,7 @@ const LayoutBackground: React.FC = async () => {
               key={gif.id}
               src={gif.images.original.url}
               alt={gif.title}
-              className={styles.gifImage}
+              className={styles.gif}
             />
           ))}
       </div>

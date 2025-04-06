@@ -63,7 +63,7 @@ const FileInputs = () => {
     >
       <Image
         className={styles.image}
-        src="/images/drag-drop-icon4.svg"
+        src="/images/drag-drop-icon.svg"
         alt=""
         fill
       />

@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 
 //Styles
 import styles from "./Upload.module.scss";
@@ -7,6 +9,19 @@ import Button from "@/components/UI/Button";
 import Input from "@/components/UI/Input";
 
 const Upload: React.FC = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleButtonClick = () => {
+    if (!inputRef.current) return;
+    inputRef.current.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    const file = e.target.files[0];
+    console.log(file);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.uploadField}>
@@ -22,9 +37,21 @@ const Upload: React.FC = () => {
             <span>
               Accepted formts: <strong>GIF, MP4, MOV, WEBP</strong>
             </span>
-            <Button className={styles.button} variant="light">
+            <Button
+              onClick={handleButtonClick}
+              className={styles.button}
+              variant="light"
+            >
               Choose file
             </Button>
+            <input
+              className={styles.fileInput}
+              type="file"
+              id="file"
+              name="file"
+              ref={inputRef}
+              onChange={handleFileChange}
+            />
           </div>
         </div>
         <div className={styles.urlInputContainer}>

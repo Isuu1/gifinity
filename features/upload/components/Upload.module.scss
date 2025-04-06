@@ -38,6 +38,9 @@
         align-items: center;
         gap: 1rem;
         margin-bottom: 1rem;
+        .fileInput {
+          display: none;
+        }
         .button {
           margin-top: 1rem;
         }

@@ -15,6 +15,9 @@
     background: #36343a;
     border-radius: 34px;
     padding: 2rem;
+    .dragActive {
+      border: 7px dashed #e00505c2 !important;
+    }
     .inputFieldsContainer {
       border: 7px dashed #ffffff54;
       border-radius: 24px;

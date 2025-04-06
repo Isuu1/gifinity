@@ -64,7 +64,7 @@ const Header: React.FC = () => {
             />
           </Link>
         </div>
-        {pathname !== "/upload" && (
+        {!pathname.startsWith("/upload") && (
           <>
             <div className={styles.headerBottom}>
               <h2>Find the Perfect GIF for Every Moment!</h2>
@@ -120,7 +120,7 @@ const Header: React.FC = () => {
         </div>
         {user && <UserModal />}
       </div>
-      {pathname !== "/upload" && (
+      {!pathname.startsWith("/upload") && (
         <>
           <div className={styles.headerBottom}>
             <h2>Find the Perfect GIF for Every Moment!</h2>

@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import styles from "./UploadSuccess.module.scss";
 import { useCollections } from "@/providers/CollectionsProvider";
 import MediaOverlay from "@/features/media/components/MediaOverlay";
+import { AnimatePresence } from "framer-motion";
 
 const UploadSuccess: React.FC = () => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
@@ -22,7 +23,9 @@ const UploadSuccess: React.FC = () => {
         onMouseEnter={() => setShowOverlay(true)}
         onMouseLeave={() => setShowOverlay(false)}
       >
-        {showOverlay && <MediaOverlay key={media?.id} />}
+        <AnimatePresence>
+          {showOverlay && <MediaOverlay key={media?.id} />}
+        </AnimatePresence>
         <Image
           className={styles.image}
           src={media?.images.original.url || ""}

@@ -1,10 +1,11 @@
 import Button from "@/components/UI/Button";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 //Styles
 import styles from "./FileInputs.module.scss";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import UploadSummary from "./UploadSummary";
+import { AnimatePresence } from "framer-motion";
 
 const FileInputs = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -13,10 +14,10 @@ const FileInputs = () => {
 
   const [file, setFile] = useState<File | null>(null);
 
+  const [summaryOpen, setSummaryOpen] = useState(false);
+
   console.log("dragActive", dragActive);
   console.log("file", file);
-
-  const router = useRouter();
 
   const handleButtonClick = () => {
     if (!inputRef.current) return;
@@ -49,53 +50,62 @@ const FileInputs = () => {
     if (files.length > 0) {
       const file = files[0];
       setFile(file);
-      // if (inputRef.current) {
-      //   inputRef.current.files = files;
-      // }
     }
   };
 
-  if (file) {
-    router.push("/upload/summary");
-  }
+  useEffect(() => {
+    if (file) {
+      setSummaryOpen(true);
+    }
+  }, [file]);
   return (
-    <div
-      className={`${styles.inputFieldsContainer} ${
-        dragActive && styles.dragActive
-      }`}
-      onDragEnter={handleDragEnter}
-      onDragLeave={() => setDragActive(false)}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
-      <Image
-        className={styles.image}
-        src="/images/drag-drop-icon.svg"
-        alt=""
-        fill
-      />
-      <div className={styles.instruction}>
-        <h2>Drag & drop your GIF or video here</h2>
-        <span>
-          Accepted formts: <strong>GIF, MP4, MOV, WEBP</strong>
-        </span>
-      </div>
-      <Button
-        onClick={handleButtonClick}
-        className={styles.button}
-        variant="light"
+    <>
+      <AnimatePresence>
+        {summaryOpen && (
+          <UploadSummary
+            file={file}
+            closeSummary={() => setSummaryOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+      <div
+        className={`${styles.inputFieldsContainer} ${
+          dragActive && styles.dragActive
+        }`}
+        onDragEnter={handleDragEnter}
+        onDragLeave={() => setDragActive(false)}
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
       >
-        Choose file
-      </Button>
-      <input
-        className={styles.fileInput}
-        type="file"
-        id="file"
-        name="file"
-        ref={inputRef}
-        onChange={handleFileChange}
-      />
-    </div>
+        <Image
+          className={styles.image}
+          src="/images/drag-drop-icon.svg"
+          alt=""
+          fill
+        />
+        <div className={styles.instruction}>
+          <h2>Drag & drop your GIF or video here</h2>
+          <span>
+            Accepted formts: <strong>GIF, MP4, MOV, WEBP</strong>
+          </span>
+        </div>
+        <Button
+          onClick={handleButtonClick}
+          className={styles.button}
+          variant="light"
+        >
+          Choose file
+        </Button>
+        <input
+          className={styles.fileInput}
+          type="file"
+          id="file"
+          name="file"
+          ref={inputRef}
+          onChange={handleFileChange}
+        />
+      </div>
+    </>
   );
 };
 

@@ -20,25 +20,25 @@ export async function uploadFile(formData: FormData) {
       status: 500,
     };
   }
-  const url = `https:/upload.giphy.com/v1/gifs?api_key=${apiKey}`;
+  //   const url = `https:/upload.giphy.com/v1/gifs?api_key=${apiKey}`;
 
-  const response = await fetch(url, {
-    method: "POST",
-    body: formData,
-  });
+  //   const response = await fetch(url, {
+  //     method: "POST",
+  //     body: formData,
+  //   });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    console.log("errorData", errorData);
-    throw new Error("Failed to upload file");
-  }
+  //   if (!response.ok) {
+  //     const errorData = await response.json();
+  //     console.log("errorData", errorData);
+  //     throw new Error("Failed to upload file");
+  //   }
 
-  const data = await response.json();
+  //   const data = await response.json();
 
-  console.log("file", file);
+  //   console.log("file", file);
   return {
     success: true,
-    data: data,
+    //data: data,
     error: null,
     status: 200,
   };

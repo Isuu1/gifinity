@@ -13,6 +13,7 @@ import { uploadFile } from "../lib/actions/upload";
 import toast from "react-hot-toast";
 import { toastStyle } from "@/styles/toast";
 import { useAuth } from "@/providers/AuthProvider";
+import { useCollections } from "@/providers/CollectionsProvider";
 
 interface UploadSummaryProps {
   file: File | null;
@@ -24,6 +25,9 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
   closeSummary,
 }) => {
   const { username } = useAuth();
+  const { collections, media, setMedia } = useCollections();
+
+  console.log("collections", collections);
 
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
@@ -51,6 +55,9 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
     console.log("result", result);
     if (result.success) {
       console.log("File uploaded successfully");
+      const gifResult = await fetch(`/api/get-gif?gifId=3v7A7YLUSVlVrhu5rp`);
+      const gif = await gifResult.json();
+      setMedia(gif);
       setUploadSuccess(true);
     }
     if (result.error) {
@@ -61,6 +68,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
       return;
     }
   };
+  console.log("media", media);
 
   // Create a URL for the file object
   // This URL can be used as the src for an <Image /> element
@@ -69,40 +77,56 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
   return (
     <Modal theme="dark">
       <div className={styles.container}>
-        <h2
-          className={styles.backButtonContainer}
-          onClick={() => closeSummary()}
-        >
-          <IoArrowUndo />
-          <span>Back</span>
-        </h2>
-        <div className={styles.innerWrapper}>
-          <div className={styles.fileContainer}>
+        {uploadSuccess && media ? (
+          <>
+            <h2>File uploaded successfully!</h2>
+            <h3>Would you like to add it to collection?</h3>
+            {/* <CollectionsModal /> */}
             <Image className={styles.image} src={imageUrl || ""} fill alt="" />
-            <div className={styles.fileName}>
-              <span className={styles.name}>{fileName}</span>
-              <span className={styles.extension}>{fileExtension}</span>
-              <span className={styles.size}>{generateFileSize()}</span>
+          </>
+        ) : (
+          <>
+            <h2
+              className={styles.backButtonContainer}
+              onClick={() => closeSummary()}
+            >
+              <IoArrowUndo />
+              <span>Back</span>
+            </h2>
+            <div className={styles.innerWrapper}>
+              <div className={styles.fileContainer}>
+                <Image
+                  className={styles.image}
+                  src={imageUrl || ""}
+                  fill
+                  alt=""
+                />
+                <div className={styles.fileName}>
+                  <span className={styles.name}>{fileName}</span>
+                  <span className={styles.extension}>{fileExtension}</span>
+                  <span className={styles.size}>{generateFileSize()}</span>
+                </div>
+              </div>
+              <div>
+                <h2>Add image info</h2>
+                <Input id="tags" type="text" label="tags" />
+                <Input
+                  id="username"
+                  label="username"
+                  type="text"
+                  value={username}
+                  disabled
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <h2>Add image info</h2>
-            <Input id="tags" type="text" label="tags" />
-            <Input
-              id="username"
-              label="username"
-              type="text"
-              value={username}
-              disabled
-            />
-          </div>
-        </div>
-        <div className={styles.buttonsContainer}>
-          <Button>Cancel</Button>
-          <Button variant="light" onClick={handleUpload}>
-            Upload
-          </Button>
-        </div>
+            <div className={styles.buttonsContainer}>
+              <Button>Cancel</Button>
+              <Button variant="light" onClick={handleUpload}>
+                Upload
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </Modal>
   );

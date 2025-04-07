@@ -6,6 +6,7 @@ import styles from "./FileInputs.module.scss";
 import Image from "next/image";
 import UploadSummary from "./UploadSummary";
 import { AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const FileInputs = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,6 +16,8 @@ const FileInputs = () => {
   const [file, setFile] = useState<File | null>(null);
 
   const [summaryOpen, setSummaryOpen] = useState(false);
+
+  const router = useRouter();
 
   console.log("dragActive", dragActive);
   console.log("file", file);
@@ -56,6 +59,7 @@ const FileInputs = () => {
   useEffect(() => {
     if (file) {
       setSummaryOpen(true);
+      //router.push("/upload/summary");
     }
   }, [file]);
   return (

@@ -15,5 +15,6 @@ export interface Gif {
   user: {
     display_name: string;
     avatar_url: string;
+    username?: string;
   };
 }

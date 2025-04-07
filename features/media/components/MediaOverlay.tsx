@@ -52,7 +52,7 @@ const MediaOverlay: React.FC = () => {
         </div>
       </div>
 
-      {media && media.user?.display_name && (
+      {media && (media.user?.display_name || media.user?.username) && (
         <div className={styles.overlay_author}>
           <Image
             className={styles.avatar}
@@ -61,7 +61,9 @@ const MediaOverlay: React.FC = () => {
             width={30}
             height={30}
           />
-          <p className={styles.name}>{media.user?.display_name}</p>
+          <p className={styles.name}>
+            {media.user?.display_name || media.user?.username}
+          </p>
         </div>
       )}
     </motion.div>

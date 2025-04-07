@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import { toastStyle } from "@/styles/toast";
 import { useAuth } from "@/providers/AuthProvider";
 import { useCollections } from "@/providers/CollectionsProvider";
+import UploadSuccess from "./UploadSuccess";
 
 interface UploadSummaryProps {
   file: File | null;
@@ -57,7 +58,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
       console.log("File uploaded successfully");
       const gifResult = await fetch(`/api/get-gif?gifId=3v7A7YLUSVlVrhu5rp`);
       const gif = await gifResult.json();
-      setMedia(gif);
+      setMedia(gif.data);
       setUploadSuccess(true);
     }
     if (result.error) {
@@ -78,12 +79,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
     <Modal theme="dark">
       <div className={styles.container}>
         {uploadSuccess && media ? (
-          <>
-            <h2>File uploaded successfully!</h2>
-            <h3>Would you like to add it to collection?</h3>
-            {/* <CollectionsModal /> */}
-            <Image className={styles.image} src={imageUrl || ""} fill alt="" />
-          </>
+          <UploadSuccess />
         ) : (
           <>
             <h2

@@ -8,6 +8,8 @@ import styles from "./UploadSuccess.module.scss";
 import { useCollections } from "@/providers/CollectionsProvider";
 import MediaOverlay from "@/features/media/components/MediaOverlay";
 import { AnimatePresence } from "framer-motion";
+import Button from "@/components/UI/Button";
+import Link from "next/link";
 
 const UploadSuccess: React.FC = () => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
@@ -17,7 +19,7 @@ const UploadSuccess: React.FC = () => {
   return (
     <div className={styles.uploadSuccess}>
       <h2>✅ File uploaded successfully!</h2>
-      <h3>Would you like to add it to collection?</h3>
+      <h3>❤️ Add it to the collection or share with your friends! ❤️</h3>
       <div
         className={styles.imageContainer}
         onMouseEnter={() => setShowOverlay(true)}
@@ -33,6 +35,13 @@ const UploadSuccess: React.FC = () => {
           alt=""
         />
       </div>
+      <h3>
+        View and manage all your uploads on your{" "}
+        <Link href="/user/profile" className={styles.link}>
+          Profile Page
+        </Link>
+      </h3>
+      <Button variant="light">Done</Button>
     </div>
   );
 };

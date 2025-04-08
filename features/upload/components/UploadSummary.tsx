@@ -95,7 +95,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
                 <span className={styles.size}>{generateFileSize()}</span>
               </div>
             </div>
-            <div>
+            <div className={styles.imageInfo}>
               <h2>Add image info</h2>
               <Input id="tags" type="text" label="tags" />
               <Input

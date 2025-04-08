@@ -14,6 +14,8 @@ import { toastStyle } from "@/styles/toast";
 import { useAuth } from "@/providers/AuthProvider";
 import { useCollections } from "@/providers/CollectionsProvider";
 import UploadSuccess from "./UploadSuccess";
+//Icons
+import { FaTags } from "react-icons/fa6";
 
 interface UploadSummaryProps {
   file: File | null;
@@ -97,7 +99,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
             </div>
             <div className={styles.imageInfo}>
               <h2>Add image info</h2>
-              <Input id="tags" type="text" label="tags" />
+              <Input id="tags" type="text" label="tags" icon={<FaTags />} />
               <Input
                 id="username"
                 label="username"

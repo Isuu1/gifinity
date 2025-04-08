@@ -44,7 +44,9 @@ const Input: React.FC<IProps> = ({
 }) => {
   return (
     <div className={`${styles.inputContainer} ${styles[variant]}`}>
-      <label htmlFor={label}>{!labelHidden && label}</label>
+      <label className={styles.label} htmlFor={label}>
+        {!labelHidden && label}
+      </label>
       <div className={`${styles.inputIcon}`}>{icon}</div>
       <div className={`${styles.showPasswordIcon}`}>{showPasswordIcon}</div>
       <input

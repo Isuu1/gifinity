@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  const { file } = useUpload();
+  const { file, setFile } = useUpload();
 
   const [showModal, setShowModal] = useState<boolean>(true);
 
@@ -19,6 +19,7 @@ export default function Page() {
 
   const closeModal = () => {
     setShowModal(false);
+    setFile(null);
   };
   console.log("showModal", showModal);
   useEffect(() => {

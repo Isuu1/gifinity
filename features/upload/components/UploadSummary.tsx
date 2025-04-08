@@ -74,7 +74,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
   return (
     <div className={styles.container}>
       {uploadSuccess && media ? (
-        <UploadSuccess />
+        <UploadSuccess closeSummary={closeSummary} />
       ) : (
         <>
           <h2 className={styles.backButtonContainer} onClick={closeSummary}>
@@ -108,7 +108,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
             </div>
           </div>
           <div className={styles.buttonsContainer}>
-            <Button>Cancel</Button>
+            <Button onClick={closeSummary}>Cancel</Button>
             <Button variant="light" onClick={handleUpload}>
               Upload
             </Button>

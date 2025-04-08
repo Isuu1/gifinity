@@ -11,7 +11,11 @@ import { AnimatePresence } from "framer-motion";
 import Button from "@/components/UI/Button";
 import Link from "next/link";
 
-const UploadSuccess: React.FC = () => {
+interface UploadSuccessProps {
+  closeSummary: () => void;
+}
+
+const UploadSuccess: React.FC<UploadSuccessProps> = ({ closeSummary }) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
   const { media } = useCollections();
@@ -41,7 +45,9 @@ const UploadSuccess: React.FC = () => {
           Profile Page
         </Link>
       </h3>
-      <Button variant="light">Done</Button>
+      <Button variant="light" onClick={closeSummary}>
+        Done
+      </Button>
     </div>
   );
 };

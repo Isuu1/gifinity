@@ -100,10 +100,16 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
             </div>
             <div className={styles.imageInfo}>
               <h2>Add image info</h2>
-              <Input id="tags" type="text" label="tags" icon={<FaTags />} />
+              <Input
+                id="tags"
+                type="text"
+                label="Tags"
+                placeholder="Separate tags by comma"
+                icon={<FaTags />}
+              />
               <Input
                 id="username"
-                label="username"
+                label="Username"
                 type="text"
                 value={username}
                 disabled

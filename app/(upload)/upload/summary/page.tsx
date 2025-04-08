@@ -1,23 +1,18 @@
 "use client";
 
-import UploadSummary from "@/features/upload/components/UploadSummary";
 import { useUpload } from "@/providers/UploadProvider";
 import { useRouter } from "next/navigation";
 
+//If this page was accessed directly (after hard refresh), redirect to upload page
 export default function Page() {
   const { file } = useUpload();
-  const router = useRouter();
-  if (!file) {
-    // Redirect to upload page if no file is selected
 
+  const router = useRouter();
+
+  if (!file && typeof window !== "undefined") {
+    // window.location.href = "/upload";
     router.push("/upload");
+    return null;
   }
-  //   const router = useRouter();
-  //   const file = false;
-  //   if (!file) {
-  //     setTimeout(() => {
-  //       router.push("/upload");
-  //     }, 3000);
-  //   }
-  return <UploadSummary file={file} />;
+  return null;
 }

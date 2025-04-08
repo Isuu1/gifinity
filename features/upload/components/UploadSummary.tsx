@@ -6,7 +6,6 @@ import React, { useState } from "react";
 import styles from "./UploadSummary.module.scss";
 import { IoArrowUndo } from "react-icons/io5";
 import Image from "next/image";
-import Modal from "@/components/UI/Modal";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import { uploadFile } from "../lib/actions/upload";
@@ -26,9 +25,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
   closeSummary,
 }) => {
   const { username } = useAuth();
-  const { collections, media, setMedia } = useCollections();
-
-  console.log("collections", collections);
+  const { media, setMedia } = useCollections();
 
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
@@ -69,62 +66,56 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
       return;
     }
   };
-  console.log("media", media);
 
   // Create a URL for the file object
   // This URL can be used as the src for an <Image /> element
   const imageUrl = file ? URL.createObjectURL(file) : null;
-  console.log("imageurl", imageUrl);
+
   return (
-    <Modal theme="dark">
-      <div className={styles.container}>
-        {uploadSuccess && media ? (
-          <UploadSuccess />
-        ) : (
-          <>
-            <h2
-              className={styles.backButtonContainer}
-              onClick={() => closeSummary()}
-            >
-              <IoArrowUndo />
-              <span>Back</span>
-            </h2>
-            <div className={styles.innerWrapper}>
-              <div className={styles.fileContainer}>
-                <Image
-                  className={styles.image}
-                  src={imageUrl || ""}
-                  fill
-                  alt=""
-                />
-                <div className={styles.fileName}>
-                  <span className={styles.name}>{fileName}</span>
-                  <span className={styles.extension}>{fileExtension}</span>
-                  <span className={styles.size}>{generateFileSize()}</span>
-                </div>
-              </div>
-              <div>
-                <h2>Add image info</h2>
-                <Input id="tags" type="text" label="tags" />
-                <Input
-                  id="username"
-                  label="username"
-                  type="text"
-                  value={username}
-                  disabled
-                />
+    <div className={styles.container}>
+      {uploadSuccess && media ? (
+        <UploadSuccess />
+      ) : (
+        <>
+          <h2 className={styles.backButtonContainer} onClick={closeSummary}>
+            <IoArrowUndo />
+            <span>Back</span>
+          </h2>
+          <div className={styles.innerWrapper}>
+            <div className={styles.fileContainer}>
+              <Image
+                className={styles.image}
+                src={imageUrl || ""}
+                fill
+                alt=""
+              />
+              <div className={styles.fileName}>
+                <span className={styles.name}>{fileName}</span>
+                <span className={styles.extension}>{fileExtension}</span>
+                <span className={styles.size}>{generateFileSize()}</span>
               </div>
             </div>
-            <div className={styles.buttonsContainer}>
-              <Button>Cancel</Button>
-              <Button variant="light" onClick={handleUpload}>
-                Upload
-              </Button>
+            <div>
+              <h2>Add image info</h2>
+              <Input id="tags" type="text" label="tags" />
+              <Input
+                id="username"
+                label="username"
+                type="text"
+                value={username}
+                disabled
+              />
             </div>
-          </>
-        )}
-      </div>
-    </Modal>
+          </div>
+          <div className={styles.buttonsContainer}>
+            <Button>Cancel</Button>
+            <Button variant="light" onClick={handleUpload}>
+              Upload
+            </Button>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

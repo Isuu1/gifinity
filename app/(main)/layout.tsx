@@ -10,18 +10,10 @@ export default async function MainLayout({
 }) {
   return (
     <div className="main-layout">
-      {/* <StorageProvider>
-        <AuthProvider>
-          <CollectionsProvider> */}
-      <AppProviders>
-        <Header />
-        <StickyHeader />
-        {children}
-        <Footer />
-      </AppProviders>
-      {/* </CollectionsProvider>
-        </AuthProvider>
-      </StorageProvider> */}
+      <Header />
+      <StickyHeader />
+      {children}
+      <Footer />
     </div>
   );
 }

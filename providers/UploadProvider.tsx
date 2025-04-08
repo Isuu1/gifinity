@@ -11,6 +11,7 @@ export const UploadContext = createContext<UploadContextType | null>(null);
 
 export const UploadProvider = ({ children }: { children: React.ReactNode }) => {
   const [file, setFile] = useState<File | null>(null);
+
   return (
     <UploadContext.Provider value={{ file, setFile }}>
       {children}

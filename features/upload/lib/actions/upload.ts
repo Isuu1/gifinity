@@ -2,6 +2,8 @@
 
 export async function uploadFile(formData: FormData) {
   const file = formData.get("file");
+  const tags = formData.get("tags");
+  console.log("tags", tags);
   const apiKey = process.env.API_KEY;
 
   if (!file) {
@@ -20,7 +22,7 @@ export async function uploadFile(formData: FormData) {
       status: 500,
     };
   }
-  //   const url = `https:/upload.giphy.com/v1/gifs?api_key=${apiKey}`;
+  //   const url = `https:/upload.giphy.com/v1/gifs?api_key=${apiKey}&tags=${tags}`;
 
   //   const response = await fetch(url, {
   //     method: "POST",

@@ -32,6 +32,8 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
 
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
+  const [tags, setTags] = useState<string | null>(null);
+
   const fileName = file?.name.split(".")[0];
   const fileExtension = file?.name.split(".").pop();
 
@@ -51,6 +53,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
     // Create a FormData object to send the file
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("tags", tags || "");
     // Pass formData to server action
     const result = await uploadFile(formData);
     console.log("result", result);
@@ -106,6 +109,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
                 label="Tags"
                 placeholder="Separate tags by comma"
                 icon={<FaTags />}
+                onChange={(e) => setTags(e.target.value)}
               />
               <Input
                 id="username"

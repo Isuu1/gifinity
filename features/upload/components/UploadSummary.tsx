@@ -16,6 +16,7 @@ import { useCollections } from "@/providers/CollectionsProvider";
 import UploadSuccess from "./UploadSuccess";
 //Icons
 import { FaTags } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa";
 
 interface UploadSummaryProps {
   file: File | null;
@@ -106,6 +107,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
                 type="text"
                 value={username}
                 disabled
+                icon={<FaUser />}
               />
             </div>
           </div>

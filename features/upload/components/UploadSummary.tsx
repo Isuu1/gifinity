@@ -11,7 +11,7 @@ import Button from "@/components/UI/Button";
 import UploadSuccess from "./UploadSuccess";
 import Error from "@/components/Error/Error";
 //Actions
-import { uploadFile } from "../lib/actions/upload";
+import { uploadFile } from "../lib/actions/uploadFile";
 //Utils
 import { generateFileSize } from "../lib/utils/generateFileSize";
 //Providers

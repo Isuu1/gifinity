@@ -1,9 +1,17 @@
+import Header from "@/components/Header/Header";
+import LayoutBackground from "@/features/upload/components/LayoutBackground";
 import Upload from "@/features/upload/components/Upload";
 
 export default async function Page() {
   return (
-    <div className="page">
-      <Upload />
-    </div>
+    <>
+      <LayoutBackground />
+      <div className="main-layout">
+        <Header />
+        <div className="page">
+          <Upload />
+        </div>
+      </div>
+    </>
   );
 }

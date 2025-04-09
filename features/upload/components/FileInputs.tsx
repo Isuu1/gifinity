@@ -68,7 +68,7 @@ const FileInputs = () => {
 
   return (
     <div
-      className={`${styles.inputFieldsContainer} ${
+      className={`${styles.fileInputsContainer} ${
         dragActive && styles.dragActive
       }`}
       onDragEnter={handleDragEnter}
@@ -85,7 +85,7 @@ const FileInputs = () => {
       <div className={styles.instruction}>
         <h2>Drag & drop your GIF or video here</h2>
         <span>
-          Accepted formts: <strong>GIF, MP4, MOV, WEBP</strong>
+          Accepted formats: <strong>GIF, MP4, MOV, WEBP</strong>
         </span>
       </div>
       <Button

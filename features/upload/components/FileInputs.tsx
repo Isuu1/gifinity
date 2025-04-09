@@ -99,6 +99,7 @@ const FileInputs = () => {
         id="file"
         name="file"
         ref={inputRef}
+        accept="image/jpeg, image/png, image/gif, image/webp"
         onChange={handleFileChange}
       />
     </div>

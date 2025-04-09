@@ -1,9 +1,14 @@
 "use server";
 
+import { Gif } from "@/interfaces/gifs";
+import { Sticker } from "@/interfaces/stickers";
+import { createClient } from "@/utils/supabase/server";
+
 export async function uploadFile(formData: FormData) {
+  //Get form data
   const file = formData.get("file");
   const tags = formData.get("tags");
-  console.log("tags", tags);
+
   const apiKey = process.env.API_KEY;
 
   if (!file) {
@@ -22,25 +27,107 @@ export async function uploadFile(formData: FormData) {
       status: 500,
     };
   }
-  //   const url = `https:/upload.giphy.com/v1/gifs?api_key=${apiKey}&tags=${tags}`;
+  //Giphy upload API URL
+  const url = `https:/upload.giphy.com/v1/gifs?api_key=${apiKey}&tags=${tags}`;
+  console.log("url", url);
 
-  //   const response = await fetch(url, {
-  //     method: "POST",
-  //     body: formData,
-  //   });
+  // const response = await fetch(url, {
+  //   method: "POST",
+  //   body: formData,
+  // });
 
-  //   if (!response.ok) {
-  //     const errorData = await response.json();
-  //     console.log("errorData", errorData);
-  //     throw new Error("Failed to upload file");
-  //   }
+  // if (!response.ok) {
+  //   const errorData = await response.json();
+  //   console.log("errorData", errorData);
+  //   throw new Error("Failed to upload file");
+  // }
 
-  //   const data = await response.json();
+  // const data = await response.json();
 
-  //   console.log("file", file);
+  // console.log("data", data);
+
+  const supabase = await createClient();
+
+  // Get the authenticated user
+  const { data: userData, error: authError } = await supabase.auth.getUser();
+
+  if (authError || !userData?.user) {
+    return {
+      success: false,
+      data: null,
+      error: "User not authenticated",
+      status: 401,
+    };
+  }
+
+  const userId = userData.user.id;
+
+  //Select the user's profile uploads table
+  const { data: userUploads } = await supabase
+    .from("profiles")
+    .select("uploads")
+    .eq("id", userId)
+    .single();
+
+  //Provide assigned upload media ID and fetch the media from Giphy API
+  const uploadedMediaResult = await fetch(
+    `${process.env.SITE_URL}/api/get-gif?gifId=CRD4WV0BzOJ5XXzF3b`
+  );
+  const { data: media }: { data: Gif | Sticker } =
+    await uploadedMediaResult.json();
+
+  //Update users uploaded gifs table
+  if (media.type === "gif") {
+    //Updated uploaded gifs array
+    const updatedGifs = [...userUploads?.uploads.gifs, media];
+
+    const { error: updateError } = await supabase
+      .from("profiles")
+      .update({
+        uploads: { gifs: updatedGifs, stickers: userUploads?.uploads.stickers },
+      })
+      .eq("id", userId)
+      .single();
+
+    console.log("Gif saved to profile");
+
+    if (updateError) {
+      return {
+        success: false,
+        data: null,
+        error: `Error updating collection, ${updateError}`,
+        status: 500,
+      };
+    }
+  }
+  //Update users uploaded stickers table
+  if (media.type === "sticker") {
+    //Updated uploaded stickers array
+    const updatedStickers = [...userUploads?.uploads.stickers, media];
+
+    const { error: updateError } = await supabase
+      .from("profiles")
+      .update({
+        uploads: { gifs: userUploads?.uploads.gifs, stickers: updatedStickers },
+      })
+      .eq("id", userId)
+      .single();
+
+    console.log("Sticker saved to profile");
+
+    if (updateError) {
+      return {
+        success: false,
+        data: null,
+        error: `Error updating collection, ${updateError}`,
+        status: 500,
+      };
+    }
+  }
+
   return {
     success: true,
-    //data: data,
+    data: media,
     error: null,
     status: 200,
   };

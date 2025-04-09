@@ -17,6 +17,7 @@ import UploadSuccess from "./UploadSuccess";
 //Icons
 import { FaTags } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
+import { Gif } from "@/interfaces/gifs";
 
 interface UploadSummaryProps {
   file: File | null;
@@ -54,22 +55,31 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
     const formData = new FormData();
     formData.append("file", file);
     formData.append("tags", tags || "");
-    // Pass formData to server action
-    const result = await uploadFile(formData);
-    console.log("result", result);
-    if (result.success) {
-      console.log("File uploaded successfully");
-      const gifResult = await fetch(`/api/get-gif?gifId=3v7A7YLUSVlVrhu5rp`);
-      const gif = await gifResult.json();
-      setMedia(gif.data);
-      setUploadSuccess(true);
-    }
-    if (result.error) {
-      toast.error(result.error, {
+    try {
+      // Pass formData to server action
+      const result = await uploadFile(formData);
+      console.log("result", result);
+      if (result.success) {
+        console.log("File uploaded successfully");
+
+        // Handle the response from the server
+        const gif: Gif | null = result.data;
+        setMedia(gif);
+        setUploadSuccess(true);
+      }
+      if (result.error) {
+        toast.error(result.error, {
+          duration: 5000,
+          style: toastStyle.style,
+        });
+        return;
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      toast.error("Error uploading file", {
         duration: 5000,
         style: toastStyle.style,
       });
-      return;
     }
   };
 

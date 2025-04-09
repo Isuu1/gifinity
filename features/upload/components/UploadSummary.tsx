@@ -33,7 +33,7 @@ interface UploadSummaryProps {
 const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   const { username } = useAuth();
   const { media, setMedia } = useCollections();
-  const { file } = useUpload();
+  const { file, setFile, fileUrl, setFileUrl } = useUpload();
 
   const [success, setSuccess] = useState<boolean>(false);
   const [tags, setTags] = useState<string | null>(null);
@@ -42,6 +42,12 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
 
   const fileName = file?.name.split(".")[0];
   const fileExtension = file?.name.split(".").pop();
+
+  const handleCloseSummary = () => {
+    closeSummary();
+    setFile(null);
+    setFileUrl(null);
+  };
 
   const handleUpload = async () => {
     if (!file) return;
@@ -88,20 +94,25 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.backButtonContainer} onClick={closeSummary}>
+      <h2 className={styles.backButtonContainer} onClick={handleCloseSummary}>
         <IoArrowUndo />
         <span>Back</span>
       </h2>
       <div className={styles.innerWrapper}>
         <div className={styles.fileContainer}>
-          <Image className={styles.image} src={imageUrl || ""} fill alt="" />
-          <div className={styles.fileName}>
-            <span className={styles.name}>{fileName}</span>
-            <span className={styles.extension}>{fileExtension}</span>
-            <span className={styles.size}>
-              {file && generateFileSize(file)}
-            </span>
-          </div>
+          {imageUrl && (
+            <Image className={styles.image} src={imageUrl} fill alt="" />
+          )}
+          {fileUrl && (
+            <Image className={styles.image} src={fileUrl} fill alt="" />
+          )}
+          {file && (
+            <div className={styles.fileName}>
+              <span className={styles.name}>{fileName}</span>
+              <span className={styles.extension}>{fileExtension}</span>
+              <span className={styles.size}>{generateFileSize(file)}</span>
+            </div>
+          )}
         </div>
         <div className={styles.imageInfo}>
           <h2>Add image info</h2>

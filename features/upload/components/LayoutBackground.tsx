@@ -25,6 +25,7 @@ const LayoutBackground: React.FC = async () => {
               src={gif.images.original.url}
               alt={gif.title}
               className={styles.gif}
+              priority
             />
           ))}
       </div>

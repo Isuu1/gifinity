@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -61,10 +61,12 @@ const FileInputs = () => {
     }
   };
 
-  //Once the file is set, redirect to the summary page
-  if (file) {
-    router.push("/upload/summary");
-  }
+  useEffect(() => {
+    //Once the file is set, redirect to the summary page
+    if (file) {
+      router.push("/upload/summary");
+    }
+  }, [file, router]);
 
   return (
     <div

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 //Styles
@@ -22,6 +22,10 @@ const UrlInput = () => {
 
   const handleUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const url = e.target.value;
+    if (!url) {
+      setError(null);
+      return;
+    }
     //Fetch the URL to check if it is valid
     const response = await fetch(url, { method: "HEAD", mode: "cors" });
     //Check if the response headers contain a content type that is accepted
@@ -37,9 +41,12 @@ const UrlInput = () => {
     }
   };
 
-  if (fileUrl) {
-    router.push("/upload/summary");
-  }
+  useEffect(() => {
+    //Once the fileUrl is set, redirect to the summary page
+    if (fileUrl) {
+      router.push("/upload/summary");
+    }
+  }, [fileUrl, router]);
 
   return (
     <div className={styles.urlInputContainer}>

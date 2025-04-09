@@ -16,6 +16,8 @@
     flex: 1 50%;
     border-radius: 34px;
     padding: 2rem;
+    display: grid;
+    grid-template-rows: 1fr auto;
   }
   .infoSection {
     flex: 1 50%;

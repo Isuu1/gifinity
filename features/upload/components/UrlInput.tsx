@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 //Styles
 import styles from "./UrlInput.module.scss";
@@ -6,8 +8,38 @@ import styles from "./UrlInput.module.scss";
 import Input from "@/components/UI/Input";
 //Icons
 import { FaLink } from "react-icons/fa6";
+import { useUpload } from "@/providers/UploadProvider";
+import { useRouter } from "next/navigation";
+import Error from "@/components/Error/Error";
 
 const UrlInput = () => {
+  const { fileUrl, setFileUrl } = useUpload();
+
+  const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
+
+  const handleUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError(null);
+    const url = e.target.value;
+    //Fetch the URL to check if it is valid
+    const response = await fetch(url, { method: "HEAD", mode: "cors" });
+    //Check if the response headers contain a content type that is accepted
+    const contentType = response.headers.get("Content-Type");
+    if (
+      contentType?.startsWith("video/") ||
+      contentType?.startsWith("image/")
+    ) {
+      setFileUrl(url);
+    } else {
+      setError("Invalid URL. Please enter a valid media URL.");
+    }
+  };
+
+  if (fileUrl) {
+    router.push("/upload/summary");
+  }
+
   return (
     <div className={styles.urlInputContainer}>
       <h2>Send from url</h2>
@@ -21,7 +53,9 @@ const UrlInput = () => {
         placeholder="Paste your gif or sticker URL here"
         labelHidden
         type="text"
+        onChange={handleUrlChange}
       />
+      {error && <Error errorMessage={error} />}
     </div>
   );
 };

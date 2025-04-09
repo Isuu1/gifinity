@@ -21,6 +21,7 @@ const UrlInput = () => {
   const router = useRouter();
 
   const handleUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFileUrl(null);
     const url = e.target.value;
     if (!url) {
       setError(null);
@@ -36,6 +37,7 @@ const UrlInput = () => {
     ) {
       setFileUrl(url);
       setError(null);
+      e.target.value = "";
     } else {
       setError("Invalid URL. Please enter a valid media URL.");
     }

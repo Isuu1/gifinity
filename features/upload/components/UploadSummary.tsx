@@ -9,8 +9,6 @@ import Image from "next/image";
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
 import { uploadFile } from "../lib/actions/upload";
-import toast from "react-hot-toast";
-import { toastStyle } from "@/styles/toast";
 import { useAuth } from "@/providers/AuthProvider";
 import { useCollections } from "@/providers/CollectionsProvider";
 import UploadSuccess from "./UploadSuccess";
@@ -21,9 +19,9 @@ import { Gif } from "@/interfaces/gifs";
 import { generateFileSize } from "../lib/utils/generateFileSize";
 import { useUpload } from "@/providers/UploadProvider";
 import { Sticker } from "@/interfaces/stickers";
+import Error from "@/components/Error/Error";
 
 interface UploadSummaryProps {
-  //file: File | null;
   closeSummary: () => void;
 }
 
@@ -35,6 +33,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   const [success, setSuccess] = useState<boolean>(false);
   const [tags, setTags] = useState<string | null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const fileName = file?.name.split(".")[0];
   const fileExtension = file?.name.split(".").pop();
@@ -42,6 +41,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   const handleUpload = async () => {
     if (!file) return;
     setIsPending(true);
+    setError(null);
     // Create a FormData object to send the file
     const formData = new FormData();
     formData.append("file", file);
@@ -58,14 +58,12 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
         setSuccess(true);
       }
       if (result.error) {
-        toast.error(result.error, {
-          duration: 5000,
-          style: toastStyle.style,
-        });
+        setError(result.error);
         return;
       }
     } catch (error) {
       console.error("Error uploading file:", error);
+      setError(`Failed to upload file: ${error}`);
     } finally {
       setIsPending(false);
     }
@@ -126,6 +124,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
           {isPending ? "Uploading media..." : "Upload"}
         </Button>
       </div>
+      {error && <Error errorMessage={error} />}
     </div>
   );
 };

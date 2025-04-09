@@ -75,60 +75,57 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   // This URL can be used as the src for an <Image /> element
   const imageUrl = file ? URL.createObjectURL(file) : null;
 
+  if (success && media) {
+    return (
+      <div className={styles.container}>
+        <UploadSuccess closeSummary={closeSummary} />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
-      {success && media ? (
-        <UploadSuccess closeSummary={closeSummary} />
-      ) : (
-        <>
-          <h2 className={styles.backButtonContainer} onClick={closeSummary}>
-            <IoArrowUndo />
-            <span>Back</span>
-          </h2>
-          <div className={styles.innerWrapper}>
-            <div className={styles.fileContainer}>
-              <Image
-                className={styles.image}
-                src={imageUrl || ""}
-                fill
-                alt=""
-              />
-              <div className={styles.fileName}>
-                <span className={styles.name}>{fileName}</span>
-                <span className={styles.extension}>{fileExtension}</span>
-                <span className={styles.size}>
-                  {file && generateFileSize(file)}
-                </span>
-              </div>
-            </div>
-            <div className={styles.imageInfo}>
-              <h2>Add image info</h2>
-              <Input
-                id="tags"
-                type="text"
-                label="Tags"
-                placeholder="Separate tags by comma"
-                icon={<FaTags />}
-                onChange={(e) => setTags(e.target.value)}
-              />
-              <Input
-                id="username"
-                label="Username"
-                type="text"
-                value={username}
-                disabled
-                icon={<FaUser />}
-              />
-            </div>
+      <h2 className={styles.backButtonContainer} onClick={closeSummary}>
+        <IoArrowUndo />
+        <span>Back</span>
+      </h2>
+      <div className={styles.innerWrapper}>
+        <div className={styles.fileContainer}>
+          <Image className={styles.image} src={imageUrl || ""} fill alt="" />
+          <div className={styles.fileName}>
+            <span className={styles.name}>{fileName}</span>
+            <span className={styles.extension}>{fileExtension}</span>
+            <span className={styles.size}>
+              {file && generateFileSize(file)}
+            </span>
           </div>
-          <div className={styles.buttonsContainer}>
-            <Button onClick={closeSummary}>Cancel</Button>
-            <Button variant="light" onClick={handleUpload} disabled={isPending}>
-              {isPending ? "Uploading media..." : "Upload"}
-            </Button>
-          </div>
-        </>
-      )}
+        </div>
+        <div className={styles.imageInfo}>
+          <h2>Add image info</h2>
+          <Input
+            id="tags"
+            type="text"
+            label="Tags"
+            placeholder="Separate tags by comma"
+            icon={<FaTags />}
+            onChange={(e) => setTags(e.target.value)}
+          />
+          <Input
+            id="username"
+            label="Username"
+            type="text"
+            value={username}
+            disabled
+            icon={<FaUser />}
+          />
+        </div>
+      </div>
+      <div className={styles.buttonsContainer}>
+        <Button onClick={closeSummary}>Cancel</Button>
+        <Button variant="light" onClick={handleUpload} disabled={isPending}>
+          {isPending ? "Uploading media..." : "Upload"}
+        </Button>
+      </div>
     </div>
   );
 };

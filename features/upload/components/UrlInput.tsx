@@ -1,16 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 //Styles
 import styles from "./UrlInput.module.scss";
 //Components
 import Input from "@/components/UI/Input";
+import Error from "@/components/Error/Error";
 //Icons
 import { FaLink } from "react-icons/fa6";
+//Providers
 import { useUpload } from "@/providers/UploadProvider";
-import { useRouter } from "next/navigation";
-import Error from "@/components/Error/Error";
 
 const UrlInput = () => {
   const { fileUrl, setFileUrl } = useUpload();
@@ -20,7 +21,6 @@ const UrlInput = () => {
   const router = useRouter();
 
   const handleUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setError(null);
     const url = e.target.value;
     //Fetch the URL to check if it is valid
     const response = await fetch(url, { method: "HEAD", mode: "cors" });
@@ -31,6 +31,7 @@ const UrlInput = () => {
       contentType?.startsWith("image/")
     ) {
       setFileUrl(url);
+      setError(null);
     } else {
       setError("Invalid URL. Please enter a valid media URL.");
     }

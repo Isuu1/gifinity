@@ -50,12 +50,13 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   };
 
   const handleUpload = async () => {
-    if (!file) return;
+    //if (!file) return;
     setIsPending(true);
     setError(null);
     // Create a FormData object to send the file
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", file || "");
+    formData.append("fileUrl", fileUrl || "");
     formData.append("tags", tags || "");
     try {
       // Pass formData to server action

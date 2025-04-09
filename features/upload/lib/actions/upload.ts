@@ -8,17 +8,13 @@ export async function uploadFile(formData: FormData) {
   //Get form data
   const file = formData.get("file");
   const tags = formData.get("tags");
+  const fileUrl = formData.get("fileUrl");
+
+  console.log("fileurl in action", fileUrl);
+  console.log("file in action", file);
 
   const apiKey = process.env.API_KEY;
 
-  if (!file) {
-    return {
-      success: false,
-      data: null,
-      error: "File is missing",
-      status: 500,
-    };
-  }
   if (!apiKey) {
     return {
       success: false,
@@ -28,23 +24,29 @@ export async function uploadFile(formData: FormData) {
     };
   }
   //Giphy upload API URL
-  const url = `https:/upload.giphy.com/v1/gifs?api_key=${apiKey}&tags=${tags}`;
+  const url = `https:/upload.giphy.com/v1/gifs?api_key=${apiKey}&tags=${tags}${
+    fileUrl ? "&source_image_url=" + fileUrl : ""
+  }`;
   console.log("url", url);
 
-  // const response = await fetch(url, {
-  //   method: "POST",
-  //   body: formData,
-  // });
+  const response = await fetch(url, {
+    method: "POST",
+    body: formData,
+  });
 
-  // if (!response.ok) {
-  //   const errorData = await response.json();
-  //   console.log("errorData", errorData);
-  //   throw new Error("Failed to upload file");
-  // }
+  if (!response.ok) {
+    const errorData = await response.json();
+    return {
+      success: false,
+      data: null,
+      error: `Error uploading file: ${errorData.message}`,
+      status: response.status,
+    };
+  }
 
-  // const data = await response.json();
+  const data = await response.json();
 
-  // console.log("data", data);
+  console.log("data", data);
 
   const supabase = await createClient();
 
@@ -71,7 +73,7 @@ export async function uploadFile(formData: FormData) {
 
   //Provide assigned upload media ID and fetch the media from Giphy API
   const uploadedMediaResult = await fetch(
-    `${process.env.SITE_URL}/api/get-gif?gifId=CRD4WV0BzOJ5XXzF3b`
+    `${process.env.SITE_URL}/api/get-gif?gifId=${data.data.id}`
   );
   const { data: media }: { data: Gif | Sticker } =
     await uploadedMediaResult.json();

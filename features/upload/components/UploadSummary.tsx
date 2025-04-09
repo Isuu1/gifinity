@@ -19,18 +19,17 @@ import { FaTags } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { Gif } from "@/interfaces/gifs";
 import { generateFileSize } from "../lib/utils/generateFileSize";
+import { useUpload } from "@/providers/UploadProvider";
 
 interface UploadSummaryProps {
-  file: File | null;
+  //file: File | null;
   closeSummary: () => void;
 }
 
-const UploadSummary: React.FC<UploadSummaryProps> = ({
-  file,
-  closeSummary,
-}) => {
+const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   const { username } = useAuth();
   const { media, setMedia } = useCollections();
+  const { file } = useUpload();
 
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
@@ -48,11 +47,10 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
     try {
       // Pass formData to server action
       const result = await uploadFile(formData);
-      console.log("result", result);
-      if (result.success) {
-        console.log("File uploaded successfully");
 
-        // Handle the response from the server
+      if (result.success) {
+        //Handle the response from the server
+        //Passed whole media object
         const gif: Gif | null = result.data;
         setMedia(gif);
         setUploadSuccess(true);

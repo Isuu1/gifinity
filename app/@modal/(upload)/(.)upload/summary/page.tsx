@@ -34,7 +34,7 @@ export default function Page() {
     <AnimatePresence onExitComplete={() => router.back()}>
       {showModal && (
         <Modal theme="dark">
-          <UploadSummary file={file} closeSummary={closeModal} />
+          <UploadSummary closeSummary={closeModal} />
         </Modal>
       )}
     </AnimatePresence>

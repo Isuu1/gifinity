@@ -3,7 +3,7 @@ import Image from "next/image";
 
 //Styles
 import styles from "./LayoutBackground.module.scss";
-
+//Interfaces
 import { Gif } from "@/interfaces/gifs";
 
 const LayoutBackground: React.FC = async () => {

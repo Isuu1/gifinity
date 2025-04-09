@@ -5,11 +5,14 @@ import React, { useState } from "react";
 
 //Styles
 import styles from "./UploadSuccess.module.scss";
+//Providers
 import { useCollections } from "@/providers/CollectionsProvider";
-import MediaOverlay from "@/features/media/components/MediaOverlay";
-import { AnimatePresence } from "framer-motion";
-import Button from "@/components/UI/Button";
 import { useUpload } from "@/providers/UploadProvider";
+//Components
+import MediaOverlay from "@/features/media/components/MediaOverlay";
+import Button from "@/components/UI/Button";
+//Animations
+import { AnimatePresence } from "framer-motion";
 
 interface UploadSuccessProps {
   closeSummary: () => void;

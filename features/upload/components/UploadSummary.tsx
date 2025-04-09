@@ -20,6 +20,7 @@ import { FaUser } from "react-icons/fa";
 import { Gif } from "@/interfaces/gifs";
 import { generateFileSize } from "../lib/utils/generateFileSize";
 import { useUpload } from "@/providers/UploadProvider";
+import { Sticker } from "@/interfaces/stickers";
 
 interface UploadSummaryProps {
   //file: File | null;
@@ -31,15 +32,16 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   const { media, setMedia } = useCollections();
   const { file } = useUpload();
 
-  const [uploadSuccess, setUploadSuccess] = useState(false);
-
+  const [success, setSuccess] = useState<boolean>(false);
   const [tags, setTags] = useState<string | null>(null);
+  const [isPending, setIsPending] = useState<boolean>(false);
 
   const fileName = file?.name.split(".")[0];
   const fileExtension = file?.name.split(".").pop();
 
   const handleUpload = async () => {
     if (!file) return;
+    setIsPending(true);
     // Create a FormData object to send the file
     const formData = new FormData();
     formData.append("file", file);
@@ -50,10 +52,10 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
 
       if (result.success) {
         //Handle the response from the server
-        //Passed whole media object
-        const gif: Gif | null = result.data;
-        setMedia(gif);
-        setUploadSuccess(true);
+        //Receive the media object
+        const media: Gif | Sticker | null = result.data;
+        setMedia(media);
+        setSuccess(true);
       }
       if (result.error) {
         toast.error(result.error, {
@@ -64,10 +66,8 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
       }
     } catch (error) {
       console.error("Error uploading file:", error);
-      toast.error("Error uploading file", {
-        duration: 5000,
-        style: toastStyle.style,
-      });
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -77,7 +77,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
 
   return (
     <div className={styles.container}>
-      {uploadSuccess && media ? (
+      {success && media ? (
         <UploadSuccess closeSummary={closeSummary} />
       ) : (
         <>
@@ -123,8 +123,8 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
           </div>
           <div className={styles.buttonsContainer}>
             <Button onClick={closeSummary}>Cancel</Button>
-            <Button variant="light" onClick={handleUpload}>
-              Upload
+            <Button variant="light" onClick={handleUpload} disabled={isPending}>
+              {isPending ? "Uploading media..." : "Upload"}
             </Button>
           </div>
         </>

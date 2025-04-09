@@ -13,7 +13,7 @@ const Upload: React.FC = () => {
         <FileInputs />
         <UrlInput />
       </div>
-      <div className={styles.info}>
+      <div className={styles.infoSection}>
         <h1>
           <span className={styles.importantText}>Share</span> Your Awesome GIFs
           & Stickers!
@@ -22,14 +22,12 @@ const Upload: React.FC = () => {
         <ul className={styles.list}>
           <li className={styles.item}>
             <span className={styles.importantText}>File Types:</span>
-            You can upload existing GIFs, or videos (MP4, MOV) up to{" "}
-            <span className={styles.importantText}>15 seconds long</span> –
-            we`ll handle the GIF conversion!
+            You can upload existing GIFs, or videos (MP4, MOV) up to 15 seconds
+            long – we`ll handle the GIF conversion!
           </li>
           <li className={styles.item}>
             <span className={styles.importantText}>File Size:</span>
-            Make sure your file is no bigger than{" "}
-            <span className={styles.importantText}>100MB</span>.
+            Make sure your file is no bigger than 100MB.
           </li>
           <li className={styles.item}>
             <span className={styles.importantText}>

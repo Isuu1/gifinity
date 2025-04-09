@@ -1,5 +1,7 @@
 .importantText {
   background: #ff204e;
+  padding: 0.4rem;
+  margin-right: 0.4rem;
 }
 
 .container {
@@ -9,21 +11,18 @@
   padding: 1rem;
   gap: 3rem;
   background: #1d1d1d;
-  //background: #36343a;
   border-radius: 34px;
   .uploadSection {
     flex: 1 50%;
-    //background: #36343a;
-    //background: #1d1d1d;
     border-radius: 34px;
     padding: 2rem;
   }
-  .info {
+  .infoSection {
     flex: 1 50%;
     display: flex;
     flex-direction: column;
     margin-top: 5rem;
-    gap: 1rem;
+    gap: 1.5rem;
     .list {
       list-style: none;
       font-size: 1.1rem;
@@ -31,9 +30,9 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      margin-top: 3rem;
+      margin-top: 1rem;
       .item {
-        line-height: 1.6rem;
+        line-height: 1.8rem;
       }
     }
   }

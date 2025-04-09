@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 1rem;
   .imageContainer {
     position: relative;
     width: 200px;
@@ -22,5 +23,8 @@
     &:hover {
       background: #a0153e;
     }
+  }
+  .doneButton {
+    margin-top: 1rem;
   }
 }

@@ -86,11 +86,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   const imageUrl = file ? URL.createObjectURL(file) : null;
 
   if (success && media) {
-    return (
-      <div className={styles.container}>
-        <UploadSuccess closeSummary={closeSummary} />
-      </div>
-    );
+    return <UploadSuccess closeSummary={closeSummary} />;
   }
 
   return (

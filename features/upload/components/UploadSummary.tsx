@@ -18,6 +18,7 @@ import UploadSuccess from "./UploadSuccess";
 import { FaTags } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { Gif } from "@/interfaces/gifs";
+import { generateFileSize } from "../lib/utils/generateFileSize";
 
 interface UploadSummaryProps {
   file: File | null;
@@ -37,17 +38,6 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
 
   const fileName = file?.name.split(".")[0];
   const fileExtension = file?.name.split(".").pop();
-
-  const generateFileSize = () => {
-    if (!file) return "";
-    if (file.size < 1024) {
-      return `${file.size} bytes`;
-    } else if (file.size < 1048576) {
-      return `${(file.size / 1024).toFixed(2)} KB`;
-    } else {
-      return `${(file.size / 1048576).toFixed(2)} MB`;
-    }
-  };
 
   const handleUpload = async () => {
     if (!file) return;
@@ -108,7 +98,9 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({
               <div className={styles.fileName}>
                 <span className={styles.name}>{fileName}</span>
                 <span className={styles.extension}>{fileExtension}</span>
-                <span className={styles.size}>{generateFileSize()}</span>
+                <span className={styles.size}>
+                  {file && generateFileSize(file)}
+                </span>
               </div>
             </div>
             <div className={styles.imageInfo}>

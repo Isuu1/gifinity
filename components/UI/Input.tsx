@@ -44,22 +44,26 @@ const Input: React.FC<IProps> = ({
 }) => {
   return (
     <div className={`${styles.inputContainer} ${styles[variant]}`}>
-      <label htmlFor={label}>{!labelHidden && label}</label>
-      <div className={`${styles.inputIcon}`}>{icon}</div>
-      <div className={`${styles.showPasswordIcon}`}>{showPasswordIcon}</div>
-      <input
-        placeholder={placeholder}
-        className={`${styles.input} ${neucha.className}`}
-        required={required}
-        disabled={disabled}
-        id={id}
-        name={id}
-        type={type}
-        defaultValue={defaultValue}
-        value={value}
-        onFocus={onFocus}
-        onChange={onChange}
-      />
+      <label className={styles.label} htmlFor={label}>
+        {!labelHidden && label}
+      </label>
+      <div className={styles.inputWrapper}>
+        <div className={`${styles.inputIcon}`}>{icon}</div>
+        <div className={`${styles.showPasswordIcon}`}>{showPasswordIcon}</div>
+        <input
+          placeholder={placeholder}
+          className={`${styles.input} ${neucha.className}`}
+          required={required}
+          disabled={disabled}
+          id={id}
+          name={id}
+          type={type}
+          defaultValue={defaultValue}
+          value={value}
+          onFocus={onFocus}
+          onChange={onChange}
+        />
+      </div>
     </div>
   );
 };

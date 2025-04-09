@@ -2,16 +2,17 @@ import React from "react";
 import { AuthProvider } from "./AuthProvider";
 import { StorageProvider } from "./StorageProvider";
 import { CollectionsProvider } from "./CollectionsProvider";
+import { UploadProvider } from "./UploadProvider";
 
 const AppProviders = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
-      <StorageProvider>
-        <AuthProvider>
+    <StorageProvider>
+      <AuthProvider>
+        <UploadProvider>
           <CollectionsProvider>{children}</CollectionsProvider>
-        </AuthProvider>
-      </StorageProvider>
-    </div>
+        </UploadProvider>
+      </AuthProvider>
+    </StorageProvider>
   );
 };
 

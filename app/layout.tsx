@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 //Styles
 import "@/styles/globals.scss";
+import AppProviders from "@/providers/AppProviders";
 
 const neucha = Neucha({
   subsets: ["latin"],
@@ -25,9 +26,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${neucha.className}`} id="modal-root">
-        <Toaster />
-        {children}
-        {modal}
+        <AppProviders>
+          <Toaster />
+          {children}
+          {modal}
+        </AppProviders>
       </body>
     </html>
   );

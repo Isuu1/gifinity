@@ -1,0 +1,36 @@
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  .innerWrapper {
+    column-count: 5;
+    .gif {
+      z-index: 10;
+      position: relative !important;
+      height: auto !important;
+      animation: fadeIn 1s ease-in-out;
+    }
+  }
+
+  .blur {
+    z-index: 11;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #1d1d1db6;
+    backdrop-filter: blur(10px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

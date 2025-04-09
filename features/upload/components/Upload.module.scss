@@ -1,0 +1,41 @@
+.importantText {
+  background: #ff204e;
+  padding: 0.4rem;
+  margin-right: 0.4rem;
+}
+
+.container {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  padding: 1rem;
+  gap: 3rem;
+  background: #1d1d1d;
+  border-radius: 34px;
+  .uploadSection {
+    flex: 1 50%;
+    border-radius: 34px;
+    padding: 2rem;
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+  .infoSection {
+    flex: 1 50%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+    gap: 1.5rem;
+    .list {
+      list-style: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      .item {
+        line-height: 1.8rem;
+      }
+    }
+  }
+}

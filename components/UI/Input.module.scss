@@ -7,47 +7,58 @@ $inputFocus: #ff204e;
   position: relative;
   border-radius: 24px;
   width: 100%;
-  .input {
-    background: #fff;
-    padding: 0.5rem 0.5rem 0.5rem 30px;
-    border-radius: 24px;
-    outline: none;
-    border: 0;
-    border: 2px solid transparent;
-    width: 100%;
-    font-size: 1rem;
-    transition: border 0.3s;
-    &:focus {
-      border: 2px solid $inputFocus;
-    }
-    &:disabled {
-      background: $inputDisabled;
-      cursor: not-allowed;
-    }
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  .label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
   }
-  .inputIcon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 7px;
-    font-size: 1.3rem;
-    color: $inputDark;
-    & svg {
-      //Fix extra space inside div
-      display: block;
+  .inputWrapper {
+    position: relative;
+    .input {
+      background: #fff;
+      padding: 0.5rem 0.5rem 0.5rem 30px;
+      border-radius: 24px;
+      outline: none;
+      border: 0;
+      border: 2px solid transparent;
+      width: 100%;
+      font-size: 1rem;
+      transition: border 0.3s;
+      &:focus {
+        border: 2px solid $inputFocus;
+      }
+      &:disabled {
+        background: $inputDisabled;
+        cursor: not-allowed;
+      }
     }
-  }
-  .showPasswordIcon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 7px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: $inputDark;
-    & svg {
-      //Fix extra space inside div
-      display: block;
+    .inputIcon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 7px;
+      font-size: 1.3rem;
+      color: $inputDark;
+      & svg {
+        //Fix extra space inside div
+        display: block;
+      }
+    }
+    .showPasswordIcon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 7px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: $inputDark;
+      & svg {
+        //Fix extra space inside div
+        display: block;
+      }
     }
   }
 }

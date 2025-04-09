@@ -15,5 +15,6 @@ export interface Sticker {
   user: {
     display_name: string;
     avatar_url: string;
+    username?: string;
   };
 }

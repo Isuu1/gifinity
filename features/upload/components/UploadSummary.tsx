@@ -1,25 +1,30 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 
 //Styles
 import styles from "./UploadSummary.module.scss";
-import { IoArrowUndo } from "react-icons/io5";
-import Image from "next/image";
+//Components
 import Input from "@/components/UI/Input";
 import Button from "@/components/UI/Button";
+import UploadSuccess from "./UploadSuccess";
+import Error from "@/components/Error/Error";
+//Actions
 import { uploadFile } from "../lib/actions/upload";
+//Utils
+import { generateFileSize } from "../lib/utils/generateFileSize";
+//Providers
 import { useAuth } from "@/providers/AuthProvider";
 import { useCollections } from "@/providers/CollectionsProvider";
-import UploadSuccess from "./UploadSuccess";
+import { useUpload } from "@/providers/UploadProvider";
 //Icons
 import { FaTags } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
+import { IoArrowUndo } from "react-icons/io5";
+//Interfaces
 import { Gif } from "@/interfaces/gifs";
-import { generateFileSize } from "../lib/utils/generateFileSize";
-import { useUpload } from "@/providers/UploadProvider";
 import { Sticker } from "@/interfaces/stickers";
-import Error from "@/components/Error/Error";
 
 interface UploadSummaryProps {
   closeSummary: () => void;

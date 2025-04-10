@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import Link from "next/link";
 
 //Components
 import Loading from "@/components/Loading/Loading";
 import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
-import MediaOverlay from "@/features/media/components/MediaOverlay";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 import CollectionMenu from "./CollectionMenu";
+import MediaCard from "@/features/media/components/MediaCard";
 //Styles
 import styles from "./CollectionItemsGrid.module.scss";
 //Hooks
@@ -15,11 +15,8 @@ import { useCollections } from "@/providers/CollectionsProvider";
 //Types
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
-//Animations
-import { AnimatePresence } from "framer-motion";
 //Icons
 import { IoArrowUndo } from "react-icons/io5";
-import Link from "next/link";
 
 interface CollectionItemsGridProps {
   collectionName: string;
@@ -28,13 +25,11 @@ interface CollectionItemsGridProps {
 const CollectionItemsGrid: React.FC<CollectionItemsGridProps> = ({
   collectionName,
 }) => {
-  const { collections, setMedia } = useCollections();
+  const { collections } = useCollections();
 
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
   const [displayedItems, setDisplayedItems] = useState<Gif[] | Sticker[]>([]);
-
-  const [showOverlay, setShowOverlay] = useState<string | null>(null);
 
   const collection = collections.find(
     (collection) => collection.name === collectionName
@@ -98,28 +93,7 @@ const CollectionItemsGrid: React.FC<CollectionItemsGridProps> = ({
       )}
       <div className={styles.grid}>
         {displayedItems.map((media) => (
-          <div
-            key={media.id}
-            className={styles.media}
-            onMouseEnter={() => {
-              setShowOverlay(media.id);
-              setMedia(media);
-            }}
-            onMouseLeave={() => {
-              setShowOverlay(null);
-            }}
-          >
-            <AnimatePresence initial={false}>
-              {showOverlay === media.id && <MediaOverlay key={media.id} />}
-            </AnimatePresence>
-            <Image
-              className={styles.image}
-              src={media.images.original.url}
-              alt={media.title}
-              fill
-              unoptimized
-            />
-          </div>
+          <MediaCard media={media} key={media.id} />
         ))}
       </div>
     </>

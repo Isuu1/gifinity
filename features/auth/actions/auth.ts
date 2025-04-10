@@ -86,7 +86,7 @@ export async function signup(prevState: SignupFormState, formData: FormData) {
     options: {
       data: {
         email: data.email,
-        username: "",
+        username: data.username,
         avatar: "",
         uploads: { gifs: [], stickers: [] },
         collections: [],

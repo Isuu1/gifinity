@@ -79,7 +79,7 @@ export async function signup(prevState: SignupFormState, formData: FormData) {
     };
   }
 
-  // Include all initial user data in metadata to insert them in the database
+  // Include all initial user data in metadata to insert them into database
   const { error } = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
@@ -88,12 +88,7 @@ export async function signup(prevState: SignupFormState, formData: FormData) {
         email: data.email,
         username: "",
         avatar: "",
-        favourite_gifs: {
-          data: [],
-        },
-        favourite_stickers: {
-          data: [],
-        },
+        uploads: { gifs: [], stickers: [] },
         collections: [],
       },
     },

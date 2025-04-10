@@ -28,7 +28,7 @@ export default function ModalLayout({
   //Always show modal on login and signup pages
   //This is necessary to put back modal state to true after closing it
   useEffect(() => {
-    if (pathname === "/login" || pathname === "/signup") {
+    if (pathname.startsWith("/login") || pathname.startsWith("/signup")) {
       setShowModal(true);
     } else {
       setShowModal(false);
@@ -44,7 +44,9 @@ export default function ModalLayout({
             <div className="margin-left-auto">
               <Button onClick={closeModal}>X</Button>
             </div>
-            <AuthModalNavMenu variant="dark" />
+            {!pathname.startsWith("/signup/success") && (
+              <AuthModalNavMenu variant="dark" />
+            )}
             {children}
           </Modal>
         )}

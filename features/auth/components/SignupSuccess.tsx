@@ -9,10 +9,9 @@ import styles from "./SignupSuccess.module.scss";
 
 interface IProps {
   email: string;
-  successMessage: string;
 }
 
-const SignupSuccess: React.FC<IProps> = ({ email, successMessage }) => {
+const SignupSuccess: React.FC<IProps> = ({ email }) => {
   const getEmailProviderUrl = (email: string) => {
     const domain = email.split("@")[1];
     switch (domain) {
@@ -31,7 +30,8 @@ const SignupSuccess: React.FC<IProps> = ({ email, successMessage }) => {
 
   return (
     <div className={styles.signupSuccessContainer}>
-      <p>{successMessage}</p>
+      <h3>Your account has been created!</h3>
+      <h3>Please confirm your email before you can log in.</h3>
       {/* Extract domain from email and provide a button to open their email */}
       {email && (
         <Link href={getEmailProviderUrl(email)}>

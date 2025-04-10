@@ -5,6 +5,7 @@
   justify-content: center;
   gap: 1rem;
   max-width: 300px;
+  margin: 0 2rem;
   .signupFormDescription {
     text-align: center;
   }
@@ -12,5 +13,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
   }
 }

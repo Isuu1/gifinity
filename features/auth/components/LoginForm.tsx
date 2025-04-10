@@ -68,10 +68,9 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className={styles.loginFormContainer}>
-      <h2>Login</h2>
-      <h4 className={styles.loginFormDescription}>
+      <h3 className={styles.loginFormDescription}>
         Access your favorites, sync across devices, and more!
-      </h4>
+      </h3>
 
       <Form action={formAction}>
         <Input

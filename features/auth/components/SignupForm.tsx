@@ -56,23 +56,21 @@ const SignupForm: React.FC = () => {
     setError([]);
   };
 
-  console.log("SignupForm state", state);
-
   return (
     <div className={styles.signupFormContainer}>
-      <h2>Signup</h2>
-
-      {state.success ? (
+      {state.success && (
         <SignupSuccess
           email={state.data.email}
           successMessage="Your account has been created!"
         />
-      ) : (
+      )}
+
+      {!state.success && (
         <>
-          <h4 className={styles.signupFormDescription}>
+          <h3 className={styles.signupFormDescription}>
             Create account to access your collections, sync across devices, and
             more!
-          </h4>
+          </h3>
 
           <Form action={formAction}>
             <Input

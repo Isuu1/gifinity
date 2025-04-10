@@ -16,9 +16,10 @@ import { useCollections } from "@/providers/CollectionsProvider";
 import styles from "./UploadsGrid.module.scss";
 //Animations
 import { AnimatePresence } from "framer-motion";
+import Loading from "@/components/Loading/Loading";
 
 const UploadsGrid = () => {
-  const { uploads } = useUpload();
+  const { uploads, isLoading } = useUpload();
   const { setMedia } = useCollections();
 
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
@@ -38,6 +39,10 @@ const UploadsGrid = () => {
     }
     // Only depend on the source object and the toggle state
   }, [uploads, activeButton]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>

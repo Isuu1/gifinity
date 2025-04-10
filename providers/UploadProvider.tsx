@@ -12,11 +12,13 @@ interface UploadContextType {
   setFileUrl: React.Dispatch<React.SetStateAction<string | null>>;
   uploads: { gifs: Gif[]; stickers: Sticker[] };
   fetchUploads: () => void;
+  isLoading: boolean;
 }
 
 export const UploadContext = createContext<UploadContextType | null>(null);
 
 export const UploadProvider = ({ children }: { children: React.ReactNode }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [file, setFile] = useState<File | null>(null);
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [uploads, setUploads] = useState({ gifs: [], stickers: [] });
@@ -26,26 +28,34 @@ export const UploadProvider = ({ children }: { children: React.ReactNode }) => {
   //Fetch uploads from user profile
 
   const fetchUploads = async () => {
-    const { data: authData, error: authError } = await supabase.auth.getUser();
+    setIsLoading(true);
 
-    if (authError || !authData.user) {
-      console.error("Error fetching user:", authError);
-      return;
+    try {
+      const { data: authData, error: authError } =
+        await supabase.auth.getUser();
+
+      if (authError || !authData.user) {
+        console.error("Error fetching user:", authError);
+        return;
+      }
+
+      // Fetch the user's profile data from the Profiles table
+      const { data: profileData, error: profileError } = await supabase
+        .from("profiles")
+        .select("uploads")
+        .eq("id", authData.user.id)
+        .single();
+
+      if (profileError) {
+        console.error("Error fetching profile data:", profileError);
+        return;
+      }
+      setUploads(profileData.uploads);
+    } catch (error) {
+      console.error("Error in fetchUploads:", error);
+    } finally {
+      setIsLoading(false);
     }
-
-    // Fetch the user's profile data from the Profiles table
-    const { data: profileData, error: profileError } = await supabase
-      .from("profiles")
-      .select("uploads")
-      .eq("id", authData.user.id)
-      .single();
-
-    if (profileError) {
-      console.error("Error fetching profile data:", profileError);
-      return;
-    }
-
-    setUploads(profileData.uploads);
   };
 
   useEffect(() => {
@@ -54,7 +64,15 @@ export const UploadProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <UploadContext.Provider
-      value={{ file, setFile, fileUrl, setFileUrl, uploads, fetchUploads }}
+      value={{
+        file,
+        setFile,
+        fileUrl,
+        setFileUrl,
+        uploads,
+        fetchUploads,
+        isLoading,
+      }}
     >
       {children}
     </UploadContext.Provider>

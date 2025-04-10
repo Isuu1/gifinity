@@ -3,27 +3,24 @@
 import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 //Styles
 import styles from "./Header.module.scss";
-
 //Components
 import Search from "../../features/search/components/Search";
 import UserModal from "../../features/user/components/UserModal";
-
+import HamburgerNavMenu from "../HamburgerNavMenu/HamburgerNavMenu";
 //Icons
 import { FaHeart } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
 import { MdCloudUpload } from "react-icons/md";
-
 //Context
 import { useAuth } from "@/providers/AuthProvider";
-
 //Animations
 import { useMotionValueEvent, useScroll } from "motion/react";
+//Providers
 import { useStorage } from "@/providers/StorageProvider";
-import HamburgerNavMenu from "../HamburgerNavMenu/HamburgerNavMenu";
-import { usePathname } from "next/navigation";
 
 const Header: React.FC = () => {
   const { user, isLoading } = useAuth();
@@ -38,8 +35,6 @@ const Header: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null);
 
   const pathname = usePathname();
-
-  console.log("pathname", pathname);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (headerRef.current) {

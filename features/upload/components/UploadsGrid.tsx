@@ -1,28 +1,21 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 
 //Components
 import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
-import MediaOverlay from "@/features/media/components/MediaOverlay";
+import Loading from "@/components/Loading/Loading";
+import MediaCard from "@/features/media/components/MediaCard";
 //Interfaces
 import { Gif } from "@/interfaces/gifs";
 import { Sticker } from "@/interfaces/stickers";
 //Providers
 import { useUpload } from "@/providers/UploadProvider";
-import { useCollections } from "@/providers/CollectionsProvider";
 //Styles
 import styles from "./UploadsGrid.module.scss";
-//Animations
-import { AnimatePresence } from "framer-motion";
-import Loading from "@/components/Loading/Loading";
 
 const UploadsGrid = () => {
   const { uploads, isLoading } = useUpload();
-  const { setMedia } = useCollections();
-
-  const [showOverlay, setShowOverlay] = useState<string | null>(null);
 
   const [displayedItems, setDisplayedItems] = useState<Gif[] | Sticker[]>([]);
 
@@ -59,28 +52,7 @@ const UploadsGrid = () => {
         )}
         {displayedItems &&
           displayedItems.map((media) => (
-            <div
-              key={media.id}
-              className={styles.media}
-              onMouseEnter={() => {
-                setShowOverlay(media.id);
-                setMedia(media);
-              }}
-              onMouseLeave={() => {
-                setShowOverlay(null);
-              }}
-            >
-              <AnimatePresence initial={false}>
-                {showOverlay === media.id && <MediaOverlay key={media.id} />}
-              </AnimatePresence>
-              <Image
-                className={styles.image}
-                src={media.images.original.url}
-                alt={media.title}
-                fill
-                unoptimized
-              />
-            </div>
+            <MediaCard media={media} key={media.id} />
           ))}
       </div>
     </div>

@@ -47,6 +47,11 @@ const UploadsGrid = () => {
       />
 
       <div className={styles.feedContainer}>
+        {displayedItems.length === 0 && (
+          <div className={styles.emptyCollection}>
+            <h3>No {activeButton} found in this collection.</h3>
+          </div>
+        )}
         {displayedItems &&
           displayedItems.map((media) => (
             <div

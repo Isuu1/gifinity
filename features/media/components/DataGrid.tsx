@@ -13,14 +13,14 @@ import { Stickers } from "@/interfaces/stickers";
 
 //import LoadMoreDataOnScroll from "../LoadMoreDataOnScroll/LoadMoreDataOnScroll";
 
-interface IProps {
+interface DataGridProps {
   data: {
     gifs: Gifs;
     stickers: Stickers;
   };
 }
 
-const DataGrid: React.FC<IProps> = ({ data }) => {
+const DataGrid: React.FC<DataGridProps> = ({ data }) => {
   const { gifs, stickers } = data;
 
   const [displayedContent, setDisplayedContent] = useState<Gifs | Stickers>(

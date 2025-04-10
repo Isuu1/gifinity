@@ -16,6 +16,7 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
+import { FaUser } from "react-icons/fa";
 
 //Styles
 import styles from "./SignupForm.module.scss";
@@ -30,7 +31,7 @@ import { SignupFormState } from "../types/forms";
 const initialState: SignupFormState = {
   error: null,
   success: false,
-  data: { email: "", password: "", confirmPassword: "" },
+  data: { email: "", username: "", password: "", confirmPassword: "" },
   status: 0,
   resetKey: Date.now(),
 };
@@ -55,7 +56,7 @@ const SignupForm: React.FC = () => {
     setError([]);
   };
 
-  console.log("state", state);
+  console.log("SignupForm state", state);
 
   return (
     <div className={styles.signupFormContainer}>
@@ -84,6 +85,17 @@ const SignupForm: React.FC = () => {
               placeholder="Email"
               icon={<MdEmail />}
               defaultValue={state.data?.email}
+              onFocus={handleFocus}
+            />
+            <Input
+              type="username"
+              id="username"
+              label="Username"
+              required
+              disabled={isPending}
+              labelHidden
+              placeholder="Username"
+              icon={<FaUser />}
               onFocus={handleFocus}
             />
             <Input

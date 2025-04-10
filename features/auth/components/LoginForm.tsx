@@ -15,7 +15,7 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
-
+import { IoSend } from "react-icons/io5";
 //Styles
 import styles from "./LoginForm.module.scss";
 import { toastStyle } from "@/styles/toast";
@@ -112,6 +112,8 @@ const LoginForm: React.FC = () => {
           type="submit"
           disabled={isPending}
           className={styles.loginButton}
+          icon={<IoSend />}
+          iconPosition="right"
         >
           {isPending ? "Logging in..." : "Login"}
         </Button>

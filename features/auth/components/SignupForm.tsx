@@ -17,6 +17,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { IoMdEye } from "react-icons/io";
 import { IoMdEyeOff } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
+import { IoSend } from "react-icons/io5";
 
 //Styles
 import styles from "./SignupForm.module.scss";
@@ -140,8 +141,10 @@ const SignupForm: React.FC = () => {
               type="submit"
               disabled={isPending}
               className={styles.signupButton}
+              icon={<IoSend />}
+              iconPosition="right"
             >
-              {isPending ? "Creating account..." : "Signup"}
+              {isPending ? "Creating account..." : "Create account"}
             </Button>
           </Form>
 

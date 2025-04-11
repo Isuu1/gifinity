@@ -21,9 +21,9 @@ export default function ModalLayout({
 
   const pathname = usePathname();
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  // const closeModal = () => {
+  //   setShowModal(false);
+  // };
 
   //Always show modal on login and signup pages
   //This is necessary to put back modal state to true after closing it
@@ -38,12 +38,12 @@ export default function ModalLayout({
   return (
     <div>
       {/* Using onExitComplete here is necessary to keep modal exit animation working */}
-      <AnimatePresence mode="wait" onExitComplete={() => router.push("/")}>
+      <AnimatePresence mode="wait" onExitComplete={() => router.back()}>
         {showModal && (
-          <Modal key="modal" theme="light">
-            <div className="margin-left-auto">
+          <Modal key="modal" theme="light" onClose={() => setShowModal(false)}>
+            {/* <div className="margin-left-auto">
               <Button onClick={closeModal}>X</Button>
-            </div>
+            </div> */}
             {!pathname.startsWith("/signup/success") && (
               <AuthModalNavMenu variant="dark" />
             )}

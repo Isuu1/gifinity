@@ -4,19 +4,21 @@ import { createPortal } from "react-dom";
 //Animations
 import { motion } from "framer-motion";
 import { modalAnimation, modalBackdropAnimation } from "@/styles/animations";
-
 //Styles
 import styles from "./Modal.module.scss";
 
-interface IProps {
+interface ModalProps {
   children: React.ReactNode;
   theme: "light" | "dark";
+  onClose?: () => void;
 }
 
-const Modal: React.FC<IProps> = ({ children, theme }) => {
+const Modal: React.FC<ModalProps> = ({ children, theme, onClose }) => {
   // --- Portal Setup ---
   const [isMounted, setIsMounted] = useState(false);
   const modalRootRef = useRef<HTMLElement | null>(null);
+
+  const innerModalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -30,6 +32,24 @@ const Modal: React.FC<IProps> = ({ children, theme }) => {
   }, []);
   // --- End Portal Setup ---
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        onClose &&
+        innerModalRef.current &&
+        !innerModalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
+    if (isMounted) {
+      document.addEventListener("click", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isMounted, onClose]);
+
   const modalMarkup = (
     <motion.div
       className={styles.modalContainer}
@@ -39,6 +59,7 @@ const Modal: React.FC<IProps> = ({ children, theme }) => {
       exit="exit"
     >
       <motion.div
+        ref={innerModalRef}
         className={`${styles.modal} ${styles[theme]}`}
         variants={modalAnimation}
         initial="hidden"

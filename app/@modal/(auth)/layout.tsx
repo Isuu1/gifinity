@@ -4,11 +4,9 @@ import { useEffect, useState } from "react";
 
 //Components
 import Modal from "@/components/UI/Modal";
-import Button from "@/components/UI/Button";
-
+import AuthModalNavMenu from "@/features/auth/components/AuthModalNavMenu";
 //Animations
 import { AnimatePresence } from "framer-motion";
-import AuthModalNavMenu from "@/features/auth/components/AuthModalNavMenu";
 
 export default function ModalLayout({
   children,
@@ -20,10 +18,6 @@ export default function ModalLayout({
   const router = useRouter();
 
   const pathname = usePathname();
-
-  // const closeModal = () => {
-  //   setShowModal(false);
-  // };
 
   //Always show modal on login and signup pages
   //This is necessary to put back modal state to true after closing it

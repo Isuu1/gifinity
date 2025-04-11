@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 //Animations
 import { motion } from "framer-motion";
 import { modalAnimation, modalBackdropAnimation } from "@/styles/animations";
-
 //Styles
 import styles from "./Modal.module.scss";
 
@@ -33,29 +32,23 @@ const Modal: React.FC<ModalProps> = ({ children, theme, onClose }) => {
   }, []);
   // --- End Portal Setup ---
 
-  const handleBackdropClick = useCallback(() => {
-    if (onClose) {
-      onClose();
-    }
-  }, [onClose]);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      onClose &&
-      innerModalRef.current &&
-      !innerModalRef.current.contains(event.target as Node)
-    ) {
-      onClose();
-    }
-  };
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        onClose &&
+        innerModalRef.current &&
+        !innerModalRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    };
     if (isMounted) {
       document.addEventListener("click", handleClickOutside);
     }
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [isMounted]);
+  }, [isMounted, onClose]);
 
   const modalMarkup = (
     <motion.div
@@ -64,7 +57,6 @@ const Modal: React.FC<ModalProps> = ({ children, theme, onClose }) => {
       initial="hidden"
       animate="visible"
       exit="exit"
-      // onClick={handleBackdropClick}
     >
       <motion.div
         ref={innerModalRef}

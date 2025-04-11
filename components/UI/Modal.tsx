@@ -10,7 +10,7 @@ import styles from "./Modal.module.scss";
 interface ModalProps {
   children: React.ReactNode;
   theme: "light" | "dark";
-  onClose: () => void;
+  onClose?: () => void;
 }
 
 const Modal: React.FC<ModalProps> = ({ children, theme, onClose }) => {

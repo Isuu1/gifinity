@@ -1,6 +1,6 @@
 # 🎭 Gifinity
 
-A **Next.js (App Router) web app** that lets users explore GIFs & stickers using the **Giphy API**. Users can **save favorites locally** without logging in and **optionally create an account** to store them in a database. Logged-in users can **transfer** their locally saved favorites to their online account.
+A modern web application built with **Next.js (App Router)** that allows users to browse and discover GIFs and stickers via the Giphy API. Users can save their favorite items locally without needing to sign in, while also having the option to create an account to store favorites in personalized collections backed by a database.
 
 ## 🚀 Features
 

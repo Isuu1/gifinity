@@ -6,8 +6,8 @@ import Image from "next/image";
 //Styles
 import styles from "./MediaCard.module.scss";
 //Interfaces
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 //Providers
 import { useCollections } from "@/providers/CollectionsProvider";
 //Components

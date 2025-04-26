@@ -1,6 +1,6 @@
 import React from "react";
 //Components
-import Button from "../../../components/UI/Button";
+import Button from "../../../shared/components/UI/Button";
 //Styles
 import styles from "./MediaTypeMenu.module.scss";
 //Animations

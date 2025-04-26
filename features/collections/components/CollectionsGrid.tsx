@@ -14,8 +14,8 @@ import { useCollections } from "@/providers/CollectionsProvider";
 import { generateCollectionThumbnail } from "../lib/utils/generateCollectionThumbnail";
 //Types
 import { Collection } from "../types/collection";
-import Button from "@/components/UI/Button";
-import Modal from "@/components/UI/Modal";
+import Button from "@/shared/components/UI/Button";
+import Modal from "@/shared/components/UI/Modal";
 import NewCollectionForm from "./NewCollectionForm";
 import { AnimatePresence } from "framer-motion";
 

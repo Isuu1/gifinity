@@ -1,4 +1,4 @@
-import Header from "@/components/Header/Header";
+import Header from "@/shared/components/Header/Header";
 import LayoutBackground from "@/features/upload/components/LayoutBackground";
 import Upload from "@/features/upload/components/Upload";
 

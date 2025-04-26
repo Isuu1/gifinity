@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 
 //Components
 import DataFeed from "@/features/media/components/DataGrid";
-import Loading from "@/components/Loading/Loading";
-import PageHeadline from "@/components/PageHeadline/PageHeadline";
-import Error from "@/components/Error/Error";
+import Loading from "@/shared/components/Loading/Loading";
+import PageHeadline from "@/shared/components/PageHeadline/PageHeadline";
+import Error from "@/shared/components/Error/Error";
 //Interfaces
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
+import { Gifs } from "@/shared/interfaces/gifs";
+import { Stickers } from "@/shared/interfaces/stickers";
 
 export default function Page() {
   const [searchedGifs, setSearchedGifs] = useState<Gifs | null>(null);

@@ -8,8 +8,8 @@ import { usePathname } from "next/navigation";
 //Styles
 import styles from "./Header.module.scss";
 //Components
-import Search from "../../features/search/components/Search";
-import UserModal from "../../features/user/components/UserModal";
+import Search from "@/features/search/components/Search";
+import UserModal from "@/features/user/components/UserModal";
 import HamburgerNavMenu from "../HamburgerNavMenu/HamburgerNavMenu";
 //Icons
 import { FaHeart } from "react-icons/fa";

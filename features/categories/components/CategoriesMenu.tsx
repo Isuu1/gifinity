@@ -6,9 +6,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 //Styles
 import styles from "./CategoriesMenu.module.scss";
 //Components
-import Error from "@/components/Error/Error";
-//Types
-import { Categories } from "@/interfaces/categories";
+import Error from "@/shared/components/Error/Error";
+//Interfaces
+import { Categories } from "@/shared/interfaces/categories";
 
 const CategoriesMenu: React.FC = () => {
   const [categories, setCategories] = useState<Categories>({ data: [] });

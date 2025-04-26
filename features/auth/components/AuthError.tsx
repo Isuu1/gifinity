@@ -2,17 +2,12 @@ import React from "react";
 
 //Styles
 import styles from "./AuthError.module.scss";
-
 //Components
-import Button from "@/components/UI/Button";
-
+import Button from "@/shared/components/UI/Button";
 //Animations
 import { motion } from "framer-motion";
-import { errorAnimation } from "@/styles/animations";
-
 //Icons
 import { MdOutlineError } from "react-icons/md";
-
 //Utils
 import { resendConfirmation } from "@/features/auth/utils/authHelpers";
 
@@ -20,6 +15,20 @@ interface IProps {
   error: string[];
   userEmail?: string;
 }
+
+const errorVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
 
 const Error: React.FC<IProps> = ({ error, userEmail }) => {
   const handleResendeEmailConfirmation = async (
@@ -63,7 +72,7 @@ const Error: React.FC<IProps> = ({ error, userEmail }) => {
   return (
     <motion.div
       className={styles.errorContainer}
-      variants={errorAnimation}
+      variants={errorVariants}
       initial="hidden"
       animate="visible"
     >

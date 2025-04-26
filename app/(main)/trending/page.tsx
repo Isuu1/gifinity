@@ -1,13 +1,13 @@
 //Components
 import DataFeed from "@/features/media/components/DataGrid";
 
-import TrendingSearchesSlider from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
-import PageHeadline from "@/components/PageHeadline/PageHeadline";
+import TrendingSearchesSlider from "@/shared/components/TrendingSearchesSlider/TrendingSearchesSlider";
+import PageHeadline from "@/shared/components/PageHeadline/PageHeadline";
 
 //Interfaces
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
-import Error from "@/components/Error/Error";
+import { Gifs } from "@/shared/interfaces/gifs";
+import { Stickers } from "@/shared/interfaces/stickers";
+import Error from "@/shared/components/Error/Error";
 
 export default async function Page({
   searchParams,

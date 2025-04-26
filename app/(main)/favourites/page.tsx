@@ -3,7 +3,7 @@
 //Components
 import FavouritesGrid from "@/features/favourites/components/FavouritesGrid";
 import NotificationMessage from "@/features/favourites/components/NotificationMessage";
-import PageHeadline from "@/components/PageHeadline/PageHeadline";
+import PageHeadline from "@/shared/components/PageHeadline/PageHeadline";
 
 //Context
 import { useStorage } from "@/providers/StorageProvider";

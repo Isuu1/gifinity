@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 
 //Components
-import TrendingSearchesSlider from "@/components/TrendingSearchesSlider/TrendingSearchesSlider";
+import TrendingSearchesSlider from "@/shared/components/TrendingSearchesSlider/TrendingSearchesSlider";
 import DataFeed from "@/features/media/components/DataGrid";
-import PageHeadline from "@/components/PageHeadline/PageHeadline";
-import Loading from "@/components/Loading/Loading";
-import Error from "@/components/Error/Error";
+import PageHeadline from "@/shared/components/PageHeadline/PageHeadline";
+import Loading from "@/shared/components/Loading/Loading";
+import Error from "@/shared/components/Error/Error";
 //Interfaces
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
+import { Gifs } from "@/shared/interfaces/gifs";
+import { Stickers } from "@/shared/interfaces/stickers";
 
 export default function Home() {
   const [trendingGifs, setTrendingGifs] = useState<Gifs | null>(null);

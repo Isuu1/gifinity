@@ -1,7 +1,7 @@
 "use server";
 
 import { CollectionNameFormState } from "@/features/collections/types/forms";
-import { createClient } from "../../../../utils/supabase/server";
+import { createClient } from "../../../../supabase/server";
 import { v4 as uuidv4 } from "uuid";
 import { Collection } from "@/features/collections/types/collection";
 

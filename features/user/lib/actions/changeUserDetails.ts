@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/supabase/server";
 import { ChangeDetailsFormState } from "@/features/user/types/forms";
 
 export async function changeUserDetails(

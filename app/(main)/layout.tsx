@@ -1,6 +1,6 @@
-import Footer from "@/components/Footer/Footer";
-import Header from "@/components/Header/Header";
-import StickyHeader from "@/components/StickyHeader/StickyHeader";
+import Footer from "@/shared/components/Footer/Footer";
+import Header from "@/shared/components/Header/Header";
+import StickyHeader from "@/shared/components/StickyHeader/StickyHeader";
 
 export default async function MainLayout({
   children,

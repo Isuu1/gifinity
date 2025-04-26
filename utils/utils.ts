@@ -1,4 +1,4 @@
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 import toast from "react-hot-toast";
 
 export function copyToClipboard(text: string) {

@@ -4,9 +4,9 @@ import React, { useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 //Components
-import Button from "@/components/UI/Button";
-import Form from "@/components/UI/Form";
-import Input from "@/components/UI/Input";
+import Button from "@/shared/components/UI/Button";
+import Form from "@/shared/components/UI/Form";
+import Input from "@/shared/components/UI/Input";
 import AuthError from "./AuthError";
 import AuthProviders from "./AuthProviders";
 
@@ -18,7 +18,7 @@ import { IoMdEyeOff } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 //Styles
 import styles from "./LoginForm.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 
 //Utils
 import { login } from "@/features/auth/actions/auth";

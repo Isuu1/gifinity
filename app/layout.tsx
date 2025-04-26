@@ -3,7 +3,7 @@ import { Neucha } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
 //Styles
-import "@/styles/globals.scss";
+import "@/shared/styles/globals.scss";
 import AppProviders from "@/providers/AppProviders";
 
 const neucha = Neucha({

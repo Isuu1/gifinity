@@ -9,13 +9,13 @@ import { CollectionNameFormState } from "../types/forms";
 import { editCollectionName } from "../lib/actions/editCollectionName";
 //Styles
 import styles from "./EditCollectionNameForm.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 //Components
-import Form from "@/components/UI/Form";
-import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button";
+import Form from "@/shared/components/UI/Form";
+import Input from "@/shared/components/UI/Input";
+import Button from "@/shared/components/UI/Button";
 import CollectionError from "./CollectionError";
-import Modal from "@/components/UI/Modal";
+import Modal from "@/shared/components/UI/Modal";
 //Icons
 import { BsFillCollectionFill } from "react-icons/bs";
 //Hooks

@@ -3,11 +3,11 @@ import toast from "react-hot-toast";
 
 //Styles
 import styles from "./ChangePasswordForm.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 //Components
-import Form from "@/components/UI/Form";
-import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button";
+import Form from "@/shared/components/UI/Form";
+import Input from "@/shared/components/UI/Input";
+import Button from "@/shared/components/UI/Button";
 import ChangeDetailsError from "@/features/user/components/ChangeDetailsError";
 //Icons
 import { RiLockPasswordFill } from "react-icons/ri";

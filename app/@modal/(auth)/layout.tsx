@@ -3,7 +3,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 //Components
-import Modal from "@/components/UI/Modal";
+import Modal from "@/shared/components/UI/Modal";
 import AuthModalNavMenu from "@/features/auth/components/AuthModalNavMenu";
 //Animations
 import { AnimatePresence } from "framer-motion";

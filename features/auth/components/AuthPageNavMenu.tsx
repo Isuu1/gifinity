@@ -2,7 +2,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 
 //Components
-import Button from "@/components/UI/Button";
+import Button from "@/shared/components/UI/Button";
 
 //Styles
 import styles from "./AuthPageNavMenu.module.scss";

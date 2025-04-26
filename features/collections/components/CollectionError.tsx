@@ -2,23 +2,34 @@ import React from "react";
 
 //Icons
 import { MdOutlineError } from "react-icons/md";
-
 //Styles
 import styles from "./CollectionError.module.scss";
-
 //Animations
 import { motion } from "motion/react";
-import { errorAnimation } from "@/styles/animations";
 
 interface IProps {
   error: string;
 }
 
+const errorVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
 const CollectionError: React.FC<IProps> = ({ error }) => {
   return (
     <motion.div
       className={styles.errorContainer}
-      variants={errorAnimation}
+      variants={errorVariants}
       initial="hidden"
       animate="visible"
     >

@@ -8,8 +8,8 @@ import styles from "./DataGrid.module.scss";
 import MediaTypeMenu from "./MediaTypeMenu";
 import MediaCard from "./MediaCard";
 //Interfaces
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
+import { Gifs } from "@/shared/interfaces/gifs";
+import { Stickers } from "@/shared/interfaces/stickers";
 
 //import LoadMoreDataOnScroll from "../LoadMoreDataOnScroll/LoadMoreDataOnScroll";
 

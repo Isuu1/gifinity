@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 //Components
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/shared/components/Loading/Loading";
 import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
-import PageHeadline from "@/components/PageHeadline/PageHeadline";
+import PageHeadline from "@/shared/components/PageHeadline/PageHeadline";
 import CollectionMenu from "./CollectionMenu";
 import MediaCard from "@/features/media/components/MediaCard";
 //Styles
@@ -13,8 +13,8 @@ import styles from "./CollectionItemsGrid.module.scss";
 //Hooks
 import { useCollections } from "@/providers/CollectionsProvider";
 //Types
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 //Icons
 import { IoArrowUndo } from "react-icons/io5";
 

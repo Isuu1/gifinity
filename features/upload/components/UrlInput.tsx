@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 //Styles
 import styles from "./UrlInput.module.scss";
 //Components
-import Input from "@/components/UI/Input";
-import Error from "@/components/Error/Error";
+import Input from "@/shared/components/UI/Input";
+import Error from "@/shared/components/Error/Error";
 //Icons
 import { FaLink } from "react-icons/fa6";
 //Providers

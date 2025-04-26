@@ -3,9 +3,9 @@ import toast from "react-hot-toast";
 
 //Styles
 import styles from "./ChangeUserAvatar.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 //Components
-import Button from "@/components/UI/Button";
+import Button from "@/shared/components/UI/Button";
 //Providers
 import { useAuth } from "@/providers/AuthProvider";
 //Actions

@@ -94,7 +94,7 @@ const CollectionsModal: React.FC = () => {
   }
 
   return (
-    <Modal theme="dark">
+    <Modal theme="dark" onClose={() => setCollectionsModalOpen(false)}>
       <div className={styles.collectionsWrapper}>
         <IoIosCloseCircle
           className={styles.closeButton}

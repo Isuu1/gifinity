@@ -16,6 +16,8 @@ import { useCollections } from "@/providers/CollectionsProvider";
 const CollectionButton: React.FC = () => {
   const { collectionsModalOpen, setCollectionsModalOpen } = useCollections();
 
+  console.log("collectionsModalOpen", collectionsModalOpen);
+
   return (
     <>
       <AnimatePresence>

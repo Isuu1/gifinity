@@ -89,8 +89,8 @@ const CollectionsModal: React.FC = () => {
     }
   };
 
-  if (!collections || !media) {
-    return <h1>Loading...</h1>;
+  if (!media) {
+    return null;
   }
 
   return (

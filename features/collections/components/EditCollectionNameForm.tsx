@@ -68,7 +68,7 @@ const EditCollectionNameForm: React.FC<FormProps> = ({
         router.push(`/user/collections/${state.data.name}`);
       }
     }
-  }, [state]);
+  }, [state, fetchCollections, closeForm, pathname, router]);
 
   return (
     <Modal theme="dark">
@@ -79,7 +79,6 @@ const EditCollectionNameForm: React.FC<FormProps> = ({
             id="name"
             type="text"
             label="name"
-            variant="light"
             labelHidden
             placeholder="Collection name"
             icon={<BsFillCollectionFill />}

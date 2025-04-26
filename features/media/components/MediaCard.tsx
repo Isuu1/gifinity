@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 //Styles
@@ -20,8 +20,15 @@ interface MediaCardProps {
 }
 
 const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
-  const { setMedia } = useCollections();
+  const { setMedia, collectionsModalOpen } = useCollections();
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
+
+  useEffect(() => {
+    //Hide overlay when modal closes
+    if (!collectionsModalOpen) {
+      setShowOverlay(null);
+    }
+  }, [collectionsModalOpen]);
 
   return (
     <div
@@ -32,7 +39,11 @@ const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
         setMedia(media);
       }}
       onMouseLeave={() => {
-        setShowOverlay(null);
+        //Prevent overlay from closing when modal is open
+        if (!collectionsModalOpen) {
+          setShowOverlay(null);
+          setMedia(null);
+        }
       }}
     >
       <AnimatePresence initial={false}>

@@ -4,7 +4,13 @@ import { Collection } from "@/features/collections/types/collection";
 import { Gif } from "@/shared/interfaces/gifs";
 import { Sticker } from "@/shared/interfaces/stickers";
 import { createClient } from "@/supabase/client";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface CollectionsContextType {
   collections: Collection[];
@@ -33,7 +39,7 @@ export const CollectionsProvider = ({
 
   const supabase = createClient();
 
-  const fetchCollections = async () => {
+  const fetchCollections = useCallback(async () => {
     // Fetch the authenticated user from the Auth table
     const { data: authData, error: authError } = await supabase.auth.getUser();
 
@@ -55,11 +61,11 @@ export const CollectionsProvider = ({
     }
 
     setCollections(profileData.collections);
-  };
+  }, [supabase]);
 
   useEffect(() => {
     fetchCollections();
-  }, []);
+  }, [fetchCollections]);
 
   return (
     <CollectionsContext.Provider

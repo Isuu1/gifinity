@@ -89,12 +89,12 @@ const CollectionsModal: React.FC = () => {
     }
   };
 
-  if (!collections || !media) {
-    return <h1>Loading...</h1>;
+  if (!media) {
+    return null;
   }
 
   return (
-    <Modal theme="dark">
+    <Modal theme="dark" onClose={() => setCollectionsModalOpen(false)}>
       <div className={styles.collectionsWrapper}>
         <IoIosCloseCircle
           className={styles.closeButton}

@@ -21,10 +21,7 @@ const CollectionButton: React.FC = () => {
       <AnimatePresence>
         {collectionsModalOpen && <CollectionsModal />}
       </AnimatePresence>
-      <motion.div
-        whileTap={{ scale: 1.6 }} // Apply scale animation on tap
-        transition={{ duration: 0.2 }}
-      >
+      <motion.div whileTap={{ scale: 1.6 }} transition={{ duration: 0.2 }}>
         <FaHeartCirclePlus
           className={styles.icon}
           onClick={() => setCollectionsModalOpen(true)}

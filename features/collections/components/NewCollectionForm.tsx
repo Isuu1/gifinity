@@ -46,7 +46,7 @@ const NewCollectionForm: React.FC<FormProps> = ({ closeForm }) => {
       fetchCollections();
       closeForm();
     }
-  }, [state]);
+  }, [state, fetchCollections, closeForm]);
 
   return (
     <div className={styles.newCollectionFormContainer}>
@@ -56,7 +56,6 @@ const NewCollectionForm: React.FC<FormProps> = ({ closeForm }) => {
           id="name"
           type="text"
           label="name"
-          variant="light"
           labelHidden
           placeholder="Collection name"
           icon={<BsFillCollectionFill />}

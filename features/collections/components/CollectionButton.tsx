@@ -16,17 +16,12 @@ import { useCollections } from "@/providers/CollectionsProvider";
 const CollectionButton: React.FC = () => {
   const { collectionsModalOpen, setCollectionsModalOpen } = useCollections();
 
-  console.log("collectionsModalOpen", collectionsModalOpen);
-
   return (
     <>
       <AnimatePresence>
         {collectionsModalOpen && <CollectionsModal />}
       </AnimatePresence>
-      <motion.div
-        whileTap={{ scale: 1.6 }} // Apply scale animation on tap
-        transition={{ duration: 0.2 }}
-      >
+      <motion.div whileTap={{ scale: 1.6 }} transition={{ duration: 0.2 }}>
         <FaHeartCirclePlus
           className={styles.icon}
           onClick={() => setCollectionsModalOpen(true)}

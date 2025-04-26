@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 
 //Interfaces
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
+import { Gifs } from "@/shared/interfaces/gifs";
+import { Stickers } from "@/shared/interfaces/stickers";
 //Components
 import MediaCard from "@/features/media/components/MediaCard";
 import ConfirmDeleteFavourites from "./ConfirmDeleteFavourites";

@@ -8,8 +8,8 @@ import toast from "react-hot-toast";
 import { toastStyle } from "@/shared/styles/toast";
 
 //Interfaces
-import { Gif, Gifs } from "@/interfaces/gifs";
-import { Sticker, Stickers } from "@/interfaces/stickers";
+import { Gif, Gifs } from "@/shared/interfaces/gifs";
+import { Sticker, Stickers } from "@/shared/interfaces/stickers";
 
 interface StorageContextType {
   localFavouriteGifs: Gifs;

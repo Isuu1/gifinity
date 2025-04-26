@@ -1,8 +1,8 @@
 "use client";
 
 import { Collection } from "@/features/collections/types/collection";
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 import { createClient } from "@/utils/supabase/client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 

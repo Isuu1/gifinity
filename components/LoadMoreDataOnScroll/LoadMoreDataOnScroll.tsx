@@ -1,7 +1,7 @@
 "use client";
 
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
+import { Gifs } from "@/shared/interfaces/gifs";
+import { Stickers } from "@/shared/interfaces/stickers";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 

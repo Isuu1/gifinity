@@ -23,8 +23,8 @@ import { FaTags } from "react-icons/fa6";
 import { FaUser } from "react-icons/fa";
 import { IoArrowUndo } from "react-icons/io5";
 //Interfaces
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 
 interface UploadSummaryProps {
   closeSummary: () => void;

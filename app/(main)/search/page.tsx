@@ -10,8 +10,8 @@ import Loading from "@/components/Loading/Loading";
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
+import { Gifs } from "@/shared/interfaces/gifs";
+import { Stickers } from "@/shared/interfaces/stickers";
 
 export default function Page() {
   const searchParams = useSearchParams();

@@ -5,8 +5,8 @@ import TrendingSearchesSlider from "@/components/TrendingSearchesSlider/Trending
 import PageHeadline from "@/components/PageHeadline/PageHeadline";
 
 //Interfaces
-import { Gifs } from "@/interfaces/gifs";
-import { Stickers } from "@/interfaces/stickers";
+import { Gifs } from "@/shared/interfaces/gifs";
+import { Stickers } from "@/shared/interfaces/stickers";
 import Error from "@/components/Error/Error";
 
 export default async function Page({

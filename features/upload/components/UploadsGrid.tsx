@@ -7,8 +7,8 @@ import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
 import Loading from "@/components/Loading/Loading";
 import MediaCard from "@/features/media/components/MediaCard";
 //Interfaces
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 //Providers
 import { useUpload } from "@/providers/UploadProvider";
 //Styles

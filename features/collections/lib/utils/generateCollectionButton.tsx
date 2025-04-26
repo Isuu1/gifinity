@@ -1,6 +1,6 @@
 //Types
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 import { Collection } from "../../types/collection";
 //Icons
 import { IoIosRemoveCircle } from "react-icons/io";

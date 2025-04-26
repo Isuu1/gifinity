@@ -1,5 +1,5 @@
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 
 export interface Collection {
   id: string;

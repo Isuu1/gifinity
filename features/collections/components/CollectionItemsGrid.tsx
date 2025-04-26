@@ -13,8 +13,8 @@ import styles from "./CollectionItemsGrid.module.scss";
 //Hooks
 import { useCollections } from "@/providers/CollectionsProvider";
 //Types
-import { Gif } from "@/interfaces/gifs";
-import { Sticker } from "@/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 //Icons
 import { IoArrowUndo } from "react-icons/io5";
 

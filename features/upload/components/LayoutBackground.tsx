@@ -4,7 +4,7 @@ import Image from "next/image";
 //Styles
 import styles from "./LayoutBackground.module.scss";
 //Interfaces
-import { Gif } from "@/interfaces/gifs";
+import { Gif } from "@/shared/interfaces/gifs";
 
 const LayoutBackground: React.FC = async () => {
   const trendingGifsResponse = await fetch(

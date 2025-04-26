@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 //Styles
 import styles from "./ChangePasswordForm.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 //Components
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";

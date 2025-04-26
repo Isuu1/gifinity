@@ -5,7 +5,7 @@ import { createContext } from "react";
 
 //Toast notifications
 import toast from "react-hot-toast";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 
 //Interfaces
 import { Gif, Gifs } from "@/interfaces/gifs";

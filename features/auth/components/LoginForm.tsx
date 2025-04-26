@@ -18,7 +18,7 @@ import { IoMdEyeOff } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 //Styles
 import styles from "./LoginForm.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 
 //Utils
 import { login } from "@/features/auth/actions/auth";

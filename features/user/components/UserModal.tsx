@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 //Styles
 import styles from "./UserModal.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 //Icons
 import { FaUserAlt } from "react-icons/fa";
 import { IoBookmarks } from "react-icons/io5";

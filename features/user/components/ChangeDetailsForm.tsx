@@ -14,7 +14,7 @@ import Button from "@/components/UI/Button";
 import Error from "@/features/auth/components/AuthError";
 //Styles
 import styles from "./ChangeDetailsForm.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 //Actions
 import { changeUserDetails } from "@/features/user/lib/actions/changeUserDetails";
 //Utils

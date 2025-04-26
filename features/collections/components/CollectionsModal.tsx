@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 //Styles
 import styles from "./CollectionsModal.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 //Icons
 import { IoIosCloseCircle } from "react-icons/io";
 import { BsFillCollectionFill } from "react-icons/bs";

@@ -9,7 +9,7 @@ import { CollectionNameFormState } from "../types/forms";
 import { editCollectionName } from "../lib/actions/editCollectionName";
 //Styles
 import styles from "./EditCollectionNameForm.module.scss";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 //Components
 import Form from "@/components/UI/Form";
 import Input from "@/components/UI/Input";

@@ -18,7 +18,7 @@ import { useCollections } from "@/providers/CollectionsProvider";
 import ConfirmAction from "@/components/ConfirmAction/ConfirmAction";
 import EditCollectionNameForm from "./EditCollectionNameForm";
 import { usePathname } from "next/navigation";
-import { toastStyle } from "@/styles/toast";
+import { toastStyle } from "@/shared/styles/toast";
 import toast from "react-hot-toast";
 
 const menuVariants = {

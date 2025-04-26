@@ -5,14 +5,12 @@ import { useRouter } from "next/navigation";
 
 //Styles
 import styles from "./TrendingSearchesSlider.module.scss";
-
 //Components
 import Button from "../UI/Button";
-
-//Icons
-import { FaFireFlameSimple } from "react-icons/fa6";
 import Error from "../Error/Error";
 import Marquee from "react-fast-marquee";
+//Icons
+import { FaFireFlameSimple } from "react-icons/fa6";
 
 interface TrendingSearches {
   data: string[];

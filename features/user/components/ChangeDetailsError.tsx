@@ -2,11 +2,8 @@ import React from "react";
 
 //Styles
 import styles from "./ChangeDetailsError.module.scss";
-
 //Animations
 import { motion } from "framer-motion";
-import { errorAnimation } from "@/styles/animations";
-
 //Icons
 import { MdOutlineError } from "react-icons/md";
 
@@ -14,11 +11,25 @@ interface IProps {
   message: string[];
 }
 
+const errorVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
+
 const ChangeDetailsError: React.FC<IProps> = ({ message }) => {
   return (
     <motion.div
       className={styles.errorContainer}
-      variants={errorAnimation}
+      variants={errorVariants}
       initial="hidden"
       animate="visible"
     >

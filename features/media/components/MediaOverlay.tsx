@@ -11,7 +11,7 @@ import { TfiSharethis } from "react-icons/tfi";
 
 //Animations
 import { motion } from "framer-motion";
-import { overlayAnimation } from "@/styles/animations";
+//import { overlayAnimation } from "@/styles/animations";
 
 //Components
 import FavouriteButton from "@/features/favourites/components/FavouriteButton";
@@ -21,6 +21,12 @@ import ShareMedia from "./ShareMedia";
 //Context
 import { useAuth } from "@/providers/AuthProvider";
 import { useCollections } from "@/providers/CollectionsProvider";
+
+const mediaOverlayVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
+};
 
 const MediaOverlay: React.FC = () => {
   const [shareContainer, setShareContainer] = useState(false);
@@ -32,7 +38,7 @@ const MediaOverlay: React.FC = () => {
   return (
     <motion.div
       className={styles.overlay}
-      variants={overlayAnimation}
+      variants={mediaOverlayVariants}
       animate="visible"
       initial="hidden"
       exit="exit"

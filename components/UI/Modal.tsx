@@ -3,7 +3,6 @@ import { createPortal } from "react-dom";
 
 //Animations
 import { motion } from "framer-motion";
-import { modalAnimation, modalBackdropAnimation } from "@/styles/animations";
 //Styles
 import styles from "./Modal.module.scss";
 
@@ -12,6 +11,33 @@ interface ModalProps {
   theme: "light" | "dark";
   onClose?: () => void;
 }
+
+const modalBackdropVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+
+const modalVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+  },
+  exit: {
+    opacity: 0,
+    scale: 0,
+  },
+};
 
 const Modal: React.FC<ModalProps> = ({ children, theme, onClose }) => {
   // --- Portal Setup ---
@@ -53,7 +79,7 @@ const Modal: React.FC<ModalProps> = ({ children, theme, onClose }) => {
   const modalMarkup = (
     <motion.div
       className={styles.modalContainer}
-      variants={modalBackdropAnimation}
+      variants={modalBackdropVariants}
       initial="hidden"
       animate="visible"
       exit="exit"
@@ -61,7 +87,7 @@ const Modal: React.FC<ModalProps> = ({ children, theme, onClose }) => {
       <motion.div
         ref={innerModalRef}
         className={`${styles.modal} ${styles[theme]}`}
-        variants={modalAnimation}
+        variants={modalVariants}
         initial="hidden"
         animate="visible"
         exit="exit"

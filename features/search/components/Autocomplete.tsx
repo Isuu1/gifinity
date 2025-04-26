@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 //Styles
 import styles from "./Autocomplete.module.scss";
 import { useRouter } from "next/navigation";
-import { autocompleteContainerAnimation } from "@/styles/animations";
 
 type AutocompleteSearch = {
   name: string;
@@ -17,6 +16,27 @@ interface IProps {
   searchQuery: string | null;
   setShowAutocomplete: (show: boolean) => void;
 }
+
+const autocompleteContainerVariants = {
+  hidden: {
+    opacity: 0,
+    maxHeight: 0,
+  },
+  visible: {
+    opacity: 1,
+    maxHeight: 300, //Can be any value as long as it fits content
+    transition: {
+      duration: 0.2,
+    },
+  },
+  exit: {
+    opacity: 0,
+    maxHeight: 0,
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
 
 const Autocomplete: React.FC<IProps> = ({
   setSearchQuery,
@@ -80,7 +100,7 @@ const Autocomplete: React.FC<IProps> = ({
     <motion.div
       className={styles.autocompleteContainer}
       ref={containerRef}
-      variants={autocompleteContainerAnimation}
+      variants={autocompleteContainerVariants}
       initial="hidden"
       animate="visible"
       exit="exit"

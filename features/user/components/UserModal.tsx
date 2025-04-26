@@ -14,12 +14,28 @@ import { IoSettings } from "react-icons/io5";
 import { FaSignOutAlt } from "react-icons/fa";
 //Animations
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  userModalAnimation,
-  userModalMenuItemsAnimation,
-} from "@/styles/animations";
 //Actions
 import { signout } from "@/features/auth/lib/actions/signout";
+
+const userModalVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: {
+    opacity: 1,
+    height: "200px",
+    transition: {
+      ease: "linear",
+      duration: 0.2,
+      delayChildren: 0.1,
+      staggerChildren: 0.02,
+    },
+  },
+  exit: { opacity: 0, height: 0 },
+};
+
+export const userModalMenuItemVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
 
 const UserModal: React.FC = () => {
   const { username, avatar } = useAuth();
@@ -62,26 +78,26 @@ const UserModal: React.FC = () => {
         {showModal && (
           <motion.ul
             className={styles.modal}
-            variants={userModalAnimation}
+            variants={userModalVariants}
             animate="visible"
             initial="hidden"
             exit="exit"
           >
-            <motion.li variants={userModalMenuItemsAnimation}>
+            <motion.li variants={userModalMenuItemVariants}>
               <Link href="/user/profile" className={styles.item}>
                 <FaUserAlt />
                 Profile
               </Link>
             </motion.li>
 
-            <motion.li variants={userModalMenuItemsAnimation}>
+            <motion.li variants={userModalMenuItemVariants}>
               <Link href="/user/collections" className={styles.item}>
                 <IoBookmarks />
                 Collections
               </Link>
             </motion.li>
 
-            <motion.li variants={userModalMenuItemsAnimation}>
+            <motion.li variants={userModalMenuItemVariants}>
               <Link href="/user/account-details" className={styles.item}>
                 <IoSettings />
                 Account details
@@ -91,7 +107,7 @@ const UserModal: React.FC = () => {
             <motion.li
               className={styles.item}
               onClick={handleSignOut}
-              variants={userModalMenuItemsAnimation}
+              variants={userModalMenuItemVariants}
             >
               <FaSignOutAlt />
               Sign out

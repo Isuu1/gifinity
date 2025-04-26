@@ -1,7 +1,7 @@
 "use server";
 
 import { changePasswordSchema } from "@/features/user/schemas/changePassword";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/supabase/server";
 import { ChangePasswordFormState } from "@/features/user/types/forms";
 
 export async function changeUserPassword(

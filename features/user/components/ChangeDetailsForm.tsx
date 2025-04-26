@@ -20,7 +20,7 @@ import { changeUserDetails } from "@/features/user/lib/actions/changeUserDetails
 //Utils
 import { normalizeErrors } from "@/features/auth/utils/authHelpers";
 //Supabase
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/supabase/client";
 //Types
 import { ChangeDetailsFormState } from "@/features/user/types/forms";
 

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/supabase/server";
 import { signupSchema } from "@/features/auth/schemas/signup";
 import { LoginFormState, SignupFormState } from "../types/forms";
 

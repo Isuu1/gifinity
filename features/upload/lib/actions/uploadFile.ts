@@ -2,7 +2,7 @@
 
 import { Gif } from "@/shared/interfaces/gifs";
 import { Sticker } from "@/shared/interfaces/stickers";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/supabase/server";
 
 export async function uploadFile(formData: FormData) {
   //Get form data

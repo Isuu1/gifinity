@@ -2,7 +2,7 @@
 
 import { Gif } from "@/shared/interfaces/gifs";
 import { Sticker } from "@/shared/interfaces/stickers";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/supabase/client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface UploadContextType {

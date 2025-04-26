@@ -1,5 +1,5 @@
 import CategoriesMenu from "@/features/categories/components/CategoriesMenu";
-import PageHeadline from "@/components/PageHeadline/PageHeadline";
+import PageHeadline from "@/shared/components/PageHeadline/PageHeadline";
 
 export default function Categories({
   children,

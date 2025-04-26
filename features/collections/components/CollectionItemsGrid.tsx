@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 //Components
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/shared/components/Loading/Loading";
 import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
-import PageHeadline from "@/components/PageHeadline/PageHeadline";
+import PageHeadline from "@/shared/components/PageHeadline/PageHeadline";
 import CollectionMenu from "./CollectionMenu";
 import MediaCard from "@/features/media/components/MediaCard";
 //Styles

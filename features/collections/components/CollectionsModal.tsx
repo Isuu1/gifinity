@@ -14,8 +14,8 @@ import { motion } from "motion/react";
 import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import NewCollectionForm from "./NewCollectionForm";
-import Modal from "@/components/UI/Modal";
-import Button from "@/components/UI/Button";
+import Modal from "@/shared/components/UI/Modal";
+import Button from "@/shared/components/UI/Button";
 import CollectionError from "./CollectionError";
 //Actions
 import { saveToCollection } from "../lib/actions/saveToCollection";

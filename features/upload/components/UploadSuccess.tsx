@@ -8,7 +8,7 @@ import styles from "./UploadSuccess.module.scss";
 import { useCollections } from "@/providers/CollectionsProvider";
 import { useUpload } from "@/providers/UploadProvider";
 //Components
-import Button from "@/components/UI/Button";
+import Button from "@/shared/components/UI/Button";
 import MediaCard from "@/features/media/components/MediaCard";
 
 interface UploadSuccessProps {

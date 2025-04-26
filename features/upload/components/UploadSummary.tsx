@@ -6,10 +6,10 @@ import Image from "next/image";
 //Styles
 import styles from "./UploadSummary.module.scss";
 //Components
-import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button";
+import Input from "@/shared/components/UI/Input";
+import Button from "@/shared/components/UI/Button";
 import UploadSuccess from "./UploadSuccess";
-import Error from "@/components/Error/Error";
+import Error from "@/shared/components/Error/Error";
 //Actions
 import { uploadFile } from "../lib/actions/uploadFile";
 //Utils

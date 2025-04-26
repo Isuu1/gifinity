@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 //Styles
 import styles from "./FileInputs.module.scss";
 //Components
-import Button from "@/components/UI/Button";
+import Button from "@/shared/components/UI/Button";
 //Providers
 import { useUpload } from "@/providers/UploadProvider";
 

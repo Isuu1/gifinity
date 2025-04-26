@@ -1,4 +1,4 @@
-import Button from "@/components/UI/Button";
+import Button from "@/shared/components/UI/Button";
 import React from "react";
 
 //Icons

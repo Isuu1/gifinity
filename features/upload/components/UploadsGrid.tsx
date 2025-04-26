@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 //Components
 import MediaTypeMenu from "@/features/media/components/MediaTypeMenu";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/shared/components/Loading/Loading";
 import MediaCard from "@/features/media/components/MediaCard";
 //Interfaces
 import { Gif } from "@/shared/interfaces/gifs";

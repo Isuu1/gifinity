@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import styles from "./Search.module.scss";
 
 //Components
-import Button from "../../../components/UI/Button";
+import Button from "../../../shared/components/UI/Button";
 import Autocomplete from "./Autocomplete";
 
 //Icons

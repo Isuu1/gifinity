@@ -3,7 +3,7 @@ import React from "react";
 //Styles
 import styles from "./AuthError.module.scss";
 //Components
-import Button from "@/components/UI/Button";
+import Button from "@/shared/components/UI/Button";
 //Animations
 import { motion } from "framer-motion";
 //Icons

@@ -1,4 +1,4 @@
-import PageHeadline from "@/components/PageHeadline/PageHeadline";
+import PageHeadline from "@/shared/components/PageHeadline/PageHeadline";
 import UploadsGrid from "@/features/upload/components/UploadsGrid";
 
 export default function Page() {

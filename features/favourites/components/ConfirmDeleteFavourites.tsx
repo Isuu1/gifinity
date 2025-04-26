@@ -1,8 +1,8 @@
 import React from "react";
 
 //Components
-import Button from "../../../components/UI/Button";
-import Modal from "@/components/UI/Modal";
+import Button from "../../../shared/components/UI/Button";
+import Modal from "@/shared/components/UI/Modal";
 
 //Styles
 import styles from "./ConfirmDeleteFavourites.module.scss";

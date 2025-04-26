@@ -1,5 +1,5 @@
 "use client";
-import Modal from "@/components/UI/Modal";
+import Modal from "@/shared/components/UI/Modal";
 import UploadSummary from "@/features/upload/components/UploadSummary";
 import { useUpload } from "@/providers/UploadProvider";
 import { AnimatePresence } from "framer-motion";

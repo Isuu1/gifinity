@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 //Styles
 import styles from "./CategoriesMenu.module.scss";
 //Components
-import Error from "@/components/Error/Error";
+import Error from "@/shared/components/Error/Error";
 //Interfaces
 import { Categories } from "@/shared/interfaces/categories";
 

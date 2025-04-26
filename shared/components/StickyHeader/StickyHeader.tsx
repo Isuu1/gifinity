@@ -11,8 +11,8 @@ import styles from "./StickyHeader.module.scss";
 import { useAuth } from "@/providers/AuthProvider";
 
 //Components
-import UserModal from "../../features/user/components/UserModal";
-import Search from "../../features/search/components/Search";
+import UserModal from "@/features/user/components/UserModal";
+import Search from "@/features/search/components/Search";
 
 //Icons
 //import { TiThMenu } from "react-icons/ti";
@@ -23,7 +23,7 @@ import { MdCloudUpload } from "react-icons/md";
 //Animations
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useStorage } from "@/providers/StorageProvider";
-import HamburgerNavMenu from "../HamburgerNavMenu/HamburgerNavMenu";
+import HamburgerNavMenu from "@/shared/components/HamburgerNavMenu/HamburgerNavMenu";
 
 const stickyHeaderAnimation = {
   initial: {

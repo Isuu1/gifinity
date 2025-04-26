@@ -8,9 +8,9 @@ import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import { MdOutlineError } from "react-icons/md";
 //Components
-import Form from "@/components/UI/Form";
-import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button";
+import Form from "@/shared/components/UI/Form";
+import Input from "@/shared/components/UI/Input";
+import Button from "@/shared/components/UI/Button";
 import Error from "@/features/auth/components/AuthError";
 //Styles
 import styles from "./ChangeDetailsForm.module.scss";

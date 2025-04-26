@@ -15,7 +15,7 @@ import { deleteCollection } from "@/features/collections/lib/actions/deleteColle
 //Hooks
 import { useCollections } from "@/providers/CollectionsProvider";
 //Components
-import ConfirmAction from "@/components/ConfirmAction/ConfirmAction";
+import ConfirmAction from "@/shared/components/ConfirmAction/ConfirmAction";
 import EditCollectionNameForm from "./EditCollectionNameForm";
 import { usePathname } from "next/navigation";
 import { toastStyle } from "@/shared/styles/toast";

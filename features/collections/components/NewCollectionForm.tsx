@@ -8,9 +8,9 @@ import { createCollection } from "../lib/actions/createCollection";
 //Styles
 import styles from "./NewCollectionForm.module.scss";
 //Components
-import Form from "@/components/UI/Form";
-import Input from "@/components/UI/Input";
-import Button from "@/components/UI/Button";
+import Form from "@/shared/components/UI/Form";
+import Input from "@/shared/components/UI/Input";
+import Button from "@/shared/components/UI/Button";
 import CollectionError from "./CollectionError";
 //Icons
 import { BsFillCollectionFill } from "react-icons/bs";

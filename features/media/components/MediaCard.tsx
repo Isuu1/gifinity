@@ -8,27 +8,44 @@ import styles from "./MediaCard.module.scss";
 //Interfaces
 import { Gif } from "@/shared/interfaces/gifs";
 import { Sticker } from "@/shared/interfaces/stickers";
-//Providers
-import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import MediaOverlay from "./MediaOverlay";
 //Animations
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 
 interface MediaCardProps {
   media: Gif | Sticker;
 }
 
 const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
-  const { setMedia, collectionsModalOpen } = useCollections();
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
+
+  const [showShareModal, setShowShareModal] = useState<boolean>(false);
+
+  const [showCollectionsModal, setShowCollectionsModal] =
+    useState<boolean>(false);
 
   useEffect(() => {
     //Hide overlay when modal closes
-    if (!collectionsModalOpen) {
+    if (!showCollectionsModal) {
       setShowOverlay(null);
     }
-  }, [collectionsModalOpen]);
+  }, [showCollectionsModal]);
+
+  useEffect(() => {
+    //Hide overlay when modal closes
+    if (!showShareModal) {
+      setShowOverlay(null);
+    }
+  }, [showShareModal]);
+
+  const handleMouseLeave = () => {
+    //Prevent modal from closing when user is outside of the viewport
+    if (showCollectionsModal || showShareModal) {
+      return;
+    }
+    setShowOverlay(null);
+  };
 
   return (
     <div
@@ -36,18 +53,20 @@ const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
       className={styles.mediaCard}
       onMouseEnter={() => {
         setShowOverlay(media.id);
-        setMedia(media);
       }}
-      onMouseLeave={() => {
-        //Prevent overlay from closing when modal is open
-        if (!collectionsModalOpen) {
-          setShowOverlay(null);
-          setMedia(null);
-        }
-      }}
+      onMouseLeave={handleMouseLeave}
     >
-      <AnimatePresence initial={false}>
-        {showOverlay === media.id && <MediaOverlay key={media.id} />}
+      <AnimatePresence>
+        {showOverlay === media.id && (
+          <MediaOverlay
+            key={media.id}
+            media={media}
+            showCollectionsModal={showCollectionsModal}
+            setShowCollectionsModal={setShowCollectionsModal}
+            showShareModal={showShareModal}
+            setShowShareModal={setShowShareModal}
+          />
+        )}
       </AnimatePresence>
       <Image
         className={styles.image}

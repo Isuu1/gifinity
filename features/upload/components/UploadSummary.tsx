@@ -16,7 +16,6 @@ import { uploadFile } from "../lib/actions/uploadFile";
 import { generateFileSize } from "../lib/utils/generateFileSize";
 //Providers
 import { useAuth } from "@/providers/AuthProvider";
-import { useCollections } from "@/providers/CollectionsProvider";
 import { useUpload } from "@/providers/UploadProvider";
 //Icons
 import { FaTags } from "react-icons/fa6";
@@ -32,13 +31,16 @@ interface UploadSummaryProps {
 
 const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   const { username } = useAuth();
-  const { media, setMedia } = useCollections();
   const { file, setFile, fileUrl, setFileUrl } = useUpload();
 
   const [success, setSuccess] = useState<boolean>(false);
   const [tags, setTags] = useState<string | null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [uploadedMedia, setUploadedMedia] = useState<Gif | Sticker | null>(
+    null
+  );
 
   const fileName = file?.name.split(".")[0];
   const fileExtension = file?.name.split(".").pop();
@@ -67,7 +69,7 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
         //Handle the response from the server
         //Receive the media object
         const media: Gif | Sticker | null = result.data;
-        setMedia(media);
+        setUploadedMedia(media);
         setSuccess(true);
       }
 
@@ -87,8 +89,13 @@ const UploadSummary: React.FC<UploadSummaryProps> = ({ closeSummary }) => {
   // This URL can be used as the src for an <Image /> element
   const imageUrl = file ? URL.createObjectURL(file) : null;
 
-  if (success && media) {
-    return <UploadSuccess closeSummary={closeSummary} />;
+  if (success && uploadedMedia) {
+    return (
+      <UploadSuccess
+        uploadedMedia={uploadedMedia}
+        closeSummary={closeSummary}
+      />
+    );
   }
 
   return (

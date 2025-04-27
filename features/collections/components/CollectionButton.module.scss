@@ -1,8 +1,16 @@
-.icon {
+.collectionButton {
   cursor: pointer;
-  color: #ffffff;
+  background: #1d1d1de3;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 0;
   font-size: 1.5rem;
-  :hover {
+  color: #ffffff;
+  transition: color 0.2s ease-in-out;
+  &:hover {
     color: #700c2a;
+  }
+  .icon {
+    display: block;
   }
 }

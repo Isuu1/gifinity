@@ -1,44 +1,59 @@
 .shareContainer {
-  position: absolute;
-  right: 0;
   width: 100%;
-  bottom: 0;
-  background: #fffffff1;
   padding: 0.6rem;
   border-radius: 0 0 5px 5px;
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
-  .shareButton {
-    cursor: pointer;
-    font-size: 2rem;
-  }
-  .fbIcon {
-    color: #1877f2;
-    transition: color 0.3s;
-    &:hover {
-      color: #3b5998;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  .buttons {
+    display: flex;
+    gap: 1rem;
+    & svg {
+      display: block;
     }
-  }
-  .messengerIcon {
-    color: #00c6ff;
-    transition: color 0.3s;
-    &:hover {
-      color: #0088cc;
+    .shareButton {
+      cursor: pointer;
+      font-size: 2.8rem;
+      background: #fff;
+      padding: 0.4rem;
+      border-radius: 14px;
+      transition: all 0.3s ease-in-out;
+      &:hover {
+        background: #ff204e;
+        color: #fff;
+      }
     }
-  }
-  .xIcon {
-    color: #000;
-    transition: color 0.3s;
-    &:hover {
-      color: #808080de;
+    .fbIcon {
+      color: #1877f2;
+      //transition: color 0.3s;
+      // &:hover {
+      //   color: #3b5998;
+      // }
     }
-  }
-  .copyIcon {
-    color: #000000d0;
-    transition: color 0.3s;
-    &:hover {
-      color: #353535de;
+    .messengerIcon {
+      color: #00c6ff;
+      //transition: color 0.3s;
+      // &:hover {
+      //   color: #0088cc;
+      // }
+    }
+    .xIcon {
+      color: #000000;
+      background: #ffffff;
+      // transition: color 0.3s;
+      border-radius: 5px;
+      // &:hover {
+      //   color: #808080de;
+      // }
+    }
+    .copyIcon {
+      color: #000000;
+      //transition: color 0.3s;
+      // &:hover {
+      //   color: #353535de;
+      // }
     }
   }
 }

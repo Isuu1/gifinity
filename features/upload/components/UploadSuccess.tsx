@@ -5,20 +5,23 @@ import React from "react";
 //Styles
 import styles from "./UploadSuccess.module.scss";
 //Providers
-import { useCollections } from "@/providers/CollectionsProvider";
 import { useUpload } from "@/providers/UploadProvider";
 //Components
 import Button from "@/shared/components/UI/Button";
 import MediaCard from "@/features/media/components/MediaCard";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 
 interface UploadSuccessProps {
+  uploadedMedia: Gif | Sticker;
   closeSummary: () => void;
 }
 
-const UploadSuccess: React.FC<UploadSuccessProps> = ({ closeSummary }) => {
+const UploadSuccess: React.FC<UploadSuccessProps> = ({
+  uploadedMedia,
+  closeSummary,
+}) => {
   const { setFile, setFileUrl } = useUpload();
-
-  const { media } = useCollections();
 
   const handleCloseSummary = () => {
     closeSummary();
@@ -32,7 +35,7 @@ const UploadSuccess: React.FC<UploadSuccessProps> = ({ closeSummary }) => {
 
       <h3>❤️ Add it to the collection or share with your friends!</h3>
 
-      {media && <MediaCard media={media} />}
+      <MediaCard media={uploadedMedia} />
 
       <h3>View all your uploads on your profile page.</h3>
 

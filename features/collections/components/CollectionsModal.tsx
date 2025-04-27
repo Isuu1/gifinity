@@ -2,15 +2,16 @@
 
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { usePathname } from "next/navigation";
+
 //Styles
 import styles from "./CollectionsModal.module.scss";
 import { toastStyle } from "@/shared/styles/toast";
 //Icons
-import { IoIosCloseCircle } from "react-icons/io";
 import { BsFillCollectionFill } from "react-icons/bs";
 //Animations
 import { motion } from "motion/react";
-//Context
+//Providers
 import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import NewCollectionForm from "./NewCollectionForm";
@@ -19,14 +20,24 @@ import Button from "@/shared/components/UI/Button";
 import CollectionError from "./CollectionError";
 //Actions
 import { saveToCollection } from "../lib/actions/saveToCollection";
-import { Collection } from "../types/collection";
-import { usePathname } from "next/navigation";
-import { generateCollectionButton } from "../lib/utils/generateCollectionButton";
 //Types
+import { Collection } from "../types/collection";
+//Utils
+import { generateCollectionButton } from "../lib/utils/generateCollectionButton";
+//Interfaces
+import { Sticker } from "@/shared/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
 
-const CollectionsModal: React.FC = () => {
-  const { collections, setCollectionsModalOpen, media, fetchCollections } =
-    useCollections();
+interface CollectionsModalProps {
+  media: Gif | Sticker;
+  closeModal: () => void;
+}
+
+const CollectionsModal: React.FC<CollectionsModalProps> = ({
+  media,
+  closeModal,
+}) => {
+  const { collections, fetchCollections } = useCollections();
 
   const [newCollectionForm, setNewCollectionForm] = useState<boolean>(false);
 
@@ -63,7 +74,7 @@ const CollectionsModal: React.FC = () => {
           if (isGifInCollection) {
             toast.success("Gif removed from collection", toastStyle);
             if (pathname.startsWith("/user/collections")) {
-              setCollectionsModalOpen(false);
+              closeModal();
             }
           } else {
             toast.success("Gif added to collection", toastStyle);
@@ -74,7 +85,7 @@ const CollectionsModal: React.FC = () => {
           if (isStickerInCollection) {
             toast.success("Sticker removed from collection", toastStyle);
             if (pathname.startsWith("/user/collections")) {
-              setCollectionsModalOpen(false);
+              closeModal();
             }
           } else {
             toast.success("Sticker added to collection", toastStyle);
@@ -94,13 +105,8 @@ const CollectionsModal: React.FC = () => {
   }
 
   return (
-    <Modal theme="dark" onClose={() => setCollectionsModalOpen(false)}>
+    <Modal theme="dark" onClose={closeModal}>
       <div className={styles.collectionsWrapper}>
-        <IoIosCloseCircle
-          className={styles.closeButton}
-          onClick={() => setCollectionsModalOpen(false)}
-        />
-
         <div className={styles.collectionsContainer}>
           <h2>Collections</h2>
           {collections.length === 0 && <h4>No collections found</h4>}
@@ -134,6 +140,9 @@ const CollectionsModal: React.FC = () => {
             <NewCollectionForm closeForm={() => setNewCollectionForm(false)} />
           )}
         </div>
+        <Button variant="dark" onClick={closeModal}>
+          Dismiss
+        </Button>
       </div>
     </Modal>
   );

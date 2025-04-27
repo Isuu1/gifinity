@@ -3,18 +3,21 @@ import React from "react";
 
 //Animations
 import { motion } from "framer-motion";
-
 //Icons
 import { FaHeart } from "react-icons/fa";
-
 //Styles
 import styles from "./FavouriteButton.module.scss";
-import { useCollections } from "@/providers/CollectionsProvider";
+//Interfaces
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 
-const FavouriteButton: React.FC = () => {
+interface FavouriteButtonProps {
+  media: Gif | Sticker;
+}
+
+const FavouriteButton: React.FC<FavouriteButtonProps> = ({ media }) => {
   const { localFavouriteGifs, localFavouriteStickers, addItemToLocalStorage } =
     useStorage();
-  const { media } = useCollections();
 
   const isGifOnWishlist = media
     ? localFavouriteGifs.data.find((item) => item.id === media.id)
@@ -24,17 +27,16 @@ const FavouriteButton: React.FC = () => {
     : null;
 
   return (
-    <motion.div
-      whileTap={{ scale: 1.6 }} // Apply scale animation on tap
-      transition={{ duration: 0.2 }}
-    >
-      <FaHeart
-        className={`${styles.icon} ${
-          isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
-        }`}
-        onClick={() => media && addItemToLocalStorage(media)}
-      />
-    </motion.div>
+    <button className={styles.favouriteButton}>
+      <motion.i whileTap={{ scale: 1.6 }} transition={{ duration: 0.2 }}>
+        <FaHeart
+          className={`${styles.icon} ${
+            isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
+          }`}
+          onClick={() => media && addItemToLocalStorage(media)}
+        />
+      </motion.i>
+    </button>
   );
 };
 

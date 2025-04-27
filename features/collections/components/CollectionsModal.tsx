@@ -6,7 +6,6 @@ import toast from "react-hot-toast";
 import styles from "./CollectionsModal.module.scss";
 import { toastStyle } from "@/shared/styles/toast";
 //Icons
-import { IoIosCloseCircle } from "react-icons/io";
 import { BsFillCollectionFill } from "react-icons/bs";
 //Animations
 import { motion } from "motion/react";
@@ -96,11 +95,6 @@ const CollectionsModal: React.FC = () => {
   return (
     <Modal theme="dark" onClose={() => setCollectionsModalOpen(false)}>
       <div className={styles.collectionsWrapper}>
-        <IoIosCloseCircle
-          className={styles.closeButton}
-          onClick={() => setCollectionsModalOpen(false)}
-        />
-
         <div className={styles.collectionsContainer}>
           <h2>Collections</h2>
           {collections.length === 0 && <h4>No collections found</h4>}
@@ -134,6 +128,9 @@ const CollectionsModal: React.FC = () => {
             <NewCollectionForm closeForm={() => setNewCollectionForm(false)} />
           )}
         </div>
+        <Button variant="dark" onClick={() => setCollectionsModalOpen(false)}>
+          Dismiss
+        </Button>
       </div>
     </Modal>
   );

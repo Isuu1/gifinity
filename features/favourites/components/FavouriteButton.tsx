@@ -24,17 +24,19 @@ const FavouriteButton: React.FC = () => {
     : null;
 
   return (
-    <motion.div
-      whileTap={{ scale: 1.6 }} // Apply scale animation on tap
-      transition={{ duration: 0.2 }}
-    >
-      <FaHeart
-        className={`${styles.icon} ${
-          isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
-        }`}
-        onClick={() => media && addItemToLocalStorage(media)}
-      />
-    </motion.div>
+    <button className={styles.favouriteButton}>
+      <motion.i
+        whileTap={{ scale: 1.6 }} // Apply scale animation on tap
+        transition={{ duration: 0.2 }}
+      >
+        <FaHeart
+          className={`${styles.icon} ${
+            isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""
+          }`}
+          onClick={() => media && addItemToLocalStorage(media)}
+        />
+      </motion.i>
+    </button>
   );
 };
 

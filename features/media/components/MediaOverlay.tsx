@@ -5,19 +5,14 @@ import Image from "next/image";
 
 //Styles
 import styles from "./MediaOverlay.module.scss";
-
 //Icons
 import { TfiSharethis } from "react-icons/tfi";
-
 //Animations
-import { motion } from "framer-motion";
-//import { overlayAnimation } from "@/styles/animations";
-
+import { motion } from "motion/react";
 //Components
 import FavouriteButton from "@/features/favourites/components/FavouriteButton";
 import CollectionButton from "@/features/collections/components/CollectionButton";
-
-//Context
+//Providers
 import { useAuth } from "@/providers/AuthProvider";
 import { useCollections } from "@/providers/CollectionsProvider";
 

@@ -12,9 +12,9 @@ import { Sticker } from "@/shared/interfaces/stickers";
 import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import MediaOverlay from "./MediaOverlay";
-//Animations
-import { AnimatePresence } from "framer-motion";
 import ShareMedia from "./ShareMedia";
+//Animations
+import { AnimatePresence } from "motion/react";
 
 interface MediaCardProps {
   media: Gif | Sticker;

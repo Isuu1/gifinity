@@ -8,11 +8,13 @@ export default async function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="main-layout">
-      <Header />
-      <StickyHeader />
-      {children}
+    <>
+      <div className="main-layout">
+        <Header />
+        <StickyHeader />
+        {children}
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }

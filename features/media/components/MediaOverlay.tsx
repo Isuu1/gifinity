@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 
 //Styles
@@ -16,7 +16,6 @@ import { motion } from "framer-motion";
 //Components
 import FavouriteButton from "@/features/favourites/components/FavouriteButton";
 import CollectionButton from "@/features/collections/components/CollectionButton";
-import ShareMedia from "./ShareMedia";
 
 //Context
 import { useAuth } from "@/providers/AuthProvider";
@@ -28,9 +27,14 @@ const mediaOverlayVariants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-const MediaOverlay: React.FC = () => {
-  const [shareContainer, setShareContainer] = useState(false);
+interface MediaOverlayProps {
+  showShareContainer: boolean;
+  setShowShareContainer: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+const MediaOverlay: React.FC<MediaOverlayProps> = ({
+  setShowShareContainer,
+}) => {
   const { media } = useCollections();
 
   const user = useAuth();
@@ -44,8 +48,6 @@ const MediaOverlay: React.FC = () => {
       exit="exit"
     >
       <div className={styles.overlayIconsContainer}>
-        {shareContainer && <ShareMedia />}
-
         <div className={styles.addToFavouritesButton}>
           {!user.user ? <FavouriteButton /> : <CollectionButton />}
         </div>
@@ -53,7 +55,7 @@ const MediaOverlay: React.FC = () => {
         <div className={styles.shareButton}>
           <TfiSharethis
             className={styles.icon}
-            onClick={() => setShareContainer(true)}
+            onClick={() => setShowShareContainer(true)}
           />
         </div>
       </div>

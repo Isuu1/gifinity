@@ -14,6 +14,7 @@ import { useCollections } from "@/providers/CollectionsProvider";
 import MediaOverlay from "./MediaOverlay";
 //Animations
 import { AnimatePresence } from "framer-motion";
+import ShareMedia from "./ShareMedia";
 
 interface MediaCardProps {
   media: Gif | Sticker;
@@ -22,6 +23,7 @@ interface MediaCardProps {
 const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
   const { setMedia, collectionsModalOpen } = useCollections();
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
+  const [showShareContainer, setShowShareContainer] = useState(false);
 
   useEffect(() => {
     //Hide overlay when modal closes
@@ -29,6 +31,13 @@ const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
       setShowOverlay(null);
     }
   }, [collectionsModalOpen]);
+
+  useEffect(() => {
+    //Hide overlay when modal closes
+    if (!showShareContainer) {
+      setShowOverlay(null);
+    }
+  }, [showShareContainer]);
 
   return (
     <div
@@ -47,7 +56,16 @@ const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
       }}
     >
       <AnimatePresence initial={false}>
-        {showOverlay === media.id && <MediaOverlay key={media.id} />}
+        {showShareContainer && (
+          <ShareMedia setShowShareContainer={setShowShareContainer} />
+        )}
+        {showOverlay === media.id && (
+          <MediaOverlay
+            key={media.id}
+            showShareContainer={showShareContainer}
+            setShowShareContainer={setShowShareContainer}
+          />
+        )}
       </AnimatePresence>
       <Image
         className={styles.image}

@@ -5,27 +5,19 @@ import React from "react";
 //Icons
 import { FaHeartCirclePlus } from "react-icons/fa6";
 //Animations
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "motion/react";
 //Styles
 import styles from "./CollectionButton.module.scss";
-//Components
-import CollectionsModal from "./CollectionsModal";
-//Hooks
-import { useCollections } from "@/providers/CollectionsProvider";
 
-const CollectionButton: React.FC = () => {
-  const { collectionsModalOpen, setCollectionsModalOpen } = useCollections();
+interface CollectionButtonProps {
+  openModal: () => void;
+}
 
+const CollectionButton: React.FC<CollectionButtonProps> = ({ openModal }) => {
   return (
     <button className={styles.collectionButton}>
-      <AnimatePresence>
-        {collectionsModalOpen && <CollectionsModal />}
-      </AnimatePresence>
       <motion.i whileTap={{ scale: 1.6 }} transition={{ duration: 0.2 }}>
-        <FaHeartCirclePlus
-          className={styles.icon}
-          onClick={() => setCollectionsModalOpen(true)}
-        />
+        <FaHeartCirclePlus className={styles.icon} onClick={openModal} />
       </motion.i>
     </button>
   );

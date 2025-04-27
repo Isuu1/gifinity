@@ -15,10 +15,10 @@ import React, {
 interface CollectionsContextType {
   collections: Collection[];
   fetchCollections: () => void;
-  media: Gif | Sticker | null;
-  setMedia: React.Dispatch<React.SetStateAction<Gif | Sticker | null>>;
-  collectionsModalOpen: boolean;
-  setCollectionsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  //media: Gif | Sticker | null;
+  //setMedia: React.Dispatch<React.SetStateAction<Gif | Sticker | null>>;
+  //collectionsModalOpen: boolean;
+  //setCollectionsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const CollectionsContext = createContext<CollectionsContextType | null>(
@@ -32,10 +32,10 @@ export const CollectionsProvider = ({
 }) => {
   const [collections, setCollections] = useState<Collection[]>([]);
 
-  const [media, setMedia] = useState<Gif | Sticker | null>(null);
+  //const [media, setMedia] = useState<Gif | Sticker | null>(null);
 
-  const [collectionsModalOpen, setCollectionsModalOpen] =
-    useState<boolean>(false);
+  // const [collectionsModalOpen, setCollectionsModalOpen] =
+  //   useState<boolean>(false);
 
   const supabase = createClient();
 
@@ -72,10 +72,10 @@ export const CollectionsProvider = ({
       value={{
         collections,
         fetchCollections,
-        media,
-        setMedia,
-        collectionsModalOpen,
-        setCollectionsModalOpen,
+        //media,
+        //setMedia,
+        //collectionsModalOpen,
+        //setCollectionsModalOpen,
       }}
     >
       {children}

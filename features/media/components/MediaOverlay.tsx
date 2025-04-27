@@ -8,13 +8,17 @@ import styles from "./MediaOverlay.module.scss";
 //Icons
 import { TfiSharethis } from "react-icons/tfi";
 //Animations
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 //Components
 import FavouriteButton from "@/features/favourites/components/FavouriteButton";
 import CollectionButton from "@/features/collections/components/CollectionButton";
 //Providers
 import { useAuth } from "@/providers/AuthProvider";
 import { useCollections } from "@/providers/CollectionsProvider";
+import CollectionsModal from "@/features/collections/components/CollectionsModal";
+import ShareMedia from "./ShareMedia";
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 
 const mediaOverlayVariants = {
   hidden: { opacity: 0 },
@@ -23,14 +27,21 @@ const mediaOverlayVariants = {
 };
 
 interface MediaOverlayProps {
-  showShareContainer: boolean;
-  setShowShareContainer: React.Dispatch<React.SetStateAction<boolean>>;
+  media: Gif | Sticker;
+  showCollectionsModal: boolean;
+  setShowCollectionsModal: React.Dispatch<React.SetStateAction<boolean>>;
+  showShareModal: boolean;
+  setShowShareModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MediaOverlay: React.FC<MediaOverlayProps> = ({
-  setShowShareContainer,
+  media,
+  showCollectionsModal,
+  setShowCollectionsModal,
+  showShareModal,
+  setShowShareModal,
 }) => {
-  const { media } = useCollections();
+  //const { media } = useCollections();
 
   const user = useAuth();
 
@@ -42,13 +53,31 @@ const MediaOverlay: React.FC<MediaOverlayProps> = ({
       initial="hidden"
       exit="exit"
     >
+      <AnimatePresence>
+        {showCollectionsModal && (
+          <CollectionsModal
+            media={media}
+            closeModal={() => setShowCollectionsModal(false)}
+          />
+        )}
+        {showShareModal && (
+          <ShareMedia
+            media={media}
+            closeModal={() => setShowShareModal(false)}
+          />
+        )}
+      </AnimatePresence>
       <div className={styles.overlayIconsContainer}>
-        {!user.user ? <FavouriteButton /> : <CollectionButton />}
+        {!user.user ? (
+          <FavouriteButton />
+        ) : (
+          <CollectionButton openModal={() => setShowCollectionsModal(true)} />
+        )}
 
         <button className={styles.shareButton}>
           <TfiSharethis
             className={styles.icon}
-            onClick={() => setShowShareContainer(true)}
+            onClick={() => setShowShareModal(true)}
           />
         </button>
       </div>

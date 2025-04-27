@@ -12,7 +12,6 @@ import { Sticker } from "@/shared/interfaces/stickers";
 import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import MediaOverlay from "./MediaOverlay";
-import ShareMedia from "./ShareMedia";
 //Animations
 import { AnimatePresence } from "motion/react";
 
@@ -21,23 +20,28 @@ interface MediaCardProps {
 }
 
 const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
-  const { setMedia, collectionsModalOpen } = useCollections();
+  //const { setMedia } = useCollections();
+
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
-  const [showShareContainer, setShowShareContainer] = useState(false);
+
+  const [showShareModal, setShowShareModal] = useState<boolean>(false);
+
+  const [showCollectionsModal, setShowCollectionsModal] =
+    useState<boolean>(false);
 
   useEffect(() => {
     //Hide overlay when modal closes
-    if (!collectionsModalOpen) {
+    if (!showCollectionsModal) {
       setShowOverlay(null);
     }
-  }, [collectionsModalOpen]);
+  }, [showCollectionsModal]);
 
   useEffect(() => {
     //Hide overlay when modal closes
-    if (!showShareContainer) {
+    if (!showShareModal) {
       setShowOverlay(null);
     }
-  }, [showShareContainer]);
+  }, [showShareModal]);
 
   return (
     <div
@@ -45,25 +49,23 @@ const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
       className={styles.mediaCard}
       onMouseEnter={() => {
         setShowOverlay(media.id);
-        setMedia(media);
       }}
       onMouseLeave={() => {
-        //Prevent overlay from closing when modal is open
-        if (!collectionsModalOpen) {
+        //Prevent modal from closing when user is outside of the viewport
+        if (!showCollectionsModal) {
           setShowOverlay(null);
-          setMedia(null);
         }
       }}
     >
-      <AnimatePresence initial={false}>
-        {showShareContainer && (
-          <ShareMedia setShowShareContainer={setShowShareContainer} />
-        )}
+      <AnimatePresence>
         {showOverlay === media.id && (
           <MediaOverlay
             key={media.id}
-            showShareContainer={showShareContainer}
-            setShowShareContainer={setShowShareContainer}
+            media={media}
+            showCollectionsModal={showCollectionsModal}
+            setShowCollectionsModal={setShowCollectionsModal}
+            showShareModal={showShareModal}
+            setShowShareModal={setShowShareModal}
           />
         )}
       </AnimatePresence>

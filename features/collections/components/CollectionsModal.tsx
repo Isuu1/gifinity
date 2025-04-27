@@ -21,11 +21,20 @@ import { saveToCollection } from "../lib/actions/saveToCollection";
 import { Collection } from "../types/collection";
 import { usePathname } from "next/navigation";
 import { generateCollectionButton } from "../lib/utils/generateCollectionButton";
+import { Sticker } from "@/shared/interfaces/stickers";
+import { Gif } from "@/shared/interfaces/gifs";
 //Types
 
-const CollectionsModal: React.FC = () => {
-  const { collections, setCollectionsModalOpen, media, fetchCollections } =
-    useCollections();
+interface CollectionsModalProps {
+  media: Gif | Sticker;
+  closeModal: () => void;
+}
+
+const CollectionsModal: React.FC<CollectionsModalProps> = ({
+  media,
+  closeModal,
+}) => {
+  const { collections, fetchCollections } = useCollections();
 
   const [newCollectionForm, setNewCollectionForm] = useState<boolean>(false);
 
@@ -62,7 +71,7 @@ const CollectionsModal: React.FC = () => {
           if (isGifInCollection) {
             toast.success("Gif removed from collection", toastStyle);
             if (pathname.startsWith("/user/collections")) {
-              setCollectionsModalOpen(false);
+              closeModal();
             }
           } else {
             toast.success("Gif added to collection", toastStyle);
@@ -73,7 +82,7 @@ const CollectionsModal: React.FC = () => {
           if (isStickerInCollection) {
             toast.success("Sticker removed from collection", toastStyle);
             if (pathname.startsWith("/user/collections")) {
-              setCollectionsModalOpen(false);
+              closeModal();
             }
           } else {
             toast.success("Sticker added to collection", toastStyle);
@@ -93,7 +102,7 @@ const CollectionsModal: React.FC = () => {
   }
 
   return (
-    <Modal theme="dark" onClose={() => setCollectionsModalOpen(false)}>
+    <Modal theme="dark" onClose={closeModal}>
       <div className={styles.collectionsWrapper}>
         <div className={styles.collectionsContainer}>
           <h2>Collections</h2>
@@ -128,7 +137,7 @@ const CollectionsModal: React.FC = () => {
             <NewCollectionForm closeForm={() => setNewCollectionForm(false)} />
           )}
         </div>
-        <Button variant="dark" onClick={() => setCollectionsModalOpen(false)}>
+        <Button variant="dark" onClick={closeModal}>
           Dismiss
         </Button>
       </div>

@@ -15,11 +15,10 @@ import { FaCopy } from "react-icons/fa";
 import styles from "./ShareMedia.module.scss";
 //Utils
 import { copyToClipboard } from "@/utils/utils";
-//Providers
-import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import Modal from "@/shared/components/UI/Modal";
 import Button from "@/shared/components/UI/Button";
+//Interfaces
 import { Gif } from "@/shared/interfaces/gifs";
 import { Sticker } from "@/shared/interfaces/stickers";
 
@@ -29,8 +28,6 @@ interface ShareMediaProps {
 }
 
 const ShareMedia: React.FC<ShareMediaProps> = ({ media, closeModal }) => {
-  //const { media } = useCollections();
-
   const url = media ? media.images.original.url : "";
 
   return (

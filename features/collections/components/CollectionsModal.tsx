@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import { usePathname } from "next/navigation";
+
 //Styles
 import styles from "./CollectionsModal.module.scss";
 import { toastStyle } from "@/shared/styles/toast";
@@ -9,7 +11,7 @@ import { toastStyle } from "@/shared/styles/toast";
 import { BsFillCollectionFill } from "react-icons/bs";
 //Animations
 import { motion } from "motion/react";
-//Context
+//Providers
 import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import NewCollectionForm from "./NewCollectionForm";
@@ -18,12 +20,13 @@ import Button from "@/shared/components/UI/Button";
 import CollectionError from "./CollectionError";
 //Actions
 import { saveToCollection } from "../lib/actions/saveToCollection";
+//Types
 import { Collection } from "../types/collection";
-import { usePathname } from "next/navigation";
+//Utils
 import { generateCollectionButton } from "../lib/utils/generateCollectionButton";
+//Interfaces
 import { Sticker } from "@/shared/interfaces/stickers";
 import { Gif } from "@/shared/interfaces/gifs";
-//Types
 
 interface CollectionsModalProps {
   media: Gif | Sticker;

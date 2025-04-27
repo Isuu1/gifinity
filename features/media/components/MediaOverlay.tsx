@@ -67,7 +67,7 @@ const MediaOverlay: React.FC<MediaOverlayProps> = ({
       </AnimatePresence>
       <div className={styles.overlayIconsContainer}>
         {!user.user ? (
-          <FavouriteButton />
+          <FavouriteButton media={media} />
         ) : (
           <CollectionButton openModal={() => setShowCollectionsModal(true)} />
         )}

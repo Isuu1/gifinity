@@ -7,13 +7,17 @@ import { motion } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 //Styles
 import styles from "./FavouriteButton.module.scss";
-//Providers
-import { useCollections } from "@/providers/CollectionsProvider";
+//Interfaces
+import { Gif } from "@/shared/interfaces/gifs";
+import { Sticker } from "@/shared/interfaces/stickers";
 
-const FavouriteButton: React.FC = () => {
+interface FavouriteButtonProps {
+  media: Gif | Sticker;
+}
+
+const FavouriteButton: React.FC<FavouriteButtonProps> = ({ media }) => {
   const { localFavouriteGifs, localFavouriteStickers, addItemToLocalStorage } =
     useStorage();
-  const { media } = useCollections();
 
   const isGifOnWishlist = media
     ? localFavouriteGifs.data.find((item) => item.id === media.id)

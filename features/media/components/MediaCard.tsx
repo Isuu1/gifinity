@@ -8,8 +8,6 @@ import styles from "./MediaCard.module.scss";
 //Interfaces
 import { Gif } from "@/shared/interfaces/gifs";
 import { Sticker } from "@/shared/interfaces/stickers";
-//Providers
-import { useCollections } from "@/providers/CollectionsProvider";
 //Components
 import MediaOverlay from "./MediaOverlay";
 //Animations
@@ -20,8 +18,6 @@ interface MediaCardProps {
 }
 
 const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
-  //const { setMedia } = useCollections();
-
   const [showOverlay, setShowOverlay] = useState<string | null>(null);
 
   const [showShareModal, setShowShareModal] = useState<boolean>(false);
@@ -43,6 +39,14 @@ const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
     }
   }, [showShareModal]);
 
+  const handleMouseLeave = () => {
+    //Prevent modal from closing when user is outside of the viewport
+    if (showCollectionsModal || showShareModal) {
+      return;
+    }
+    setShowOverlay(null);
+  };
+
   return (
     <div
       key={media.id}
@@ -50,12 +54,7 @@ const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
       onMouseEnter={() => {
         setShowOverlay(media.id);
       }}
-      onMouseLeave={() => {
-        //Prevent modal from closing when user is outside of the viewport
-        if (!showCollectionsModal) {
-          setShowOverlay(null);
-        }
-      }}
+      onMouseLeave={handleMouseLeave}
     >
       <AnimatePresence>
         {showOverlay === media.id && (

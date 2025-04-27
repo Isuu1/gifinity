@@ -12,11 +12,11 @@ import { AnimatePresence, motion } from "motion/react";
 //Components
 import FavouriteButton from "@/features/favourites/components/FavouriteButton";
 import CollectionButton from "@/features/collections/components/CollectionButton";
+import CollectionsModal from "@/features/collections/components/CollectionsModal";
+import ShareMedia from "@/features/media/components/ShareMedia";
 //Providers
 import { useAuth } from "@/providers/AuthProvider";
-import { useCollections } from "@/providers/CollectionsProvider";
-import CollectionsModal from "@/features/collections/components/CollectionsModal";
-import ShareMedia from "./ShareMedia";
+//Interfaces
 import { Gif } from "@/shared/interfaces/gifs";
 import { Sticker } from "@/shared/interfaces/stickers";
 
@@ -41,8 +41,6 @@ const MediaOverlay: React.FC<MediaOverlayProps> = ({
   showShareModal,
   setShowShareModal,
 }) => {
-  //const { media } = useCollections();
-
   const user = useAuth();
 
   return (

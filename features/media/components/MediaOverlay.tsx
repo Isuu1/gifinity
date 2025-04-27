@@ -48,16 +48,14 @@ const MediaOverlay: React.FC<MediaOverlayProps> = ({
       exit="exit"
     >
       <div className={styles.overlayIconsContainer}>
-        <div className={styles.addToFavouritesButton}>
-          {!user.user ? <FavouriteButton /> : <CollectionButton />}
-        </div>
+        {!user.user ? <FavouriteButton /> : <CollectionButton />}
 
-        <div className={styles.shareButton}>
+        <button className={styles.shareButton}>
           <TfiSharethis
             className={styles.icon}
             onClick={() => setShowShareContainer(true)}
           />
-        </div>
+        </button>
       </div>
 
       {media && (media.user?.display_name || media.user?.username) && (

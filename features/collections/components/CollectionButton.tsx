@@ -17,17 +17,17 @@ const CollectionButton: React.FC = () => {
   const { collectionsModalOpen, setCollectionsModalOpen } = useCollections();
 
   return (
-    <>
+    <button className={styles.collectionButton}>
       <AnimatePresence>
         {collectionsModalOpen && <CollectionsModal />}
       </AnimatePresence>
-      <motion.div whileTap={{ scale: 1.6 }} transition={{ duration: 0.2 }}>
+      <motion.i whileTap={{ scale: 1.6 }} transition={{ duration: 0.2 }}>
         <FaHeartCirclePlus
           className={styles.icon}
           onClick={() => setCollectionsModalOpen(true)}
         />
-      </motion.div>
-    </>
+      </motion.i>
+    </button>
   );
 };
 

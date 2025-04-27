@@ -3,12 +3,11 @@ import React from "react";
 
 //Animations
 import { motion } from "framer-motion";
-
 //Icons
 import { FaHeart } from "react-icons/fa";
-
 //Styles
 import styles from "./FavouriteButton.module.scss";
+//Providers
 import { useCollections } from "@/providers/CollectionsProvider";
 
 const FavouriteButton: React.FC = () => {
@@ -25,10 +24,7 @@ const FavouriteButton: React.FC = () => {
 
   return (
     <button className={styles.favouriteButton}>
-      <motion.i
-        whileTap={{ scale: 1.6 }} // Apply scale animation on tap
-        transition={{ duration: 0.2 }}
-      >
+      <motion.i whileTap={{ scale: 1.6 }} transition={{ duration: 0.2 }}>
         <FaHeart
           className={`${styles.icon} ${
             isGifOnWishlist || isStickerOnWishlist ? styles.filled : ""

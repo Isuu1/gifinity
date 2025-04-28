@@ -10,6 +10,7 @@ export interface Gif {
   images: {
     original: {
       url: string;
+      mp4: string;
     };
   };
   user: {

@@ -10,6 +10,7 @@ export interface Sticker {
   images: {
     original: {
       url: string;
+      mp4: string;
     };
   };
   user: {

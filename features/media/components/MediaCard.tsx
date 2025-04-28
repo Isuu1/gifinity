@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 
 //Styles
 import styles from "./MediaCard.module.scss";
@@ -68,12 +67,13 @@ const MediaCard: React.FC<MediaCardProps> = ({ media }) => {
           />
         )}
       </AnimatePresence>
-      <Image
+      <video
         className={styles.image}
-        src={media.images.original.url}
-        alt={media.title}
-        fill
-        unoptimized
+        src={media.images.original.mp4}
+        autoPlay
+        loop
+        muted
+        playsInline
       />
     </div>
   );

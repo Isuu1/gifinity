@@ -1,16 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
 //Components
 import TrendingSearchesSlider from "@/shared/components/TrendingSearchesSlider/TrendingSearchesSlider";
-import DataFeed from "@/features/media/components/DataGrid";
 import PageHeadline from "@/shared/components/PageHeadline/PageHeadline";
 import Loading from "@/shared/components/Loading/Loading";
 import Error from "@/shared/components/Error/Error";
 //Interfaces
 import { Gifs } from "@/shared/interfaces/gifs";
 import { Stickers } from "@/shared/interfaces/stickers";
+
+//Dynamically import DataGrid component to prevent server-side rendering
+const DataGrid = dynamic(() => import("@/features/media/components/DataGrid"), {
+  loading: () => <Loading />,
+  ssr: false, // Optional: Prevent this component from ever rendering on the server
+});
 
 export default function Home() {
   const [trendingGifs, setTrendingGifs] = useState<Gifs | null>(null);
@@ -20,17 +26,19 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  console.log("Home.tsx in (main)");
+
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);
       setError(null);
       try {
-        const gifsResponse = await fetch("/api/trending/gifs");
+        const gifsResponse = await fetch(`/api/trending/gifs?limit=25`);
 
         const gifsData: Gifs = await gifsResponse.json();
         setTrendingGifs(gifsData);
 
-        const stickersResponse = await fetch("/api/trending/stickers");
+        const stickersResponse = await fetch(`/api/trending/stickers?limit=25`);
 
         const stickersData: Stickers = await stickersResponse.json();
         setTrendingStickers(stickersData);
@@ -75,7 +83,7 @@ export default function Home() {
       <TrendingSearchesSlider />
 
       {trendingGifs?.data && trendingStickers?.data && (
-        <DataFeed
+        <DataGrid
           data={{
             gifs: trendingGifs,
             stickers: trendingStickers,

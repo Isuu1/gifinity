@@ -26,8 +26,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  console.log("Home.tsx in (main)");
-
   useEffect(() => {
     async function fetchData() {
       setIsLoading(true);

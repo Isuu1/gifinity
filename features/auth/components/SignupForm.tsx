@@ -62,6 +62,12 @@ const SignupForm: React.FC = () => {
     setError([]);
   };
 
+  const handleShowPassword = (e: React.MouseEvent<SVGElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowPassword((prev) => !prev);
+  };
+
   return (
     <div className={styles.signupFormContainer}>
       <h3 className={styles.signupFormDescription}>
@@ -104,9 +110,9 @@ const SignupForm: React.FC = () => {
           icon={<RiLockPasswordFill />}
           showPasswordIcon={
             showPassword ? (
-              <IoMdEye onClick={() => setShowPassword(false)} />
+              <IoMdEye onClick={handleShowPassword} />
             ) : (
-              <IoMdEyeOff onClick={() => setShowPassword(true)} />
+              <IoMdEyeOff onClick={handleShowPassword} />
             )
           }
           onFocus={handleFocus}
@@ -122,9 +128,9 @@ const SignupForm: React.FC = () => {
           icon={<RiLockPasswordFill />}
           showPasswordIcon={
             showPassword ? (
-              <IoMdEye onClick={() => setShowPassword(false)} />
+              <IoMdEye onClick={handleShowPassword} />
             ) : (
-              <IoMdEyeOff onClick={() => setShowPassword(true)} />
+              <IoMdEyeOff onClick={handleShowPassword} />
             )
           }
           onFocus={handleFocus}

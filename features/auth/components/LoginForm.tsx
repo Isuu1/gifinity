@@ -53,6 +53,12 @@ const LoginForm: React.FC = () => {
     setError([]);
   };
 
+  const handleShowPassword = (e: React.MouseEvent<SVGElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowPassword((prev) => !prev);
+  };
+
   //Redirect to home page and show success message when user is logged in
   useEffect(() => {
     if (state.success) {
@@ -95,9 +101,9 @@ const LoginForm: React.FC = () => {
           icon={<RiLockPasswordFill />}
           showPasswordIcon={
             showPassword ? (
-              <IoMdEye onClick={() => setShowPassword(false)} />
+              <IoMdEye onClick={handleShowPassword} />
             ) : (
-              <IoMdEyeOff onClick={() => setShowPassword(true)} />
+              <IoMdEyeOff onClick={handleShowPassword} />
             )
           }
           onFocus={handleFocus}

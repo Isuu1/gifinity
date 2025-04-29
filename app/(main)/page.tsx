@@ -54,31 +54,15 @@ export default function Home() {
     fetchData();
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="page">
-        <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
-        <TrendingSearchesSlider />
-        <Loading />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="page">
-        <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
-
-        <Error errorMessage={error} />
-      </div>
-    );
-  }
-
   return (
     <div className="page">
       <PageHeadline title="Trending now" imageUrl="/images/trending4.svg" />
 
       <TrendingSearchesSlider />
+
+      {isLoading && <Loading />}
+
+      {!isLoading && error && <Error errorMessage={error} />}
 
       {trendingGifs?.data && trendingStickers?.data && (
         <DataGrid

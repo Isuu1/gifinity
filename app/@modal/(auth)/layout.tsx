@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Modal from "@/shared/components/UI/Modal";
 import AuthModalNavMenu from "@/features/auth/components/AuthModalNavMenu";
 //Animations
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 
 export default function ModalLayout({
   children,
@@ -19,10 +19,16 @@ export default function ModalLayout({
 
   const pathname = usePathname();
 
+  console.log("pathname", pathname);
+
   //Always show modal on login and signup pages
   //This is necessary to put back modal state to true after closing it
   useEffect(() => {
-    if (pathname.startsWith("/login") || pathname.startsWith("/signup")) {
+    if (
+      pathname.startsWith("/login") ||
+      pathname.startsWith("/signup") ||
+      pathname.startsWith("/forgot-password")
+    ) {
       setShowModal(true);
     } else {
       setShowModal(false);
@@ -32,13 +38,11 @@ export default function ModalLayout({
   return (
     <div>
       {/* Using onExitComplete here is necessary to keep modal exit animation working */}
-      <AnimatePresence mode="wait" onExitComplete={() => router.back()}>
+      <AnimatePresence mode="wait" onExitComplete={() => router.push("/")}>
         {showModal && (
           <Modal key="modal" theme="light" onClose={() => setShowModal(false)}>
-            {/* <div className="margin-left-auto">
-              <Button onClick={closeModal}>X</Button>
-            </div> */}
-            {!pathname.startsWith("/signup/success") && (
+            {(pathname.startsWith("/login") ||
+              pathname.startsWith("/signup")) && (
               <AuthModalNavMenu variant="dark" />
             )}
             {children}

@@ -26,3 +26,12 @@ export type SignupFormState = {
   status: number;
   resetKey?: number;
 };
+
+export type ForgotPasswordFormState = {
+  data: { email: string };
+  error: string | null;
+  success: boolean;
+  status: number;
+  message: string;
+  resetKey?: number;
+};

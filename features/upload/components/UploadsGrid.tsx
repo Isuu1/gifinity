@@ -22,8 +22,8 @@ const UploadsGrid = () => {
   const [activeButton, setActiveButton] = useState<string>("gifs");
 
   useEffect(() => {
-    const uploadedGifs = uploads.gifs || [];
-    const uploadedStickers = uploads.stickers || [];
+    const uploadedGifs = uploads?.gifs || [];
+    const uploadedStickers = uploads?.stickers || [];
     // Set state based on activeButton
     if (activeButton === "gifs") {
       setDisplayedItems(uploadedGifs);
@@ -37,6 +37,19 @@ const UploadsGrid = () => {
     return <Loading />;
   }
 
+  if (displayedItems.length === 0)
+    return (
+      <>
+        <MediaTypeMenu
+          activeButton={activeButton}
+          setActiveButton={setActiveButton}
+        />
+        <div className={styles.emptyCollection}>
+          <h3>You did not upload any {activeButton} yet.</h3>
+        </div>
+      </>
+    );
+
   return (
     <div>
       <MediaTypeMenu
@@ -45,11 +58,6 @@ const UploadsGrid = () => {
       />
 
       <div className={styles.feedContainer}>
-        {displayedItems.length === 0 && (
-          <div className={styles.emptyCollection}>
-            <h3>No {activeButton} found in this collection.</h3>
-          </div>
-        )}
         {displayedItems &&
           displayedItems.map((media) => (
             <MediaCard media={media} key={media.id} />

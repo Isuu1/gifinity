@@ -36,6 +36,15 @@ export async function changeUserPassword(
     };
   }
 
+  if (data.newPassword !== data.confirmPassword) {
+    return {
+      error: "Passwords do not match",
+      success: false,
+      data,
+      resetKey: Date.now(),
+    };
+  }
+
   //Update password in the Auth table
   const { error: passwordError } = await supabase.auth.updateUser({
     password: data.newPassword,

@@ -25,6 +25,7 @@ import { login } from "@/features/auth/actions/auth";
 
 //Types
 import { LoginFormState } from "../types/forms";
+import Link from "next/link";
 
 const initialState: LoginFormState = {
   error: null,
@@ -125,9 +126,9 @@ const LoginForm: React.FC = () => {
         </Button>
       </Form>
 
-      {/* <Link href="forgot-password">
+      <Link href="forgot-password">
         <h4>Forgot your password?</h4>
-      </Link> */}
+      </Link>
 
       <h4>——— or ———</h4>
 

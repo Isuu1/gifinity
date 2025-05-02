@@ -13,6 +13,10 @@ const LayoutBackground: React.FC = async () => {
 
   const trendingGifs = await trendingGifsResponse.json();
 
+  if (!trendingGifsResponse.ok) {
+    return <div className={styles.background}></div>;
+  }
+
   return (
     <div className={styles.background}>
       <div className={styles.blur}></div>

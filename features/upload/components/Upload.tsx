@@ -5,8 +5,33 @@ import styles from "./Upload.module.scss";
 //Components
 import FileInputs from "./FileInputs";
 import UrlInput from "./UrlInput";
+import { createClient } from "@/supabase/server";
+import Button from "@/shared/components/UI/Button";
+import Link from "next/link";
 
-const Upload: React.FC = () => {
+const Upload: React.FC = async () => {
+  const supabase = await createClient();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    console.log("No session found, redirecting to login page...");
+    return (
+      <div className={styles.notLoggedIn}>
+        <h2>Please log in to upload gifs and stickers.</h2>
+        <div className={styles.buttons}>
+          <Link href="/login">
+            <Button variant="light">Log In</Button>
+          </Link>
+          <Link href="/">
+            <Button variant="dark">Go back to home page</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.uploadSection}>

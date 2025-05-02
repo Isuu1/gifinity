@@ -33,70 +33,54 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const supabase = createClient();
 
-  // Memoize fetchUser with useCallback
   const fetchUser = useCallback(async () => {
-    // Indicate loading whenever this function is called
     setIsLoading(true);
     try {
-      // Fetch the authenticated user from the Auth table
       const { data: authData, error: authError } =
         await supabase.auth.getUser();
 
-      // If error or no user, clear all state and exit
       if (authError || !authData?.user) {
         if (authError && authError.message !== "user not found") {
-          // Don't log expected "not found" as error
           console.warn("Auth fetch warning:", authError.message);
         }
         setUser(null);
         setUsername("");
         setEmail("");
         setAvatar("");
-        // Keep isLoading true until finally block? Or set false here?
-        // Setting false in finally is generally safer.
         return;
       }
-
-      // User authenticated, set the user object immediately
       setUser(authData.user);
 
-      // Fetch the user's profile data from the Profiles table
+      //Fetch the profile data from the profiles table using the user ID
       const { data: profileData, error: profileError } = await supabase
         .from("profiles")
         .select("email, username, avatar")
         .eq("id", authData.user.id)
         .single();
 
-      // If profile fetch fails, log error but keep auth user, clear profile fields
       if (profileError) {
         console.error("Error fetching profile data:", profileError);
         setUsername("");
         setEmail("");
         setAvatar("");
-        return; // Exit after setting auth user but clearing profile
+        return;
       }
-
-      // Both fetches successful, set profile data
-      setUsername(profileData?.username || ""); // Use fallbacks
+      setUsername(profileData?.username || "");
       setEmail(profileData?.email || "");
       setAvatar(profileData?.avatar || "");
     } catch (error) {
-      // Catch unexpected errors during the process
       console.error("Unexpected error fetching user data:", error);
-      setUser(null); // Clear all state on unexpected errors
+      setUser(null);
       setUsername("");
       setEmail("");
       setAvatar("");
     } finally {
-      // Always set loading to false when done (success or error)
       setIsLoading(false);
     }
-  }, [supabase]); // Dependency: fetchUser depends on the supabase client instance.
+  }, [supabase]);
 
-  // Initial fetch on mount
   useEffect(() => {
     fetchUser();
-    // Now the dependency is stable, and ESLint is happy
   }, [fetchUser]);
 
   return (

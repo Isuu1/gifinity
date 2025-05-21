@@ -12,7 +12,6 @@ import { useAuth } from "@/providers/AuthProvider";
 
 //Components
 import UserModal from "@/features/user/components/UserModal";
-import Search from "@/features/search/components/Search";
 
 //Icons
 //import { TiThMenu } from "react-icons/ti";
@@ -102,8 +101,6 @@ const StickyHeader = () => {
         </div>
         {user && <UserModal />}
       </div>
-
-      <Search />
     </motion.header>
   );
 };

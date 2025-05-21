@@ -31,12 +31,12 @@ export default function Home() {
       setIsLoading(true);
       setError(null);
       try {
-        const gifsResponse = await fetch(`/api/trending/gifs?limit=25`);
+        const gifsResponse = await fetch(`/api/trending/gifs?limit=10`);
 
         const gifsData: Gifs = await gifsResponse.json();
         setTrendingGifs(gifsData);
 
-        const stickersResponse = await fetch(`/api/trending/stickers?limit=25`);
+        const stickersResponse = await fetch(`/api/trending/stickers?limit=10`);
 
         const stickersData: Stickers = await stickersResponse.json();
         setTrendingStickers(stickersData);

@@ -15,12 +15,11 @@ import HamburgerNavMenu from "../HamburgerNavMenu/HamburgerNavMenu";
 import { FaHeart } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
 import { MdCloudUpload } from "react-icons/md";
-//Context
-import { useAuth } from "@/providers/AuthProvider";
 //Animations
 import { useMotionValueEvent, useScroll } from "motion/react";
 //Providers
 import { useStorage } from "@/providers/StorageProvider";
+import { useAuth } from "@/providers/AuthProvider";
 
 const Header: React.FC = () => {
   const { user, isLoading } = useAuth();

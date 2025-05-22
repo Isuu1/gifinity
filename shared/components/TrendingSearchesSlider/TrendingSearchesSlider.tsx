@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Marquee from "react-fast-marquee";
 
 //Styles
 import styles from "./TrendingSearchesSlider.module.scss";
 //Components
 import Button from "../UI/Button";
 import Error from "../Error/Error";
-import Marquee from "react-fast-marquee";
 //Icons
 import { FaFireFlameSimple } from "react-icons/fa6";
 

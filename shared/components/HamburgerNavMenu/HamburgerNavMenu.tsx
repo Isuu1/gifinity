@@ -10,8 +10,10 @@ import { LuLogIn } from "react-icons/lu";
 
 //Styles
 import styles from "./HamburgerNavMenu.module.scss";
+//Providers
 import { useAuth } from "@/providers/AuthProvider";
 import { useStorage } from "@/providers/StorageProvider";
+//Animations
 import { AnimatePresence, motion } from "framer-motion";
 
 const hamburgerMenuVariants = {

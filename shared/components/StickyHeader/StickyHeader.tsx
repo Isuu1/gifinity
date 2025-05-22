@@ -3,26 +3,20 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
 //Styles
 import styles from "./StickyHeader.module.scss";
-
-//Context
+//Providers
 import { useAuth } from "@/providers/AuthProvider";
-
+import { useStorage } from "@/providers/StorageProvider";
 //Components
 import UserModal from "@/features/user/components/UserModal";
-
+import HamburgerNavMenu from "@/shared/components/HamburgerNavMenu/HamburgerNavMenu";
 //Icons
-//import { TiThMenu } from "react-icons/ti";
 import { FaHeart } from "react-icons/fa";
 import { BiSolidCategory } from "react-icons/bi";
 import { MdCloudUpload } from "react-icons/md";
-
 //Animations
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
-import { useStorage } from "@/providers/StorageProvider";
-import HamburgerNavMenu from "@/shared/components/HamburgerNavMenu/HamburgerNavMenu";
 
 const stickyHeaderAnimation = {
   initial: {

@@ -1,15 +1,15 @@
 import React from "react";
+import Image from "next/image";
 
 //Styles
 import styles from "./PageHeadline.module.scss";
-import Image from "next/image";
 
-interface IProps {
+interface PageHeadlineProps {
   title: string;
   imageUrl: string;
 }
 
-const PageHeadline: React.FC<IProps> = ({ title, imageUrl }) => {
+const PageHeadline: React.FC<PageHeadlineProps> = ({ title, imageUrl }) => {
   return (
     <div className={styles.headline}>
       <Image src={imageUrl} alt="trending" width={40} height={40} priority />
